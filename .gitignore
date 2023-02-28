@@ -1,2 +1,9 @@
 node_modules
 .env
+package-lock.json
+public/bundle.js
+public/bundle.js.LICENSE.txt
+public/bundle.js.map
+public/tailwind.css
+.DS_Store
+
