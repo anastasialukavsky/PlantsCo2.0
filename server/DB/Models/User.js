@@ -7,6 +7,7 @@ const User = db.define('user', {
     allowNull: false,
     validate: {
       notEmpty: true,
+      notNull: true,
     },
   },
   lastName: {
@@ -14,6 +15,7 @@ const User = db.define('user', {
     allowNull: false,
     validate: {
       notEmpty: true,
+      notNull: true,
     },
   },
   fullName: {
@@ -34,10 +36,16 @@ const User = db.define('user', {
     validate: {
       isEmail: true,
       notEmpty: true,
+      notNull: true,
     },
     imageUrl: {
       type: Sequelize.STRING,
       defaultValue: 'Default-Avatar.svg',
+      allowNull: false,
+      validate: {
+        notEmpty: false,
+        notNull: false,
+      },
     },
   },
   // Will need hook to hash password
@@ -46,17 +54,27 @@ const User = db.define('user', {
     allowNull: false,
     validate: {
       len: [8, 20], //allow strings between 8 - 20 characters
+      notEmpty: false,
+      notNull: false,
     },
   },
   isAdmin: {
-    type: Sequelize.ENUM('true', 'false'),
+    type: Sequelize.BOOLEAN,
     allowNull: false,
     defaultValue: 'false',
+    validate: {
+      notEmpty: false,
+      notNull: false,
+    },
   },
   role: {
-    type: Sequelize.ENUM('cto', 'engineer', 'user'),
+    type: Sequelize.BOOLEAN,
     allowNull: true,
     defaultValue: 'user',
+    validate: {
+      notEmpty: false,
+      notNull: false,
+    },
   },
 });
 

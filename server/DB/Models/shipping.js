@@ -7,27 +7,84 @@ const Shipping = db.define('shipping', {
     allowNull: false,
     validate: {
       notEmpty: true,
+      notNull: true,
     },
   },
   street2: {
     type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true,
-    },
   },
   city: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
       notEmpty: true,
+      notNull: true,
     },
   },
   state: {
-    type: Sequelize.STRING,
+    type: Sequelize.ENUM(
+      'Alabama',
+      'Alaska',
+      'American Samoa',
+      'Arizona',
+      'Arkansas',
+      'California',
+      'Colorado',
+      'Connecticut',
+      'Delaware',
+      'District of Columbia',
+      'Florida',
+      'Georgia',
+      'Guam',
+      'Hawaii',
+      'Idaho',
+      'Illinois',
+      'Indiana',
+      'Iowa',
+      'Kansas',
+      'Kentucky',
+      'Louisiana',
+      'Maine',
+      'Maryland',
+      'Massachusetts',
+      'Michigan',
+      'Minnesota',
+      'Minor Outlying Islands',
+      'Mississippi',
+      'Missouri',
+      'Montana',
+      'Nebraska',
+      'Nevada',
+      'New Hampshire',
+      'New Jersey',
+      'New Mexico',
+      'New York',
+      'North Carolina',
+      'North Dakota',
+      'Northern Mariana Islands',
+      'Ohio',
+      'Oklahoma',
+      'Oregon',
+      'Pennsylvania',
+      'Puerto Rico',
+      'Rhode Island',
+      'South Carolina',
+      'South Dakota',
+      'Tennessee',
+      'Texas',
+      'U.S. Virgin Islands',
+      'Utah',
+      'Vermont',
+      'Virginia',
+      'Washington',
+      'West Virginia',
+      'Wisconsin',
+      'Wyoming'
+    ),
     allowNull: false,
     validate: {
       notEmpty: true,
+      notNull: true,
     },
   },
   zip: {
@@ -35,13 +92,21 @@ const Shipping = db.define('shipping', {
     allowNull: false,
     validate: {
       notEmpty: true,
-      len: [5, 5],
+      notNull: true,
+      min: 10000,
+      max: 99999,
     },
   },
   address: {
     type: Sequelize.DataTypes.VIRTUAL,
     get() {
-      return `${this.street1} ${this.city}, ${this.state} ${this.zip}`;
+      let addressArray = [];
+      addressArray.push(this.street1);
+      if (this.street2) addressArray.push(this.street2);
+      addressArray.push(this.city);
+      addressArray.push(this.state);
+      addressArray.push(this.zip);
+      return addressArray;
     },
     set(value) {
       throw new Error(
@@ -50,11 +115,12 @@ const Shipping = db.define('shipping', {
     },
   },
   isDefault: {
-    type: Sequelize.ENUM('true', 'false'),
+    type: Sequelize.BOOLEAN,
     allowNull: false,
-    defaultValue: 'false',
+    defaultValue: false,
     validate: {
       notEmpty: true,
+      notNull: true,
     },
   },
 });

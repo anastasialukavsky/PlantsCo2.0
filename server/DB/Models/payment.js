@@ -7,6 +7,7 @@ const Payment = db.define('payment', {
     allowNull: false,
     validate: {
       notEmpty: true,
+      notNull: true,
     },
   },
   ccNum: {
@@ -36,9 +37,9 @@ const Payment = db.define('payment', {
     },
   },
   isDefault: {
-    type: Sequelize.ENUM('true', 'false'),
+    type: Sequelize.BOOLEAN,
     allowNull: false,
-    defaultValue: 'false',
+    defaultValue: false,
     validate: {
       notEmpty: true,
     },
