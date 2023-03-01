@@ -55,6 +55,9 @@ const Product = db.define('product', {
       const rawQty = this.getDataValue('qty');
       return rawQty <= 10;
     },
+    set(value) {
+      throw new Error('Do not try to set lowQty value');
+    },
   },
   shortDescription: {
     type: Sequelize.VIRTUAL,
@@ -65,8 +68,10 @@ const Product = db.define('product', {
       }
       return rawDescription.substring(0, 100) + '...';
     },
+    set(value) {
+      throw new Error('Do not try to set shortDescription value');
+    },
   },
 });
 
 module.exports = Product;
-
