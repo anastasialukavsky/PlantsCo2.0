@@ -7,21 +7,21 @@ const Order = db.define('order', {
     allowNull: false,
     defaultValue: 1,
     validate: {
-      isEmpty: false,
+      notEmpty: true,
     },
   },
   finalPrice: {
     type: Sequelize.DECIMAL(10, 2),
     allowNull: false,
     validate: {
-      isEmpty: false,
+      notEmpty: true,
     },
   },
   totalQty: {
     type: Sequelize.INTEGER,
     allowNull: false,
     validate: {
-      isEmpty: false,
+      notEmpty: true,
     },
   },
 });

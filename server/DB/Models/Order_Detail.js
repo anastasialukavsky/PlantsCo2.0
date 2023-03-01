@@ -6,63 +6,63 @@ const Order_Detail = db.define('order_detail', {
     type: Sequelize.INTEGER,
     allowNull: true,
     validate: {
-      isEmpty: false,
+      notEmpty: true,
     },
   },
   userName: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      isEmpty: false,
+      notEmpty: true,
     },
   },
   userEmail: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      isEmpty: false,
+      notEmpty: true,
     },
   },
   address: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      isEmpty: false,
+      notEmpty: true,
     },
   },
   paymentMethod: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      isEmpty: false,
+      notEmpty: true,
     },
   },
   productId: {
     type: Sequelize.INTEGER,
     allowNull: false,
     validate: {
-      isEmpty: false,
+      notEmpty: true,
     },
   },
   productName: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      isEmpty: false,
+      notEmpty: true,
     },
   },
   qty: {
     type: Sequelize.INTEGER,
     allowNull: false,
     validate: {
-      isEmpty: false,
+      notEmpty: true,
     },
   },
   basePrice: {
     type: Sequelize.DECIMAL(10, 2),
     allowNull: false,
     validate: {
-      isEmpty: false,
+      notEmpty: true,
     },
   },
   currencyRate: {
@@ -70,7 +70,7 @@ const Order_Detail = db.define('order_detail', {
     allowNull: false,
     defaultValue: 1,
     validate: {
-      isEmpty: false,
+      notEmpty: true,
     },
   },
   totalPrice: {
