@@ -68,10 +68,11 @@ const User = db.define('user', {
     },
   },
   role: {
-    type: Sequelize.ENUM('cto', 'engineer', 'user'),
+    type: Sequelize.STRING,
     allowNull: false,
     defaultValue: 'user',
     validate: {
+      isIn: [['cto', 'engineer', 'user']],
       notEmpty: true,
       notNull: true,
     },

@@ -13,6 +13,33 @@ const Wishlist = require('./Models/Wishlist');
 
 // ASSOCIATIONS HERE
 
+Order.hasMany(Order_Detail);
+Order_Detail.belongsTo(Order);
+
+Order.belongsTo(User);
+User.hasMany(Order);
+
+User.hasMany(Shipping);
+Shipping.belongsTo(User);
+
+User.hasMany(Payment);
+Payment.belongsTo(User);
+
+User.belongsTo(Currency);
+Currency.hasMany(User);
+
+Product.belongsToMany(Tag, { through: 'Product_Tags' });
+Tag.belongsToMany(Product, { through: 'Product_Tags' });
+
+User.belongsToMany(Product, { through: Cart });
+Product.belongsToMany(User, { through: Cart });
+
+Wishlist.belongsToMany(Product, { through: 'Wishlist_Detail' });
+Product.belongsToMany(Wishlist, { through: 'Wishlist_Detail' });
+
+User.hasMany(Wishlist);
+Wishlist.belongsTo(User);
+
 module.exports = {
   db,
   Cart,

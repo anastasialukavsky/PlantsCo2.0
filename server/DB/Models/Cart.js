@@ -1,6 +1,8 @@
 const Sequelize = require('sequelize');
 const db = require('../database');
-const { User, Product } = require('../index');
+// const { User, Product } = require('../index');
+const User = require('./User');
+const Product = require('./Product');
 
 // TODO: do we need a hook here to constrain qty to max from product table?
 
