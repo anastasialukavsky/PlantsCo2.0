@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const db = require('../database');
+const { db } = require('../index');
 
 const Order = db.define('order', {
   promoRate: {
@@ -8,6 +8,9 @@ const Order = db.define('order', {
     defaultValue: 1,
     validate: {
       notEmpty: true,
+      notNull: true,
+      min: 0,
+      max: 1,
     },
   },
   finalPrice: {
@@ -15,6 +18,8 @@ const Order = db.define('order', {
     allowNull: false,
     validate: {
       notEmpty: true,
+      notNull: true,
+      min: 0,
     },
   },
   totalQty: {
@@ -22,12 +27,14 @@ const Order = db.define('order', {
     allowNull: false,
     validate: {
       notEmpty: true,
+      notNull: true,
+      min: 1,
     },
   },
 });
 
 Order.beforeValidate('finalPrice', (order) => {
-  order.finalPrice *= order.promoRate;
+  order.finalPrice *= 1 - order.promoRate;
 });
 
 module.exports = Order;
