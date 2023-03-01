@@ -2,11 +2,11 @@ const Sequelize = require('sequelize');
 const db = require('../database');
 
 const Currency = db.define('currency', {
-  currencyName: {
-    type: Sequelize.ENUM('USD', 'GBP', 'EUR', 'CAD'),
+  name: {
+    type: Sequelize.STRING,
     allowNull: false,
-    unique: true,
     validate: {
+      isIn: [['USD', 'GBP', 'EUR', 'CAD']],
       notEmpty: true,
       notNull: true,
       isUppercase: true,

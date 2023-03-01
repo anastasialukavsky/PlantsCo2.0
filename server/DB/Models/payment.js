@@ -3,9 +3,10 @@ const db = require('../database');
 
 const Payment = db.define('payment', {
   method: {
-    type: Sequelize.ENUM('cc', 'paypal', 'venmo', 'gift card'),
+    type: Sequelize.STRING,
     allowNull: false,
     validate: {
+      isIn: [['cc', 'paypal', 'venmo', 'gift card']],
       notEmpty: true,
       notNull: true,
     },
