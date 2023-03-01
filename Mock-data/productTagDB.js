@@ -1,6 +1,18 @@
-const db = require('./server/DB/database');
-const Product = require('./server/DB/Models/Product');
-const Tag = require('./server/DB/Models/Tag');
+const db = require('../server/DB/database');
+const { Product, Tag } = require('../server/DB/');
+
+const tags = [
+  { tagName: 'Small' },
+  { tagName: 'Medium' },
+  { tagName: 'Large' },
+  { tagName: 'Low/Artificial' },
+  { tagName: 'Partial/Bright indirect' },
+  { tagName: 'Direct sunlight' },
+  { tagName: 'Pet safe' },
+  { tagName: 'Poisonous/toxic' },
+  { tagName: 'Air-purifying' },
+  { tagName: 'Easy-care' },
+];
 
 const products = [
   {
@@ -405,24 +417,19 @@ const products = [
   },
 ];
 
-const tags = [
-  { tagName: 'Small' },
-  { tagName: 'Medium' },
-  { tagName: 'Large' },
-  { tagName: 'Low/Artificial' },
-  { tagName: 'Partial/Bright indirect' },
-  { tagName: 'Direct sunlight' },
-  { tagName: 'Pet safe' },
-  { tagName: 'Poisonous/toxic' },
-  { tagName: 'Air-purifying' },
-  { tagName: 'Easy-care' },
-];
-
 const seed = async () => {
   await db.sync({ force: true });
 
-  await Product.bulkCreate(products, { validate: true });
-  await Tag.bulkCreate(tags, { validate: true });
+  const tagCount = tags.length;
+
+  const newTags = await Tag.bulkCreate(tags, { validate: true });
+
+  const newProducts = await Product.bulkCreate(products, { validate: true });
+
+  for (let product of newProducts) {
+    let randomTag = Math.floor(Math.random() * tagCount);
+    await product.addTag(newTags[randomTag]);
+  }
 
   console.log('Seeding successful');
 };
