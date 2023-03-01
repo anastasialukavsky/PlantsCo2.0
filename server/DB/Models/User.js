@@ -38,7 +38,7 @@ const User = db.define('user', {
       notEmpty: true,
       notNull: true,
     },
-    imageUrl: {
+    imageURL: {
       type: Sequelize.STRING,
       defaultValue: 'Default-Avatar.svg',
       allowNull: false,
