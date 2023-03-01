@@ -27,6 +27,37 @@ const User = db.define('user', {
       );
     },
   },
+  email: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    unique: true,
+    validate: {
+      isEmail: true,
+      notEmpty: true,
+    },
+    imageUrl: {
+      type: Sequelize.STRING,
+      defaultValue: 'Default-Avatar.svg',
+    },
+  },
+  // Will need hook to hash password
+  password: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      len: [8, 20], //allow strings between 8 - 20 characters
+    },
+  },
+  isAdmin: {
+    type: Sequelize.ENUM(true, false),
+    allowNull: false,
+    defaultValue: false,
+  },
+  role: {
+    type: Sequelize.ENUM('cto', 'engineer', 'user'),
+    allowNull: true,
+    defaultValue: 'user',
+  },
 });
 
 module.exports = User;
