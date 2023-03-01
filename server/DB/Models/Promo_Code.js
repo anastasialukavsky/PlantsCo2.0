@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const db = require('../database');
+const { db } = require('../index');
 
 const Promo_Code = db.define('promo_code', {
   name: {
@@ -8,6 +8,7 @@ const Promo_Code = db.define('promo_code', {
     unique: true,
     validate: {
       notEmpty: true,
+      notNull: true,
     },
   },
   discountRate: {
@@ -15,14 +16,18 @@ const Promo_Code = db.define('promo_code', {
     allowNull: false,
     validate: {
       notEmpty: true,
+      notNull: true,
+      min: 0.0,
+      max: 1.0,
     },
   },
   status: {
-    type: Sequelize.ENUM('true', 'false'),
+    type: Sequelize.BOOLEAN(true, false),
     allowNull: false,
-    defaultValue: 'false',
+    defaultValue: false,
     validate: {
       notEmpty: true,
+      notNull: true,
     },
   },
 });
