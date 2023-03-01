@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const { db } = require('../index');
+const db = require('../database');
 
 const Promo_Code = db.define('promo_code', {
   name: {
