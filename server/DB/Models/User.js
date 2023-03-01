@@ -38,14 +38,14 @@ const User = db.define('user', {
       notEmpty: true,
       notNull: true,
     },
-    imageURL: {
-      type: Sequelize.STRING,
-      defaultValue: 'Default-Avatar.svg',
-      allowNull: false,
-      validate: {
-        notEmpty: true,
-        notNull: true,
-      },
+  },
+  imageURL: {
+    type: Sequelize.STRING,
+    defaultValue: 'Default-Avatar.svg',
+    allowNull: false,
+    validate: {
+      notEmpty: true,
+      notNull: true,
     },
   },
   // Will need hook to hash password
