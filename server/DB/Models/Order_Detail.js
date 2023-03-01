@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const { db } = require('../index');
+const db = require('../database');
 
 const Order_Detail = db.define('order_detail', {
   userId: {

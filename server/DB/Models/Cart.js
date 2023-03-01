@@ -1,8 +1,7 @@
 const Sequelize = require('sequelize');
-const { db } = require('../index');
+const db = require('../database');
+const { User, Product } = require('../index');
 
-// TODO: import User table once available
-// TODO: import Product table once available
 // TODO: User.belongsToMany(Product, { through: Cart })
 // TODO: Product.belongsToMany(User, { through: Cart })
 // TODO: do we need a hook here to constrain qty to max from product table?
@@ -12,18 +11,18 @@ const { db } = require('../index');
 const Cart = db.define('cart', {
   userId: {
     type: Sequelize.INTEGER,
-    // references: {
-    //   model: User,
-    //   key: 'id',
-    // },
+    references: {
+      model: User,
+      key: 'id',
+    },
   },
 
   productId: {
     type: Sequelize.INTEGER,
-    // references: {
-    //   model: Product,
-    //   key: 'id',
-    // },
+    references: {
+      model: Product,
+      key: 'id',
+    },
     allowNull: false,
     validate: {
       notNull: true,
@@ -41,5 +40,7 @@ const Cart = db.define('cart', {
     },
   },
 });
+
+db.sync({ force: true });
 
 module.exports = Cart;

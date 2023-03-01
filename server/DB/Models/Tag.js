@@ -1,6 +1,5 @@
 const Sequelize = require('sequelize');
-const { db } = require('../index');
-
+const db = require('../database');
 
 const Tag = db.define('tag', {
   tagName: {
@@ -8,10 +7,10 @@ const Tag = db.define('tag', {
     allowNull: false,
     validate: {
       notEmpty: true,
-      notNull: true
+      notNull: true,
     },
     unique: true,
-  }
-})
+  },
+});
 
 module.exports = Tag;
