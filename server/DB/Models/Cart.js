@@ -12,18 +12,18 @@ const { db } = require('../index');
 const Cart = db.define('cart', {
   userId: {
     type: Sequelize.INTEGER,
-    references: {
-      model: User,
-      key: 'id',
-    },
+    // references: {
+    //   model: User,
+    //   key: 'id',
+    // },
   },
 
   productId: {
     type: Sequelize.INTEGER,
-    references: {
-      model: Product,
-      key: 'id',
-    },
+    // references: {
+    //   model: Product,
+    //   key: 'id',
+    // },
     allowNull: false,
     validate: {
       notNull: true,
