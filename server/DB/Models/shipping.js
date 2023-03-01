@@ -23,7 +23,6 @@ const Shipping = db.define('shipping', {
       notEmpty: true,
     },
   },
-  // State potentially an ENUM?
   state: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -49,10 +48,13 @@ const Shipping = db.define('shipping', {
         'Field is set automatically, please do not try to change'
       );
     },
-    isDefault: {
-      type: Sequelize.ENUM('true', 'false'),
-      allowNull: false,
-      defaultValue: 'false',
+  },
+  isDefault: {
+    type: Sequelize.ENUM('true', 'false'),
+    allowNull: false,
+    defaultValue: 'false',
+    validate: {
+      notEmpty: true,
     },
   },
 });
