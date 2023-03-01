@@ -8,6 +8,7 @@ const PORT = process.env.PORT_NUMBER || 3000;
 // Static middleware
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
+// logging middleware
 app.use(volleyball);
 
 // Body parsing middleware
