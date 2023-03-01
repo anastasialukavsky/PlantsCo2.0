@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const db = require('../database');
+const { db } = require('../index');
 
 const Order_Detail = db.define('order_detail', {
   userId: {
@@ -14,6 +14,7 @@ const Order_Detail = db.define('order_detail', {
     allowNull: false,
     validate: {
       notEmpty: true,
+      notNull: true,
     },
   },
   userEmail: {
@@ -21,6 +22,7 @@ const Order_Detail = db.define('order_detail', {
     allowNull: false,
     validate: {
       notEmpty: true,
+      notNull: true,
     },
   },
   address: {
@@ -28,6 +30,7 @@ const Order_Detail = db.define('order_detail', {
     allowNull: false,
     validate: {
       notEmpty: true,
+      notNull: true,
     },
   },
   paymentMethod: {
@@ -35,6 +38,7 @@ const Order_Detail = db.define('order_detail', {
     allowNull: false,
     validate: {
       notEmpty: true,
+      notNull: true,
     },
   },
   productId: {
@@ -42,6 +46,7 @@ const Order_Detail = db.define('order_detail', {
     allowNull: false,
     validate: {
       notEmpty: true,
+      notNull: true,
     },
   },
   productName: {
@@ -49,6 +54,7 @@ const Order_Detail = db.define('order_detail', {
     allowNull: false,
     validate: {
       notEmpty: true,
+      notNull: true,
     },
   },
   qty: {
@@ -56,6 +62,8 @@ const Order_Detail = db.define('order_detail', {
     allowNull: false,
     validate: {
       notEmpty: true,
+      notNull: true,
+      min: 1,
     },
   },
   basePrice: {
@@ -63,14 +71,18 @@ const Order_Detail = db.define('order_detail', {
     allowNull: false,
     validate: {
       notEmpty: true,
+      notNull: true,
+      min: 0,
     },
   },
   currencyRate: {
-    type: Sequelize.DECIMAL(10, 2),
+    type: Sequelize.DECIMAL(10, 4),
     allowNull: false,
     defaultValue: 1,
     validate: {
       notEmpty: true,
+      notNull: true,
+      min: 0,
     },
   },
   totalPrice: {
@@ -78,6 +90,9 @@ const Order_Detail = db.define('order_detail', {
     get() {
       const total = this.basePrice * this.currencyRate * this.qty;
       return total;
+    },
+    set() {
+      return 'Do not attempt to set this virtual field!';
     },
   },
 });
