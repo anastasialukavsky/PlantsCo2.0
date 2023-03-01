@@ -26,4 +26,8 @@ const Order = db.define('order', {
   },
 });
 
+Order.beforeValidate('finalPrice', (order) => {
+  order.finalPrice *= order.promoRate;
+});
+
 module.exports = Order;
