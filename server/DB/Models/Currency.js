@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 const db = require('../database');
 
 const Currency = db.define('currency', {
-  name: {
+  currencyName: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
