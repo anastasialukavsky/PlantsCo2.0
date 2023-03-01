@@ -43,8 +43,8 @@ const User = db.define('user', {
       defaultValue: 'Default-Avatar.svg',
       allowNull: false,
       validate: {
-        notEmpty: false,
-        notNull: false,
+        notEmpty: true,
+        notNull: true,
       },
     },
   },
@@ -54,26 +54,26 @@ const User = db.define('user', {
     allowNull: false,
     validate: {
       len: [8, 20], //allow strings between 8 - 20 characters
-      notEmpty: false,
-      notNull: false,
+      notEmpty: true,
+      notNull: true,
     },
   },
   isAdmin: {
     type: Sequelize.BOOLEAN,
     allowNull: false,
-    defaultValue: 'false',
+    defaultValue: false,
     validate: {
-      notEmpty: false,
-      notNull: false,
+      notEmpty: true,
+      notNull: true,
     },
   },
   role: {
-    type: Sequelize.BOOLEAN,
-    allowNull: true,
+    type: Sequelize.ENUM('cto', 'engineer', 'user'),
+    allowNull: false,
     defaultValue: 'user',
     validate: {
-      notEmpty: false,
-      notNull: false,
+      notEmpty: true,
+      notNull: true,
     },
   },
 });
