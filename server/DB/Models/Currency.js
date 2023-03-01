@@ -6,20 +6,25 @@ const { db } = require('../index');
 
 const Currency = db.define('currency', {
   currencyName: {
-    type: Sequelize.STRING,
+    type: Sequelize.ENUM('USD', 'GBP', 'EUR', 'CAD'),
     allowNull: false,
+    unique: true,
     validate: {
       notEmpty: true,
+      notNull: true,
       isUppercase: true,
     },
   },
+
   rate: {
     type: Sequelize.DECIMAL(12, 4),
     allowNull: false,
     validate: {
       min: 0,
+      notEmpty: true,
+      notNull: true,
     },
   },
 });
 
-module.exports = { Currency };
+module.exports = Currency;

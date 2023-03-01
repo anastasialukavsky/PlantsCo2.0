@@ -13,28 +13,15 @@ const Wishlist = db.define('wishlist', {
     defaultValue: 'default wishlist',
     validate: {
       notEmpty: true,
+      notNull: true,
     },
   },
 });
 
-// PB: Fairly certain this isn't necessary - should be created by M:M assoc
-// recommend deleting after associations & testing
+Wishlist.beforeValidate((wishlist) => {
+  // TODO: unique wishlist name per-user
+  // find all wishlists for wishlist.userid
+  // if result contains wishlist.wishlistName, reject
+});
 
-// const WishlistProducts = db.define('wishlist_products', {
-//   wishlistId: {
-//     type: Sequelize.INTEGER,
-//     references: {
-//       model: Wishlist,
-//       key: 'id',
-//     },
-//   },
-//   productId: {
-//     type: Sequelize.INTEGER,
-//     references: {
-//       model: Product,
-//       key: 'id',
-//     },
-//   },
-// });
-
-module.exports = { Wishlist };
+module.exports = Wishlist;
