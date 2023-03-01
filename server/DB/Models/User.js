@@ -17,7 +17,7 @@ const User = db.define('user', {
     },
   },
   fullName: {
-    type: DataTypes.VIRTUAL,
+    type: Sequelize.DataTypes.VIRTUAL,
     get() {
       return `${this.firstName} ${this.lastName}`;
     },
@@ -49,9 +49,9 @@ const User = db.define('user', {
     },
   },
   isAdmin: {
-    type: Sequelize.ENUM(true, false),
+    type: Sequelize.ENUM('true', 'false'),
     allowNull: false,
-    defaultValue: false,
+    defaultValue: 'false',
   },
   role: {
     type: Sequelize.ENUM('cto', 'engineer', 'user'),
