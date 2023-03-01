@@ -1,11 +1,6 @@
 const Sequelize = require('sequelize');
 const db = require('../database');
 
-// TODO: Wishlist.belongsToMany(Product)
-// TODO: Product.belongsToMany(Wishlist)
-// TODO: User.hasMany(Wishlist)
-// TODO: Wishlist.belongsTo(User)
-
 const Wishlist = db.define('wishlist', {
   wishlistName: {
     type: Sequelize.STRING,

@@ -1,9 +1,6 @@
 const Sequelize = require('sequelize');
 const db = require('../database');
 
-// TODO: Order.hasOne(Currency)
-// TODO: Currency.belongsTo(Order)
-
 const Currency = db.define('currency', {
   currencyName: {
     type: Sequelize.ENUM('USD', 'GBP', 'EUR', 'CAD'),
