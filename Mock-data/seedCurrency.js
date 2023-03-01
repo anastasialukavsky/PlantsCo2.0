@@ -1,9 +1,9 @@
 // const { db } = require('../index');
-const db = require('../database');
-const Currency = require('./Currency');
+const db = require('../server/DB/database');
+const { Currency } = require('../server/DB/');
 
 async function seedCurrency() {
-  await db.sync({ force: true });
+  // await db.sync({ force: true });
 
   const currencyList = [
     { currencyName: 'USD', rate: 1 },
