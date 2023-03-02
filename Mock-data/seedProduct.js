@@ -1,19 +1,3 @@
-const db = require('../server/DB/database');
-const { Product, Tag } = require('../server/DB/');
-
-const tags = [
-  { tagName: 'Small' },
-  { tagName: 'Medium' },
-  { tagName: 'Large' },
-  { tagName: 'Low/Artificial' },
-  { tagName: 'Partial/Bright indirect' },
-  { tagName: 'Direct sunlight' },
-  { tagName: 'Pet safe' },
-  { tagName: 'Poisonous/toxic' },
-  { tagName: 'Air-purifying' },
-  { tagName: 'Easy-care' },
-];
-
 const products = [
   {
     name: 'Snake plant',
@@ -417,27 +401,27 @@ const products = [
   },
 ];
 
-const seed = async () => {
-  await db.sync({ force: true });
+// const seed = async () => {
+//   // await db.sync({ force: true });
 
-  const tagCount = tags.length;
+//   const tagCount = tags.length;
 
-  const newTags = await Tag.bulkCreate(tags, { validate: true });
+//   const newTags = await Tag.bulkCreate(tags, { validate: true });
 
-  const newProducts = await Product.bulkCreate(products, { validate: true });
+//   const newProducts = await Product.bulkCreate(products, { validate: true });
 
-  for (let product of newProducts) {
-    let randomTag = Math.floor(Math.random() * tagCount);
-    await product.addTag(newTags[randomTag]);
-  }
+//   for (let product of newProducts) {
+//     let randomTag = Math.floor(Math.random() * tagCount);
+//     await product.addTag(newTags[randomTag]);
+//   }
 
-  console.log('Seeding successful');
-};
+//   console.log('Seeding successful');
+// };
 
-seed().catch((err) => {
-  console.error('Seeding failed', err.message);
+// seed().catch((err) => {
+//   console.error('Seeding failed', err.message);
 
-  db.close();
-});
+//   // db.close();
+// });
 
-module.exports = seed;
+module.exports = products;
