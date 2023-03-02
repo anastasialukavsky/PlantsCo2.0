@@ -14,7 +14,7 @@ router.get('/', async (req, res, next) => {
 });
 
 // GET single product route /api/products/:productId
-router.get('/:productId', middlewarefunc, async (req, res, next) => {
+router.get('/:productId', async (req, res, next) => {
   try {
     const product = await Product.findByPk(req.params.productId, {
       include: Tag,
@@ -31,6 +31,17 @@ router.get('/:productId', middlewarefunc, async (req, res, next) => {
 
 // POST (admin only - token auth headers)
 // send get request to '/api/auth/:token' passing in token in header
+router.post('/', async (req, res, next) => {
+  try {
+    const checkProd = await Product.findOne({ where: { name: req.body.name } });
+    if (checkProd) return res.status(409).send('Product already exists');
+    const newProduct = await Product.create(req.body);
+    res.status(201).send(newProduct);
+  } catch (e) {
+    console.error(chalk.bgRed('BACKEND ISSUE ADDING NEW PROD'));
+    next(e);
+  }
+});
 
 // UPDATE (admin only - token auth headers)
 
