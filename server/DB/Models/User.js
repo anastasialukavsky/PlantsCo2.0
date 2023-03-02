@@ -53,7 +53,7 @@ const User = db.define('user', {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      len: [8, 20], //allow strings between 8 - 20 characters
+      // len: [8, 20], //allow strings between 8 - 20 characters
       notEmpty: true,
       notNull: true,
     },
