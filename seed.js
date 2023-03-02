@@ -103,6 +103,10 @@ const seed = async () => {
     for (let product of newProducts) {
       let randomTag = Math.floor(Math.random() * newTags.length);
       await product.addTag(newTags[randomTag]);
+
+      let newRandomTag = Math.floor(Math.random() * newTags.length);
+      if (randomTag !== newRandomTag)
+        await product.addTag(newTags[newRandomTag]);
     }
 
     console.log('Product seeding successful');
