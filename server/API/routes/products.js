@@ -21,7 +21,7 @@ router.get('/:productId', async (req, res, next) => {
     });
     res.json(product);
   } catch (e) {
-    console.error(chalk.bgRed('BACKEND ISSUE SINGLE FETCHING PRODUCT'));
+    console.error(chalk.bgRed('BACKEND ISSUE FETCHING SINGLE PRODUCT'));
     next(e);
   }
 });
