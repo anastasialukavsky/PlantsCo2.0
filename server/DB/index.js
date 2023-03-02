@@ -5,9 +5,9 @@ const Order = require('./Models/Order');
 const Order_Detail = require('./Models/Order_Detail');
 const Product = require('./Models/Product');
 const Cart = require('./Models/Cart');
-const Payment = require('./Models/payment');
+const Payment = require('./Models/Payment');
 const Promo_Code = require('./Models/Promo_Code');
-const Shipping = require('./Models/shipping');
+const Shipping = require('./Models/Shipping');
 const Tag = require('./Models/Tag');
 const Wishlist = require('./Models/Wishlist');
 
