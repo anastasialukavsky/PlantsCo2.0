@@ -20,6 +20,7 @@ const shipmentList = require('./Mock-data/seedShipment');
 const tagList = require('./Mock-data/seedTag');
 const productList = require('./Mock-data/seedProduct');
 const cartList = require('./Mock-data/seedCart');
+const wishlistsList = require('./Mock-data/seedWishlist');
 
 const seed = async () => {
   try {
@@ -104,7 +105,7 @@ const seed = async () => {
     }
 
     console.log('Product seeding successful');
-    
+
     /**
      * SEED CARTS
      * (include users, products)
@@ -112,19 +113,29 @@ const seed = async () => {
 
     console.log('Seeding carts...');
 
-      let randomUser = Math.floor(Math.random() * seededUsers.length);
-  
-      for (let i = 1; i < randomUser; i++) {
-        await Cart.create({userId:i, productId:i, qty: 1})
-      }
-      
-      console.log('Cart seeding successful');
-    
+    let randomUser = Math.floor(Math.random() * seededUsers.length);
+
+    for (let i = 1; i < randomUser; i++) {
+      await Cart.create({ userId: i, productId: i, qty: 1 });
+    }
+
+    console.log('Cart seeding successful');
+
     /**
      * SEED WISHLISTS
      * (include users, products)
      */
 
+    console.log('Seeding wishlists...');
+    let wishlist;
+    for (listName of wishlistsList) {
+      randomUser = Math.floor(Math.random() * seededUsers.length);
+      wishlist = await seededUsers[randomUser].createWishlist(listName);
+      randomProduct = Math.floor(Math.random() * newProducts.length);
+      await wishlist.addProduct(randomProduct);
+    }
+
+    console.log('Wishlist seeding successful');
     /**
      * SEED PROMO CODES
      */
