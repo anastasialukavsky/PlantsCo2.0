@@ -13,8 +13,6 @@ const Wishlist = db.define('wishlist', {
   },
 });
 
-// uncomment & test after associations created
-
 // Wishlist.beforeValidate(async (wishlist) => {
 //   // TODO: unique wishlist name per-user
 //   // find all wishlists for wishlist.userid

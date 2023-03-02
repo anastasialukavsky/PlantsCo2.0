@@ -12,10 +12,11 @@ const Payment = db.define('payment', {
     },
   },
   ccNum: {
-    type: Sequelize.INTEGER,
-    validate: {
-      isCreditCard: true,
-    },
+    type: Sequelize.BIGINT, //used to be an integer
+    // validate: {
+    //   isCreditCard: true,
+
+    // },
   },
   ccExpMonth: {
     type: Sequelize.INTEGER,

@@ -96,8 +96,6 @@ const Shipping = db.define('shipping', {
     validate: {
       notEmpty: true,
       notNull: true,
-      min: 10000,
-      max: 99999,
     },
   },
   address: {

@@ -28,7 +28,7 @@ const Order = db.define('order', {
     validate: {
       notEmpty: true,
       notNull: true,
-      min: 1,
+      min: 0,
     },
   },
 });
