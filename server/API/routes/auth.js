@@ -15,7 +15,7 @@ router.get('/', requireToken, (req, res, next) => {
   }
 });
 
-router.post('/signin', async (req, res, next) => {
+router.post('/login', async (req, res, next) => {
   try {
     const { email, password } = req.body;
     res.send({ token: await User.authenticate({ email, password }) });
