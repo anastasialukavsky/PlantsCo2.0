@@ -15,6 +15,7 @@ const {
 } = require('./server/DB/');
 const currencyList = require('./Mock-data/seedCurrency');
 const usersList = require('./Mock-data/userData');
+const paymentMethodList = require('./Mock-data/seedPayment');
 
 const seed = async () => {
   try {
@@ -34,14 +35,19 @@ const seed = async () => {
      * SEED USERS
      */
     console.log('Seeding users...');
-    const seededUsers = await User.bulkCreate(usersList);
+    const seededUsers = await User.bulkCreate(usersList, { validate: true });
     console.log('User seeding successful');
 
     /**
      * SEED PAYMENT METHODS
      */
-
-    /**
+    console.log('Seeding payment...');
+    for (let user of seededUsers) {
+      let randomPaymentMethod = Math.floor(Math.random() * paymentMethodList.length);
+      await user.createPayment(paymentMethodList[randomPaymentMethod]);
+    }
+    console.log('Payment seeding successful');
+     /**
      * SEED SHIPPING ADDRESSES
      */
 
