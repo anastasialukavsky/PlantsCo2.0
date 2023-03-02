@@ -1,7 +1,3 @@
-const db = require('../server/DB/database');
-const { User, Product } = require('../server/DB');
-const seedCurrency = require('./seedCurrency');
-
 const usersList = [
   {
     firstName: 'Margalit',
@@ -254,18 +250,5 @@ const usersList = [
     currencyId: 2,
   },
 ];
-
-const seed = async () => {
-  try {
-    await db.sync({ force: true });
-    await seedCurrency();
-    await User.bulkCreate(usersList);
-    console.log('User seeding successful');
-  } catch (err) {
-    console.log('Error in users seed:', err);
-  }
-};
-
-// seed();
 
 module.exports = usersList;
