@@ -21,6 +21,7 @@ const tagList = require('./Mock-data/seedTag');
 const productList = require('./Mock-data/seedProduct');
 const cartList = require('./Mock-data/seedCart');
 const wishlistsList = require('./Mock-data/seedWishlist');
+const promoCodes = require('./Mock-data/seedPromo');
 
 const seed = async () => {
   try {
@@ -136,9 +137,14 @@ const seed = async () => {
     }
 
     console.log('Wishlist seeding successful');
+
     /**
      * SEED PROMO CODES
      */
+
+    console.log('Seeding promo codes...');
+    const seededPromoCodes = await Promo_Code.bulkCreate(promoCodes);
+    console.log('Promo code seeding successful');
 
     /**
      * SEED ORDER / DETAILS
