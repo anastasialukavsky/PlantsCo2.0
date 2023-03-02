@@ -31,11 +31,14 @@ router.get('/:productId', async (req, res, next) => {
 
 // POST (admin only - token auth headers)
 // send get request to '/api/auth/:token' passing in token in header
+
 router.post('/', async (req, res, next) => {
   try {
-    const checkProd = await Product.findOne({ where: { name: req.body.name } });
-    if (checkProd) return res.status(409).send('Product already exists');
-    const newProduct = await Product.create(req.body);
+    const [newProduct, wasCreated] = await Product.findOrCreate({
+      where: { name: req.body.name },
+      defaults: req.body,
+    });
+    if (!wasCreated) return res.status(409).send('Product already exists');
     res.status(201).send(newProduct);
   } catch (e) {
     console.error(chalk.bgRed('BACKEND ISSUE ADDING NEW PROD'));
@@ -43,7 +46,7 @@ router.post('/', async (req, res, next) => {
   }
 });
 
-// UPDATE (admin only - token auth headers)
+// PUT (admin only - token auth headers)
 
 // DELETE (admin only - token auth headers)
 
