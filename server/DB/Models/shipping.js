@@ -91,13 +91,11 @@ const Shipping = db.define('shipping', {
     },
   },
   zip: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.INTEGER(5).UNSIGNED.ZEROFILL,
     allowNull: false,
     validate: {
       notEmpty: true,
       notNull: true,
-      min: 10000,
-      max: 99999,
     },
   },
   address: {
