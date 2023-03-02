@@ -14,7 +14,7 @@ router.get('/', async (req, res, next) => {
 });
 
 // GET single product route /api/products/:productId
-router.get('/:productId', middlewarefunc, async (req, res, next) => {
+router.get('/:productId', async (req, res, next) => {
   try {
     const product = await Product.findByPk(req.params.productId, {
       include: Tag,
