@@ -84,6 +84,29 @@ const User = db.define('user', {
   },
 });
 
+/**
+ * HOOKS
+ */
+
+User.beforeValidate((user) => {
+  const MIN_PASSWORD_LENGTH = 8;
+
+  const pw = user.password;
+  if (pw.length < MIN_PASSWORD_LENGTH) {
+    const err = new Error();
+    err.message = `Minimum password requirement not met (${MIN_PASSWORD_LENGTH} characters)`;
+    throw err;
+  }
+});
+
+User.beforeCreate(async (user) => {
+  user.password = await bcrypt.hash(user.password, 10);
+});
+
+/**
+ * AUTH CLASS METHODS
+ */
+
 User.verifyByToken = async (token) => {
   try {
     const { id } = jwt.verify(token, SECRET);
@@ -100,15 +123,20 @@ User.verifyByToken = async (token) => {
   }
 };
 
-User.authenticate = async ({ username, password }) => {
+User.authenticate = async ({ email, password }) => {
   try {
     const user = await User.findOne({
-      where: { username },
+      where: { email },
     });
 
     if (user && (await bcrypt.compare(password, user.password))) {
       return jwt.sign(
-        { id: user.id, isAdmin: user.isAdmin, role: user.role },
+        {
+          id: user.id,
+          email: user.email,
+          isAdmin: user.isAdmin,
+          role: user.role,
+        },
         SECRET
       );
     }
