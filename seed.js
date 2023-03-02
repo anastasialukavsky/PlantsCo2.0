@@ -117,7 +117,11 @@ const seed = async () => {
     let randomUser = Math.floor(Math.random() * seededUsers.length);
 
     for (let i = 1; i < randomUser; i++) {
-      await Cart.create({ userId: i, productId: i, qty: 1 });
+      await Cart.create({
+        userId: i,
+        productId: Math.floor(Math.random() * newProducts.length) + 1,
+        qty: Math.floor(Math.random() * 5) + 1,
+      });
     }
 
     console.log('Cart seeding successful');
@@ -129,11 +133,13 @@ const seed = async () => {
 
     console.log('Seeding wishlists...');
     let wishlist;
+    let randomProductIndex;
+
     for (listName of wishlistsList) {
       randomUser = Math.floor(Math.random() * seededUsers.length);
       wishlist = await seededUsers[randomUser].createWishlist(listName);
-      randomProduct = Math.floor(Math.random() * newProducts.length);
-      await wishlist.addProduct(randomProduct);
+      randomProductIndex = Math.floor(Math.random() * newProducts.length);
+      await wishlist.addProduct(randomProductIndex);
     }
 
     console.log('Wishlist seeding successful');
@@ -155,6 +161,82 @@ const seed = async () => {
      * payment,
      * shipping)
      */
+    console.log('Seeding past orders...');
+
+    const ORDER_COUNT = 10;
+    let currentOrder;
+    let productCount;
+    let currentProduct;
+    let quantity;
+    let totalQuantity;
+    let randomCurrencyIndex;
+    let totalPrice;
+    let discountRate;
+    let randomUserIndex;
+    let address;
+    let lineExtd;
+    let currentUserId;
+
+    for (let i = 0; i < ORDER_COUNT; i++) {
+      totalPrice = 0;
+      totalQuantity = 0;
+      discountRate = Math.random() / 2;
+      productCount = Math.floor(Math.random() * 5) + 1;
+      randomCurrencyIndex =
+        Math.floor(Math.random() * (seededCurrencies.length - 1)) + 1;
+      randomUserIndex =
+        Math.floor(Math.random() * (seededUsers.length - 1)) + 1;
+
+      (currentUserId = Math.random() < 0.2 ? null : randomUser.id), // leave userId null sometimes
+        (randomUser = await User.findByPk(randomUserIndex, {
+          include: [Shipping, Payment],
+        }));
+      address = randomUser.shippings[0].address.join('\n');
+
+      currentOrder = await Order.build({
+        userId: currentUserId,
+        promoRate: discountRate,
+        totalPrice: 0,
+        totalQty: 0,
+      });
+
+      await currentOrder.save(); // must save in order to generate ID; therefore qty & price must be 0 momentarily
+
+      for (let j = 0; j < productCount; j++) {
+        randomProductIndex =
+          Math.floor(Math.random() * (newProducts.length - 1)) + 1;
+        currentProduct = newProducts[randomProductIndex];
+
+        quantity = Math.floor(Math.random() * 5) + 1;
+        totalQuantity += quantity;
+
+        lineExtd =
+          currentProduct.price *
+          (1 - discountRate) *
+          quantity *
+          seededCurrencies[randomCurrencyIndex].rate;
+        totalPrice += lineExtd;
+
+        await currentOrder.createOrder_detail({
+          userId: currentUserId,
+          userName: randomUser.fullName,
+          userEmail: randomUser.email,
+          address,
+          paymentMethod: randomUser.payments[0].method,
+          productId: randomProductIndex,
+          productName: currentProduct.name,
+          qty: quantity,
+          basePrice: currentProduct.price,
+          currencyRate: seededCurrencies[randomCurrencyIndex].rate,
+        });
+
+        currentOrder.finalPrice = totalPrice;
+        currentOrder.totalQty = totalQuantity;
+      }
+      await currentOrder.save();
+    }
+
+    console.log('Order seeding successful');
 
     db.close();
   } catch (e) {
