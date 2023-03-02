@@ -1,9 +1,27 @@
-// express routes that handle post (serve new tokens) and get (verify tokens) requests
+const router = require('express').Router();
+const { User } = require('../../DB');
+const { requireToken, isAdmin } = require('../authMiddleware');
 
-// log in routes
+/**
+ * INBOUND ROUTE: /api/auth
+ */
 
-// POST '/signup'
-// only retrieve necessary info (username, password) from req.body
-// create user using these fields (to avoid injection errors)
+router.get('/', requireToken, (req, res, next) => {
+  try {
+    res.send(req.user);
+  } catch (ex) {
+    next(ex);
+    1;
+  }
+});
 
-// GET '/user'
+router.post('/login', async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+    res.send({ token: await User.authenticate({ email, password }) });
+  } catch (err) {
+    next(err);
+  }
+});
+
+module.exports = router;
