@@ -30,7 +30,7 @@
   "version": "1.0.0",
   "main": "webpack.config.js",
   "scripts": {
-    "start": "node server/server.js",
+    "start": "nodemon server/server.js",
     "seed": "node seed.js",
     "start-dev": "npm run style & npm run webpack & nodemon server/server.js",
     "style": "npx tailwindcss -i ./public/style.css -o ./public/tailwind.css --watch",
