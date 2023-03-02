@@ -20,7 +20,7 @@ router.get('/:productId', async (req, res, next) => {
       include: Tag,
     });
     if (product === null) {
-      return res.status(404).send('Oops! Product not found!');
+      return res.sendStatus(404);
     }
     res.json(product);
   } catch (e) {
