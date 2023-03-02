@@ -28,14 +28,14 @@ Payment.belongsTo(User);
 User.belongsTo(Currency);
 Currency.hasMany(User);
 
-Product.belongsToMany(Tag, { through: 'Product_Tags' });
-Tag.belongsToMany(Product, { through: 'Product_Tags' });
+Product.belongsToMany(Tag, { through: 'product_tags' });
+Tag.belongsToMany(Product, { through: 'product_tags' });
 
 User.belongsToMany(Product, { through: Cart });
 Product.belongsToMany(User, { through: Cart });
 
-Wishlist.belongsToMany(Product, { through: 'Wishlist_Detail' });
-Product.belongsToMany(Wishlist, { through: 'Wishlist_Detail' });
+Wishlist.belongsToMany(Product, { through: 'wishlist_details' });
+Product.belongsToMany(Wishlist, { through: 'wishlist_details' });
 
 User.hasMany(Wishlist);
 Wishlist.belongsTo(User);
