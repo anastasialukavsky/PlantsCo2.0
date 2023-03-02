@@ -14,13 +14,13 @@ router.get('/', async (req, res, next) => {
 });
 
 // GET single product route /api/products/:productId
-router.get('/:productId', async (req, res, next) => {
+router.get('/:productId', middlewarefunc, async (req, res, next) => {
   try {
     const product = await Product.findByPk(req.params.productId, {
       include: Tag,
     });
     if (product === null) {
-      return res.sendStatus(404);
+      return res.status(404).send('product not found!');
     }
     res.json(product);
   } catch (e) {
@@ -30,6 +30,7 @@ router.get('/:productId', async (req, res, next) => {
 });
 
 // POST (admin only - token auth headers)
+// send get request to '/api/auth/:token' passing in token in header
 
 // UPDATE (admin only - token auth headers)
 
