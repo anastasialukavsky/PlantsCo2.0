@@ -21,5 +21,7 @@ router.get('/:productId', async (req, res, next) => {
   } catch (e) {
     console.error(chalk.bgRed('BACKEND ISSUE FETCHING PRODUCT'));
     next(e);
+  }
+});
 
 module.exports = router;
