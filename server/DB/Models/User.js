@@ -1,5 +1,10 @@
 const Sequelize = require('sequelize');
 const db = require('../database');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+const dotenv = require('dotenv').config();
+
+const SECRET = process.env.JWT;
 
 const User = db.define('user', {
   firstName: {
@@ -78,5 +83,41 @@ const User = db.define('user', {
     },
   },
 });
+
+User.verifyByToken = async (token) => {
+  try {
+    const { id } = jwt.verify(token, SECRET);
+    const user = await User.findByPk(id);
+    if (user) {
+      return user.id;
+    } else {
+      const error = new Error('bad credentials / bad token');
+      error.status = 401;
+      throw error;
+    }
+  } catch (err) {
+    console.log('verification error: ', err);
+  }
+};
+
+User.authenticate = async ({ username, password }) => {
+  try {
+    const user = await User.findOne({
+      where: { username },
+    });
+
+    if (user && (await bcrypt.compare(password, user.password))) {
+      return jwt.sign(
+        { id: user.id, isAdmin: user.isAdmin, role: user.role },
+        SECRET
+      );
+    }
+    const error = new Error('bad credentials');
+    error.status = 401;
+    throw error;
+  } catch (err) {
+    console.log('Authentication error:', err);
+  }
+};
 
 module.exports = User;
