@@ -50,6 +50,7 @@ router.get('/:userId', requireToken, async (req, res, next) => {
   try {
     const { userId } = req.params;
 
+    // if user is not admin & they're attempting to pull someone else's data, fail w/403
     if (req.user.id === +userId || req.user.isAdmin) {
       const user = await User.findByPk(+userId, {
         include: [Product],
@@ -96,18 +97,15 @@ router.put('/:userId', requireToken, async (req, res, next) => {
     // if we've made it this far we're safe to proceed
     const user = await User.findByPk(userId);
 
-    await user.update(
-      {
-        firstName,
-        lastName,
-        email,
-        imageURL,
-        password,
-        role,
-        isAdmin,
-      }
-      // { validate: true }
-    );
+    await user.update({
+      firstName,
+      lastName,
+      email,
+      imageURL,
+      password,
+      role,
+      isAdmin,
+    });
 
     // pull user from the database again to include all updates
     // (and to prevent sending back password)
@@ -129,6 +127,8 @@ router.put('/:userId', requireToken, async (req, res, next) => {
 
 router.delete('/:userId', requireToken, async (req, res, next) => {
   const userId = +req.params.userId;
+
+  // if user is not admin & they're attempting to delete someone else's user, fail w/403
   if (req.user.id !== userId && !req.user.isAdmin) {
     return res
       .status(403)
@@ -139,7 +139,7 @@ router.delete('/:userId', requireToken, async (req, res, next) => {
 
   try {
     await User.destroy({ where: { id: userId } });
-    res.sendStatus(204);
+    res.sendStatus(204); // 204 no data (successful delete)
   } catch (err) {
     next(err);
   }
