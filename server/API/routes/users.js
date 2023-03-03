@@ -3,8 +3,6 @@ const chalk = require('chalk');
 const { requireToken, isAdmin } = require('../authMiddleware');
 const { User, Product, Cart } = require('../../DB');
 
-// api/user/userid/cart
-// router.use('/:id/cart', require('./cart'));
 // router.use('/:id/wishlist', require('./wishlist'));
 
 router.get('/', requireToken, isAdmin, async (req, res, next) => {
@@ -182,15 +180,18 @@ router.get('/:id/cart', requireToken, async (req, res, next) => {
 // PUT - update cart-item qty (front-end track qty and submit new qty)
 router.put('/:id/cart', requireToken, async (req, res, next) => {
   try {
+    const itemQty = req.body.qty || 1;
     if (req.user.id === +req.params.id || req.user.isAdmin) {
-      const cartItem = await Cart.findOne({
+      let cartItem = await Cart.findOne({
         where: {
           userId: req.params.id,
           productId: req.body.productId,
         },
       });
-      if (!cartItem) return res.status(404).send('Nothing to update!');
-      await cartItem.update({ qty: req.body.qty });
+      if (!cartItem) {
+        const user = await User.findByPk(req.params.id);
+        cartItem = await user.addProduct(req.body.productId);
+      } else await cartItem.update({ qty: itemQty });
       res.json(cartItem);
     } else {
       res
