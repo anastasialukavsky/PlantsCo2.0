@@ -148,6 +148,7 @@ router.delete('/:userId', requireToken, async (req, res, next) => {
 
 // CART ROUTES
 
+// GET cart product info
 router.get('/:id/cart', requireToken, async (req, res, next) => {
   try {
     if (req.user.id === +req.params.id || req.user.isAdmin) {
@@ -174,6 +175,58 @@ router.get('/:id/cart', requireToken, async (req, res, next) => {
     }
   } catch (e) {
     console.error(chalk.bgRed('BACKEND ISSUE FETCHING USER CART'));
+    next(e);
+  }
+});
+
+// PUT - update cart-item qty (front-end track qty and submit new qty)
+router.put('/:id/cart', requireToken, async (req, res, next) => {
+  try {
+    if (req.user.id === +req.params.id || req.user.isAdmin) {
+      const cartItem = await Cart.findOne({
+        where: {
+          userId: req.params.id,
+          productId: req.body.productId,
+        },
+      });
+      if (!cartItem) return res.status(404).send('Nothing to update!');
+      await cartItem.update({ qty: req.body.qty });
+      res.json(cartItem);
+    } else {
+      res
+        .status(403)
+        .send(
+          'Inadequate access rights / Requested user does not match logged-in user'
+        );
+    }
+  } catch (e) {
+    console.error(chalk.bgRed('BACKEND ISSUE UPDATING USER CART ITEMS'));
+    next(e);
+  }
+});
+
+// DELETE - remove cart items (frontend - when qty is 0, user removes from cart, and when user completes an order)
+router.delete('/:id/cart', requireToken, async (req, res, next) => {
+  try {
+    if (req.user.id === +req.params.id || req.user.isAdmin) {
+      const cartItem = await Cart.findOne({
+        where: {
+          userId: req.params.id,
+          productId: req.body.productId,
+        },
+      });
+      if (!cartItem) return res.status(404).send('No product to delete!');
+      await cartItem.destroy();
+      res.json(cartItem);
+    } else {
+      res
+        .status(403)
+        .send(
+          'Inadequate access rights / Requested user does not match logged-in user'
+        );
+    }
+  } catch (e) {
+    console.error(chalk.bgRed('BACKEND ISSUE DELETING USER CART ITEMS'));
     next(e);
   }
 });
