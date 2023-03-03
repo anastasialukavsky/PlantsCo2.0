@@ -3,13 +3,16 @@ const app = express();
 const path = require('path');
 const dotenv = require('dotenv').config();
 const volleyball = require('volleyball');
+const config = require('config');
 const PORT = process.env.PORT_NUMBER || 3000;
 
 // Static middleware
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
-// logging middleware
-app.use(volleyball);
+// logging middleware - disable during test
+if (config.util.getEnv('NODE_ENV') !== 'test') {
+  app.use(volleyball);
+}
 
 // Body parsing middleware
 app.use(express.json());
@@ -37,3 +40,5 @@ async function init() {
 }
 
 init();
+
+module.exports = app; // imported to mocha for tests
