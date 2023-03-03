@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
   selectAllProducts,
   fetchAllProducts,
+  resetStatus,
+  selectStatus,
 } from '../slices/product/productSlice';
 
 const AllProducts = () => {
@@ -10,15 +12,16 @@ const AllProducts = () => {
 
   useEffect(() => {
     dispatch(fetchAllProducts());
+
+    return () => dispatch(resetStatus());
   }, [dispatch]);
 
   const allProducts = useSelector(selectAllProducts);
-  console.log('allProducts', allProducts);
 
   return (
     <div className="text-yellow-500 text-3xl">
       <h1 className=" text-sm">This is the all products page</h1>
-      {allProducts.slice(0, 5).map((product) => {
+      {allProducts.map((product) => {
         return (
           <section key={product.id} className="flex">
             <h1 className="">{product.name}</h1>
