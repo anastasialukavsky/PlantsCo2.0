@@ -6,7 +6,7 @@ const { requireToken, isAdmin } = require('../authMiddleware');
 
 router.get('/', requireToken, isAdmin, async (req, res, next) => {
   try {
-    const allPromos = await Promo_Code.findAll();
+    const allPromos = await Promo_Code.findAll({ include: Order });
     res.json(allPromos);
   } catch (e) {
     console.error(chalk.bgRed('BACKEND ISSUE GETTING PROMO_CODES'));
