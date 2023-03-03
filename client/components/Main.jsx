@@ -1,13 +1,20 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
-import { Homepage } from './index';
+import store from '../store';
+import { Homepage, AllProducts, SingleProduct } from './index';
 
 export default function Main() {
   return (
     <div>
-      <Routes>
-        <Route path="/" element={<Homepage />} />
-      </Routes>
+      <Provider store={store}>
+        <Routes>
+          <Route path="/" element={<Homepage />} />
+          <Route path="/products" element={<AllProducts />} />
+          {/* BELOW ROUTE WILL BE CHANGED, MADE FOR STYLING PURPOSES ONLY */}
+          <Route path="/singleproduct" element={<SingleProduct />} />
+        </Routes>
+      </Provider>
     </div>
   );
 }
