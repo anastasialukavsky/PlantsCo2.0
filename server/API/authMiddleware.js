@@ -9,6 +9,9 @@ const { User } = require('../DB/index');
 async function requireToken(req, res, next) {
   try {
     const token = req.headers.authorization;
+    if (!token) {
+      return res.status(403).send('Must be logged in to access!');
+    }
     const user = await User.verifyByToken(token);
     req.user = user;
     next();
