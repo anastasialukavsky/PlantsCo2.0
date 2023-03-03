@@ -3,7 +3,7 @@ const { requireToken, isAdmin } = require('../authMiddleware');
 const { User, Product } = require('../../DB');
 
 // api/user/userid/cart
-// router.use('/:id/cart', require('./cart'));
+router.use('/:id/cart', require('./cart'));
 // router.use('/:id/wishlist', require('./wishlist'));
 
 router.get('/', requireToken, isAdmin, async (req, res, next) => {
