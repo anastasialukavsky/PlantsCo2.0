@@ -6,7 +6,7 @@ import { Homepage, AllProducts, SingleProduct } from './index';
 
 export default function Main() {
   return (
-    <div>
+    <div className="font-fraunces">
       <Provider store={store}>
         <Routes>
           <Route path="/" element={<Homepage />} />
