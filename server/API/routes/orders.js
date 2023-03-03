@@ -3,12 +3,11 @@
 // This is a public sample test API key.
 // Don’t submit any personally identifiable information in requests made with this key.
 // Sign in to see your own test API key embedded in code samples.
-const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+const dotenv = require('dotenv').config();
+const stripe = require('stripe')(process.env.STRIPE_DEMO);
 const router = require('express').Router();
-
 // const app = express();
 // app.use(express.static('public'));
-
 
 router.post('/checkout', async (req, res, next) => {
   const products = req.body.products;
@@ -37,6 +36,5 @@ router.post('/checkout', async (req, res, next) => {
   console.log('sessionURL', session.url);
   res.redirect(303, session.url);
 });
-
 
 module.exports = router;
