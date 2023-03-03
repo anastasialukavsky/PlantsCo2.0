@@ -88,18 +88,17 @@ const User = db.define('user', {
  * HOOKS
  */
 
-// User.beforeValidate((user) => {
-//   const MIN_PASSWORD_LENGTH = 8;
+User.beforeValidate((user) => {
+  const MIN_PASSWORD_LENGTH = 8;
 
-//   const pw = user.password;
-//   if (pw.length < MIN_PASSWORD_LENGTH) {
-//     const err = new Error();
-//     err.message = `Minimum password requirement not met (${MIN_PASSWORD_LENGTH} characters)`;
-//     throw err;
-//   }
-// });
+  const pw = user.password;
+  if (pw.length < MIN_PASSWORD_LENGTH) {
+    const err = new Error();
+    err.message = `Minimum password requirement not met (${MIN_PASSWORD_LENGTH} characters)`;
+    throw err;
+  }
+});
 
-<<<<<<< HEAD
 User.beforeCreate(async (user) => {
   user.password = await bcrypt.hash(user.password, SALT_ROUNDS);
 });
@@ -108,11 +107,6 @@ User.beforeUpdate(async (user) => {
   if (user.password)
     user.password = await bcrypt.hash(user.password, SALT_ROUNDS);
 });
-=======
-// User.beforeCreate(async (user) => {
-//   user.password = await bcrypt.hash(user.password, 10);
-// });
->>>>>>> c13e521ca21c80c675e429d947bd31ff58615d23
 
 /**
  * AUTH CLASS METHODS
