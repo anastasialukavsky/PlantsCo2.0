@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 const dotenv = require('dotenv').config();
 
 const SECRET = process.env.JWT;
+const SALT_ROUNDS = 10;
 
 const User = db.define('user', {
   firstName: {
@@ -53,12 +54,11 @@ const User = db.define('user', {
       notNull: true,
     },
   },
-  // Will need hook to hash password
+
   password: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      // len: [8, 20], //allow strings between 8 - 20 characters
       notEmpty: true,
       notNull: true,
     },
@@ -100,7 +100,12 @@ User.beforeValidate((user) => {
 });
 
 User.beforeCreate(async (user) => {
-  user.password = await bcrypt.hash(user.password, 10);
+  user.password = await bcrypt.hash(user.password, SALT_ROUNDS);
+});
+
+User.beforeUpdate(async (user) => {
+  if (user.password)
+    user.password = await bcrypt.hash(user.password, SALT_ROUNDS);
 });
 
 /**
@@ -110,9 +115,13 @@ User.beforeCreate(async (user) => {
 User.verifyByToken = async (token) => {
   try {
     const { id } = jwt.verify(token, SECRET);
-    const user = await User.findByPk(id);
+    const user = await User.findByPk(id, {
+      attributes: {
+        exclude: ['password'],
+      },
+    });
     if (user) {
-      return user.id;
+      return user;
     } else {
       const error = new Error('bad credentials / bad token');
       error.status = 401;
