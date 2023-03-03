@@ -16,7 +16,7 @@ const AllProducts = () => {
   console.log('allProducts', allProducts);
 
   return (
-    <div className="text-red-800 text-3xl">
+    <div className="text-yellow-500 text-3xl">
       <h1 className=" text-sm">This is the all products page</h1>
       {allProducts.slice(0, 5).map((product) => {
         return (
