@@ -2,8 +2,9 @@
 const router = require('express').Router();
 const chalk = require('chalk');
 const { Promo_Code, Order } = require('../../DB');
+const { requireToken, isAdmin } = require('../authMiddleware');
 
-router.get('/', async (req, res, next) => {
+router.get('/', requireToken, isAdmin, async (req, res, next) => {
   try {
     const allPromos = await Promo_Code.findAll();
     res.json(allPromos);
@@ -13,7 +14,7 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', requireToken, isAdmin, async (req, res, next) => {
   try {
     const singlePromo = await Promo_Code.findByPk(req.params.id, {
       include: Order,
@@ -25,7 +26,7 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-router.post('/', async (req, res, next) => {
+router.post('/', requireToken, isAdmin, async (req, res, next) => {
   try {
     const [newPromo, wasCreated] = await Promo_Code.findOrCreate({
       where: { name: req.body.name },
@@ -39,7 +40,7 @@ router.post('/', async (req, res, next) => {
   }
 });
 
-router.put('/:id', async (req, res, next) => {
+router.put('/:id', requireToken, isAdmin, async (req, res, next) => {
   try {
     const promo = await Promo_Code.findByPk(req.params.id);
     if (!promo) return res.status(404).send('No promo to update!');
@@ -51,7 +52,7 @@ router.put('/:id', async (req, res, next) => {
   }
 });
 
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id', requireToken, isAdmin, async (req, res, next) => {
   try {
     const promo = await Promo_Code.findByPk(req.params.id);
     if (!promo) return res.status(404).send('No promo to delete!');
