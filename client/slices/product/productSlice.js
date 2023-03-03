@@ -55,12 +55,18 @@ const productSlice = createSlice({
       console.log('failed payload', action.payload);
       state.error = action.error.message;
     });
+    builder.addCase(fetchSingleProduct.fulfilled, (state, action) => {
+      state.status = 'success';
+      state.error = '';
+      state.singleProduct = action.payload;
+    });
   },
 });
 
 export const { resetStatusError } = productSlice.actions;
 
 export const selectAllProducts = (state) => state.products.products;
+export const selectSingleProduct = (state) => state.products.singleProduct;
 export const selectStatus = (state) => state.products.status;
 
 export default productSlice.reducer;
