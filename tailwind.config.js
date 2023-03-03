@@ -10,7 +10,7 @@ module.exports = {
     },
     extend: {
       colors: {
-        primary_deep_green: '#365314',
+        'primary-deep-green': '#365314',
         'primary-promo-banner': '#a7bfb4',
         'primary-button-green': '#283F3B',
         'primary-offwhite': '#f4f4f4',
