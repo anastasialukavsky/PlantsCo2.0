@@ -20,6 +20,18 @@ export const fetchAllProducts = createAsyncThunk(
   }
 );
 
+export const fetchSingleProduct = createAsyncThunk(
+  'products/fetchOne',
+  async (id, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.get(`/api/products/${id}`);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 const productSlice = createSlice({
   name: 'products',
   initialState,
