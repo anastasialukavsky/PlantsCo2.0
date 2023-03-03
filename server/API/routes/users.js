@@ -1,9 +1,8 @@
 const router = require('express').Router();
+const chalk = require('chalk');
 const { requireToken, isAdmin } = require('../authMiddleware');
-const { User, Product } = require('../../DB');
+const { User, Product, Cart } = require('../../DB');
 
-// api/user/userid/cart
-// router.use('/:id/cart', require('./cart'));
 // router.use('/:id/wishlist', require('./wishlist'));
 
 router.get('/', requireToken, isAdmin, async (req, res, next) => {
@@ -142,6 +141,94 @@ router.delete('/:userId', requireToken, async (req, res, next) => {
     res.sendStatus(204); // 204 no data (successful delete)
   } catch (err) {
     next(err);
+  }
+});
+
+// CART ROUTES
+
+// GET cart product info
+router.get('/:id/cart', requireToken, async (req, res, next) => {
+  try {
+    if (req.user.id === +req.params.id || req.user.isAdmin) {
+      const cart = await User.findByPk(req.params.id, {
+        include: Product,
+        attributes: {
+          exclude: [
+            'password',
+            'imageURL',
+            'isAdmin',
+            'role',
+            'createdAt',
+            'updatedAt',
+          ],
+        },
+      });
+      res.json(cart);
+    } else {
+      res
+        .status(403)
+        .send(
+          'Inadequate access rights / Requested user does not match logged-in user'
+        );
+    }
+  } catch (e) {
+    console.error(chalk.bgRed('BACKEND ISSUE FETCHING USER CART'));
+    next(e);
+  }
+});
+
+// PUT - update cart-item qty (front-end track qty and submit new qty)
+router.put('/:id/cart', requireToken, async (req, res, next) => {
+  try {
+    const itemQty = req.body.qty || 1;
+    if (req.user.id === +req.params.id || req.user.isAdmin) {
+      let cartItem = await Cart.findOne({
+        where: {
+          userId: req.params.id,
+          productId: req.body.productId,
+        },
+      });
+      if (!cartItem) {
+        const user = await User.findByPk(req.params.id);
+        cartItem = await user.addProduct(req.body.productId);
+      } else await cartItem.update({ qty: itemQty });
+      res.json(cartItem);
+    } else {
+      res
+        .status(403)
+        .send(
+          'Inadequate access rights / Requested user does not match logged-in user'
+        );
+    }
+  } catch (e) {
+    console.error(chalk.bgRed('BACKEND ISSUE UPDATING USER CART ITEMS'));
+    next(e);
+  }
+});
+
+// DELETE - remove cart items (frontend - when qty is 0, user removes from cart, and when user completes an order)
+router.delete('/:id/cart', requireToken, async (req, res, next) => {
+  try {
+    if (req.user.id === +req.params.id || req.user.isAdmin) {
+      const cartItem = await Cart.findOne({
+        where: {
+          userId: req.params.id,
+          productId: req.body.productId,
+        },
+      });
+      if (!cartItem) return res.status(404).send('No product to delete!');
+      await cartItem.destroy();
+      res.json(cartItem);
+    } else {
+      res
+        .status(403)
+        .send(
+          'Inadequate access rights / Requested user does not match logged-in user'
+        );
+    }
+  } catch (e) {
+    console.error(chalk.bgRed('BACKEND ISSUE DELETING USER CART ITEMS'));
+    next(e);
   }
 });
 
