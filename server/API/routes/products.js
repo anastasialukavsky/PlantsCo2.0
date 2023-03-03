@@ -1,8 +1,8 @@
 const router = require('express').Router();
 const chalk = require('chalk');
 const { Product, Tag } = require('../../DB');
+const { requireToken, isAdmin } = require('../authMiddleware');
 
-// GET all prods /api/products
 router.get('/', async (req, res, next) => {
   try {
     const allProds = await Product.findAll({ include: Tag });
@@ -13,7 +13,6 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-// GET single product route /api/products/:productId
 router.get('/:productId', async (req, res, next) => {
   try {
     const product = await Product.findByPk(req.params.productId, {
@@ -29,10 +28,7 @@ router.get('/:productId', async (req, res, next) => {
   }
 });
 
-// POST (admin only - token auth headers)
-// send get request to '/api/auth/:token' passing in token in header
-
-router.post('/', async (req, res, next) => {
+router.post('/', requireToken, isAdmin, async (req, res, next) => {
   try {
     const [newProduct, wasCreated] = await Product.findOrCreate({
       where: { name: req.body.name },
@@ -46,8 +42,7 @@ router.post('/', async (req, res, next) => {
   }
 });
 
-// PUT (admin only - token auth headers)
-router.put('/:id', async (req, res, next) => {
+router.put('/:id', requireToken, isAdmin, async (req, res, next) => {
   try {
     const prod = await Product.findByPk(req.params.id);
     if (!prod) return res.status(404).send('No product to update!');
@@ -59,8 +54,7 @@ router.put('/:id', async (req, res, next) => {
   }
 });
 
-// DELETE (admin only - token auth headers)
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id', requireToken, isAdmin, async (req, res, next) => {
   try {
     const prod = await Product.findByPk(req.params.id);
     if (!prod) return res.status(404).send('No product to delete!');
