@@ -6,6 +6,7 @@
     "babel-loader": "^9.1.2",
     "chai": "^4.3.7",
     "chai-http": "^4.3.0",
+    "cross-env": "^7.0.3",
     "mocha": "^10.2.0",
     "nodemon": "^2.0.20",
     "tailwindcss": "^3.2.7",
@@ -36,6 +37,7 @@
   "scripts": {
     "start": "SET NODE_ENV=dev && nodemon server/server.js",
     "seed": "node seed.js",
+    "seed-test": "cross-env NODE_ENV=test node seed.js",
     "start-dev": "npm run style & npm run webpack & nodemon server/server.js",
     "style": "npx tailwindcss -i ./public/style.css -o ./public/tailwind.css --watch",
     "webpack": "webpack -w ",
