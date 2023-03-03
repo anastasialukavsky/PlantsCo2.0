@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
   selectAllProducts,
   fetchAllProducts,
-  resetStatus,
+  resetStatusError,
   selectStatus,
 } from '../slices/product/productSlice';
 
@@ -13,7 +13,7 @@ const AllProducts = () => {
   useEffect(() => {
     dispatch(fetchAllProducts());
 
-    return () => dispatch(resetStatus());
+    return () => dispatch(resetStatusError());
   }, [dispatch]);
 
   const allProducts = useSelector(selectAllProducts);
