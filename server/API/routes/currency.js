@@ -3,9 +3,9 @@ const chalk = require('chalk');
 const { Currency, User } = require('../../DB');
 const { requireToken, isAdmin } = require('../authMiddleware');
 
-router.get('/', requireToken, isAdmin, async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
-    const allCurrencies = await Currency.findAll({ include: User });
+    const allCurrencies = await Currency.findAll();
     res.json(allCurrencies);
   } catch (e) {
     console.error(chalk.bgRed('BACKEND ISSUE GETTING CURRENCY'));
