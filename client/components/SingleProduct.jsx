@@ -1,29 +1,15 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 // import samplePlant from '../../public/assets/samplePlant.png';
 
 const SingleProduct = () => {
   return (
     <main className="font-serif flex h-screen">
       <section className="flex gap-20 justify-center items-center">
-        <div className="grid grid-cols-[1fr 1fr] grid-rows-[1fr 1fr 1fr] w-112 h-96 justify-center gap-3 items-center">
+        <div className="">
           <img
-            className="h-28"
-            src="assets/samplePlant.png"
-            alt="error showing photo"
-          />
-          <img
-            className="h-28"
-            src="assets/samplePlant.png"
-            alt="error showing photo"
-          />
-          <img
-            className="h-28"
-            src="assets/samplePlant.png"
-            alt="error showing photo"
-          />
-          <img
-            className="h-96  row-start-1 row-end-4 col-start-2"
-            src="assets/samplePlant.png"
+            className="h-96"
+            src="/assets/samplePlant.png"
             alt="error showing photo"
           />
         </div>
