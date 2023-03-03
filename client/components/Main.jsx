@@ -11,8 +11,7 @@ export default function Main() {
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/products" element={<AllProducts />} />
-          {/* BELOW ROUTE WILL BE CHANGED, MADE FOR STYLING PURPOSES ONLY */}
-          <Route path="/singleproduct" element={<SingleProduct />} />
+          <Route path="/products/:productId" element={<SingleProduct />} />
         </Routes>
       </Provider>
     </div>
