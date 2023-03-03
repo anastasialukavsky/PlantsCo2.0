@@ -1,4 +1,4 @@
-process.env.NODE_ENV = 'dev';
+process.env.NODE_ENV = 'test';
 
 const sequelize = require('sequelize');
 const { User, Product } = require('../server/DB');
