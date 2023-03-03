@@ -1,9 +1,10 @@
 const router = require('express').Router();
+const chalk = require('chalk');
 const { requireToken, isAdmin } = require('../authMiddleware');
-const { User, Product } = require('../../DB');
+const { User, Product, Cart } = require('../../DB');
 
 // api/user/userid/cart
-router.use('/:id/cart', require('./cart'));
+// router.use('/:id/cart', require('./cart'));
 // router.use('/:id/wishlist', require('./wishlist'));
 
 router.get('/', requireToken, isAdmin, async (req, res, next) => {
@@ -142,6 +143,38 @@ router.delete('/:userId', requireToken, async (req, res, next) => {
     res.sendStatus(204); // 204 no data (successful delete)
   } catch (err) {
     next(err);
+  }
+});
+
+// CART ROUTES
+
+router.get('/:id/cart', requireToken, async (req, res, next) => {
+  try {
+    if (req.user.id === +req.params.id || req.user.isAdmin) {
+      const cart = await User.findByPk(req.params.id, {
+        include: Product,
+        attributes: {
+          exclude: [
+            'password',
+            'imageURL',
+            'isAdmin',
+            'role',
+            'createdAt',
+            'updatedAt',
+          ],
+        },
+      });
+      res.json(cart);
+    } else {
+      res
+        .status(403)
+        .send(
+          'Inadequate access rights / Requested user does not match logged-in user'
+        );
+    }
+  } catch (e) {
+    console.error(chalk.bgRed('BACKEND ISSUE FETCHING USER CART'));
+    next(e);
   }
 });
 
