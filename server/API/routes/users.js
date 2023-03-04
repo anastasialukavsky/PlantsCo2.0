@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const chalk = require('chalk');
 const { requireToken, isAdmin } = require('../authMiddleware');
-const { User, Product, Cart } = require('../../DB');
+const { User, Product, Cart, Wishlist } = require('../../DB');
 
 // router.use('/:id/wishlist', require('./wishlist'));
 
@@ -160,12 +160,113 @@ router.get('/:userId/wishlists', requireToken, async (req, res, next) => {
   }
   try {
     const user = await User.findByPk(userId);
-    const wishlists = await user.getWishlists();
-    res.status(200).send(wishlists);
+    const wishlists = await user.getWishlists({ include: [Product] });
+    res.status(200).json(wishlists);
   } catch (err) {
     next(err);
   }
 });
+
+router.get(
+  '/:userId/wishlists/:wishlistId',
+  requireToken,
+  async (req, res, next) => {
+    try {
+      if (req.user.id === +req.params.userId || req.user.isAdmin) {
+        const wishlistId = +req.params.wishlistId;
+        const wishlist = await Wishlist.findByPk(wishlistId, {
+          include: [Product],
+        });
+        if (wishlist) return res.status(200).json(wishlist);
+      } else {
+        res
+          .status(403)
+          .send(
+            'Inadequate access rights / Requested user does not match logged-in user'
+          );
+      }
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
+router.post('/:userId/wishlists', requireToken, async (req, res, next) => {
+  try {
+    if (req.user.id === +req.params.userId || req.user.isAdmin) {
+      const userId = +req.params.userId;
+      const { wishlistName } = req.body;
+      const newWishlist = await Wishlist.create({ userId, wishlistName });
+      res.status(200).json(newWishlist);
+    } else {
+      res
+        .status(403)
+        .send(
+          'Inadequate access rights / Requested user does not match logged-in user'
+        );
+    }
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.put(
+  '/:userId/wishlists/:wishlistId',
+  requireToken,
+  async (req, res, next) => {
+    try {
+      if (req.user.id === +req.params.userId || req.user.isAdmin) {
+        const wishlistId = +req.params.wishlistId;
+        const { productId, action } = req.body; // action: ['add', 'delete']
+        let wishlist = await Wishlist.findByPk(wishlistId);
+        if (action === 'add') {
+          await wishlist.addProduct(productId);
+        } else if (action === 'delete') {
+          await wishlist.removeProduct(productId);
+        }
+        wishlist = await Wishlist.findByPk(wishlistId, {
+          include: [Product],
+        });
+        const updatedWishlist = await Wishlist.findByPk(wishlistId, {
+          include: [Product],
+        });
+        res.status(200).json(updatedWishlist);
+      } else {
+        res
+          .status(403)
+          .send(
+            'Inadequate access rights / Requested user does not match logged-in user'
+          );
+      }
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
+router.delete(
+  '/:userId/wishlists/:wishlistId',
+  requireToken,
+  async (req, res, next) => {
+    try {
+      if (req.user.id === +req.params.userId || req.user.isAdmin) {
+        const wishlistId = +req.params.wishlistId;
+        const wishlist = await Wishlist.findByPk(wishlistId);
+        await wishlist.destroy();
+        res.sendStatus(204);
+      } else {
+        res
+          .status(403)
+          .send(
+            'Inadequate access rights / Requested user does not match logged-in user'
+          );
+      }
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
 // CART ROUTES
 
 // GET cart product info

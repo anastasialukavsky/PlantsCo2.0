@@ -69,7 +69,7 @@ describe('Wishlists', () => {
     adminToken = res.body.token;
   });
 
-  describe('GET /users/<userId>/wishlists', () => {
+  describe('GET /users/:userId/wishlists', () => {
     it('Returns a 200 status given correct token', async () => {
       res = await chai
         .request(server)
