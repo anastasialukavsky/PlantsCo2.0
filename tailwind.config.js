@@ -16,6 +16,7 @@ module.exports = {
         'primary-offwhite': '#f4f4f4',
         'primary-bright-white': '#FFFFFF',
       },
+      display: ['group-hover'],
     },
   },
   plugins: [],
