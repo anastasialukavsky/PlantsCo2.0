@@ -145,4 +145,27 @@ router.delete('/:userId', requireToken, async (req, res, next) => {
   }
 });
 
+/**
+ * WISHLIST
+ */
+
+router.get('/:userId/wishlists', requireToken, async (req, res, next) => {
+  const userId = +req.params.userId;
+  // if user is not admin & they're attempting to delete someone else's user, fail w/403
+  if (req.user.id !== userId && !req.user.isAdmin) {
+    return res
+      .status(403)
+      .send(
+        'Inadequate access rights / Requested user does not match logged-in user'
+      );
+  }
+  try {
+    const user = await User.findByPk(userId);
+    const wishlists = await user.getWishlists();
+    res.status(200).send(wishlists);
+  } catch (err) {
+    next(err);
+  }
+});
+
 module.exports = router;
