@@ -6,6 +6,7 @@ const initialState = {
   singleProduct: {},
   error: '',
   status: '',
+  similarPage: 0,
 };
 
 export const fetchAllProducts = createAsyncThunk(
@@ -39,6 +40,13 @@ const productSlice = createSlice({
     resetStatusError(state) {
       state.status = '';
       state.error = '';
+      state.similarPage = 0;
+    },
+    similarPageChange(state, { payload }) {
+      if (payload[0] === 'next')
+        state.similarPage = Math.min(payload[1] - 5, state.similarPage + 4);
+      if (payload === 'previous')
+        state.similarPage = Math.max(0, state.similarPage - 4);
     },
   },
   extraReducers: (builder) => {
@@ -63,19 +71,23 @@ const productSlice = createSlice({
   },
 });
 
-export const { resetStatusError } = productSlice.actions;
+export const { resetStatusError, similarPageChange } = productSlice.actions;
 
 export const selectAllProducts = (state) => state.products.products;
 export const selectSingleProduct = (state) => state.products.singleProduct;
 export const selectStatus = (state) => state.products.status;
+export const selectSimilarPage = (state) => state.products.similarPage;
+
+// Selects all products that have a matching tag to current product
 export const selectSimilar = (state) => {
   const allProducts = state.products.products;
   const currentProd = state.products.singleProduct;
   const currentProdTags = currentProd.tags?.map(({ tagName }) => tagName);
 
   return allProducts.filter((product) => {
-    return product?.tags.some(({ tagName }) =>
-      currentProdTags?.includes(tagName)
+    return (
+      product?.tags.some(({ tagName }) => currentProdTags?.includes(tagName)) &&
+      product?.id !== currentProd.id
     );
   });
 };
