@@ -18,7 +18,7 @@ let adminToken;
 let seededProducts;
 
 describe('Authentication', () => {
-  beforeEach(async () => {
+  before(async () => {
     if (!adminToken || !regularToken) {
       const temp = await userSetup();
       regularUser = temp.regularUser;

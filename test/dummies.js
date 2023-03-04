@@ -1,7 +1,7 @@
 // process.env.NODE_ENV = 'test';
 
 const sequelize = require('sequelize');
-const { User, Product } = require('../server/DB');
+const { User, Product, Wishlist } = require('../server/DB');
 const chai = require('chai');
 const server = require('../server/server');
 
@@ -80,4 +80,25 @@ async function userSetup() {
   return { regularUser, adminUser, regularToken, adminToken };
 }
 
-module.exports = { productSetup, userSetup };
+async function wishlistSetup(users, products) {
+  let wishlists = [];
+
+  const randomProductIdx = () => Math.floor(Math.random() * products.length);
+
+  const addRandomProduct = async (newWishlist) =>
+    await newWishlist.addProduct(products[randomProductIdx()].id);
+
+  for (let user of users) {
+    let newWishlist = await Wishlist.create({
+      userId: user.id,
+      wishlistName: `${user.firstName}'s Wishlist`,
+    });
+    await addRandomProduct(newWishlist);
+    if (user.id % 2 === 0) await addRandomProduct(newWishlist);
+
+    wishlists.push(newWishlist);
+  }
+  return wishlists;
+}
+
+module.exports = { productSetup, userSetup, wishlistSetup };
