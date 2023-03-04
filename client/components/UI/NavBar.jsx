@@ -4,7 +4,6 @@ import searchIcon from '../../../public/assets/search-icon.svg';
 
 const NavBar = (props) => {
   const { auth } = props;
-  console.log(auth);
 
   return (
     <nav className="border-b-2 border-green-900 flex justify-between font-serif h-20 items-center tracking-tighter text-green-900 px-5">
