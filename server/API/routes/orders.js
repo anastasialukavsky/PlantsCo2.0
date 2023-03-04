@@ -47,6 +47,7 @@ router.post('/', async (req, res, next) => {
 
     let totalQty = 0,
       finalPrice = 0;
+      
     for (let row of orderDetail) {
       const {
         userName,
