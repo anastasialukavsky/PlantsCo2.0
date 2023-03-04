@@ -40,7 +40,7 @@ let adminToken;
 let seededProducts;
 
 describe('Authentication', () => {
-  beforeEach(async () => {
+  before(async () => {
     // empty the Users table
     await User.destroy({ truncate: true, cascade: true });
 
@@ -119,7 +119,7 @@ describe('Authentication', () => {
     });
   });
   describe('Other route examples', () => {
-    beforeEach(async () => {
+    before(async () => {
       await Product.destroy({ truncate: true, cascade: true });
 
       const products = [
