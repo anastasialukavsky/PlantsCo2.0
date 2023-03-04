@@ -1,8 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 
-import { Homepage, AllProducts, SingleProduct, NavBar, Login } from './index';
+import {
+  Homepage,
+  AllProducts,
+  SingleProduct,
+  NavBar,
+  Login,
+  UserAccount,
+} from './index';
 import { selectAuth, attemptTokenLogin } from '../slices/users/authSlice';
 
 export default function Main() {
@@ -24,6 +31,7 @@ export default function Main() {
           <Route path="/login" element={<Login />} />
           <Route path="/products" element={<AllProducts />} />
           <Route path="/products/:productId" element={<SingleProduct />} />
+          <Route path="/account" element={<UserAccount />} />
         </Routes>
       </div>
     </>
