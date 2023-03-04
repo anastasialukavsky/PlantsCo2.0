@@ -221,18 +221,19 @@ router.put(
       if (req.user.id === +req.params.userId || req.user.isAdmin) {
         const wishlistId = +req.params.wishlistId;
         const { productId, action } = req.body; // action: ['add', 'delete']
+
         let wishlist = await Wishlist.findByPk(wishlistId);
+
         if (action === 'add') {
           await wishlist.addProduct(productId);
         } else if (action === 'delete') {
           await wishlist.removeProduct(productId);
         }
-        wishlist = await Wishlist.findByPk(wishlistId, {
-          include: [Product],
-        });
+
         const updatedWishlist = await Wishlist.findByPk(wishlistId, {
           include: [Product],
         });
+
         res.status(200).json(updatedWishlist);
       } else {
         res
@@ -307,6 +308,7 @@ router.get('/:id/cart', requireToken, async (req, res, next) => {
 router.put('/:id/cart', requireToken, async (req, res, next) => {
   try {
     const itemQty = req.body.qty || 1;
+
     if (req.user.id === +req.params.id || req.user.isAdmin) {
       let cartItem = await Cart.findOne({
         where: {
@@ -314,10 +316,12 @@ router.put('/:id/cart', requireToken, async (req, res, next) => {
           productId: req.body.productId,
         },
       });
+
       if (!cartItem) {
         const user = await User.findByPk(req.params.id);
         cartItem = await user.addProduct(req.body.productId);
       } else await cartItem.update({ qty: itemQty });
+
       res.json(cartItem);
     } else {
       res

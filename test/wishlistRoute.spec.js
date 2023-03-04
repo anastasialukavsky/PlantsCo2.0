@@ -173,11 +173,11 @@ describe('Wishlists', () => {
     });
   });
 
-  xdescribe('PUT /users/:userId/wishlists updates wishlist name', () => {
+  describe('PUT /users/:userId/wishlists/:wishlistId updates wishlist name', () => {
     it('Returns a 200 status given correct token', async () => {
       res = await chai
         .request(server)
-        .put(`/api/users/${regularUser.id}/wishlists`)
+        .put(`/api/users/${regularUser.id}/wishlists/${seededWishlists[0].id}`)
         .set('Authorization', regularToken)
         .send(dummyListData);
 
@@ -186,14 +186,15 @@ describe('Wishlists', () => {
     it('Returns a 200 status for any user given admin token', async () => {
       res = await chai
         .request(server)
-        .put(`/api/users/${regularUser.id}/wishlists`)
+        .put(`/api/users/${regularUser.id}/wishlists/${seededWishlists[0].id}`)
         .set('Authorization', adminToken)
         .send(dummyListData);
 
       res.should.have.status(200);
+
       res = await chai
         .request(server)
-        .put(`/api/users/${adminUser.id}/wishlists`)
+        .put(`/api/users/${regularUser.id}/wishlists/${seededWishlists[0].id}`)
         .set('Authorization', adminToken)
         .send(dummyListData);
 
@@ -202,7 +203,7 @@ describe('Wishlists', () => {
     it('Returns a 403 status given bad (non-admin, wrong user) token', async () => {
       res = await chai
         .request(server)
-        .put(`/api/users/${adminUser.id}/wishlists`)
+        .put(`/api/users/${adminUser.id}/wishlists/${seededWishlists[1].id}`)
         .set('Authorization', regularToken)
         .send(dummyListData);
 
@@ -212,7 +213,7 @@ describe('Wishlists', () => {
     it('Returns a 403 status given no token', async () => {
       res = await chai
         .request(server)
-        .put(`/api/users/${adminUser.id}/wishlists`)
+        .put(`/api/users/${regularUser.id}/wishlists/${seededWishlists[0].id}`)
         .send(dummyListData);
 
       res.should.have.status(403);
