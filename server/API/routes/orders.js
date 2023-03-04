@@ -4,7 +4,7 @@ const router = require('express').Router();
 const { User, Order, Order_Detail, Promo_Code } = require('../../DB');
 const { isAdmin, requireToken } = require('../authMiddleware');
 
-router.get('/', async (req, res, next) => {
+router.get('/', requireToken, isAdmin, async (req, res, next) => {
   try {
     const orders = await Order.findAll({
       include: [
@@ -32,8 +32,9 @@ router.post('/', async (req, res, next) => {
 
     let promoCode = null;
     if (promoCodeId) {
-      promoCode = await Promo_Code.findOne({ where: { id: promoCodeId } });
-      if (!promoCodeId) {
+      promoCode = await Promo_Code.findByPk(promoCodeId);
+
+      if (!promoCode) {
         return res.status(400).send('Invalid promo code');
       }
     }
@@ -42,13 +43,16 @@ router.post('/', async (req, res, next) => {
       promoRate: promoCode ? promoCode.discountRate : 0,
       finalPrice: 0,
       totalQty: 0,
+      promoCodeId,
       userId,
     });
 
     let totalQty = 0,
       finalPrice = 0;
-      
-    for (let row of orderDetail) {
+
+    for (let i = 0; i < orderDetail.length; i++) {
+      let row = orderDetail[i];
+
       const {
         userName,
         userEmail,
@@ -82,7 +86,7 @@ router.post('/', async (req, res, next) => {
 
     await order.update({ totalQty, finalPrice });
 
-    order = await Order.findByPk(order.id);
+    order = await Order.findByPk(order.id, { include: [Order_Detail] });
 
     res.status(200).json(order);
   } catch (err) {
@@ -90,19 +94,18 @@ router.post('/', async (req, res, next) => {
   }
 });
 
-
 router.delete('/:id', requireToken, isAdmin, async (req, res, next) => {
   try {
     const id = +req.params.id;
 
     const order = await Order.findByPk(id);
-    if (order) await order.destroy();
+    if (!order) return res.status(404).send('Order not found');
+    await order.destroy();
     res.sendStatus(204);
   } catch (err) {
     next(err);
   }
 });
-
 
 // router.post('/checkout', async (req, res, next) => {
 //   const products = req.body.products;
