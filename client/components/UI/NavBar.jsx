@@ -2,11 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import searchIcon from '../../../public/assets/search-icon.svg';
 
-const NavBar = () => {
+const NavBar = (props) => {
+  const { auth } = props;
+
   return (
     <nav className="border-b-2 border-green-900 flex justify-between font-serif h-20 items-center tracking-tighter text-green-900 px-5">
       <div>
-        <h1 className="text-green-900 text-5xl font-bold">Plants&Co</h1>
+        <Link to={'/'}>
+          <h1 className="text-green-900 text-5xl font-bold">Plants&Co</h1>
+        </Link>
       </div>
       <div className="flex gap-10">
         <div className="flex gap-1 stroke-green-900">
@@ -21,7 +25,15 @@ const NavBar = () => {
           <Link to={`/products`}>
             <li>Shop</li>
           </Link>
-          <li>Login</li>
+          {auth.firstName ? (
+            <Link to={'/account'}>
+              <li>Hi, {auth.firstName} </li>
+            </Link>
+          ) : (
+            <Link to={'/login'}>
+              <li>Login</li>
+            </Link>
+          )}
           <li>Cart</li>
         </ul>
       </div>

@@ -68,5 +68,16 @@ export const { resetStatusError } = productSlice.actions;
 export const selectAllProducts = (state) => state.products.products;
 export const selectSingleProduct = (state) => state.products.singleProduct;
 export const selectStatus = (state) => state.products.status;
+export const selectSimilar = (state) => {
+  const allProducts = state.products.products;
+  const currentProd = state.products.singleProduct;
+  const currentProdTags = currentProd.tags?.map(({ tagName }) => tagName);
+
+  return allProducts.filter((product) => {
+    return product?.tags.some(({ tagName }) =>
+      currentProdTags?.includes(tagName)
+    );
+  });
+};
 
 export default productSlice.reducer;
