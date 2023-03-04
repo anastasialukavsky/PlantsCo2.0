@@ -174,9 +174,11 @@ router.get(
     try {
       if (req.user.id === +req.params.userId || req.user.isAdmin) {
         const wishlistId = +req.params.wishlistId;
+
         const wishlist = await Wishlist.findByPk(wishlistId, {
           include: [Product],
         });
+
         if (wishlist) return res.status(200).json(wishlist);
       } else {
         res
@@ -196,6 +198,7 @@ router.post('/:userId/wishlists', requireToken, async (req, res, next) => {
     if (req.user.id === +req.params.userId || req.user.isAdmin) {
       const userId = +req.params.userId;
       const { wishlistName } = req.body;
+
       const newWishlist = await Wishlist.create({ userId, wishlistName });
       res.status(200).json(newWishlist);
     } else {

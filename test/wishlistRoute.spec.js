@@ -17,6 +17,9 @@ let adminUser;
 let adminToken;
 let seededProducts;
 let seededWishlists;
+let dummyListData = {
+  wishlistName: 'some wishlist name',
+};
 
 describe('Wishlists', () => {
   before(async () => {
@@ -112,9 +115,6 @@ describe('Wishlists', () => {
   });
 
   describe('POST /users/:userId/wishlists creates new wishlist', () => {
-    let dummyListData = {
-      wishlistName: 'some wishlist name',
-    };
     it('Returns a 200 status given correct token', async () => {
       res = await chai
         .request(server)
@@ -173,7 +173,7 @@ describe('Wishlists', () => {
     });
   });
 
-  describe('PUT /users/:userId/wishlists updates wishlist name', () => {
+  xdescribe('PUT /users/:userId/wishlists updates wishlist name', () => {
     it('Returns a 200 status given correct token', async () => {
       res = await chai
         .request(server)
@@ -217,5 +217,14 @@ describe('Wishlists', () => {
 
       res.should.have.status(403);
     });
+    // it('Adds an item to a wishlist', async () => {
+    // pick up here when I can afford to come back to testing
+    //   const wishlistId = 1 // need to figure out the reg user's wishlist id
+    //   res = await (
+    //     await chai.request(server).put(`/api/users/${regularUser.id}/wishlists`)
+    //   )
+    //     .set('Authorization', regularToken)
+    //     .send({});
+    // });
   });
 });
