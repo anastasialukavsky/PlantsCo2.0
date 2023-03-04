@@ -1,11 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  selectAuth,
-  logIn,
-  attemptTokenLogin,
-} from '../slices/users/authSlice';
+import { useDispatch } from 'react-redux';
+import { logIn, attemptTokenLogin } from '../slices/users/authSlice';
 
 const Login = () => {
   const navigate = useNavigate();
