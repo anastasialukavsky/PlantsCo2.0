@@ -102,31 +102,32 @@ router.delete('/:id', requireToken, isAdmin, async (req, res, next) => {
   }
 });
 
-router.post('/checkout', async (req, res, next) => {
-  const products = req.body.products;
 
-  let line_items = [];
-  for (let product of products) {
-    let lineItem = {
-      price_data: {
-        currency: 'usd',
-        product_data: { name: product.name },
-        unit_amount: product.price * 100,
-      },
-      quantity: product.qty,
-    };
-    line_items.push(lineItem);
-  }
+// router.post('/checkout', async (req, res, next) => {
+//   const products = req.body.products;
 
-  const session = await stripe.checkout.sessions.create({
-    line_items,
-    mode: 'payment',
-    success_url: `http://localhost:3000/?success=true`,
-    cancel_url: `http://localhost:3000/?canceled=true`,
-  });
+//   let line_items = [];
+//   for (let product of products) {
+//     let lineItem = {
+//       price_data: {
+//         currency: 'usd',
+//         product_data: { name: product.name },
+//         unit_amount: product.price * 100,
+//       },
+//       quantity: product.qty,
+//     };
+//     line_items.push(lineItem);
+//   }
 
-  console.log('sessionURL', session.url);
-  res.redirect(303, session.url);
-});
+//   const session = await stripe.checkout.sessions.create({
+//     line_items,
+//     mode: 'payment',
+//     success_url: `http://localhost:3000/?success=true`,
+//     cancel_url: `http://localhost:3000/?canceled=true`,
+//   });
+
+//   console.log('sessionURL', session.url);
+//   res.redirect(303, session.url);
+// });
 
 module.exports = router;
