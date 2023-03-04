@@ -1,21 +1,38 @@
-import React from 'react';
-import { Provider } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
-import store from '../store';
-import { Homepage, AllProducts, SingleProduct, NavBar } from './index';
+
+import {
+  Homepage,
+  AllProducts,
+  SingleProduct,
+  NavBar,
+  Login,
+  UserAccount,
+} from './index';
+import { selectAuth, attemptTokenLogin } from '../slices/users/authSlice';
 
 export default function Main() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(attemptTokenLogin());
+  }, []);
+
+  const { auth } = useSelector(selectAuth);
+
   return (
     <>
       <div className="font-fraunces text-primary-deep-green">
-        <Provider store={store}>
-          <NavBar />
-          <Routes>
-            <Route path="/" element={<Homepage />} />
-            <Route path="/products" element={<AllProducts />} />
-            <Route path="/products/:productId" element={<SingleProduct />} />
-          </Routes>
-        </Provider>
+        <NavBar auth={auth} />
+
+        <Routes>
+          <Route path="/" element={<Homepage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/products" element={<AllProducts />} />
+          <Route path="/products/:productId" element={<SingleProduct />} />
+          <Route path="/account" element={<UserAccount />} />
+        </Routes>
       </div>
     </>
   );
