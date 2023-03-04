@@ -19,6 +19,7 @@ export const attemptTokenLogin = createAsyncThunk(
   async (x, { rejectWithValue }) => {
     try {
       const token = localStorage.getItem('token');
+      if (!token) return {};
       const { data } = await axios.get(`/api/auth`, {
         headers: {
           authorization: token,
