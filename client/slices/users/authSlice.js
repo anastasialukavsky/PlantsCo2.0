@@ -19,7 +19,7 @@ export const attemptTokenLogin = createAsyncThunk(
   async (x, { rejectWithValue }) => {
     try {
       const token = localStorage.getItem('token');
-      const { data } = await axios.get(`api/auth`, {
+      const { data } = await axios.get(`/api/auth`, {
         headers: {
           authorization: token,
         },
@@ -35,6 +35,7 @@ const authSlice = createSlice({
   name: 'auth',
   initialState: {
     token: '',
+    auth: {},
     error: '',
     status: '',
   },
@@ -46,6 +47,7 @@ const authSlice = createSlice({
     logOut: (state) => {
       state.auth = {};
       state.token = '';
+      localStorage.clear();
     },
   },
   extraReducers: (builder) => {

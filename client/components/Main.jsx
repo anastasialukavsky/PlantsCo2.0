@@ -1,25 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 
-import {
-  Homepage,
-  AllProducts,
-  SingleProduct,
-  NavBar,
-  Login,
-  LoggedInNavBar,
-} from './index';
-import { selectAuth } from '../slices/users/authSlice';
+import { Homepage, AllProducts, SingleProduct, NavBar, Login } from './index';
+import { selectAuth, attemptTokenLogin } from '../slices/users/authSlice';
 
 export default function Main() {
-  const { status } = useSelector(selectAuth);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(attemptTokenLogin());
+  }, []);
+
   const { auth } = useSelector(selectAuth);
 
   return (
     <>
       <div className="font-fraunces text-primary-deep-green">
-        {status ? <LoggedInNavBar auth={auth} /> : <NavBar />}
+        <NavBar auth={auth} />
 
         <Routes>
           <Route path="/" element={<Homepage />} />
