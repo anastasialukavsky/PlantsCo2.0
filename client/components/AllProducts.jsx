@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import ProductCard from './ProductCard.jsx';
 import {
   selectAllProducts,
   fetchAllProducts,
@@ -62,25 +63,7 @@ const AllProducts = () => {
         </div>
         <main className="grid grid-cols-4 justify-items-center gap-x-8  gap-y-8 mx-12">
           {allProducts.map((product) => {
-            return (
-              <div key={product.id} className="relative group">
-                <Link to={`/products/${product.id}`}>
-                  <img
-                    src={product.imageURL}
-                    alt="Picture of plant on a counter"
-                    className="w-full relative group"
-                  />
-                  <p className="text-2xl mb-1">{product.name}</p>
-                  <p className="text-sm">${product.price}</p>
-                </Link>
-                <button className="bg-primary-deep-green w-full text-white absolute bottom-14  py-1 invisible group-hover:visible mx-auto opacity-60 transition duration-100 ease-in-out hover:opacity-100">
-                  Add To Cart
-                </button>
-                {/* <button className="bg-primary-deep-green w-full text-white absolute bottom-14 rounded-xl py-1 invisible group-hover:visible mx-auto opacity-60 transition duration-100 ease-in-out hover:opacity-100">
-                  Add To Cart
-                </button> */}
-              </div>
-            );
+            return <ProductCard product={product} key={product.id} />;
           })}
         </main>
       </section>
