@@ -19,8 +19,8 @@ const UserAccount = () => {
 
   const { auth, status } = useSelector(selectAuth);
   // const { user } = useSelector(selectUsers);
-  const id = auth.id;
-  const token = localStorage.getItem('token');
+  // const id = auth.id;
+  // const token = localStorage.getItem('token');
 
   useEffect(() => {
     dispatch(attemptTokenLogin());
@@ -40,6 +40,10 @@ const UserAccount = () => {
 
   const orderHistory = () => {
     navigate('/account/orderhistory');
+  };
+
+  const updatePassword = () => {
+    navigate('/account/updatepassword');
   };
 
   const attemptLogOut = async () => {
@@ -64,6 +68,12 @@ const UserAccount = () => {
             Edit Profile
           </button>
           <button
+            onClick={updatePassword}
+            className="py-3 px-5 mr-2 mb-2 text-text-primary-deep-green-900 bg-white rounded-lg border hover:bg-gray-100"
+          >
+            Update Password
+          </button>
+          <button
             onClick={orderHistory}
             className="py-3 px-5 mr-2 mb-2 text-text-primary-deep-green-900 bg-white rounded-lg border hover:bg-gray-100"
           >
@@ -71,7 +81,7 @@ const UserAccount = () => {
           </button>
           <button
             onClick={attemptLogOut}
-            className="text-primary-deep-green hover:text-primary-promo-banner pb-16"
+            className="text-primary-deep-green hover:text-primary-promo-banner pb-16 text-sm"
           >
             Log Out
           </button>
