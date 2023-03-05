@@ -82,7 +82,7 @@ describe('Authentication', () => {
     });
   });
   describe('Other route examples', () => {
-    beforeEach(async () => {
+    before(async () => {
       await Product.destroy({ truncate: true, cascade: true });
 
       const products = [

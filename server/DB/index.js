@@ -19,6 +19,9 @@ Order_Detail.belongsTo(Order);
 Order.belongsTo(User);
 User.hasMany(Order);
 
+Promo_Code.hasMany(Order);
+Order.belongsTo(Promo_Code);
+
 User.hasMany(Shipping);
 Shipping.belongsTo(User);
 
@@ -40,8 +43,6 @@ Product.belongsToMany(Wishlist, { through: 'wishlist_details' });
 User.hasMany(Wishlist);
 Wishlist.belongsTo(User);
 
-Promo_Code.hasMany(Order);
-Order.belongsTo(Promo_Code);
 
 module.exports = {
   db,
