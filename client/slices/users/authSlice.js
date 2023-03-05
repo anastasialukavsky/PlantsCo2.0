@@ -62,10 +62,10 @@ const authSlice = createSlice({
       .addCase(logIn.rejected, (state, { payload }) => {
         state.status = 'failed';
         console.log('failed payload', payload);
-        state.error = payload.error.message;
+        state.error = payload.message;
       })
       .addCase(attemptTokenLogin.fulfilled, (state, { payload }) => {
-        state.auth = payload;
+        state.auth = payload || {};
         state.status = 'success';
         state.error = '';
       })
