@@ -13,6 +13,23 @@ router.get('/', async (req, res, next) => {
   }
 });
 
+router.post('/cart', async (req, res, next) => {
+  try {
+    const { products } = req.body;
+    // products = [{productId: #, qty: #}, ...]
+    const cart = [];
+    for (let product of products) {
+      cart.push({
+        product: await Product.findByPk(product.productId),
+        qty: product.qty,
+      });
+    }
+    res.status(200).json(cart);
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.get('/:productId', async (req, res, next) => {
   try {
     const product = await Product.findByPk(req.params.productId, {
