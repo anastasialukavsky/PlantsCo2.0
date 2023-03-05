@@ -61,6 +61,12 @@ const productSlice = createSlice({
       if (payload) state.filterBy = [payload];
       else state.filterBy = [];
     },
+    adjustSort(state, { payload }) {
+      state.products.sort((a, b) => {
+        console.log(a.name);
+        return a.name > b.name ? 1 : b.name > a.name ? -1 : 0;
+      });
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchAllProducts.fulfilled, (state, action) => {
@@ -88,6 +94,7 @@ export const {
   similarPageChange,
   productPageChange,
   adjustFilter,
+  adjustSort,
 } = productSlice.actions;
 
 export const selectAllProducts = (state) => state.products.products;
@@ -105,7 +112,6 @@ export const selectFilteredProducts = (state) => {
     return product.tags.some(({ tagName }) => {
       return state.products.filterBy.includes(tagName);
     });
-    // return product.tags?.some(({ tagName }) => tagName === state.filterBy[0]);
   });
 };
 
