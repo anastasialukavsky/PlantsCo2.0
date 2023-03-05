@@ -1,5 +1,5 @@
 const dotenv = require('dotenv').config();
-const stripe = require('stripe')(process.env.STRIPE_DEMO);
+// const stripe = require('stripe')(process.env.STRIPE_DEMO);
 const router = require('express').Router();
 const { User, Order, Order_Detail, Promo_Code } = require('../../DB');
 const { isAdmin, requireToken } = require('../authMiddleware');
