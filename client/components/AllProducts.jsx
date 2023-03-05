@@ -8,6 +8,7 @@ import {
 import FilterSection from './FilterSection.jsx';
 import AllProductsSection from './AllProductsSection.jsx';
 import ProductPagination from './ProductPagination.jsx';
+import Sort from './Sort.jsx';
 
 const AllProducts = () => {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ const AllProducts = () => {
     <div className="flex justify-center">
       <section>
         <FilterSection />
+        <Sort />
         <AllProductsSection />
         <ProductPagination />
       </section>

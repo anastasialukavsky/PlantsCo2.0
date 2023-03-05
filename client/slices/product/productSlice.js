@@ -63,8 +63,14 @@ const productSlice = createSlice({
     },
     adjustSort(state, { payload }) {
       state.products.sort((a, b) => {
-        console.log(a.name);
-        return a.name > b.name ? 1 : b.name > a.name ? -1 : 0;
+        if (payload === 'price') {
+          return +a[payload] > +b[payload]
+            ? 1
+            : +a[payload] < +b[payload]
+            ? -1
+            : 0;
+        }
+        return a[payload] > b[payload] ? 1 : a[payload] < b[payload] ? -1 : 0;
       });
     },
   },
