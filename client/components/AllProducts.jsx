@@ -1,12 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
-import ProductCard from './ProductCard.jsx';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
 import {
   fetchAllProducts,
   resetStatusError,
-  productPageChange,
 } from '../slices/product/productSlice';
 import FilterSection from './FilterSection.jsx';
 import AllProductsSection from './AllProductsSection.jsx';
