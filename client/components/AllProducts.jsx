@@ -11,6 +11,8 @@ import {
   selectStatus,
   productPageChange,
   selectProductPage,
+  adjustFilter,
+  selectFilteredProducts,
 } from '../slices/product/productSlice';
 
 const AllProducts = () => {
@@ -25,6 +27,7 @@ const AllProducts = () => {
   }, [dispatch]);
 
   const allProducts = useSelector(selectAllProducts);
+  const filteredProducts = useSelector(selectFilteredProducts);
   const productPage = useSelector(selectProductPage);
 
   const handleHover = () => {
@@ -35,7 +38,12 @@ const AllProducts = () => {
   };
 
   const handlePageChange = (pageInfo) => {
+    if (filteredProducts.length < 8) return;
     dispatch(productPageChange(pageInfo));
+  };
+
+  const handleFilter = (filter) => {
+    dispatch(adjustFilter(filter));
   };
 
   return (
@@ -44,7 +52,12 @@ const AllProducts = () => {
       <section>
         <div className="my-9">
           <ul className="flex justify-center gap-12 text-2xl">
-            <li>All</li>
+            <button onClick={() => handleFilter('')}>
+              <li>All</li>
+            </button>
+            <button onClick={() => handleFilter('Air-purifying')}>
+              <li>Easy-care</li>
+            </button>
             <li>Popular</li>
             <div
               onMouseEnter={handleHover}
@@ -71,9 +84,11 @@ const AllProducts = () => {
           </ul>
         </div>
         <main className="grid grid-cols-4 justify-items-center gap-x-8  gap-y-8 mx-12 mb-4">
-          {allProducts?.slice(productPage, productPage + 8).map((product) => {
-            return <ProductCard product={product} key={product.id} />;
-          })}
+          {filteredProducts
+            ?.slice(productPage, productPage + 8)
+            .map((product) => {
+              return <ProductCard product={product} key={product.id} />;
+            })}
         </main>
         <div className="flex gap-4 justify-center items-center text-2xl h-16">
           <button
@@ -86,7 +101,7 @@ const AllProducts = () => {
           next
           <button
             className="block h-full max-w-sm min-w-[52px]"
-            onClick={() => handlePageChange(['next', allProducts?.length])}
+            onClick={() => handlePageChange(['next', filteredProducts?.length])}
           >
             <img src={rightArrow} alt="right arrow icon" className="w-12" />
           </button>
