@@ -16,10 +16,10 @@ const EditProfile = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [shipping, setShipping] = useState('');
-  const [payment, setPayment] = useState('');
-  const [currency, setCurrency] = useState('');
+  // const [password, setPassword] = useState('');
+  // const [shipping, setShipping] = useState('');
+  // const [payment, setPayment] = useState('');
+  // const [currency, setCurrency] = useState('');
 
   useEffect(() => {
     dispatch(attemptTokenLogin());
@@ -49,9 +49,7 @@ const EditProfile = () => {
         </p>
         <p className="text-center text-4xl font-extrabold">{auth.firstName}</p>
         <div className="flex flex-col mt-8 gap-3">
-          <h2 className="text-center text-2xl font-bold mt-3 mb-3">
-            Edit Profile
-          </h2>
+          <h2 className="text-center font-bold mt-3 mb-3">EDIT PROFILE</h2>
           <section className="flex gap-20 justify-center ">
             <form className="w-full max-w-lg" onSubmit={updateUser}>
               <div className="flex flex-wrap -mx-3 mb-6">
@@ -102,7 +100,7 @@ const EditProfile = () => {
                   />
                 </div>
               </div>
-              <div className="flex flex-wrap -mx-3 mb-6">
+              {/* <div className="flex flex-wrap -mx-3 mb-6">
                 <div className="w-full px-3">
                   <label
                     className="block uppercase tracking-wide text-primary-deep-green text-xs font-bold mb-2"
@@ -119,7 +117,7 @@ const EditProfile = () => {
                     onChange={(evt) => setPassword(evt.target.value)}
                   />
                 </div>
-              </div>
+              </div> */}
               {/* <div className="flex flex-wrap -mx-3 mb-3">
                 <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                   <label
