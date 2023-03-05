@@ -9,6 +9,7 @@ import {
   NavBar,
   Login,
   UserAccount,
+  Signup
 } from './index';
 import { selectAuth, attemptTokenLogin } from '../slices/users/authSlice';
 
@@ -32,6 +33,7 @@ export default function Main() {
           <Route path="/products" element={<AllProducts />} />
           <Route path="/products/:productId" element={<SingleProduct />} />
           <Route path="/account" element={<UserAccount />} />
+          <Route path="/signup" element={<Signup />} />
         </Routes>
       </div>
     </>

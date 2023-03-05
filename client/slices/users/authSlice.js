@@ -90,12 +90,9 @@ const authSlice = createSlice({
       })
       .addCase(signUp.fulfilled, (state, { payload }) => {
         state.status = 'success';
-        //maybe just payload?
         state.token = payload.token;
         state.error = '';
-        // state.auth = payload;
         console.log('payload from signUp:', payload);
-        // console.log('payload auth', payload.auth);
       })
       .addCase(signUp.pending, (state, { payload }) => {
         state.status = 'loading';

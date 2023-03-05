@@ -8,7 +8,7 @@ const ProductCard = (props) => {
       <Link to={`/products/${product.id}`}>
         <div className="relative">
           <img
-            src={`/${product.imageURL}`}
+            src={`${product.imageURL}`}
             alt="Picture of plant on a counter"
             className="w-full relative group"
           />

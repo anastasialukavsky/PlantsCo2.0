@@ -21,13 +21,9 @@ export default function Signup() {
 
   const token = window.localStorage.getItem('token');
   useEffect(() => {
-    // if (
-    //   auth.token !== '' &&
-    //   auth.status === 'success' &&
-    //   auth.auth.id === undefined
-    // )
     if (token) {
       dispatch(attemptTokenLogin());
+      navigate('/products');
     }
   }, [token]);
 
@@ -43,19 +39,9 @@ export default function Signup() {
       setIsInvalid(true);
       return;
     }
-    // setIsInvalid(true);
+  
     dispatch(signUp(formData));
-    setTimeout(() => {
-      navigate('/products');
-    }, 500);
-
-    // setTimeout(() => {
-    //   if (auth.status === 'success' && auth.auth.id !== undefined) {
-    //     console.log('hello');
-    //   }
-
-    //   console.log('timeout');
-    // }, 500);
+   
   };
 
   return (
