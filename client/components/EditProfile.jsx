@@ -1,17 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
   attemptTokenLogin,
   selectAuth,
   resetStatus,
 } from '../slices/users/authSlice';
+import {
+  updateSingleUser,
+  fetchSingleUser,
+  selectUsers,
+} from '../slices/users/userSlice';
 
 const EditProfile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { auth, status } = useSelector(selectAuth);
+  const { auth, token } = useSelector(selectAuth);
+
+  const { user } = useSelector(selectUsers);
+  const id = auth.id;
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -27,7 +35,7 @@ const EditProfile = () => {
     return () => {
       dispatch(resetStatus());
     };
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     setFirstName(auth.firstName || '');
@@ -35,7 +43,12 @@ const EditProfile = () => {
     setEmail(auth.email || '');
   }, [auth]);
 
-  const updateUser = () => {};
+  const updateUser = (evt) => {
+    evt.preventDefault();
+    const updates = { firstName, lastName, email };
+    // dispatch(fetchSingleUser({ id, token }));
+    dispatch(updateSingleUser({ id, updates }));
+  };
 
   const goBack = () => {
     navigate('/account');
