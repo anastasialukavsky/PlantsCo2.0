@@ -24,8 +24,8 @@ const Login = () => {
   };
 
   return (
-    <div className="bg-cover bg-[url('/assets/bg_img/login_signin_page.jpg')]">
-      <div className="w-full max-w-sm m-auto mt-16">
+    <div className="bg-cover bg-center bg-[url('/assets/bg_img/login_signin_page.jpg')] h-screen">
+      <div className="w-full max-w-sm m-auto pt-16">
         <h2 className="text-center text-4xl font-bold">Log In</h2>
         <section className="flex gap-20 justify-center mt-16 ">
           <form onSubmit={onSubmit}>
