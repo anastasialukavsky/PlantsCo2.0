@@ -203,7 +203,7 @@ const seed = async () => {
       currentOrder = await Order.build({
         userId: currentUserId,
         promoRate: discountRate,
-        totalPrice: 0,
+        finalPrice: 0,
         totalQty: 0,
       });
 
