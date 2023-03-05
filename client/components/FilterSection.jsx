@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { adjustFilter } from '../slices/product/productSlice';
+import FilterDropdownMenu from './UI/FilterDropdownMenu.jsx';
 
 const FilterSection = () => {
   const dispatch = useDispatch();
@@ -34,22 +35,12 @@ const FilterSection = () => {
         >
           <li className="relative group">Filter By</li>
         </div>
-        <div
-          onMouseEnter={handleHover}
-          onMouseLeave={handleHide}
-          className={`w-1/2 top-36 h-36 bg-white ${display} delay-100 z-10 border-2 overflow-hidden`}
-        >
-          <div className="text-xs">
-            <ul>
-              <li>Pet Friendly</li>
-              <li>Indoor</li>
-              <li>Outdoor</li>
-              <li>Easy Care</li>
-              <li>Low Light</li>
-            </ul>
-          </div>
-        </div>
       </ul>
+      <FilterDropdownMenu
+        handleHover={handleHover}
+        handleHide={handleHide}
+        display={display}
+      />
     </div>
   );
 };
