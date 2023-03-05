@@ -33,8 +33,8 @@ const Order = db.define('order', {
   },
 });
 
-Order.beforeValidate('finalPrice', (order) => {
-  order.finalPrice *= 1 - order.promoRate;
-});
+// Order.beforeValidate('finalPrice', (order) => {
+//   order.finalPrice *= 1 - order.promoRate;
+// });
 
 module.exports = Order;
