@@ -25,7 +25,7 @@ const Login = () => {
 
   return (
     <div className="bg-cover bg-[url('/assets/bg_img/login_signin_page.jpg')]">
-      <div className="w-full max-w-sm m-auto">
+      <div className="w-full max-w-sm m-auto mt-16">
         <h2 className="text-center text-4xl font-bold">Log In</h2>
         <section className="flex gap-20 justify-center mt-16 ">
           <form onSubmit={onSubmit}>
@@ -68,16 +68,17 @@ const Login = () => {
               <button
                 type="submit"
                 className="hover:bg-primary-button-green w-full bg-primary-deep-green text-white py-2 rounded-2xl mx-auto block text-xl hover:transition-all"
-                // className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
               >
                 Log In
               </button>
-              {/* <a
-              className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-              href="#"
-            >
-              Forgot Password?
-            </a> */}
+            </div>
+            <div className="flex justify-center">
+              <a
+                className="inline-block align-baseline font-bold text-sm hover:text-blue-800 py-3"
+                href="#"
+              >
+                Forgot Password?
+              </a>
             </div>
           </form>
         </section>
