@@ -26,73 +26,11 @@ export const fetchCart = createAsyncThunk('cart/fetchCart', async () => {
     });
 
     dbCart = data;
-
-    // VVV use this one instead if we need to keep cart info bulky
-    // const cartData = res.data.products;
-
-    // const userCartDataSimple = cartData.map((product) => {
-    //   return product.cart;
-    // });
-    // ^^^
   }
 
-  // check for cart in localStorage (even if logged in)
-
-  // VVV use this one
-
-  // what does the localstorage cart look like?
-  // what if we generate a user ID for *every* guest so we're always working with DB objects?
-  // gigantic fkn pain in the ass - lots of backend rework
-  // what if the localstorage cart was the same as userCartDataSimple?
-  // how do we look up product images / names / prices given product ID?
-  // can we just send little requests to /api/product/:productId to collect info?
-  // maybe build a route off of cart to take in an array of prodIds?
-  // could serve both logged-in and guest users
-
-  // {prodId: qty}
-
-  // merge db cart & localstorage cart
-  // {
-  //   productId,
-  //   qty
-  // }
-
+  // pull cart from localStorage (even if we're logged in)
   // localCart looks like [{productId, qty}] (may also include userId)
-  localCart = localStorage.getItem('cart') || [];
-
-  // dummy data for testing
-  const cartData = [
-    {
-      userId: 1,
-      productId: 3,
-      qty: 4,
-    },
-    {
-      userId: 1,
-      productId: 2,
-      qty: 1,
-    },
-    {
-      userId: 1,
-      productId: 6,
-      qty: 2,
-    },
-  ];
-
-  localCart = [
-    {
-      productId: 2,
-      qty: 4,
-    },
-    {
-      productId: 6,
-      qty: 1,
-    },
-    {
-      productId: 12,
-      qty: 14,
-    },
-  ];
+  localCart = JSON.parse(localStorage.getItem('cart')) || [];
 
   console.log('db cart data:', dbCart);
   console.log('localstorage cart data', localCart);
@@ -102,6 +40,7 @@ export const fetchCart = createAsyncThunk('cart/fetchCart', async () => {
   let mergedCart = {};
 
   for (let product of [...dbCart, ...localCart]) {
+    console.log('product:', product);
     if (Object.hasOwn(mergedCart, product.productId)) {
       mergedCart[product.productId] = Math.max(
         product.qty,
@@ -109,17 +48,14 @@ export const fetchCart = createAsyncThunk('cart/fetchCart', async () => {
       );
     } else mergedCart[product.productId] = product.qty;
   }
+  console.log('mergedCart:', mergedCart);
 
   mergedCart = Object.keys(mergedCart).map((key) => {
     return { userId, productId: +key, qty: mergedCart[key] };
   });
 
   // resulting cart object (identical to backend response):
-  // {
-  //   userId,
-  //   productId,
-  //   qty
-  // }
+  // { userId, productId, qty }
   return mergedCart;
 });
 
@@ -127,7 +63,6 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState: {
     cart: [],
-    cartSimple: [],
   },
   extraReducers: (builder) => {
     builder.addCase(fetchCart.fulfilled, (state, { payload }) => {

@@ -9,6 +9,7 @@ import {
   NavBar,
   Login,
   UserAccount,
+  Cart,
 } from './index';
 import { selectAuth, attemptTokenLogin } from '../slices/users/authSlice';
 
@@ -25,7 +26,7 @@ export default function Main() {
     <>
       <div className="font-fraunces text-primary-deep-green">
         <NavBar auth={auth} />
-
+        <Cart />
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/login" element={<Login />} />

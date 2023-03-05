@@ -5,6 +5,24 @@ import { fetchCart, selectCart } from '../../slices/users/cartSlice';
 export default function Cart(props) {
   const dispatch = useDispatch();
 
+  // dummy cart for testing
+  const localCart = [
+    {
+      productId: 2,
+      qty: 4,
+    },
+    {
+      productId: 6,
+      qty: 1,
+    },
+    {
+      productId: 12,
+      qty: 14,
+    },
+  ];
+
+  // window.localStorage.setItem('cart', JSON.stringify(localCart));
+
   useEffect(() => {
     console.log('dispatching fetchCart');
     dispatch(fetchCart());
@@ -12,7 +30,7 @@ export default function Cart(props) {
 
   const cart = useSelector(selectCart);
 
-  console.log(cart);
+  console.log('cart', cart);
 
   return (
     <div className="cart">
