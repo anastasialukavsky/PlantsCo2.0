@@ -1,8 +1,8 @@
-process.env.NODE_ENV = 'dev';
+process.env.NODE_ENV = 'test';
 
 const sequelize = require('sequelize');
 const { User, Product } = require('../server/DB');
-// const seed = require('../seed');
+const { userSetup, productSetup } = require('./dummies');
 
 const chai = require('chai');
 const chaiHttp = require('chai-http');
@@ -10,28 +10,6 @@ const should = chai.should();
 const server = require('../server/server');
 
 chai.use(chaiHttp);
-
-const adminDummy = {
-  firstName: 'Travus',
-  lastName: 'Seater',
-  email: 'tseater1@nature.com',
-  imageURL: 'http://dummyimage.com/100x100.png/5fa2dd/ffffff',
-  password: 'Q4dgqiiH',
-  isAdmin: true,
-  role: 'user',
-  currencyId: 1,
-};
-
-const userDummy = {
-  firstName: 'Joellyn',
-  lastName: 'Moreno',
-  email: 'jmoreno2@baidu.com',
-  imageURL: 'http://dummyimage.com/100x100.png/ff4444/ffffff',
-  password: 'LVuVthfVZDX',
-  isAdmin: false,
-  role: 'user',
-  currencyId: 4,
-};
 
 let regularUser;
 let regularToken;
@@ -41,31 +19,16 @@ let seededProducts;
 
 describe('Authentication', () => {
   before(async () => {
-    // empty the Users table
-    await User.destroy({ truncate: true, cascade: true });
-
-    // add 2 users (1 regular / 1 admin)
-    regularUser = await User.create(userDummy);
-    adminUser = await User.create(adminDummy);
-    const seedUsers = [regularUser, adminUser];
-
-    // log in the regular user & store token
-    let res = await chai
-      .request(server)
-      .post('/api/auth/login')
-      .type('json')
-      .send({ email: userDummy.email, password: userDummy.password });
-
-    regularToken = res.body.token;
-
-    // log in the admin user & store token
-    res = await chai
-      .request(server)
-      .post('/api/auth/login')
-      .type('json')
-      .send({ email: adminDummy.email, password: adminDummy.password });
-
-    adminToken = res.body.token;
+    if (!adminToken || !regularToken) {
+      const temp = await userSetup();
+      regularUser = temp.regularUser;
+      regularToken = temp.regularToken;
+      adminUser = temp.adminUser;
+      adminToken = temp.adminToken;
+    }
+    if (!seededProducts) {
+      seededProducts = await productSetup();
+    }
   });
 
   describe('POST /api/auth/login', () => {
@@ -74,7 +37,7 @@ describe('Authentication', () => {
         .request(server)
         .post('/api/auth/login')
         .type('json')
-        .send({ email: adminDummy.email, password: adminDummy.password });
+        .send({ email: adminUser.email, password: adminUser.password });
       res.should.have.status(200);
       res.should.have.property('body');
       res.body.should.have.property('token');
@@ -87,7 +50,7 @@ describe('Authentication', () => {
         .post('/api/auth/login')
         .type('json')
         .send({
-          email: adminDummy.email,
+          email: adminUser.email,
           password: 'this is definitely the wrong password',
         });
       res.should.have.status(401);
@@ -99,7 +62,7 @@ describe('Authentication', () => {
   describe('/GET /api/auth', () => {
     it('it should return a 200 given valid token', async () => {
       // tests for using an existing token -- mirror this sort of setup in all guarded routes
-      // (see beforeEach block above)
+      // (tokens are generated in dummies.js)
       const res = await chai
         .request(server)
         .get('/api/auth')
