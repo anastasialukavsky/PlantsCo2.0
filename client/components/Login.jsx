@@ -74,7 +74,7 @@ const Login = () => {
             </div>
             <div className="flex justify-center">
               <a
-                className="inline-block align-baseline font-bold text-sm hover:text-blue-800 py-3"
+                className="inline-block align-baseline font-bold text-sm hover:text-primary-promo-banner py-3"
                 href="#"
               >
                 Forgot Password?
