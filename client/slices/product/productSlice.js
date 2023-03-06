@@ -4,6 +4,7 @@ import axios from 'axios';
 const initialState = {
   products: [],
   singleProduct: {},
+  filterBy: [],
   error: '',
   status: '',
   similarPage: 0,
@@ -45,15 +46,32 @@ const productSlice = createSlice({
     },
     similarPageChange(state, { payload }) {
       if (payload[0] === 'next')
-        state.similarPage = Math.min(payload[1] - 5, state.similarPage + 4);
+        state.similarPage = Math.min(payload[1] - 4, state.similarPage + 4);
       if (payload === 'previous')
         state.similarPage = Math.max(0, state.similarPage - 4);
     },
     productPageChange(state, { payload }) {
       if (payload[0] === 'next')
-        state.productPage = Math.min(payload[1] - 9, state.productPage + 8);
+        state.productPage = Math.min(payload[1] - 8, state.productPage + 8);
       if (payload === 'previous')
         state.productPage = Math.max(0, state.productPage - 8);
+    },
+    adjustFilter(state, { payload }) {
+      state.productPage = 0;
+      if (payload) state.filterBy = [payload];
+      else state.filterBy = [];
+    },
+    adjustSort(state, { payload }) {
+      state.products.sort((a, b) => {
+        if (payload === 'price') {
+          return +a[payload] > +b[payload]
+            ? 1
+            : +a[payload] < +b[payload]
+            ? -1
+            : 0;
+        }
+        return a[payload] > b[payload] ? 1 : a[payload] < b[payload] ? -1 : 0;
+      });
     },
   },
   extraReducers: (builder) => {
@@ -67,7 +85,6 @@ const productSlice = createSlice({
     });
     builder.addCase(fetchAllProducts.rejected, (state, action) => {
       state.status = 'failed';
-      console.log('failed payload', action.payload);
       state.error = action.error.message;
     });
     builder.addCase(fetchSingleProduct.fulfilled, (state, action) => {
@@ -78,16 +95,32 @@ const productSlice = createSlice({
   },
 });
 
-export const { resetStatusError, similarPageChange, productPageChange } =
-  productSlice.actions;
+export const {
+  resetStatusError,
+  similarPageChange,
+  productPageChange,
+  adjustFilter,
+  adjustSort,
+} = productSlice.actions;
 
 export const selectAllProducts = (state) => state.products.products;
 export const selectSingleProduct = (state) => state.products.singleProduct;
 export const selectStatus = (state) => state.products.status;
+export const selectFilterBy = (state) => state.products.filterBy;
 // Page for scrolling through similar items
 export const selectSimilarPage = (state) => state.products.similarPage;
 // Page for scrolling through ALL products page
 export const selectProductPage = (state) => state.products.productPage;
+
+export const selectFilteredProducts = (state) => {
+  const allProducts = state.products.products;
+  if (state.products.filterBy.length === 0) return allProducts;
+  return allProducts.filter((product) => {
+    return product.tags.some(({ tagName }) => {
+      return state.products.filterBy.includes(tagName);
+    });
+  });
+};
 
 // Selects all products that have a matching tag to current product
 export const selectSimilar = (state) => {

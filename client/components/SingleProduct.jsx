@@ -40,7 +40,7 @@ const singleProduct = () => {
           <div className="">
             <img
               className="h-5/6"
-              src={`/${singleProduct.imageURL}`}
+              src={`${singleProduct.imageURL}`}
               alt="error showing photo"
             />
           </div>

@@ -6,6 +6,7 @@ export { default as NavBar } from './UI/NavBar.jsx';
 export { default as Cart } from './UI/Cart.jsx';
 export { default as Login } from './Login.jsx';
 export { default as UserAccount } from './UserAccount.jsx';
+export { default as Signup } from './Signup.jsx';
 export { default as EditProfile } from './EditProfile.jsx';
 export { default as OrderHistory } from './OrderHistory.jsx';
 export { default as CartView } from './CartView.jsx';
