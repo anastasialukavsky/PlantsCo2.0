@@ -45,7 +45,6 @@ export default function Main() {
           <Route path="/cart" element={<CartView />} />
 
           <Route path="/*" element={<NotFound />} />
-
         </Routes>
       </div>
     </React.Fragment>
