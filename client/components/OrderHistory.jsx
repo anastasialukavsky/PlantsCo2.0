@@ -49,7 +49,23 @@ const OrderHistory = () => {
   };
 
   // if (status === 'pending') return <div>Loading..</div>;
-  if (userOrders.length < 1) return <div>No Orders!</div>;
+  if (userOrders.length < 1)
+    return (
+      <div className="bg-cover bg-center h-[calc(100vh_-_5rem)] bg-[url('/assets/bg_img/cart.jpg')]">
+        <div className="flex flex-col gap-10 w-full max-w-xl absolute top-30 left-10 pt-16">
+          <p className="text-center text-4xl font-extrabold text-primary-deep-green">
+            No Orders!
+          </p>
+          <button
+            className="inline-block align-baseline font-bold text-sm hover:text-primary-promo-banner py-1"
+            onClick={goBack}
+          >
+            Back
+          </button>
+        </div>
+        <div className="pt-50 m-auto"></div>
+      </div>
+    );
 
   return (
     <div className="bg-cover bg-center h-[calc(100vh_-_5rem)] bg-[url('/assets/bg_img/cart.jpg')]">
