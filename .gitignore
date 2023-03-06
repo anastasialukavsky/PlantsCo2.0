@@ -7,3 +7,5 @@ public/bundle.js.map
 public/tailwind.css
 .DS_Store
 
+public/bundle.js
+public/bundle.js.map
