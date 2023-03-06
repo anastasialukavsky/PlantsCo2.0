@@ -29,7 +29,7 @@ export const fetchUserOrders = createAsyncThunk(
       });
       return data;
     } catch (err) {
-      console.log('axios error getting all orders');
+      console.log('axios error getting user orders');
       return rejectWithValue(err);
     }
   }
@@ -78,7 +78,7 @@ const orderSlice = createSlice({
   },
 });
 
-export const {} = orderSlice.actions;
+export const { resetStatus } = orderSlice.actions;
 export const selectOrders = (state) => state.orders;
 
 export default orderSlice.reducer;
