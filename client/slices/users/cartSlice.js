@@ -39,6 +39,7 @@ export const fetchCart = createAsyncThunk('cart/fetchCart', async () => {
 
   for (let product of [...dbCart, ...localCart]) {
     if (Object.hasOwn(mergedCart, product.productId)) {
+      if (userId !== null) product.userId = userId;
       mergedCart[product.productId] = Math.max(
         product.qty,
         mergedCart[product.productId]
