@@ -103,10 +103,10 @@ User.beforeCreate(async (user) => {
   user.password = await bcrypt.hash(user.password, SALT_ROUNDS);
 });
 
-User.beforeUpdate(async (user) => {
-  if (user.password)
-    user.password = await bcrypt.hash(user.password, SALT_ROUNDS);
-});
+// User.beforeUpdate(async (user) => {
+//   if (user.password)
+//     user.password = await bcrypt.hash(user.password, SALT_ROUNDS);
+// });
 
 /**
  * AUTH CLASS METHODS

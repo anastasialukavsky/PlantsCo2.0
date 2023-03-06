@@ -7,11 +7,11 @@ import {
   selectSingleProduct,
   fetchSingleProduct,
   resetStatusError,
-  selectSimilar,
   fetchAllProducts,
 } from '../slices/product/productSlice.js';
 import { addOneToCart } from '../slices/users/cartSlice.js';
 import ProductCard from './ProductCard.jsx';
+import SimilarProducts from './SimilarProducts.jsx';
 
 const singleProduct = () => {
   const dispatch = useDispatch();
@@ -25,7 +25,6 @@ const singleProduct = () => {
   }, [dispatch, productId]);
 
   const singleProduct = useSelector(selectSingleProduct);
-  const similarProducts = useSelector(selectSimilar);
 
   const handleDescriptionClick = (e) => {};
 
@@ -36,7 +35,7 @@ const singleProduct = () => {
   return (
     <>
       <PromoBanner />
-      <main className="font-serif flex h-[600px] ">
+      <main className="font-serif flex h-[700px] ">
         <section className="flex gap-20 justify-center mt-16 ">
           <div className="">
             <img
@@ -77,14 +76,7 @@ const singleProduct = () => {
           </div>
         </section>
       </main>
-      <section className="w-4/5 mx-auto mb-12">
-        <h2 className="text-2xl">You might also like</h2>
-        <div className="grid grid-cols-4 justify-items-center gap-x-8 gap-y-8 mx-12">
-          {similarProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
-      </section>
+      <SimilarProducts />
     </>
   );
 };
