@@ -52,8 +52,8 @@ const OrderHistory = () => {
 
   return (
     <div className="bg-cover bg-center h-[calc(100vh_-_5rem)] bg-[url('/assets/bg_img/cart.jpg')]">
-      <div className="w-full max-w-xl absolute top-30 left-10 pt-16">
-        <p className="text-center text-4xl font-extrabold pb-10 text-primary-deep-green">
+      <div className="flex flex-col gap-10 w-full max-w-xl absolute top-30 left-10 pt-16">
+        <p className="text-center text-4xl font-extrabold text-primary-deep-green">
           Previous Orders
         </p>
 
@@ -82,7 +82,7 @@ const OrderHistory = () => {
                       <tr
                         onClick={() => orderDetails(order.id)}
                         key={order.id}
-                        className="cursor-pointer"
+                        className="cursor-pointer hover:text-primary-promo-banner"
                       >
                         <th scope="col" className="px-6 py-3">
                           {order.id}
@@ -102,6 +102,14 @@ const OrderHistory = () => {
                 : 'No past orders!'}
             </tbody>
           </table>
+        </div>
+        <div className="pt-50 m-auto">
+          <button
+            className="inline-block align-baseline font-bold text-sm hover:text-primary-promo-banner py-1"
+            onClick={goBack}
+          >
+            Back
+          </button>
         </div>
       </div>
     </div>
