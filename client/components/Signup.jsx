@@ -45,12 +45,15 @@ export default function Signup() {
   };
 
   return (
-    <div className="w-full max-w-xs">
+    <div className="bg-cover bg-center bg-[url('/assets/bg_img/login_signin_page.jpg')] h-screen">
+    <div className="w-full max-w-sm m-auto pt-16">
+    <h2 className="text-center text-4xl font-bold">Sign Up</h2>
       <section className="flex gap-20 justify-center mt-16 ">
         <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="firstName">First Name</label>
+          <div className="mb-3">
+            <label  className="block text-gray-700 text-sm font-bold mb-2" htmlFor="firstName">First Name</label>
             <input
+            className="shadow appearance-none border rounded w-96 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline"
               id="firstName"
               type="text"
               placeholder={isInvalid ? 'Enter your first name' : null}
@@ -62,9 +65,10 @@ export default function Signup() {
             />
           </div>
 
-          <div>
-            <label htmlFor="lastName">Last Name</label>
+          <div className="mb-3">
+            <label   className="block text-gray-700 text-sm font-bold mb-2" htmlFor="lastName">Last Name</label>
             <input
+            className="shadow appearance-none border rounded w-96 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline"
               id="lastName"
               type="text"
               placeholder={isInvalid ? 'Enter your last name' : null}
@@ -76,9 +80,10 @@ export default function Signup() {
             />
           </div>
 
-          <div>
-            <label htmlFor="email">Email</label>
+          <div className="mb-3">
+            <label   className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">Email</label>
             <input
+            className="shadow appearance-none border rounded w-96 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline"
               id="email"
               type="text"
               placeholder={isInvalid ? 'Enter your email' : null}
@@ -90,9 +95,10 @@ export default function Signup() {
             />
           </div>
 
-          <div>
-            <label htmlFor="password">Password</label>
+          <div className="mb-3">
+            <label   className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">Password</label>
             <input
+            className="shadow appearance-none border rounded w-96 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline"
               id="password"
               type="password"
               placeholder={isInvalid ? 'Enter your password' : null}
@@ -105,10 +111,12 @@ export default function Signup() {
           </div>
 
           <div>
-            <button type="submit">Submit</button>
+            <button className="ease-in duration-500  hover:bg-primary-button-hover w-full bg-primary-deep-green text-white py-2 rounded-2xl mx-auto block text-xl hover:transition-all mt-10" type="submit">Submit</button>
           </div>
         </form>
       </section>
+    </div>
+
     </div>
   );
 }
