@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logIn, attemptTokenLogin } from '../slices/users/authSlice';
 
@@ -23,11 +23,17 @@ const Login = () => {
     navigate('/');
   };
 
+  const signup = () => {
+    navigate('/signup');
+  };
+
+  const forgotPassword = () => {};
+
   return (
-    <div className="bg-cover bg-center bg-[url('/assets/bg_img/login_signin_page.jpg')] h-screen">
+    <div className="bg-cover bg-center bg-[url('/assets/bg_img/login_signin_page.jpg')] h-[calc(100vh_-_5rem)]">
       <div className="w-full max-w-sm m-auto pt-16">
         <h2 className="text-center text-4xl font-bold">Log In</h2>
-        <section className="flex gap-20 justify-center mt-16 ">
+        <section className="flex flex-col gap-5 justify-center mt-16 ">
           <form onSubmit={onSubmit}>
             <div className="mb-4">
               <label
@@ -67,20 +73,28 @@ const Login = () => {
             <div className="flex items-center justify-between">
               <button
                 type="submit"
-                className="hover:bg-primary-button-green w-full bg-primary-deep-green text-white py-2 rounded-2xl mx-auto block text-xl hover:transition-all"
+                className="hover:bg-primary-button-hover w-full bg-primary-deep-green text-white py-2 rounded-2xl mx-auto block text-xl hover:transition-all"
               >
                 Log In
               </button>
             </div>
-            <div className="flex justify-center">
-              <a
-                className="inline-block align-baseline font-bold text-sm hover:text-primary-promo-banner py-3"
-                href="#"
-              >
-                Forgot Password?
-              </a>
-            </div>
           </form>
+          <div className="flex justify-center">
+            <button
+              onClick={forgotPassword}
+              className="inline-block align-baseline font-bold text-sm hover:text-primary-promo-banner py-3"
+            >
+              Forgot Password?
+            </button>
+          </div>
+          <div className="flex justify-center">
+            <button
+              onClick={signup}
+              className="inline-block align-baseline font-bold text-sm hover:text-primary-promo-banner"
+            >
+              Don't have an account? Sign up!
+            </button>
+          </div>
         </section>
       </div>
     </div>
