@@ -39,76 +39,107 @@ export default function Signup() {
       setIsInvalid(true);
       return;
     }
-  
+
     dispatch(signUp(formData));
-   
   };
 
   return (
-    <div className="w-full max-w-xs">
-      <section className="flex gap-20 justify-center mt-16 ">
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="firstName">First Name</label>
-            <input
-              id="firstName"
-              type="text"
-              placeholder={isInvalid ? 'Enter your first name' : null}
-              value={formData.firstName}
-              name="firstName"
-              onChange={(e) =>
-                setFormData({ ...formData, firstName: e.target.value })
-              }
-            />
-          </div>
+    <div className="bg-cover bg-center bg-[url('/assets/bg_img/login_signin_page.jpg')] h-[calc(100vh_-_5rem)]">
+      <div className="w-full max-w-sm m-auto pt-16">
+        <h2 className="text-center text-4xl font-bold">Sign Up</h2>
+        <section className="flex gap-20 justify-center mt-16 ">
+          <form onSubmit={handleSubmit}>
+            <div className="mb-3">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="firstName"
+              >
+                First Name
+              </label>
+              <input
+                className="shadow appearance-none border rounded w-96 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline"
+                id="firstName"
+                type="text"
+                placeholder={isInvalid ? 'Enter your first name' : null}
+                value={formData.firstName}
+                name="firstName"
+                onChange={(e) =>
+                  setFormData({ ...formData, firstName: e.target.value })
+                }
+              />
+            </div>
 
-          <div>
-            <label htmlFor="lastName">Last Name</label>
-            <input
-              id="lastName"
-              type="text"
-              placeholder={isInvalid ? 'Enter your last name' : null}
-              value={formData.lastName}
-              name="lastName"
-              onChange={(e) =>
-                setFormData({ ...formData, lastName: e.target.value })
-              }
-            />
-          </div>
+            <div className="mb-3">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="lastName"
+              >
+                Last Name
+              </label>
+              <input
+                className="shadow appearance-none border rounded w-96 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline"
+                id="lastName"
+                type="text"
+                placeholder={isInvalid ? 'Enter your last name' : null}
+                value={formData.lastName}
+                name="lastName"
+                onChange={(e) =>
+                  setFormData({ ...formData, lastName: e.target.value })
+                }
+              />
+            </div>
 
-          <div>
-            <label htmlFor="email">Email</label>
-            <input
-              id="email"
-              type="text"
-              placeholder={isInvalid ? 'Enter your email' : null}
-              value={formData.email}
-              name="email"
-              onChange={(e) =>
-                setFormData({ ...formData, email: e.target.value })
-              }
-            />
-          </div>
+            <div className="mb-3">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="email"
+              >
+                Email
+              </label>
+              <input
+                className="shadow appearance-none border rounded w-96 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline"
+                id="email"
+                type="text"
+                placeholder={isInvalid ? 'Enter your email' : null}
+                value={formData.email}
+                name="email"
+                onChange={(e) =>
+                  setFormData({ ...formData, email: e.target.value })
+                }
+              />
+            </div>
 
-          <div>
-            <label htmlFor="password">Password</label>
-            <input
-              id="password"
-              type="password"
-              placeholder={isInvalid ? 'Enter your password' : null}
-              value={formData.password}
-              name="password"
-              onChange={(e) =>
-                setFormData({ ...formData, password: e.target.value })
-              }
-            />
-          </div>
+            <div className="mb-3">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="password"
+              >
+                Password
+              </label>
+              <input
+                className="shadow appearance-none border rounded w-96 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline"
+                id="password"
+                type="password"
+                placeholder={isInvalid ? 'Enter your password' : null}
+                value={formData.password}
+                name="password"
+                onChange={(e) =>
+                  setFormData({ ...formData, password: e.target.value })
+                }
+              />
+            </div>
 
-          <div>
-            <button type="submit">Submit</button>
-          </div>
-        </form>
-      </section>
+            <div>
+              <button
+                className="ease-in duration-500  hover:bg-primary-button-hover w-full bg-primary-deep-green text-white py-2 rounded-2xl mx-auto block text-xl hover:transition-all mt-10"
+                type="submit"
+              >
+                Submit
+              </button>
+            </div>
+          </form>
+        </section>
+      </div>
     </div>
   );
 }

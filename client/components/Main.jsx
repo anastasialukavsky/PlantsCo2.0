@@ -9,7 +9,7 @@ import {
   NavBar,
   Login,
   UserAccount,
-  Signup
+  Signup,
   EditProfile,
   OrderHistory,
 } from './index';
@@ -25,7 +25,7 @@ export default function Main() {
   const { auth } = useSelector(selectAuth);
 
   return (
-    <>
+    <React.Fragment>
       <div className="font-fraunces text-primary-deep-green">
         <NavBar auth={auth} />
 
@@ -40,6 +40,6 @@ export default function Main() {
           <Route path="/account/orderhistory" element={<OrderHistory />} />
         </Routes>
       </div>
-    </>
+    </React.Fragment>
   );
 }
