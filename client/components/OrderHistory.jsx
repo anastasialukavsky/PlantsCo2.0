@@ -33,13 +33,18 @@ const OrderHistory = () => {
     setUserOrders(order, []);
   }, [order]);
 
-  if (userOrders.length >= 1) {
-    console.log('local state', userOrders[0]);
-    console.log(Object.keys(userOrders[0]));
-  }
+  // if (userOrders.length >= 1) {
+  //   console.log('local state', userOrders[0]);
+  //   console.log(Object.keys(userOrders[0]));
+  //   console.log(typeof userOrders[0].createdAt);
+  // }
 
   const goBack = () => {
     navigate('/account');
+  };
+
+  const orderDetails = (orderId) => {
+    console.log('ORDER ID:', orderId);
   };
 
   // if (status === 'pending') return <div>Loading..</div>;
@@ -47,8 +52,8 @@ const OrderHistory = () => {
 
   return (
     <div className="bg-cover bg-center h-[calc(100vh_-_5rem)] bg-[url('/assets/bg_img/cart.jpg')]">
-      <div className="w-full max-w-lg absolute top-30 left-10 pt-16">
-        <p className="text-center text-4xl font-extrabold pb-2 text-primary-deep-green">
+      <div className="w-full max-w-xl absolute top-30 left-10 pt-16">
+        <p className="text-center text-4xl font-extrabold pb-10 text-primary-deep-green">
           Previous Orders
         </p>
 
@@ -71,81 +76,32 @@ const OrderHistory = () => {
               </tr>
             </thead>
             <tbody>
-              <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th
-                  scope="row"
-                  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                >
-                  1
-                </th>
-                <th
-                  scope="row"
-                  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                >
-                  2/24/22
-                </th>
-
-                <td className="px-6 py-4">1</td>
-                <td className="px-6 py-4">$29</td>
-              </tr>
-              <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th
-                  scope="row"
-                  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                >
-                  2
-                </th>
-                <th
-                  scope="row"
-                  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                >
-                  1/1/23
-                </th>
-
-                <td className="px-6 py-4">3</td>
-                <td className="px-6 py-4">$150</td>
-              </tr>
-              <tr className="bg-white dark:bg-gray-800">
-                <th
-                  scope="row"
-                  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                >
-                  3
-                </th>
-                <th
-                  scope="row"
-                  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                >
-                  2/14/23
-                </th>
-
-                <td className="px-6 py-4">5</td>
-                <td className="px-6 py-4">$299</td>
-              </tr>
+              {userOrders && userOrders.length
+                ? userOrders.map((order) => {
+                    return (
+                      <tr
+                        onClick={() => orderDetails(order.id)}
+                        key={order.id}
+                        className="cursor-pointer"
+                      >
+                        <th scope="col" className="px-6 py-3">
+                          {order.id}
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                          {order.createdAt.slice(0, 10)}
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                          {order.totalQty}
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                          {order.finalPrice}
+                        </th>
+                      </tr>
+                    );
+                  })
+                : 'No past orders!'}
             </tbody>
           </table>
-        </div>
-
-        <div className="flex flex-col mt-8 gap-3 text-center">
-          <div>ORDER 1</div>
-          <div>ORDER 2</div>
-          <div>ORDER 3</div>
-          <div>ORDER 4</div>
-          <button className="py-3 px-5 mr-2 mb-2 text-text-primary-deep-green-900 bg-white rounded-lg border hover:bg-gray-100">
-            Edit Profile
-          </button>
-          <button className="py-3 px-5 mr-2 mb-2 text-text-primary-deep-green-900 bg-white rounded-lg border hover:bg-gray-100">
-            Update Password
-          </button>
-          <button className="py-3 px-5 mr-2 mb-2 text-text-primary-deep-green-900 bg-white rounded-lg border hover:bg-gray-100">
-            Order History
-          </button>
-          <button
-            className="text-primary-deep-green hover:text-primary-promo-banner text-sm"
-            onClick={goBack}
-          >
-            Back
-          </button>
         </div>
       </div>
     </div>
