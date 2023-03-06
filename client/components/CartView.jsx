@@ -1,6 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCart, selectCart } from '../slices/users/cartSlice';
+import {
+  fetchCart,
+  selectCart,
+  addOneToCart,
+  removeOneFromCart,
+} from '../slices/users/cartSlice';
 import ProductCard from './ProductCard.jsx';
 
 export default function CartView(props) {
@@ -11,6 +16,14 @@ export default function CartView(props) {
   useEffect(() => {
     dispatch(fetchCart());
   }, [dispatch]);
+
+  function decrementCart(productId) {
+    dispatch(removeOneFromCart(productId));
+  }
+
+  function incrementCart(productId) {
+    dispatch(addOneToCart(productId));
+  }
 
   console.log('cart state:', cart);
 
@@ -25,6 +38,12 @@ export default function CartView(props) {
             return (
               <li key={item.product.id}>
                 <ProductCard product={item.product} />
+                <button onClick={() => incrementCart(item.product.id)}>
+                  Add One
+                </button>
+                <button onClick={() => decrementCart(item.product.id)}>
+                  Remove One
+                </button>
               </li>
             );
           })}
