@@ -5,5 +5,3 @@ bundle.js.LICENSE.txt
 bundle.js.map
 tailwind.css
 .DS_Store
-
-package-lock.json
