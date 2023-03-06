@@ -46,7 +46,7 @@ const OrderHistory = () => {
   if (userOrders.length < 1) return <div>No Orders!</div>;
 
   return (
-    <div className="bg-cover bg-center h-screen bg-[url('/assets/bg_img/cart.jpg')]">
+    <div className="bg-cover bg-center h-[calc(100vh_-_5rem)] bg-[url('/assets/bg_img/cart.jpg')]">
       <div className="w-full max-w-lg absolute top-30 left-10 pt-16">
         <p className="text-center text-4xl font-extrabold pb-2 text-primary-deep-green">
           Previous Orders
