@@ -16,10 +16,6 @@ const OrderHistory = () => {
 
   // useEffect(() => {
   //   dispatch(attemptTokenLogin());
-
-  //   return () => {
-  //     dispatch(resetStatus());
-  //   };
   // }, []);
 
   const { auth, token } = useSelector(selectAuth);
