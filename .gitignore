@@ -5,6 +5,3 @@ bundle.js.LICENSE.txt
 bundle.js.map
 tailwind.css
 .DS_Store
-
-public/bundle.js
-public/bundle.js.map
