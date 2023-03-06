@@ -311,25 +311,53 @@ router.get('/:id/cart', requireToken, async (req, res, next) => {
   }
 });
 
+// POST - bulk-update of cart
+// expects array: [{productId, qty}]
+
+router.post('/:id/cart', requireToken, async (req, res, next) => {
+  try {
+    const userId = +req.params.id;
+    const { cart } = req.body;
+
+    if (!cart) return res.status(400).send('Must provide cart information');
+
+    const cleanCart = cart.map((line) => {
+      return { productId: line.productId, userId: userId, qty: line.qty };
+    });
+
+    const dbResponse = Cart.bulkCreate(cleanCart);
+    console.log('dbResponse:', dbResponse);
+    res.status(200).send(dbResponse);
+  } catch (err) {
+    next(err);
+  }
+});
+
 // PUT - update cart-item qty (front-end track qty and submit new qty)
+// expects {productId, qty}
 router.put('/:id/cart', requireToken, async (req, res, next) => {
   try {
-    const itemQty = req.body.qty || 1;
+    const userId = +req.params.id;
+    const productId = +req.body.productId;
+    const itemQty = +req.body.qty || 1;
 
-    if (req.user.id === +req.params.id || req.user.isAdmin) {
+    if (req.user.id === userId || req.user.isAdmin) {
       let cartItem = await Cart.findOne({
         where: {
-          userId: req.params.id,
-          productId: req.body.productId,
+          userId,
+          productId,
         },
       });
 
       if (!cartItem) {
-        const user = await User.findByPk(req.params.id);
-        cartItem = await user.addProduct(req.body.productId);
-      } else await cartItem.update({ qty: itemQty });
+        cartItem = await Cart.create({ userId, productId, qty: itemQty });
+      } else {
+        await cartItem.update({ qty: itemQty });
+      }
 
-      res.json(cartItem);
+      const newCart = await Cart.findAll({ where: { userId } });
+
+      res.status(200).json(newCart);
     } else {
       res
         .status(403)
