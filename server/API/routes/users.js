@@ -1,7 +1,15 @@
 const router = require('express').Router();
 const chalk = require('chalk');
 const { requireToken, isAdmin } = require('../authMiddleware');
-const { User, Product, Cart, Wishlist } = require('../../DB');
+const {
+  User,
+  Product,
+  Cart,
+  Wishlist,
+  Order_Detail,
+  Promo_Code,
+  Order,
+} = require('../../DB');
 
 // router.use('/:id/wishlist', require('./wishlist'));
 
@@ -64,6 +72,32 @@ router.get('/:userId', requireToken, async (req, res, next) => {
         );
     }
   } catch (err) {
+    next(err);
+  }
+});
+
+// GET USER ORDERS
+
+router.get('/:userId/orders', requireToken, async (req, res, next) => {
+  try {
+    const { userId } = req.params;
+
+    if (req.user.id === +userId || req.user.isAdmin) {
+      const userOrders = await Order.findAll({
+        where: { userId: +userId },
+        include: [Order_Detail, Promo_Code],
+      });
+      if (!userOrders) return res.status(404).send('User orders not found');
+      res.status(200).send(userOrders);
+    } else {
+      res
+        .status(403)
+        .send(
+          'Inadequate access rights / Requested user does not match logged-in user'
+        );
+    }
+  } catch (err) {
+    console.log('Backend issue fetching user orders');
     next(err);
   }
 });
