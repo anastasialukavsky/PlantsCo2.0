@@ -85,7 +85,8 @@ router.put('/:userId', requireToken, async (req, res, next) => {
       req.body;
 
     // if user is not an admin, but they're attempting to set new role or isAdmin, fail w/ 403
-    if (!req.user.isAdmin && (role !== req.user.role || isAdmin)) {
+
+    if (role && !req.user.isAdmin && (role !== req.user.role || isAdmin)) {
       return res
         .status(403)
         .send(
