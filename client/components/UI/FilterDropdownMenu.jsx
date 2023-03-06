@@ -9,7 +9,7 @@ const FilterDropdownMenu = (props) => {
     <div
       onMouseEnter={handleHover}
       onMouseLeave={handleHide}
-      className={`top-36 h-44 w-screen ${display} flex gap-6 justify-center z-10 bg-gray-100 border-t-2 border-primary-deep-green`}
+      className={`top-36 h-44 w-screen ${display} flex gap-6 justify-center z-10 bg-gray-100 border-t-2 border-primary-deep-green text-center`}
     >
       <div className="">
         <FilterHeader>Size</FilterHeader>
@@ -22,9 +22,9 @@ const FilterDropdownMenu = (props) => {
       <div className="">
         <FilterHeader>Light</FilterHeader>
         <FilterCategories>
-          <FilterTag>Low / Artificial</FilterTag>
-          <FilterTag>Partial / Bright Indirect</FilterTag>
-          <FilterTag>Direct Sunlight</FilterTag>
+          <FilterTag>Low/Artificial</FilterTag>
+          <FilterTag>Partial/Bright indirect</FilterTag>
+          <FilterTag>Direct sunlight</FilterTag>
         </FilterCategories>
       </div>
       <div className="">

@@ -106,6 +106,7 @@ export const {
 export const selectAllProducts = (state) => state.products.products;
 export const selectSingleProduct = (state) => state.products.singleProduct;
 export const selectStatus = (state) => state.products.status;
+export const selectFilterBy = (state) => state.products.filterBy;
 // Page for scrolling through similar items
 export const selectSimilarPage = (state) => state.products.similarPage;
 // Page for scrolling through ALL products page
