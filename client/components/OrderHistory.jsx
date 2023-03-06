@@ -6,7 +6,6 @@ import {
   resetStatus,
   selectOrders,
 } from '../slices/users/orderSlice';
-// import { selectUsers } from '../slices/users/userSlice';
 import { attemptTokenLogin, selectAuth } from '../slices/users/authSlice';
 
 // <form onSubmit={onSubmit}>
