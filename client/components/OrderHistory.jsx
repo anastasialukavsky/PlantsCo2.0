@@ -45,6 +45,7 @@ const OrderHistory = () => {
 
   const orderDetails = (orderId) => {
     console.log('ORDER ID:', orderId);
+    navigate(`/account/orderhistory/${orderId}`);
   };
 
   // if (status === 'pending') return <div>Loading..</div>;
