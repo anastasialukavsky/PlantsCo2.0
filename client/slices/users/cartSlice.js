@@ -6,12 +6,13 @@ export const fetchCart = createAsyncThunk('cart/fetchCart', async () => {
   let dbCart = [];
   let localCart = [];
   let userId = null;
+  let res;
 
   // pull cart info from database (if we have a token)
   const token = localStorage.getItem('token');
 
   if (token) {
-    let res = await axios.get(`/api/auth`, {
+    res = await axios.get(`/api/auth`, {
       headers: {
         authorization: token,
       },
@@ -35,27 +36,40 @@ export const fetchCart = createAsyncThunk('cart/fetchCart', async () => {
 
   // create hash of product IDs & quantities from both carts
   // larger number wins
-  let mergedCart = {};
+  let simpleCart = {};
 
   for (let product of [...dbCart, ...localCart]) {
-    if (Object.hasOwn(mergedCart, product.productId)) {
+    if (Object.hasOwn(simpleCart, product.productId)) {
       if (userId !== null) product.userId = userId;
-      mergedCart[product.productId] = Math.max(
+      simpleCart[product.productId] = Math.max(
         product.qty,
-        mergedCart[product.productId]
+        simpleCart[product.productId]
       );
-    } else mergedCart[product.productId] = product.qty;
+    } else simpleCart[product.productId] = product.qty;
   }
 
-  mergedCart = Object.keys(mergedCart).map((key) => {
-    return { userId, productId: parseInt(key), qty: mergedCart[key] };
+  simpleCart = Object.keys(simpleCart).map((key) => {
+    return { userId, productId: parseInt(key), qty: simpleCart[key] };
   });
 
   // resulting cart object (identical to backend response):
   // { userId, productId, qty }
-  window.localStorage.setItem('cart', JSON.stringify(mergedCart));
-  await axios.post('/');
-  return mergedCart;
+  window.localStorage.setItem('cart', JSON.stringify(simpleCart));
+  if (userId !== null && token) {
+    await axios.post(
+      `/api/users/${userId}/cart`,
+      { cart: simpleCart },
+      {
+        headers: { authorization: token },
+      }
+    );
+  }
+
+  // use simplified / merged cart to request expanded cart (product detail + qty)
+  res = await axios.post('/api/products/cart', simpleCart);
+  const expandedCart = res.data;
+
+  return { simpleCart, expandedCart };
 });
 
 export const addOneToCart = createAsyncThunk(
@@ -67,7 +81,7 @@ export const addOneToCart = createAsyncThunk(
     let userId = null;
 
     if (token) {
-      let res = await axios.get(`/api/auth`, {
+      res = await axios.get(`/api/auth`, {
         headers: {
           authorization: token,
         },
@@ -107,7 +121,6 @@ export const addOneToCart = createAsyncThunk(
           headers: { authorization: token },
         }
       );
-      console.log('result of PUT request:', data);
     }
 
     return localCart;
@@ -118,17 +131,20 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState: {
     cart: [],
+    expandedCart: [],
   },
   extraReducers: (builder) => {
     builder.addCase(fetchCart.fulfilled, (state, { payload }) => {
-      state.cart = payload;
+      state.cart = payload.simpleCart;
+      state.expandedCart = payload.expandedCart;
     });
     builder.addCase(addOneToCart.fulfilled, (state, { payload }) => {
-      state.cart = payload;
+      state.cart = payload.simpleCart;
+      state.expandedCart = payload.expandedCart;
     });
   },
 });
 
-export const selectCart = (state) => state.cart.cart;
+export const selectCart = (state) => state.cart;
 
 export default cartSlice.reducer;

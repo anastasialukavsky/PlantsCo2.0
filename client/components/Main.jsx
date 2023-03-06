@@ -12,6 +12,7 @@ import {
   Cart,
   EditProfile,
   OrderHistory,
+  CartView,
 } from './index';
 import { selectAuth, attemptTokenLogin } from '../slices/users/authSlice';
 
@@ -37,6 +38,7 @@ export default function Main() {
           <Route path="/account" element={<UserAccount />} />
           <Route path="/account/editprofile" element={<EditProfile />} />
           <Route path="/account/orderhistory" element={<OrderHistory />} />
+          <Route path="/cart" element={<CartView />} />
         </Routes>
       </div>
     </>

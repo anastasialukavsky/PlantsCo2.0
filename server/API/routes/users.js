@@ -274,7 +274,7 @@ router.delete(
 
 // CART ROUTES
 
-// GET cart product info
+// GET cart info (minimal)
 router.get('/:id/cart', requireToken, async (req, res, next) => {
   try {
     const userId = +req.params.id;
@@ -326,8 +326,9 @@ router.post('/:id/cart', requireToken, async (req, res, next) => {
       return { productId: line.productId, userId: userId, qty: line.qty };
     });
 
-    const dbResponse = Cart.bulkCreate(cleanCart);
-    console.log('dbResponse:', dbResponse);
+    await Cart.destroy({ where: { userId } });
+
+    const dbResponse = await Cart.bulkCreate(cleanCart);
     res.status(200).send(dbResponse);
   } catch (err) {
     next(err);
