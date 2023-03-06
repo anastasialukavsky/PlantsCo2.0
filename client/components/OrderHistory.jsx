@@ -26,7 +26,7 @@ const OrderHistory = () => {
   }, [auth]);
 
   useEffect(() => {
-    setUserOrders(order, []);
+    setUserOrders(order || []);
   }, [order]);
 
   const orderDetails = (orderId) => {
