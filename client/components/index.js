@@ -8,3 +8,4 @@ export { default as UserAccount } from './UserAccount.jsx';
 export { default as Signup } from './Signup.jsx';
 export { default as EditProfile } from './EditProfile.jsx';
 export { default as OrderHistory } from './OrderHistory.jsx';
+export { default as OrderHistoryDetails } from './OrderHistoryDetails.jsx';
