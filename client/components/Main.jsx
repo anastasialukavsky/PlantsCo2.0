@@ -9,6 +9,9 @@ import {
   NavBar,
   Login,
   UserAccount,
+  Signup,
+  EditProfile,
+  OrderHistory,
 } from './index';
 import { selectAuth, attemptTokenLogin } from '../slices/users/authSlice';
 
@@ -22,7 +25,7 @@ export default function Main() {
   const { auth } = useSelector(selectAuth);
 
   return (
-    <>
+    <React.Fragment>
       <div className="font-fraunces text-primary-deep-green">
         <NavBar auth={auth} />
 
@@ -32,8 +35,11 @@ export default function Main() {
           <Route path="/products" element={<AllProducts />} />
           <Route path="/products/:productId" element={<SingleProduct />} />
           <Route path="/account" element={<UserAccount />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/account/editprofile" element={<EditProfile />} />
+          <Route path="/account/orderhistory" element={<OrderHistory />} />
         </Routes>
       </div>
-    </>
+    </React.Fragment>
   );
 }
