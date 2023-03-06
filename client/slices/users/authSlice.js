@@ -74,18 +74,18 @@ const authSlice = createSlice({
       })
       .addCase(logIn.rejected, (state, { payload }) => {
         state.status = 'failed';
-        console.log('failed payload', payload);
-        state.error = payload.error.message;
+        state.error = payload.message;
       })
       .addCase(attemptTokenLogin.fulfilled, (state, { payload }) => {
         state.auth = payload || {};
         console.log('payload from attemptTokenLogin:', payload);
         state.status = 'success';
         state.error = '';
+        const token = localStorage.getItem('token');
+        state.token = token;
       })
       .addCase(attemptTokenLogin.rejected, (state, { payload }) => {
         state.status = 'failed';
-        console.log('failed payload', payload);
         state.error = payload.message;
       })
       .addCase(signUp.fulfilled, (state, { payload }) => {
