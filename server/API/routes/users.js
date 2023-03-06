@@ -102,6 +102,32 @@ router.get('/:userId/orders', requireToken, async (req, res, next) => {
   }
 });
 
+// GET USER ORDER DETAILS
+router.get('/:userId/orders/:orderId', requireToken, async (req, res, next) => {
+  try {
+    const { userId, orderId } = req.params;
+
+    if (req.user.id === +userId || req.user.isAdmin) {
+      const userOrderDetails = await Order_Detail.findAll({
+        where: { orderId: +orderId },
+      });
+
+      if (!userOrderDetails)
+        return res.status(404).send('User order details not found');
+      res.status(200).send(userOrderDetails);
+    } else {
+      res
+        .status(403)
+        .send(
+          'Inadequate access rights / Requested user does not match logged-in user'
+        );
+    }
+  } catch (err) {
+    console.log('Backend issue fetching user order details');
+    next(err);
+  }
+});
+
 router.put('/:userId', requireToken, async (req, res, next) => {
   const userId = +req.params.userId;
 
