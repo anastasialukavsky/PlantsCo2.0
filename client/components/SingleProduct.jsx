@@ -10,6 +10,7 @@ import {
   selectSimilar,
   fetchAllProducts,
 } from '../slices/product/productSlice.js';
+import { addOneToCart } from '../slices/users/cartSlice.js';
 import ProductCard from './ProductCard.jsx';
 
 const singleProduct = () => {
@@ -27,6 +28,10 @@ const singleProduct = () => {
   const similarProducts = useSelector(selectSimilar);
 
   const handleDescriptionClick = (e) => {};
+
+  function addToCart() {
+    dispatch(addOneToCart(productId));
+  }
 
   return (
     <>
@@ -58,7 +63,10 @@ const singleProduct = () => {
             </p>
             <p className="mb-8 leading-tight">{singleProduct.description}</p>
             <div className="border-b-4 pb-4 mb-3">
-              <button className="hover:bg-primary-button-green w-full bg-primary-deep-green text-white py-3 rounded-2xl mx-auto block text-xl hover:transition-all">
+              <button
+                onClick={addToCart}
+                className="hover:bg-primary-button-green w-full bg-primary-deep-green text-white py-3 rounded-2xl mx-auto block text-xl hover:transition-all"
+              >
                 ADD TO CART
               </button>
             </div>

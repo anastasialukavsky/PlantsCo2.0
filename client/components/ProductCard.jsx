@@ -1,8 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addOneToCart } from '../slices/users/cartSlice';
 
 const ProductCard = (props) => {
   const { product } = props;
+  const dispatch = useDispatch();
+
+  function addToCart() {
+    dispatch(addOneToCart(product.id));
+  }
+
   return (
     <div key={product.id} className="group">
       <Link to={`/products/${product.id}`}>
@@ -12,7 +20,10 @@ const ProductCard = (props) => {
             alt="Picture of plant on a counter"
             className="w-full relative group"
           />
-          <button className="bg-primary-deep-green w-full text-white absolute bottom-0  py-1 invisible group-hover:visible mx-auto opacity-60 transition duration-100 ease-in-out hover:opacity-100">
+          <button
+            onClick={addToCart}
+            className="bg-primary-deep-green w-full text-white absolute bottom-0  py-1 invisible group-hover:visible mx-auto opacity-60 transition duration-100 ease-in-out hover:opacity-100"
+          >
             Add To Cart
           </button>
         </div>
