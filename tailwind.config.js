@@ -8,6 +8,12 @@ module.exports = {
       gloock: ['Gloock', 'serif'],
       outfit: ['Outfit', 'sans-serif'],
     },
+    fontWeight: {
+      thin: 100,
+      xtralight: 200,
+      light: 300,
+      semibold: 600,
+    },
     extend: {
       colors: {
         'primary-deep-green': '#365314',
