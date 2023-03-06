@@ -6,24 +6,22 @@ import {
   selectAuth,
   resetStatus,
 } from '../slices/users/authSlice';
-import {
-  updateSingleUser,
-  fetchSingleUser,
-  selectUsers,
-} from '../slices/users/userSlice';
+import { updateSingleUser, selectUsers } from '../slices/users/userSlice';
 
 const EditProfile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { auth, token } = useSelector(selectAuth);
+  const { auth } = useSelector(selectAuth);
 
   const { user } = useSelector(selectUsers);
   const id = auth.id;
+  const token = localStorage.getItem('token');
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
+  const [role, setRole] = useState('');
   // const [password, setPassword] = useState('');
   // const [shipping, setShipping] = useState('');
   // const [payment, setPayment] = useState('');
@@ -46,8 +44,7 @@ const EditProfile = () => {
   const updateUser = (evt) => {
     evt.preventDefault();
     const updates = { firstName, lastName, email };
-    // dispatch(fetchSingleUser({ id, token }));
-    dispatch(updateSingleUser({ id, updates }));
+    dispatch(updateSingleUser({ id, token, updates }));
   };
 
   const goBack = () => {
