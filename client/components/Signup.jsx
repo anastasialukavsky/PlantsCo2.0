@@ -43,11 +43,15 @@ export default function Signup() {
     dispatch(signUp(formData));
   };
 
+  const login = () => {
+    navigate('/login');
+  };
+
   return (
     <div className="bg-cover bg-center bg-[url('/assets/bg_img/login_signin_page.jpg')] h-[calc(100vh_-_5rem)]">
       <div className="w-full max-w-sm m-auto pt-16">
         <h2 className="text-center text-4xl font-bold">Sign Up</h2>
-        <section className="flex gap-20 justify-center mt-16 ">
+        <section className="flex flex-col gap-10 justify-center mt-16 ">
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
               <label
@@ -138,6 +142,14 @@ export default function Signup() {
               </button>
             </div>
           </form>
+          <div className="flex justify-center">
+            <button
+              onClick={login}
+              className="inline-block align-baseline font-bold text-sm hover:text-primary-promo-banner"
+            >
+              Already have an account? Log in!
+            </button>
+          </div>
         </section>
       </div>
     </div>
