@@ -18,11 +18,28 @@ export const fetchSingleUser = createAsyncThunk(
   }
 );
 
+// export const updateSingleUser = createAsyncThunk(
+//   'updateSingleUser',
+//   async ({ id, updates }, { rejectWithValue }) => {
+//     try {
+//       let { data } = await axios.put(`/api/users/${id}`, updates);
+//       return data;
+//     } catch (err) {
+//       console.log('axios error updating single user');
+//       return rejectWithValue(err);
+//     }
+//   }
+// );
+
 export const updateSingleUser = createAsyncThunk(
   'updateSingleUser',
-  async ({ id, updates }, { rejectWithValue }) => {
+  async ({ id, updates, token }, { rejectWithValue }) => {
     try {
-      let { data } = await axios.put(`/api/users/${id}`, updates);
+      let { data } = await axios.put(`/api/users/${id}`, updates, {
+        headers: {
+          authorization: token,
+        },
+      });
       return data;
     } catch (err) {
       console.log('axios error updating single user');
