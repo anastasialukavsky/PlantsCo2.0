@@ -12,6 +12,8 @@ import {
   Signup,
   EditProfile,
   OrderHistory,
+  NotFound,
+  OrderHistoryDetails,
 } from './index';
 import { selectAuth, attemptTokenLogin } from '../slices/users/authSlice';
 
