@@ -2,7 +2,6 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 export const fetchCart = createAsyncThunk('cart/fetchCart', async () => {
-  // doesn't really merge DB + user cart the way I want yet...
   let dbCart = [];
   let localCart = [];
   let userId = null;
@@ -76,6 +75,7 @@ export const addOneToCart = createAsyncThunk(
   'cart/addOneToCart',
   async (productId) => {
     if (typeof productId === 'string') productId = parseInt(productId);
+    let res;
 
     const token = localStorage.getItem('token');
     let userId = null;
@@ -123,7 +123,76 @@ export const addOneToCart = createAsyncThunk(
       );
     }
 
-    return localCart;
+    res = await axios.post('/api/products/cart', localCart);
+    const expandedCart = res.data;
+
+    return { localCart, expandedCart };
+  }
+);
+
+export const removeOneFromCart = createAsyncThunk(
+  'cart/removeOneFromCart',
+  async (productId) => {
+    if (typeof productId === 'string') productId = parseInt(productId);
+    let res;
+
+    const token = localStorage.getItem('token');
+    let userId = null;
+
+    if (token) {
+      res = await axios.get(`/api/auth`, {
+        headers: {
+          authorization: token,
+        },
+      });
+
+      // extract userId from token response
+      userId = res.data.id;
+    }
+
+    let localCart = JSON.parse(window.localStorage.getItem('cart')) || [];
+
+    // iterate over cart items -- if same item already exists, decrement (or delete if qty === 1)
+    // if the item wasn't in the cart to begin with, act like nothing happened
+    let newQty = 0;
+    let found;
+
+    for (let cartItem of localCart) {
+      if (cartItem.productId === productId) {
+        cartItem.qty = cartItem.qty - 1;
+        newQty = cartItem.qty;
+        found = true;
+        break;
+      }
+    }
+
+    if (!found) return; // exit early without hitting db / resetting localstorage
+
+    // remove zero qty lines
+    console.log('localCart before filter', localCart);
+    localCart = localCart.filter((cartItem) => cartItem.qty > 0);
+    console.log('localCart after filter', localCart);
+    window.localStorage.setItem('cart', JSON.stringify(localCart));
+
+    // if there was a token (and a user ID), use it to update DB cart
+    // send product ID & new qty (pulled from above) to PUT route
+    // backend PUT will delete row if qty === 0
+
+    if (token) {
+      const updateObject = { productId, qty: newQty };
+      const { data } = await axios.put(
+        `/api/users/${userId}/cart`,
+        updateObject,
+        {
+          headers: { authorization: token },
+        }
+      );
+    }
+
+    res = await axios.post('/api/products/cart', localCart);
+    const expandedCart = res.data;
+
+    return { localCart, expandedCart };
   }
 );
 
@@ -139,7 +208,12 @@ const cartSlice = createSlice({
       state.expandedCart = payload.expandedCart;
     });
     builder.addCase(addOneToCart.fulfilled, (state, { payload }) => {
-      state.cart = payload.simpleCart;
+      state.cart = payload.localCart;
+      state.expandedCart = payload.expandedCart;
+    });
+    builder.addCase(removeOneFromCart.fulfilled, (state, { payload }) => {
+      if (!payload) return; // thunk will return null if nothing to remove
+      state.cart = payload.localCart;
       state.expandedCart = payload.expandedCart;
     });
   },

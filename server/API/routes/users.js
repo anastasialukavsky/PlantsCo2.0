@@ -337,6 +337,7 @@ router.post('/:id/cart', requireToken, async (req, res, next) => {
 
 // PUT - update cart-item qty (front-end track qty and submit new qty)
 // expects {productId, qty}
+// deletes if qty === 0
 router.put('/:id/cart', requireToken, async (req, res, next) => {
   try {
     const userId = +req.params.id;
@@ -351,12 +352,19 @@ router.put('/:id/cart', requireToken, async (req, res, next) => {
         },
       });
 
-      if (!cartItem) {
+      // delete existing line if quantity is to be come zero
+      // if we're adding a new item to the cart (didn't previously exist), create it
+      // otherwise, update the quantity
+      if (cartItem && itemQty === 0) {
+        console.log('item exists in cart; new qty zero -- deleting item');
+        await cartItem.destroy();
+      } else if (!cartItem) {
         cartItem = await Cart.create({ userId, productId, qty: itemQty });
       } else {
         await cartItem.update({ qty: itemQty });
       }
 
+      // pull down & send back revised cart data
       const newCart = await Cart.findAll({ where: { userId } });
 
       res.status(200).json(newCart);
