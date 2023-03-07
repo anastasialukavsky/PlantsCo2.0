@@ -34,6 +34,22 @@ router.get('/', requireToken, isAdmin, async (req, res, next) => {
   }
 });
 
+// router.get('/?userId=id', requireToken, async (req, res, next) => {
+//   try {
+//     console.log('REQ.QUERY:', req.query.userId);
+
+//     const orders = await Order.findOne({
+//       where: {
+//         userId: req.query.userId,
+//       },
+//     });
+//     if (!orders) return res.status(404).send('User orders not found');
+//     res.send(orders);
+//   } catch (err) {
+//     next(err);
+//   }
+// });
+
 router.post('/', async (req, res, next) => {
   try {
     const { name, address, userEmail, promoCode, cart, userId, currencyId } =

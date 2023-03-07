@@ -14,7 +14,6 @@ const SimilarProducts = () => {
 
   const similarProducts = useSelector(selectSimilar);
   const similarPage = useSelector(selectSimilarPage);
-  console.log(similarPage);
 
   const handlePageChange = (pageInfo) => {
     dispatch(similarPageChange(pageInfo));

@@ -8,7 +8,7 @@ export default function Homepage() {
         <p className="">one click away</p>
       </div>
       <div className="flex absolute top-[35rem] text-2xl left-48">
-        <p>Transform and beautify your space. No green thumb needed</p>
+        <p>Transform your space. No green thumb needed</p>
       </div>
     </div>
   );

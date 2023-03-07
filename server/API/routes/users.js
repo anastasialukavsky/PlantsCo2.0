@@ -1,7 +1,15 @@
 const router = require('express').Router();
 const chalk = require('chalk');
 const { requireToken, isAdmin } = require('../authMiddleware');
-const { User, Product, Cart, Wishlist } = require('../../DB');
+const {
+  User,
+  Product,
+  Cart,
+  Wishlist,
+  Order_Detail,
+  Promo_Code,
+  Order,
+} = require('../../DB');
 
 // router.use('/:id/wishlist', require('./wishlist'));
 
@@ -64,6 +72,32 @@ router.get('/:userId', requireToken, async (req, res, next) => {
         );
     }
   } catch (err) {
+    next(err);
+  }
+});
+
+// GET USER ORDERS
+
+router.get('/:userId/orders', requireToken, async (req, res, next) => {
+  try {
+    const { userId } = req.params;
+
+    if (req.user.id === +userId || req.user.isAdmin) {
+      const userOrders = await Order.findAll({
+        where: { userId: +userId },
+        include: [Order_Detail, Promo_Code],
+      });
+      if (!userOrders) return res.status(404).send('User orders not found');
+      res.status(200).send(userOrders);
+    } else {
+      res
+        .status(403)
+        .send(
+          'Inadequate access rights / Requested user does not match logged-in user'
+        );
+    }
+  } catch (err) {
+    console.log('Backend issue fetching user orders');
     next(err);
   }
 });
@@ -274,23 +308,30 @@ router.delete(
 
 // CART ROUTES
 
-// GET cart product info
+// GET cart info (minimal)
 router.get('/:id/cart', requireToken, async (req, res, next) => {
   try {
-    if (req.user.id === +req.params.id || req.user.isAdmin) {
-      const cart = await User.findByPk(req.params.id, {
-        include: Product,
-        attributes: {
-          exclude: [
-            'password',
-            'imageURL',
-            'isAdmin',
-            'role',
-            'createdAt',
-            'updatedAt',
-          ],
-        },
-      });
+    const userId = +req.params.id;
+    if (req.user.id === userId || req.user.isAdmin) {
+      const cart = await Cart.findAll({ where: { userId } });
+
+      // const cart = await User.findByPk(req.params.id, {
+      //   include: Product,
+      //   attributes: {
+      //     exclude: [
+      //       'password',
+      //       'imageURL',
+      //       'isAdmin',
+      //       'role',
+      //       'createdAt',
+      //       'updatedAt',
+      //     ],
+      //   },
+      // });
+
+      // const cart = await Cart.findAll({
+      //   where: { userId: +req.params.id },
+      // });
       res.json(cart);
     } else {
       res
@@ -305,26 +346,62 @@ router.get('/:id/cart', requireToken, async (req, res, next) => {
   }
 });
 
+// POST - bulk-update of cart
+// expects array: [{productId, qty}]
+
+router.post('/:id/cart', requireToken, async (req, res, next) => {
+  try {
+    const userId = +req.params.id;
+    const { cart } = req.body;
+
+    if (!cart) return res.status(400).send('Must provide cart information');
+
+    const cleanCart = cart.map((line) => {
+      return { productId: line.productId, userId: userId, qty: line.qty };
+    });
+
+    await Cart.destroy({ where: { userId } });
+
+    const dbResponse = await Cart.bulkCreate(cleanCart);
+    res.status(200).send(dbResponse);
+  } catch (err) {
+    next(err);
+  }
+});
 
 // PUT - update cart-item qty (front-end track qty and submit new qty)
+// expects {productId, qty}
+// deletes if qty === 0
 router.put('/:id/cart', requireToken, async (req, res, next) => {
   try {
-    const itemQty = req.body.qty || 1;
+    const userId = +req.params.id;
+    const productId = +req.body.productId;
+    const itemQty = +req.body.qty || 1;
 
-    if (req.user.id === +req.params.id || req.user.isAdmin) {
+    if (req.user.id === userId || req.user.isAdmin) {
       let cartItem = await Cart.findOne({
         where: {
-          userId: req.params.id,
-          productId: req.body.productId,
+          userId,
+          productId,
         },
       });
 
-      if (!cartItem) {
-        const user = await User.findByPk(req.params.id);
-        cartItem = await user.addProduct(req.body.productId);
-      } else await cartItem.update({ qty: itemQty });
+      // delete existing line if quantity is to be come zero
+      // if we're adding a new item to the cart (didn't previously exist), create it
+      // otherwise, update the quantity
+      if (cartItem && itemQty === 0) {
+        console.log('item exists in cart; new qty zero -- deleting item');
+        await cartItem.destroy();
+      } else if (!cartItem) {
+        cartItem = await Cart.create({ userId, productId, qty: itemQty });
+      } else {
+        await cartItem.update({ qty: itemQty });
+      }
 
-      res.json(cartItem);
+      // pull down & send back revised cart data
+      const newCart = await Cart.findAll({ where: { userId } });
+
+      res.status(200).json(newCart);
     } else {
       res
         .status(403)

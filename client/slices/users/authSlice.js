@@ -78,7 +78,7 @@ const authSlice = createSlice({
       })
       .addCase(attemptTokenLogin.fulfilled, (state, { payload }) => {
         state.auth = payload || {};
-        console.log('payload from attemptTokenLogin:', payload);
+        // console.log('payload from attemptTokenLogin:', payload);
         state.status = 'success';
         state.error = '';
         const token = localStorage.getItem('token');
@@ -92,7 +92,7 @@ const authSlice = createSlice({
         state.status = 'success';
         state.token = payload.token;
         state.error = '';
-        console.log('payload from signUp:', payload);
+        // console.log('payload from signUp:', payload);
       })
       .addCase(signUp.pending, (state, { payload }) => {
         state.status = 'loading';

@@ -54,8 +54,8 @@ const UserAccount = () => {
   if (status !== 'success') return <h1>Page Loading...</h1>;
 
   return (
-    <div className="bg-cover bg-center h-screen bg-[url('/assets/bg_img/user_acc_page.jpg')]">
-      <div className="w-full max-w-sm absolute top-40 right-10 pt-16">
+    <div className="bg-cover bg-center h-[calc(100vh_-_5rem)] bg-[url('/assets/bg_img/wishlist_page.jpg')]">
+      <div className="w-full max-w-sm absolute top-40 right-10 mr-20 pt-16">
         <p className="text-center text-4xl font-extrabold pb-2 text-primary-deep-green">
           Welcome Back,
         </p>
