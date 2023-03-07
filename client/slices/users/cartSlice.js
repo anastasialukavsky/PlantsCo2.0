@@ -220,5 +220,10 @@ const cartSlice = createSlice({
 });
 
 export const selectCart = (state) => state.cart;
+export const selectCartSubtotal = (state) =>
+  state.cart.expandedCart.reduce(
+    (acc, cv) => (acc += +cv.product.price * cv.qty),
+    0
+  );
 
 export default cartSlice.reducer;
