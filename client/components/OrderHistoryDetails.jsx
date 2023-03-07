@@ -90,7 +90,7 @@ const OrderHistoryDetails = () => {
               {details && details.length
                 ? details.map((item) => {
                     return (
-                      <tr key={item.productId}>
+                      <tr key={item.id}>
                         <th scope="col" className="px-6 py-3">
                           {item.productName}
                         </th>
