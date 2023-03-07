@@ -46,6 +46,10 @@ const UserAccount = () => {
     navigate('/account/updatepassword');
   };
 
+  const adminDash = () => {
+    navigate('/account/admin');
+  };
+
   const attemptLogOut = async () => {
     await dispatch(logOut());
     navigate('/');
@@ -80,7 +84,10 @@ const UserAccount = () => {
             Order History
           </button>
           {auth.isAdmin ? (
-            <button className="py-3 px-5 mr-2 mb-2 text-text-primary-deep-green-900 bg-white rounded-lg border hover:bg-gray-100">
+            <button
+              onClick={adminDash}
+              className="py-3 px-5 mr-2 mb-2 text-text-primary-deep-green-900 bg-white rounded-lg border hover:bg-gray-100"
+            >
               Admin Dashboard
             </button>
           ) : (

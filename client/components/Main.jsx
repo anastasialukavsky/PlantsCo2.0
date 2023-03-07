@@ -16,6 +16,7 @@ import {
   CartView,
   NotFound,
   OrderHistoryDetails,
+  AdminDashboard,
 } from './index';
 import { selectAuth, attemptTokenLogin } from '../slices/users/authSlice';
 
@@ -48,6 +49,7 @@ export default function Main() {
             path="/account/orderhistory/:orderId"
             element={<OrderHistoryDetails />}
           />
+          <Route path="/account/admin" element={<AdminDashboard />} />
         </Routes>
       </div>
     </React.Fragment>
