@@ -9,9 +9,12 @@ import {
   resetStatusError,
   fetchAllProducts,
 } from '../slices/product/productSlice.js';
+import { fetchWishlist, selectWishlist } from '../slices/users/wishlistSlice';
+
 import { addOneToCart } from '../slices/users/cartSlice.js';
-import ProductCard from './ProductCard.jsx';
 import SimilarProducts from './SimilarProducts.jsx';
+import heartOutline from '../../public/assets/heart-outline.svg';
+import heartFilled from '../../public/assets/heart-filled.svg';
 
 const singleProduct = () => {
   const dispatch = useDispatch();
@@ -20,13 +23,20 @@ const singleProduct = () => {
   useEffect(() => {
     dispatch(fetchSingleProduct(productId));
     dispatch(fetchAllProducts());
+    dispatch(fetchWishlist());
 
     return () => dispatch(resetStatusError());
   }, [dispatch, productId]);
 
   const singleProduct = useSelector(selectSingleProduct);
 
-  const handleDescriptionClick = (e) => {};
+  const handleHeartClick = () => {
+    console.log('this was clicked');
+    dispatch(fetchWishlist());
+  };
+
+  const wishlist = useSelector(selectWishlist);
+  console.log('wishlist in card', wishlist);
 
   function addToCart() {
     dispatch(addOneToCart(productId));
@@ -45,11 +55,16 @@ const singleProduct = () => {
             />
           </div>
           <div className="w-1/3">
-            <div className="flex justify-between">
-              <header className=" text-green-900 text-3xl mb-8">
+            <div className="flex justify-between items-center mb-8">
+              <header className=" text-green-900 text-3xl">
                 {singleProduct.name}
               </header>
-              <img></img>
+              <img
+                src={heartOutline}
+                alt="heart outline icon"
+                className="w-8"
+                onClick={handleHeartClick}
+              />
             </div>
 
             <div className="flex justify-between border-b-4 pb-2 mb-4">
