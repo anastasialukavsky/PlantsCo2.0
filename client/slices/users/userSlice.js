@@ -1,6 +1,23 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+export const fetchAllUsers = createAsyncThunk(
+  'getAllUsers',
+  async ({ token }, { rejectWithValue }) => {
+    try {
+      let { data } = await axios.get(`/api/users`, {
+        headers: {
+          authorization: token,
+        },
+      });
+      return data;
+    } catch (err) {
+      console.log('axios error getting single user');
+      return rejectWithValue(err);
+    }
+  }
+);
+
 export const fetchSingleUser = createAsyncThunk(
   'getSingleUser',
   async ({ id, token }, { rejectWithValue }) => {
@@ -51,6 +68,19 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(fetchAllUsers.fulfilled, (state, { payload }) => {
+        state.users = payload;
+        state.status = 'success';
+        state.error = '';
+      })
+      .addCase(fetchAllUsers.pending, (state, { payload }) => {
+        state.status = 'loading';
+      })
+      .addCase(fetchAllUsers.rejected, (state, { payload }) => {
+        state.status = 'failed';
+        console.log('failed payload', payload);
+        state.error = payload.message;
+      })
       .addCase(fetchSingleUser.fulfilled, (state, { payload }) => {
         state.user = payload;
         state.status = 'success';
