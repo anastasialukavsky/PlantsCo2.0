@@ -55,6 +55,16 @@ const UserAccount = () => {
           >
             Order History
           </Link>
+          {auth.isAdmin ? (
+            <Link
+              to={'/account/admin'}
+              className="py-3 px-5 mr-2 mb-2 text-center text-text-primary-deep-green-900 bg-white rounded-lg border hover:bg-gray-100"
+            >
+              Admin Settings
+            </Link>
+          ) : (
+            ''
+          )}
           <Link
             to={'/account/wishlist'}
             className="py-3 px-5 mr-2 mb-2 text-center text-text-primary-deep-green-900 bg-white rounded-lg border hover:bg-gray-100"
