@@ -16,11 +16,11 @@ router.get('/', async (req, res, next) => {
 router.post('/cart', async (req, res, next) => {
   try {
     const products = req.body;
-    // products = [{productId: #, qty: #}, ...]
+    // products looks like [{productId: #, qty: #}, ...]
     const cart = [];
     for (let product of products) {
       cart.push({
-        product: await Product.findByPk(product.productId),
+        product: await Product.findByPk(product.productId, { include: [Tag] }),
         qty: product.qty,
       });
     }
