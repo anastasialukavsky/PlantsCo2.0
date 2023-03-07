@@ -9,8 +9,8 @@ import {
   resetStatusError,
   fetchAllProducts,
 } from '../slices/product/productSlice.js';
+import LikedProduct from './UI/LikedProduct.jsx';
 import { addOneToCart } from '../slices/users/cartSlice.js';
-import ProductCard from './ProductCard.jsx';
 import SimilarProducts from './SimilarProducts.jsx';
 
 const singleProduct = () => {
@@ -20,13 +20,10 @@ const singleProduct = () => {
   useEffect(() => {
     dispatch(fetchSingleProduct(productId));
     dispatch(fetchAllProducts());
-
     return () => dispatch(resetStatusError());
   }, [dispatch, productId]);
 
   const singleProduct = useSelector(selectSingleProduct);
-
-  const handleDescriptionClick = (e) => {};
 
   function addToCart() {
     dispatch(addOneToCart(productId));
@@ -35,7 +32,7 @@ const singleProduct = () => {
   return (
     <>
       <PromoBanner />
-      <main className="font-serif flex h-[700px] ">
+      <main className="font-serif flex h-[700px]">
         <section className="flex gap-20 justify-center mt-16 ">
           <div className="">
             <img
@@ -45,11 +42,11 @@ const singleProduct = () => {
             />
           </div>
           <div className="w-1/3">
-            <div className="flex justify-between">
-              <header className=" text-green-900 text-3xl mb-8">
+            <div className="flex justify-between items-center mb-8">
+              <header className=" text-green-900 text-3xl">
                 {singleProduct.name}
               </header>
-              <p className="text-2xl">❤️</p>
+              <LikedProduct />
             </div>
 
             <div className="flex justify-between border-b-4 pb-2 mb-4">
