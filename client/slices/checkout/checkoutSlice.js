@@ -10,6 +10,8 @@ export const checkout = createAsyncThunk(
       const cart = window.localStorage.getItem('cart');
       if (!cart) return;
 
+      promoCode = promoCode.toLowerCase();
+
       const token = localStorage.getItem('token');
 
       let userId = null;
@@ -84,7 +86,7 @@ const checkoutSlice = createSlice({
       })
       .addCase(checkout.rejected, (state, { payload }) => {
         state.status = 'failed';
-        state.error = payload.message;
+        state.error = payload.response.data;
       })
       .addCase(updateOrderStatus.fulfilled, (state, { payload }) => {
         state.order = payload;

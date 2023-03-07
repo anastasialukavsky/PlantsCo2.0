@@ -54,12 +54,9 @@ router.post('/', async (req, res, next) => {
   try {
     const { name, address, userEmail, promoCode, cart, userId, currencyId } =
       req.body;
-
-    // console.log('req/body', req.body);
     let promo = null;
     if (promoCode) {
       promo = await Promo_Code.findOne({ where: { name: promoCode } });
-      console.log('promo', promo);
       if (!promo) {
         return res.status(400).send('Invalid promo code');
       }
@@ -70,18 +67,17 @@ router.post('/', async (req, res, next) => {
       finalPrice: 0,
       totalQty: 0,
       promoCode: promo ? promo.id : null,
-      userId,
+      userId: userId,
       status: 'pending',
     });
 
     let orderDetail = [];
     let currency = await Currency.findByPk(currencyId);
     let totalPrice = 0;
-    console.log('cart from backend:', cart);
 
     for (let line of JSON.parse(cart)) {
       let detailLine = {};
-      console.log('line from order', line);
+
       let product = await Product.findByPk(line.productId);
 
       detailLine.qty = line.qty;
@@ -151,14 +147,12 @@ router.post('/checkout', async (req, res, next) => {
     line_items,
     mode: 'payment',
     success_url: `http://localhost:3000/confirmation?status=complete&orderid=${order.id}`,
-    cancel_url: `http://localhost:3000/?status=failed&orderid=${order.id}`,
+    cancel_url: `http://localhost:3000/confirmation?status=failed&orderid=${order.id}`,
   });
 
   console.log('sessionURL', session.url);
   res.send(session.url);
 });
-
-
 
 router.put('/:orderId', async (req, res, next) => {
   try {

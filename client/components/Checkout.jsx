@@ -10,9 +10,8 @@ import { selectAuth } from '../slices/users/authSlice';
 export default function Checkout() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  //select users
+  
   const checkoutState = useSelector(selectCheckout);
-
   const auth = useSelector(selectAuth);
   const user = useSelector(selectUsers);
 
@@ -36,7 +35,6 @@ export default function Checkout() {
     }
   }, [dispatch, token, auth]);
 
-  // console.log('userInfo:', user);
 
   useEffect(() => {
     if (user && user.user && user.user.id) {
@@ -63,7 +61,6 @@ export default function Checkout() {
       tempFormData.promoCode = '';
 
       setFormData(tempFormData);
-      // console.log('tempFormData', tempFormData);
     }
   }, [user]);
 
@@ -93,8 +90,15 @@ export default function Checkout() {
   };
 
   useEffect(() => {
+
     if (checkoutState && checkoutState.checkout) {
       window.location = checkoutState.checkout;
+    }
+
+    if (checkoutState && checkoutState.error === 'Invalid promo code') {
+  
+      const promo = document.querySelector('#promoCode');
+      promo.value = '';
     }
   }, [checkoutState]);
 
@@ -120,6 +124,17 @@ export default function Checkout() {
             name="lastName"
             id="lastName"
             value={formData.lastName}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div>
+          <label htmlFor="email">Email</label>
+          <input
+            type="text"
+            name="email"
+            id="email"
+            value={formData.email}
             onChange={handleChange}
           />
         </div>
@@ -175,6 +190,11 @@ export default function Checkout() {
             name="promoCode"
             id="promoCode"
             value={formData.promoCode}
+            placeholder={
+              checkoutState.error === 'Invalid promo code'
+                ? 'Invalid promo code'
+                : null
+            }
             onChange={handleChange}
           />
         </div>
