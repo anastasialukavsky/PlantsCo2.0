@@ -38,8 +38,7 @@ const AdminDashboard = () => {
   const activeButtonClass =
     'bg-green-900 text-primary-bright-white p-5 rounded-r-full mr-5';
 
-  const [adminButtonStatus, setAdminButtonStatus] =
-    useState(inactiveButtonClass);
+  const [adminButtonStatus, setAdminButtonStatus] = useState(activeButtonClass);
   const [prodButtonStatus, setProdButtonStatus] = useState(inactiveButtonClass);
   const [userButtonStatus, setUserButtonStatus] = useState(inactiveButtonClass);
   const [promoButtonStatus, setPromoButtonStatus] =
@@ -81,7 +80,7 @@ const AdminDashboard = () => {
                 }}
                 className=""
               >
-                ADMIN DASHBOARD
+                {'ADMIN DASHBOARD'}
               </button>
             </div>
             <div className="flex flex-col">
@@ -99,7 +98,7 @@ const AdminDashboard = () => {
                   }}
                   className=""
                 >
-                  PRODUCTS
+                  {'PRODUCTS'}
                 </button>
               </div>
               <div className={promoButtonStatus}>
@@ -116,7 +115,7 @@ const AdminDashboard = () => {
                   }}
                   className=""
                 >
-                  PROMOCODES
+                  {'PROMOCODES'}
                 </button>
               </div>
               <div className={userButtonStatus}>
@@ -133,7 +132,7 @@ const AdminDashboard = () => {
                   }}
                   className=""
                 >
-                  USER MANAGEMENT
+                  {'USER MANAGEMENT'}
                 </button>
               </div>
               <div className={inactiveButtonClass}>
@@ -154,16 +153,16 @@ const AdminDashboard = () => {
                   <thead className="text-sm text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 rounded-xl sticky top-0">
                     <tr>
                       <th scope="col" className="px-6 py-3 sticky top-0">
-                        USER ID
+                        {'USER ID'}
                       </th>
                       <th scope="col" className="px-6 py-3 top-0 sticky">
-                        NAME
+                        {'NAME'}
                       </th>
                       <th scope="col" className="px-6 py-3 top-0 sticky">
-                        EMAIL
+                        {'EMAIL'}
                       </th>
                       <th scope="col" className="px-6 py-3 top-0 sticky">
-                        Role
+                        {'ROLE'}
                       </th>
                     </tr>
                   </thead>
@@ -202,16 +201,16 @@ const AdminDashboard = () => {
                   <thead className="text-sm text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 rounded-xl sticky top-0">
                     <tr>
                       <th scope="col" className="px-6 py-3 sticky top-0">
-                        PRODUCT ID
+                        {'PRODUCT ID'}
                       </th>
                       <th scope="col" className="px-6 py-3 top-0 sticky">
-                        NAME
+                        {'NAME'}
                       </th>
                       <th scope="col" className="px-6 py-3 top-0 sticky">
-                        PRICE
+                        {'PRICE'}
                       </th>
                       <th scope="col" className="px-6 py-3 top-0 sticky">
-                        QTY
+                        {'QTY'}
                       </th>
                     </tr>
                   </thead>
@@ -230,9 +229,10 @@ const AdminDashboard = () => {
                                 {product.name}
                               </th>
                               <th scope="col" className="px-6 py-3">
-                                ${product.price}
+                                {'$'}
+                                {product.price}
                               </th>
-                              <th scope="col" className="px-6 py-3 text-center">
+                              <th scope="col" className="px-6 py-3">
                                 {product.qty}
                               </th>
                             </tr>
@@ -250,16 +250,16 @@ const AdminDashboard = () => {
                   <thead className="text-sm text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 rounded-xl sticky top-0">
                     <tr>
                       <th scope="col" className="px-6 py-3 sticky top-0">
-                        PROMO ID
+                        {'PROMO ID'}
                       </th>
                       <th scope="col" className="px-6 py-3 top-0 sticky">
-                        NAME
+                        {'NAME'}
                       </th>
                       <th scope="col" className="px-6 py-3 top-0 sticky">
-                        DISCOUNT RATE
+                        {'DISCOUNT RATE'}
                       </th>
                       <th scope="col" className="px-6 py-3 top-0 sticky">
-                        STATUS
+                        {'STATUS'}
                       </th>
                     </tr>
                   </thead>
@@ -278,7 +278,8 @@ const AdminDashboard = () => {
                                 {promo.name}
                               </th>
                               <th scope="col" className="px-6 py-3">
-                                {(promo.discountRate * 100).toFixed(0)}%
+                                {(promo.discountRate * 100).toFixed(0)}
+                                {'%'}
                               </th>
                               <th scope="col" className="px-6 py-3">
                                 {promo.status.toString()}
@@ -291,8 +292,8 @@ const AdminDashboard = () => {
                 </table>
               </div>
               <div id="admin" className={adminTable}>
-                <p>Howdy, {auth.firstName}!</p>
-                <p>You're an admin... Nice!</p>
+                <p>{`Howdy, ${auth.firstName}!`}</p>
+                <p>{"You're an admin... Nice!"}</p>
               </div>
             </div>
           </div>
