@@ -8,6 +8,7 @@ import {
 } from '../slices/users/cartSlice';
 import minus from '../../public/assets/minus.svg';
 import plus from '../../public/assets/plus.svg';
+import { Link } from 'react-router-dom';
 
 const CartCard = (props) => {
   const dispatch = useDispatch();
@@ -37,7 +38,9 @@ const CartCard = (props) => {
           />
         </div>
         <div className=" flex flex-col gap-3 w-48">
-          <h1 className="text-3xl">{product.name}</h1>
+          <Link to={`/products/${product.id}`}>
+            <h1 className="text-3xl hover:underline">{product.name}</h1>
+          </Link>
           <p className="text-gray-600 text-xs italic">TAGS WILL GO HERE</p>
           <p>${product.price}</p>
           <div className="flex gap-2">
