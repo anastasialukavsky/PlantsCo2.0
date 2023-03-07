@@ -1,26 +1,18 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import {
   logOut,
   attemptTokenLogin,
   selectAuth,
   resetStatus,
 } from '../slices/users/authSlice';
-// import {
-//   fetchSingleUser,
-//   selectUsers,
-//   resetStatus,
-// } from '../slices/users/userSlice';
 
 const UserAccount = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const { auth, status } = useSelector(selectAuth);
-  // const { user } = useSelector(selectUsers);
-  // const id = auth.id;
-  // const token = localStorage.getItem('token');
 
   useEffect(() => {
     dispatch(attemptTokenLogin());
@@ -29,22 +21,6 @@ const UserAccount = () => {
       dispatch(resetStatus());
     };
   }, []);
-
-  // useEffect(() => {
-  //   dispatch(fetchSingleUser({ id, token }));
-  // }, [auth]);
-
-  const editProfile = async () => {
-    navigate('/account/editprofile');
-  };
-
-  const orderHistory = () => {
-    navigate('/account/orderhistory');
-  };
-
-  const updatePassword = () => {
-    navigate('/account/updatepassword');
-  };
 
   const attemptLogOut = async () => {
     await dispatch(logOut());
@@ -61,24 +37,25 @@ const UserAccount = () => {
         </p>
         <p className="text-center text-4xl font-extrabold">{auth.firstName}</p>
         <div className="flex flex-col mt-8 gap-3">
-          <button
-            onClick={editProfile}
-            className="py-3 px-5 mr-2 mb-2 text-text-primary-deep-green-900 bg-white rounded-lg border hover:bg-gray-100"
+          <Link
+            to={'/account/editprofile'}
+            className="py-3 px-5 mr-2 mb-2 text-center text-text-primary-deep-green-900 bg-white rounded-lg border hover:bg-gray-100"
           >
             Edit Profile
-          </button>
-          <button
-            onClick={updatePassword}
-            className="py-3 px-5 mr-2 mb-2 text-text-primary-deep-green-900 bg-white rounded-lg border hover:bg-gray-100"
+          </Link>
+          <Link
+            tpo={'/account/updatepassword'}
+            className="py-3 px-5 mr-2 mb-2 text-center text-text-primary-deep-green-900 bg-white rounded-lg border hover:bg-gray-100"
           >
             Update Password
-          </button>
-          <button
-            onClick={orderHistory}
-            className="py-3 px-5 mr-2 mb-2 text-text-primary-deep-green-900 bg-white rounded-lg border hover:bg-gray-100"
+          </Link>
+          <Link
+            to={'/account/orderhistory'}
+            className="py-3 px-5 mr-2 mb-2 text-center text-text-primary-deep-green-900 bg-white rounded-lg border hover:bg-gray-100"
           >
             Order History
-          </button>
+          </Link>
+
           <button
             onClick={attemptLogOut}
             className="text-primary-deep-green hover:text-primary-promo-banner pb-16 text-sm"
