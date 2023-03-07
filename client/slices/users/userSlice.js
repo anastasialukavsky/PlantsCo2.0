@@ -12,7 +12,7 @@ export const fetchAllUsers = createAsyncThunk(
       });
       return data;
     } catch (err) {
-      console.log('axios error getting single user');
+      console.log('axios error getting all users');
       return rejectWithValue(err);
     }
   }
