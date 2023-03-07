@@ -35,12 +35,29 @@ export const fetchUserOrders = createAsyncThunk(
   }
 );
 
+export const fetchOrderDetails = createAsyncThunk(
+  'fetchOrderDetails',
+  async ({ userId, orderId, token }, { rejectWithValue }) => {
+    try {
+      let { data } = await axios.get(`/api/users/${userId}/orders/${orderId}`, {
+        headers: {
+          authorization: token,
+        },
+      });
+      return data;
+    } catch (err) {
+      console.log('axios error getting user orders');
+      return rejectWithValue(err);
+    }
+  }
+);
+
 const orderSlice = createSlice({
   name: 'orders',
   initialState: {
     allOrders: [],
     order: [],
-    orderDetails: {},
+    orderDetails: [],
     status: '',
     error: '',
   },
@@ -73,6 +90,18 @@ const orderSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(fetchUserOrders.rejected, (state, { payload }) => {
+        state.status = 'failed';
+        state.error = payload.message;
+      })
+      .addCase(fetchOrderDetails.fulfilled, (state, { payload }) => {
+        state.orderDetails = payload;
+        state.status = 'success';
+        state.error = '';
+      })
+      .addCase(fetchOrderDetails.pending, (state, { payload }) => {
+        state.status = 'loading';
+      })
+      .addCase(fetchOrderDetails.rejected, (state, { payload }) => {
         state.status = 'failed';
         state.error = payload.message;
       });
