@@ -239,6 +239,35 @@ export const removeCartRow = createAsyncThunk(
   }
 );
 
+const purgeCart = createAsyncThunk('cart/purgeCart', async () => {
+  let userId = null;
+
+  if (token) {
+    res = await axios.get(`/api/auth`, {
+      headers: {
+        authorization: token,
+      },
+    });
+
+    // extract userId from token response
+    userId = res.data.id;
+  }
+
+  if (userId !== null) {
+    await axios.delete(
+      `/api/users/${userId}/cart`,
+      { action: 'purge' },
+      {
+        headers: { authorization: token },
+      }
+    );
+  }
+
+  window.localStorage.setItem('cart', JSON.stringify([]));
+
+  return;
+});
+
 const cartSlice = createSlice({
   name: 'cart',
   initialState: {
@@ -263,6 +292,10 @@ const cartSlice = createSlice({
       if (!payload) return; // thunk will return null if nothing to remove
       state.cart = payload.localCart;
       state.expandedCart = payload.expandedCart;
+    });
+    builder.addCase(purgeCart.fulfilled, (state, { payload }) => {
+      state.cart = [];
+      state.expandedCart = [];
     });
   },
 });
