@@ -16,8 +16,7 @@ router.get('/', async (req, res, next) => {
 router.post('/cart', async (req, res, next) => {
   try {
     const products = req.body;
-    console.log('req.body:', req.body);
-    // products = [{productId: #, qty: #}, ...]
+    // products looks like [{productId: #, qty: #}, ...]
     const cart = [];
     for (let product of products) {
       cart.push({
