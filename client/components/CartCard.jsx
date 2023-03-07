@@ -5,6 +5,7 @@ import {
   selectCart,
   addOneToCart,
   removeOneFromCart,
+  removeCartRow,
 } from '../slices/users/cartSlice';
 import minus from '../../public/assets/minus.svg';
 import plus from '../../public/assets/plus.svg';
@@ -25,6 +26,9 @@ const CartCard = (props) => {
 
   function incrementCart(productId) {
     dispatch(addOneToCart(productId));
+  }
+  function removeFromCart(productId) {
+    dispatch(removeCartRow(productId));
   }
 
   return (
@@ -54,7 +58,10 @@ const CartCard = (props) => {
           </div>
         </div>
         <div className="ml-8">
-          <button className="border-2  px-4 py-2 block rounded hover:bg-gray-200">
+          <button
+            onClick={() => removeFromCart(product.id)}
+            className="border-2  px-4 py-2 block rounded hover:bg-gray-200"
+          >
             remove
           </button>
         </div>
