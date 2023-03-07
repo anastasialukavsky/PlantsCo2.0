@@ -39,7 +39,7 @@ router.post('/', async (req, res, next) => {
     const { name, address, userEmail, promoCode, cart, userId, currencyId } =
       req.body;
 
-    console.log('req/body', req.body);
+    // console.log('req/body', req.body);
     let promo = null;
     if (promoCode) {
       promo = await Promo_Code.findOne({ where: { name: promoCode } });
