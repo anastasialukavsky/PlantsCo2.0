@@ -9,6 +9,7 @@ const {
   Order_Detail,
   Promo_Code,
   Order,
+  Tag,
 } = require('../../DB');
 
 // router.use('/:id/wishlist', require('./wishlist'));
@@ -221,7 +222,9 @@ router.get('/:userId/wishlists', requireToken, async (req, res, next) => {
   }
   try {
     const user = await User.findByPk(userId);
-    const wishlists = await user.getWishlists({ include: [Product] });
+    const wishlists = await user.getWishlists({
+      include: { model: Product, include: { model: Tag } },
+    });
     res.status(200).json(wishlists);
   } catch (err) {
     next(err);
@@ -237,7 +240,7 @@ router.get(
         const wishlistId = +req.params.wishlistId;
 
         const wishlist = await Wishlist.findByPk(wishlistId, {
-          include: [Product],
+          include: { model: Product, include: { model: Tag } },
         });
 
         if (wishlist) return res.status(200).json(wishlist);
