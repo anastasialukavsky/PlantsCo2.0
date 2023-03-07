@@ -45,7 +45,9 @@ const CartCard = (props) => {
           <Link to={`/products/${product.id}`}>
             <h1 className="text-3xl hover:underline">{product.name}</h1>
           </Link>
-          <p className="text-gray-600 text-xs italic">TAGS WILL GO HERE</p>
+          <p className="text-gray-600 text-xs italic">
+            {product?.tags.map(({ tagName }) => tagName).join(', ')}
+          </p>
           <p>${product.price}</p>
           <div className="flex gap-2">
             <button onClick={() => decrementCart(product.id)}>

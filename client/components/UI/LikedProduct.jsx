@@ -8,6 +8,7 @@ import {
 } from '../../slices/users/wishlistSlice';
 import heartOutline from '../../../public/assets/heart-outline.svg';
 import heartFilled from '../../../public/assets/heart-filled.svg';
+import toast, { Toaster } from 'react-hot-toast';
 
 const LikedProduct = () => {
   const dispatch = useDispatch();
@@ -17,6 +18,11 @@ const LikedProduct = () => {
   useEffect(() => {
     dispatch(fetchWishlist());
   }, []);
+
+  const notify = () =>
+    productIsLiked
+      ? toast.error('Item removed from wishlist', { duration: 1000 })
+      : toast.success('Item added to wishlist');
 
   const handleHeartClick = () => {
     if (!wishlist) {
@@ -40,12 +46,21 @@ const LikedProduct = () => {
   }
 
   return (
-    <button className="w-8" onClick={handleHeartClick}>
-      <img
-        src={productIsLiked ? heartFilled : heartOutline}
-        alt="heart outline icon"
-      />
-    </button>
+    <>
+      <button
+        className="w-8"
+        onClick={() => {
+          notify();
+          handleHeartClick();
+        }}
+      >
+        <img
+          src={productIsLiked ? heartFilled : heartOutline}
+          alt="heart outline icon"
+        />
+      </button>
+      <Toaster />
+    </>
   );
 };
 
