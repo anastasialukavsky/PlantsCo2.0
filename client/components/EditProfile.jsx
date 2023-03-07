@@ -21,11 +21,6 @@ const EditProfile = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
-  const [role, setRole] = useState('');
-  // const [password, setPassword] = useState('');
-  // const [shipping, setShipping] = useState('');
-  // const [payment, setPayment] = useState('');
-  // const [currency, setCurrency] = useState('');
 
   useEffect(() => {
     dispatch(attemptTokenLogin());
