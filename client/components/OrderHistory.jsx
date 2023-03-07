@@ -56,7 +56,7 @@ const OrderHistory = () => {
         </p>
 
         <div className="relative overflow-x-auto">
-          <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 bg-white rounded-xl">
             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>
                 <th scope="col" className="px-6 py-3">
@@ -65,10 +65,10 @@ const OrderHistory = () => {
                 <th scope="col" className="px-6 py-3">
                   Date of Order
                 </th>
-                <th scope="col" className="px-6 py-3">
+                <th scope="col" className="px-6 py-3 text-center">
                   Item Qty
                 </th>
-                <th scope="col" className="px-6 py-3">
+                <th scope="col" className="px-6 py-3 text-right">
                   Total
                 </th>
               </tr>
@@ -88,10 +88,10 @@ const OrderHistory = () => {
                         <th scope="col" className="px-6 py-3">
                           {order.createdAt.slice(0, 10)}
                         </th>
-                        <th scope="col" className="px-6 py-3">
+                        <th scope="col" className="px-6 py-3 text-center">
                           {order.totalQty}
                         </th>
-                        <th scope="col" className="px-6 py-3">
+                        <th scope="col" className="px-6 py-3 text-right">
                           ${order.finalPrice}
                         </th>
                       </tr>
