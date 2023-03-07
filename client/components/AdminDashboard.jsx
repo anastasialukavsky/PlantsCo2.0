@@ -12,14 +12,20 @@ import {
 import {
   fetchAllProducts,
   selectAllProducts,
-  resetStatusError,
+  resetStatusError as resetProductStatus,
 } from '../slices/product/productSlice';
+import {
+  fetchAllPromos,
+  selectPromos,
+  resetStatus as resetPromoStatus,
+} from '../slices/product/promoSlice';
 
 const AdminDashboard = () => {
   const dispatch = useDispatch();
   const products = useSelector(selectAllProducts);
   const { auth, token } = useSelector(selectAuth);
   const { users } = useSelector(selectUsers);
+  const { promos } = useSelector(selectPromos);
 
   const [userTable, setUserTable] = useState('collapse');
   const [productTable, setProductTable] = useState('collapse');
@@ -41,13 +47,17 @@ const AdminDashboard = () => {
   useEffect(() => {
     dispatch(fetchAllUsers({ token }));
     dispatch(fetchAllProducts());
+    dispatch(fetchAllPromos({ token }));
 
     return () => {
       resetAuthStatus();
       resetUserStatus();
-      resetStatusError();
+      resetProductStatus();
+      resetPromoStatus();
     };
   }, [auth]);
+
+  if (promos.length >= 1) console.log(promos[0].status);
 
   return (
     <div className="bg-cover bg-center h-[calc(100vh_-_5rem)] bg-[url('/assets/bg_img/admin.jpg')]">
@@ -205,6 +215,54 @@ const AdminDashboard = () => {
                               </th>
                               <th scope="col" className="px-6 py-3 text-center">
                                 {product.qty}
+                              </th>
+                            </tr>
+                          );
+                        })
+                      : ''}
+                  </tbody>
+                </table>
+              </div>
+              <div id="promos" className={promoTable}>
+                <table
+                  id="promoTable"
+                  className="w-full text-sm text-left text-gray-500 dark:text-gray-400 bg-white rounded-xl overflow-x-auto"
+                >
+                  <thead className="text-sm text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 rounded-xl sticky top-0">
+                    <tr>
+                      <th scope="col" className="px-6 py-3 sticky top-0">
+                        PROMO ID
+                      </th>
+                      <th scope="col" className="px-6 py-3 top-0 sticky">
+                        NAME
+                      </th>
+                      <th scope="col" className="px-6 py-3 top-0 sticky">
+                        DISCOUNT RATE
+                      </th>
+                      <th scope="col" className="px-6 py-3 top-0 sticky">
+                        STATUS
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {promos && promos.length
+                      ? promos.map((promo) => {
+                          return (
+                            <tr
+                              key={promo.id}
+                              className="text-xs odd:bg-white even:bg-slate-50"
+                            >
+                              <th scope="col" className="px-6 py-3">
+                                {promo.id}
+                              </th>
+                              <th scope="col" className="px-6 py-3">
+                                {promo.name}
+                              </th>
+                              <th scope="col" className="px-6 py-3">
+                                {(promo.discountRate * 100).toFixed(0)}%
+                              </th>
+                              <th scope="col" className="px-6 py-3">
+                                {promo.status.toString()}
                               </th>
                             </tr>
                           );
