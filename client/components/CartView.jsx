@@ -18,32 +18,23 @@ export default function CartView(props) {
     dispatch(fetchCart());
   }, [dispatch]);
 
-  function decrementCart(productId) {
-    dispatch(removeOneFromCart(productId));
-  }
-
-  function incrementCart(productId) {
-    dispatch(addOneToCart(productId));
-  }
-
   console.log('cart state:', cart);
 
   if (!cart || !cart.cart || !cart.cart.length > 0)
     return <h1>Your cart is empty...</h1>;
 
   return (
-    <div className="bg-[url('/assets/bg_img/cart.jpg')] bg-fixed bg-cover bg-[right_top_-40rem] w-screen cart-container pt-10">
+    <div className="">
       {/* <ul className="flex flex-col flex-nowrap gap-4 w-1/6"> */}
-      <ul className="">
-        {cart.expandedCart &&
-          cart.expandedCart.map((item) => {
-            return (
-              <li key={item.product.id}>
-                <CartCard product={item.product} />
-              </li>
-            );
-          })}
-      </ul>
+      {cart.expandedCart &&
+        cart.expandedCart.map((item) => {
+          console.log('item', item);
+          return (
+            <div key={item.product.id}>
+              <CartCard product={item.product} item={item} />
+            </div>
+          );
+        })}
     </div>
   );
 }
