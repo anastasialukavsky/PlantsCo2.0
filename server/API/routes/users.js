@@ -13,8 +13,6 @@ const {
   Payment,
 } = require('../../DB');
 
-// router.use('/:id/wishlist', require('./wishlist'));
-
 router.get('/', requireToken, isAdmin, async (req, res, next) => {
   // fetch all users info (ADMIN ONLY)
   // any includes? payments/shipments? cart? wishlists?
@@ -100,6 +98,32 @@ router.get('/:userId/orders', requireToken, async (req, res, next) => {
     }
   } catch (err) {
     console.log('Backend issue fetching user orders');
+    next(err);
+  }
+});
+
+// GET USER ORDER DETAILS
+router.get('/:userId/orders/:orderId', requireToken, async (req, res, next) => {
+  try {
+    const { userId, orderId } = req.params;
+
+    if (req.user.id === +userId || req.user.isAdmin) {
+      const userOrderDetails = await Order_Detail.findAll({
+        where: { orderId: +orderId },
+      });
+
+      if (!userOrderDetails)
+        return res.status(404).send('User order details not found');
+      res.status(200).send(userOrderDetails);
+    } else {
+      res
+        .status(403)
+        .send(
+          'Inadequate access rights / Requested user does not match logged-in user'
+        );
+    }
+  } catch (err) {
+    console.log('Backend issue fetching user order details');
     next(err);
   }
 });
@@ -204,31 +228,31 @@ router.get('/:userId/wishlists', requireToken, async (req, res, next) => {
   }
 });
 
-router.get(
-  '/:userId/wishlists/:wishlistId',
-  requireToken,
-  async (req, res, next) => {
-    try {
-      if (req.user.id === +req.params.userId || req.user.isAdmin) {
-        const wishlistId = +req.params.wishlistId;
+// router.get(
+//   '/:userId/wishlists/:wishlistId',
+//   requireToken,
+//   async (req, res, next) => {
+//     try {
+//       if (req.user.id === +req.params.userId || req.user.isAdmin) {
+//         const wishlistId = +req.params.wishlistId;
 
-        const wishlist = await Wishlist.findByPk(wishlistId, {
-          include: [Product],
-        });
+//         const wishlist = await Wishlist.findByPk(wishlistId, {
+//           include: [Product],
+//         });
 
-        if (wishlist) return res.status(200).json(wishlist);
-      } else {
-        res
-          .status(403)
-          .send(
-            'Inadequate access rights / Requested user does not match logged-in user'
-          );
-      }
-    } catch (err) {
-      next(err);
-    }
-  }
-);
+//         if (wishlist) return res.status(200).json(wishlist);
+//       } else {
+//         res
+//           .status(403)
+//           .send(
+//             'Inadequate access rights / Requested user does not match logged-in user'
+//           );
+//       }
+//     } catch (err) {
+//       next(err);
+//     }
+//   }
+// );
 
 router.post('/:userId/wishlists', requireToken, async (req, res, next) => {
   try {
@@ -255,7 +279,7 @@ router.put(
   requireToken,
   async (req, res, next) => {
     try {
-      if (req.user.id === +req.params.userId || req.user.isAdmin) {
+      if (req.user?.id === +req.params.userId || req.user.isAdmin) {
         const wishlistId = +req.params.wishlistId;
         const { productId, action } = req.body; // action: ['add', 'delete']
 
@@ -317,23 +341,6 @@ router.get('/:id/cart', requireToken, async (req, res, next) => {
     if (req.user.id === userId || req.user.isAdmin) {
       const cart = await Cart.findAll({ where: { userId } });
 
-      // const cart = await User.findByPk(req.params.id, {
-      //   include: Product,
-      //   attributes: {
-      //     exclude: [
-      //       'password',
-      //       'imageURL',
-      //       'isAdmin',
-      //       'role',
-      //       'createdAt',
-      //       'updatedAt',
-      //     ],
-      //   },
-      // });
-
-      // const cart = await Cart.findAll({
-      //   where: { userId: +req.params.id },
-      // });
       res.json(cart);
     } else {
       res
@@ -362,9 +369,9 @@ router.post('/:id/cart', requireToken, async (req, res, next) => {
       return { productId: line.productId, userId: userId, qty: line.qty };
     });
 
-    await Cart.destroy({ where: { userId } });
+    await Cart.destroy({ where: { userId: userId } });
 
-    const dbResponse = await Cart.bulkCreate(cleanCart);
+    const dbResponse = await Cart.bulkCreate(cleanCart, { validate: true });
     res.status(200).send(dbResponse);
   } catch (err) {
     next(err);
