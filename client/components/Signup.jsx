@@ -55,13 +55,13 @@ export default function Signup() {
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
               <label
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block text-primary-deep-green text-sm font-bold mb-2"
                 htmlFor="firstName"
               >
                 First Name
               </label>
               <input
-                className="shadow appearance-none border rounded w-96 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline"
+                className=" appearance-none border rounded w-96 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline"
                 id="firstName"
                 type="text"
                 placeholder={isInvalid ? 'Enter your first name' : null}
@@ -75,13 +75,13 @@ export default function Signup() {
 
             <div className="mb-3">
               <label
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block text-primary-deep-green text-sm font-bold mb-2"
                 htmlFor="lastName"
               >
                 Last Name
               </label>
               <input
-                className="shadow appearance-none border rounded w-96 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline"
+                className=" appearance-none border rounded w-96 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline"
                 id="lastName"
                 type="text"
                 placeholder={isInvalid ? 'Enter your last name' : null}
@@ -95,13 +95,13 @@ export default function Signup() {
 
             <div className="mb-3">
               <label
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block text-primary-deep-green text-sm font-bold mb-2"
                 htmlFor="email"
               >
                 Email
               </label>
               <input
-                className="shadow appearance-none border rounded w-96 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline"
+                className=" appearance-none border rounded w-96 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline"
                 id="email"
                 type="text"
                 placeholder={isInvalid ? 'Enter your email' : null}
@@ -115,13 +115,13 @@ export default function Signup() {
 
             <div className="mb-3">
               <label
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block text-primary-deep-green text-sm font-bold mb-2"
                 htmlFor="password"
               >
                 Password
               </label>
               <input
-                className="shadow appearance-none border rounded w-96 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline"
+                className=" appearance-none border rounded w-96 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline"
                 id="password"
                 type="password"
                 placeholder={isInvalid ? 'Enter your password' : null}
