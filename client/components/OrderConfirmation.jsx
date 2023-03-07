@@ -25,20 +25,26 @@ export default function OrderConfirmation() {
 
   return (
     <div>
-      {status && status === 'complete' ? (
-        <div>
-          <h1>Thank you for your purchase!</h1>
-          <div>
-            <p>Your order confirmation is #{orderId}</p>
+      <div className="bg-cover bg-center bg-[url('/assets/bg_img/order_conf_page.jpg')] h-[calc(100vh_-_5rem)]">
+        {status && status === 'complete' ? (
+          <div className="">
+            <h1 className="absolute flex flex-col w-screen pt-48 items-center content-center justify-center font-extrabold text-primary-bright-white text-[3.5rem]  tracking-wide">
+              Thank you for your purchase!
+            </h1>
+            <div>
+              <p className="flex flex-col text-center w-screen pt-72  items-center content-center justify-center text-primary-bright-white text-xl  tracking-wide">
+                Your order confirmation is #{orderId}
+              </p>
+            </div>
+            <p className=" flex flex-col font-light text-primary-bright-white items-center content-center justify-center">
+              We are starting on your order right away, and you should receive
+              your order confirmation email shortly!
+            </p>
           </div>
-          <p>
-            We are starting on your order right away, and you should receive
-            your order confirmation email shortly!
-          </p>
-        </div>
-      ) : (
-        <p>Checkout canceled</p>
-      )}
+        ) : (
+          <p>Checkout canceled</p>
+        )}
+      </div>
     </div>
   );
 }
