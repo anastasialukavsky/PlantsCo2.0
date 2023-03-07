@@ -38,7 +38,7 @@ export const attemptTokenLogin = createAsyncThunk(
           authorization: token,
         },
       });
-      return data;
+      return { data, token };
     } catch (err) {
       return rejectWithValue(err);
     }
@@ -72,17 +72,23 @@ const authSlice = createSlice({
         state.status = 'success';
         state.error = '';
       })
+      .addCase(logIn.pending, (state, { payload }) => {
+        state.status = 'loading';
+        state.error = '';
+      })
       .addCase(logIn.rejected, (state, { payload }) => {
         state.status = 'failed';
         state.error = payload.message;
       })
       .addCase(attemptTokenLogin.fulfilled, (state, { payload }) => {
-        state.auth = payload || {};
-        // console.log('payload from attemptTokenLogin:', payload);
+        state.auth = payload.data || {};
         state.status = 'success';
         state.error = '';
-        const token = localStorage.getItem('token');
-        state.token = token;
+        state.token = payload.token;
+      })
+      .addCase(attemptTokenLogin.pending, (state, { payload }) => {
+        state.status = 'loading';
+        state.error = '';
       })
       .addCase(attemptTokenLogin.rejected, (state, { payload }) => {
         state.status = 'failed';
@@ -92,7 +98,6 @@ const authSlice = createSlice({
         state.status = 'success';
         state.token = payload.token;
         state.error = '';
-        // console.log('payload from signUp:', payload);
       })
       .addCase(signUp.pending, (state, { payload }) => {
         state.status = 'loading';
