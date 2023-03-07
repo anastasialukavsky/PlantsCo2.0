@@ -369,9 +369,9 @@ router.post('/:id/cart', requireToken, async (req, res, next) => {
       return { productId: line.productId, userId: userId, qty: line.qty };
     });
 
-    await Cart.destroy({ where: { userId } });
+    await Cart.destroy({ where: { userId: userId } });
 
-    const dbResponse = await Cart.bulkCreate(cleanCart);
+    const dbResponse = await Cart.bulkCreate(cleanCart, { validate: true });
     res.status(200).send(dbResponse);
   } catch (err) {
     next(err);
