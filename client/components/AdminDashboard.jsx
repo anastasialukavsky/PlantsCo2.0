@@ -27,6 +27,7 @@ const AdminDashboard = () => {
   const { users } = useSelector(selectUsers);
   const { promos } = useSelector(selectPromos);
 
+  const [adminTable, setAdminTable] = useState('visible');
   const [userTable, setUserTable] = useState('collapse');
   const [productTable, setProductTable] = useState('collapse');
   const [promoTable, setPromoTable] = useState('collapse');
@@ -37,10 +38,10 @@ const AdminDashboard = () => {
   const activeButtonClass =
     'bg-green-900 text-primary-bright-white p-5 rounded-r-full mr-5';
 
+  const [adminButtonStatus, setAdminButtonStatus] =
+    useState(inactiveButtonClass);
   const [prodButtonStatus, setProdButtonStatus] = useState(inactiveButtonClass);
-
   const [userButtonStatus, setUserButtonStatus] = useState(inactiveButtonClass);
-
   const [promoButtonStatus, setPromoButtonStatus] =
     useState(inactiveButtonClass);
 
@@ -57,8 +58,6 @@ const AdminDashboard = () => {
     };
   }, [auth]);
 
-  if (promos.length >= 1) console.log(promos[0].status);
-
   return (
     <div className="bg-cover bg-center h-[calc(100vh_-_5rem)] bg-[url('/assets/bg_img/admin.jpg')]">
       <div className="flex flex-row">
@@ -67,17 +66,33 @@ const AdminDashboard = () => {
           className=" w-1/4 h-[calc(100vh_-_5rem)] transition-transform -translate-x-full sm:translate-x-0 flex flex-col gap-10"
           aria-label="Sidebar"
         >
-          <div className="">
-            <div className="">
-              <p className="p-5">ADMIN DASHBOARD</p>
+          <div className="pt-5">
+            <div className={adminButtonStatus}>
+              <button
+                onClick={() => {
+                  setAdminTable('visible');
+                  setProductTable('collapse');
+                  setPromoTable('collapse');
+                  setUserTable('collapse');
+                  setAdminButtonStatus(activeButtonClass);
+                  setProdButtonStatus(inactiveButtonClass);
+                  setPromoButtonStatus(inactiveButtonClass);
+                  setUserButtonStatus(inactiveButtonClass);
+                }}
+                className=""
+              >
+                ADMIN DASHBOARD
+              </button>
             </div>
             <div className="flex flex-col">
               <div className={prodButtonStatus}>
                 <button
                   onClick={() => {
+                    setAdminTable('collapse');
                     setProductTable('visible');
                     setPromoTable('collapse');
                     setUserTable('collapse');
+                    setAdminButtonStatus(inactiveButtonClass);
                     setProdButtonStatus(activeButtonClass);
                     setUserButtonStatus(inactiveButtonClass);
                     setPromoButtonStatus(inactiveButtonClass);
@@ -90,9 +105,11 @@ const AdminDashboard = () => {
               <div className={promoButtonStatus}>
                 <button
                   onClick={() => {
+                    setAdminTable('collapse');
                     setProductTable('collapse');
                     setPromoTable('visible');
                     setUserTable('collapse');
+                    setAdminButtonStatus(inactiveButtonClass);
                     setProdButtonStatus(inactiveButtonClass);
                     setPromoButtonStatus(activeButtonClass);
                     setUserButtonStatus(inactiveButtonClass);
@@ -105,9 +122,11 @@ const AdminDashboard = () => {
               <div className={userButtonStatus}>
                 <button
                   onClick={() => {
+                    setAdminTable('collapse');
                     setProductTable('collapse');
                     setPromoTable('collapse');
                     setUserTable('visible');
+                    setAdminButtonStatus(inactiveButtonClass);
                     setProdButtonStatus(inactiveButtonClass);
                     setPromoButtonStatus(inactiveButtonClass);
                     setUserButtonStatus(activeButtonClass);
@@ -171,7 +190,7 @@ const AdminDashboard = () => {
                             </tr>
                           );
                         })
-                      : ''}
+                      : 'Users Loading...'}
                   </tbody>
                 </table>
               </div>
@@ -219,7 +238,7 @@ const AdminDashboard = () => {
                             </tr>
                           );
                         })
-                      : ''}
+                      : 'Products Loading...'}
                   </tbody>
                 </table>
               </div>
@@ -267,9 +286,13 @@ const AdminDashboard = () => {
                             </tr>
                           );
                         })
-                      : ''}
+                      : 'Promos Loading...'}
                   </tbody>
                 </table>
+              </div>
+              <div id="admin" className={adminTable}>
+                <p>Howdy, {auth.firstName}!</p>
+                <p>You're an admin... Nice!</p>
               </div>
             </div>
           </div>
