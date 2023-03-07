@@ -35,7 +35,7 @@ const singleProduct = () => {
   return (
     <>
       <PromoBanner />
-      <main className="font-serif flex h-[700px] ">
+      <main className="font-serif flex h-[700px]">
         <section className="flex gap-20 justify-center mt-16 ">
           <div className="">
             <img
@@ -49,7 +49,7 @@ const singleProduct = () => {
               <header className=" text-green-900 text-3xl mb-8">
                 {singleProduct.name}
               </header>
-              <p className="text-2xl">❤️</p>
+              <img></img>
             </div>
 
             <div className="flex justify-between border-b-4 pb-2 mb-4">
