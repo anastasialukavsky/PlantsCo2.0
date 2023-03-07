@@ -79,6 +79,13 @@ const UserAccount = () => {
           >
             Order History
           </button>
+          {auth.isAdmin ? (
+            <button className="py-3 px-5 mr-2 mb-2 text-text-primary-deep-green-900 bg-white rounded-lg border hover:bg-gray-100">
+              Admin Dashboard
+            </button>
+          ) : (
+            ''
+          )}
           <button
             onClick={attemptLogOut}
             className="text-primary-deep-green hover:text-primary-promo-banner pb-16 text-sm"
