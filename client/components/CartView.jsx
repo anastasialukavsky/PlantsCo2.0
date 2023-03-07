@@ -6,6 +6,7 @@ import {
   addOneToCart,
   removeOneFromCart,
 } from '../slices/users/cartSlice';
+import CartCard from './CartCard.jsx';
 import ProductCard from './ProductCard.jsx';
 
 export default function CartView(props) {
@@ -32,18 +33,13 @@ export default function CartView(props) {
 
   return (
     <div className="bg-[url('/assets/bg_img/cart.jpg')] bg-fixed bg-cover bg-[right_top_-40rem] w-screen cart-container pt-10">
-      <ul className="flex flex-col flex-nowrap gap-4 w-1/6">
+      {/* <ul className="flex flex-col flex-nowrap gap-4 w-1/6"> */}
+      <ul className="">
         {cart.expandedCart &&
           cart.expandedCart.map((item) => {
             return (
               <li key={item.product.id}>
-                <ProductCard product={item.product} />
-                <button onClick={() => incrementCart(item.product.id)}>
-                  Add One
-                </button>
-                <button onClick={() => decrementCart(item.product.id)}>
-                  Remove One
-                </button>
+                <CartCard product={item.product} />
               </li>
             );
           })}
