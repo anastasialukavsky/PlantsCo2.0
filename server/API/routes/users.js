@@ -341,23 +341,6 @@ router.get('/:id/cart', requireToken, async (req, res, next) => {
     if (req.user.id === userId || req.user.isAdmin) {
       const cart = await Cart.findAll({ where: { userId } });
 
-      // const cart = await User.findByPk(req.params.id, {
-      //   include: Product,
-      //   attributes: {
-      //     exclude: [
-      //       'password',
-      //       'imageURL',
-      //       'isAdmin',
-      //       'role',
-      //       'createdAt',
-      //       'updatedAt',
-      //     ],
-      //   },
-      // });
-
-      // const cart = await Cart.findAll({
-      //   where: { userId: +req.params.id },
-      // });
       res.json(cart);
     } else {
       res
