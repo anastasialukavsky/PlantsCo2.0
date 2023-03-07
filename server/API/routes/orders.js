@@ -77,9 +77,11 @@ router.post('/', async (req, res, next) => {
     let orderDetail = [];
     let currency = await Currency.findByPk(currencyId);
     let totalPrice = 0;
+    console.log('cart from backend:', cart);
 
-    for (let line of cart) {
+    for (let line of JSON.parse(cart)) {
       let detailLine = {};
+      console.log('line from order', line);
       let product = await Product.findByPk(line.productId);
 
       detailLine.qty = line.qty;
@@ -129,7 +131,7 @@ router.delete('/:id', requireToken, isAdmin, async (req, res, next) => {
 
 router.post('/checkout', async (req, res, next) => {
   const order = req.body;
-  
+
   let line_items = [];
   for (let product of order.order_details) {
     let lineItem = {
@@ -137,10 +139,8 @@ router.post('/checkout', async (req, res, next) => {
         currency: 'usd',
         product_data: { name: product.productName },
         unit_amount: Math.round(
-          product.basePrice *
-          product.currencyRate *
-          (1 - order.promoRate) *
-          100),
+          product.basePrice * product.currencyRate * (1 - order.promoRate) * 100
+        ),
       },
       quantity: product.qty,
     };
@@ -150,13 +150,15 @@ router.post('/checkout', async (req, res, next) => {
   const session = await stripe.checkout.sessions.create({
     line_items,
     mode: 'payment',
-    success_url: `http://localhost:3000/?status=complete&orderid=${order.id}`,
+    success_url: `http://localhost:3000/confirmation?status=complete&orderid=${order.id}`,
     cancel_url: `http://localhost:3000/?status=failed&orderid=${order.id}`,
   });
 
   console.log('sessionURL', session.url);
   res.send(session.url);
 });
+
+
 
 router.put('/:orderId', async (req, res, next) => {
   try {

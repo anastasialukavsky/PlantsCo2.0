@@ -9,6 +9,8 @@ const {
   Order_Detail,
   Promo_Code,
   Order,
+  Shipping,
+  Payment,
 } = require('../../DB');
 
 // router.use('/:id/wishlist', require('./wishlist'));
@@ -60,7 +62,7 @@ router.get('/:userId', requireToken, async (req, res, next) => {
     // if user is not admin & they're attempting to pull someone else's data, fail w/403
     if (req.user.id === +userId || req.user.isAdmin) {
       const user = await User.findByPk(+userId, {
-        include: [Product, Shipping, Payment], 
+        include: [Product, Shipping, Payment],
         attributes: { exclude: ['password'] },
       });
       res.status(200).send(user);

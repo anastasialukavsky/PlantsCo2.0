@@ -39,7 +39,7 @@ export const checkout = createAsyncThunk(
 
       const { data: order } = await axios.post('/api/orders', orderPayload);
 
-      res = await axios.post('/api/orders/checkout', order);
+      let res = await axios.post('/api/orders/checkout', order);
 
       return res.data;
     } catch (err) {
@@ -85,11 +85,12 @@ const checkoutSlice = createSlice({
       .addCase(checkout.rejected, (state, { payload }) => {
         state.status = 'failed';
         state.error = payload.message;
-      }).addCase(updateOrderStatus.fulfilled, (state, {payload}) => {
+      })
+      .addCase(updateOrderStatus.fulfilled, (state, { payload }) => {
         state.order = payload;
         state.status = 'success';
         state.error = '';
-      })
+      });
   },
 });
 

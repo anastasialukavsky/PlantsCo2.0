@@ -16,6 +16,8 @@ import {
   CartView,
   NotFound,
   OrderHistoryDetails,
+  Checkout,
+  OrderConfirmation,
 } from './index';
 import { selectAuth, attemptTokenLogin } from '../slices/users/authSlice';
 
@@ -43,11 +45,13 @@ export default function Main() {
           <Route path="/account/editprofile" element={<EditProfile />} />
           <Route path="/account/orderhistory" element={<OrderHistory />} />
           <Route path="/cart" element={<CartView />} />
-          <Route path="/*" element={<NotFound />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/confirmation" element={<OrderConfirmation />} />
           <Route
             path="/account/orderhistory/:orderId"
             element={<OrderHistoryDetails />}
           />
+          <Route path="/*" element={<NotFound />} />
         </Routes>
       </div>
     </React.Fragment>
