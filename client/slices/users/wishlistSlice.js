@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 const initialState = {
   wishlist: [],
@@ -7,6 +8,9 @@ const initialState = {
 export const fetchWishlist = createAsyncThunk(
   'wishlist/fetchWishlist',
   async () => {
+    let res;
+    let userId;
+
     const token = localStorage.getItem('token');
     if (token) {
       res = await axios.get(`/api/auth`, {
@@ -19,14 +23,10 @@ export const fetchWishlist = createAsyncThunk(
       userId = +res.data.id;
 
       // request wishlist from db
-
-      const { data } = await axios.get(`/api/users/${userId}/cart`, {
+      const { data } = await axios.get(`/api/users/${userId}/wishlists`, {
         headers: { authorization: token },
       });
-      console.log('wishlist payload data', data);
       return data;
-    } else {
-      console.log('theres no token');
     }
   }
 );
@@ -37,7 +37,10 @@ const wishlistSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchWishlist.fulfilled, (state, { payload }) => {
-      state.wishlist = action.payload;
+      state.wishlist = payload;
+    });
+    builder.addCase(fetchWishlist.rejected, (state, action) => {
+      console.log(action.error);
     });
   },
 });

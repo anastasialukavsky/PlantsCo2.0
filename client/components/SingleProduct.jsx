@@ -10,11 +10,9 @@ import {
   fetchAllProducts,
 } from '../slices/product/productSlice.js';
 import { fetchWishlist, selectWishlist } from '../slices/users/wishlistSlice';
-
+import LikedProduct from './UI/LikedProduct.jsx';
 import { addOneToCart } from '../slices/users/cartSlice.js';
 import SimilarProducts from './SimilarProducts.jsx';
-import heartOutline from '../../public/assets/heart-outline.svg';
-import heartFilled from '../../public/assets/heart-filled.svg';
 
 const singleProduct = () => {
   const dispatch = useDispatch();
@@ -23,20 +21,10 @@ const singleProduct = () => {
   useEffect(() => {
     dispatch(fetchSingleProduct(productId));
     dispatch(fetchAllProducts());
-    dispatch(fetchWishlist());
-
     return () => dispatch(resetStatusError());
   }, [dispatch, productId]);
 
   const singleProduct = useSelector(selectSingleProduct);
-
-  const handleHeartClick = () => {
-    console.log('this was clicked');
-    dispatch(fetchWishlist());
-  };
-
-  const wishlist = useSelector(selectWishlist);
-  console.log('wishlist in card', wishlist);
 
   function addToCart() {
     dispatch(addOneToCart(productId));
@@ -59,12 +47,7 @@ const singleProduct = () => {
               <header className=" text-green-900 text-3xl">
                 {singleProduct.name}
               </header>
-              <img
-                src={heartOutline}
-                alt="heart outline icon"
-                className="w-8"
-                onClick={handleHeartClick}
-              />
+              <LikedProduct />
             </div>
 
             <div className="flex justify-between border-b-4 pb-2 mb-4">
