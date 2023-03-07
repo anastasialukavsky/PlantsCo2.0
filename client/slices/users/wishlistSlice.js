@@ -31,7 +31,7 @@ export const fetchWishlist = createAsyncThunk(
   }
 );
 
-export const addToWishlist = createAsyncThunk(
+export const adjustWishlist = createAsyncThunk(
   'wishlist/addOne',
   async ({ productId, action, wishlistId }) => {
     if (typeof productId === 'string') productId = parseInt(productId);
@@ -60,7 +60,7 @@ export const addToWishlist = createAsyncThunk(
           headers: { authorization: token },
         }
       );
-      console.log('axios data', data);
+      console.log('axios wishlist put data', data);
       return data;
     }
   }
@@ -77,7 +77,7 @@ const wishlistSlice = createSlice({
     builder.addCase(fetchWishlist.rejected, (state, action) => {
       console.log(action.error);
     });
-    builder.addCase(addToWishlist.fulfilled, (state, { payload }) => {
+    builder.addCase(adjustWishlist.fulfilled, (state, { payload }) => {
       state.wishlist = [payload];
     });
   },

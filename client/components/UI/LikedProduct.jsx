@@ -4,7 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import {
   selectWishlist,
   fetchWishlist,
-  addToWishlist,
+  adjustWishlist,
 } from '../../slices/users/wishlistSlice';
 import heartOutline from '../../../public/assets/heart-outline.svg';
 import heartFilled from '../../../public/assets/heart-filled.svg';
@@ -23,7 +23,7 @@ const LikedProduct = () => {
       navigate('/signup');
     } else {
       dispatch(
-        addToWishlist({
+        adjustWishlist({
           productId,
           action: productIsLiked ? 'delete' : 'add',
           wishlistId: wishlist[0]?.id,
