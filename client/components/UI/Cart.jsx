@@ -30,8 +30,6 @@ export default function Cart(props) {
     dispatch(fetchCart());
   }, [dispatch, auth]);
 
-  console.log('cart', cart);
-
   return (
     <div className="cart">
       {/* {cart && cart.length > 0 && <ul>
