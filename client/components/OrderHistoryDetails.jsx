@@ -41,7 +41,7 @@ const OrderHistoryDetails = () => {
 
   if (details.length >= 1) {
     addressArr = details[0].address.split('\n');
-    date = userOrder.createdAt.slice(0, 10);
+    date = details[0].createdAt.slice(0, 10);
   }
 
   if (details.length < 1)
