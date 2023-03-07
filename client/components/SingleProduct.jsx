@@ -9,7 +9,6 @@ import {
   resetStatusError,
   fetchAllProducts,
 } from '../slices/product/productSlice.js';
-import { fetchWishlist, selectWishlist } from '../slices/users/wishlistSlice';
 import LikedProduct from './UI/LikedProduct.jsx';
 import { addOneToCart } from '../slices/users/cartSlice.js';
 import SimilarProducts from './SimilarProducts.jsx';

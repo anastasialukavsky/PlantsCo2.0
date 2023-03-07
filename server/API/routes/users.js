@@ -279,7 +279,7 @@ router.put(
   requireToken,
   async (req, res, next) => {
     try {
-      if (req.user.id === +req.params.userId || req.user.isAdmin) {
+      if (req.user?.id === +req.params.userId || req.user.isAdmin) {
         const wishlistId = +req.params.wishlistId;
         const { productId, action } = req.body; // action: ['add', 'delete']
 
