@@ -40,12 +40,12 @@ const LikedProduct = () => {
   }
 
   return (
-    <img
-      src={productIsLiked ? heartFilled : heartOutline}
-      alt="heart outline icon"
-      className="w-8"
-      onClick={handleHeartClick}
-    />
+    <button className="w-8" onClick={handleHeartClick}>
+      <img
+        src={productIsLiked ? heartFilled : heartOutline}
+        alt="heart outline icon"
+      />
+    </button>
   );
 };
 
