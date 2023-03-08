@@ -69,12 +69,6 @@ export default function Signup() {
     }
   };
 
-  function validateEmail(email) {
-    // from https://www.w3docs.com/snippets/javascript/how-to-validate-an-e-mail-using-javascript.html
-    let res = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    return res.test(email);
-  }
-
   const handleSubmit = async (evt) => {
     evt.preventDefault();
     checkFormValidation();
