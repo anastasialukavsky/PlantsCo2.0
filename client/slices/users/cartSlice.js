@@ -169,9 +169,7 @@ export const removeOneFromCart = createAsyncThunk(
     if (!found) return; // exit early without hitting db / resetting localstorage
 
     // remove zero qty lines
-    console.log('localCart before filter', localCart);
     localCart = localCart.filter((cartItem) => cartItem.qty > 0);
-    console.log('localCart after filter', localCart);
     window.localStorage.setItem('cart', JSON.stringify(localCart));
 
     // if there was a token (and a user ID), use it to update DB cart
@@ -239,11 +237,13 @@ export const removeCartRow = createAsyncThunk(
   }
 );
 
-const purgeCart = createAsyncThunk('cart/purgeCart', async () => {
+export const purgeCart = createAsyncThunk('cart/purgeCart', async () => {
   let userId = null;
 
+  const token = window.localStorage.getItem('token');
+
   if (token) {
-    res = await axios.get(`/api/auth`, {
+    let res = await axios.get(`/api/auth`, {
       headers: {
         authorization: token,
       },
@@ -253,17 +253,16 @@ const purgeCart = createAsyncThunk('cart/purgeCart', async () => {
     userId = res.data.id;
   }
 
-  if (userId !== null) {
-    await axios.delete(
-      `/api/users/${userId}/cart`,
-      { action: 'purge' },
-      {
-        headers: { authorization: token },
-      }
-    );
+  let axiosPayload = { action: 'purge' };
+
+  if (token && userId !== null) {
+    await axios.delete(`/api/users/${userId}/cart`, {
+      headers: { authorization: token },
+      data: axiosPayload,
+    });
   }
 
-  window.localStorage.setItem('cart', JSON.stringify([]));
+  window.localStorage.removeItem('cart');
 
   return;
 });
@@ -293,7 +292,7 @@ const cartSlice = createSlice({
       state.cart = payload.localCart;
       state.expandedCart = payload.expandedCart;
     });
-    builder.addCase(purgeCart.fulfilled, (state, { payload }) => {
+    builder.addCase(purgeCart.fulfilled, (state, action) => {
       state.cart = [];
       state.expandedCart = [];
     });

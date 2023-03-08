@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCart, selectCart } from '../slices/users/cartSlice';
+import { fetchCart, selectCart, purgeCart } from '../slices/users/cartSlice';
 import CartCard from './CartCard.jsx';
 import CartSubtotal from './CartSubtotal.jsx';
 
@@ -16,10 +16,16 @@ export default function CartView(props) {
   if (!cart || !cart.cart || !cart.cart.length > 0)
     return <h1>Your cart is empty...</h1>;
 
+  function emptyCart() {
+    console.log('emptyCart()');
+    dispatch(purgeCart());
+  }
+
   return (
     <>
       <div>
         <h1 className="text-3xl text-center">CART</h1>
+        <button onClick={emptyCart}>Empty Cart</button>
       </div>
       <div className="max-h-[75vh] overflow-scroll">
         {/* <ul className="flex flex-col flex-nowrap gap-4 w-1/6"> */}
