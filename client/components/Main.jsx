@@ -16,6 +16,8 @@ import {
   CartView,
   NotFound,
   OrderHistoryDetails,
+  Checkout,
+  OrderConfirmation,
   AdminDashboard,
   Wishlist,
   EditProduct,
@@ -47,11 +49,13 @@ export default function Main() {
           <Route path="/account/orderhistory" element={<OrderHistory />} />
           <Route path="/account/wishlist" element={<Wishlist />} />
           <Route path="/cart" element={<CartView />} />
-          <Route path="/*" element={<NotFound />} />
+          <Route path="/shipping" element={<Checkout />} />
+          <Route path="/confirmation" element={<OrderConfirmation />} />
           <Route
             path="/account/orderhistory/:orderId"
             element={<OrderHistoryDetails />}
           />
+          <Route path="/*" element={<NotFound />} />
           <Route path="/account/admin" element={<AdminDashboard />} />
           <Route
             path="/account/admin/editproduct/:productId"
