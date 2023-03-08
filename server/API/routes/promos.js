@@ -14,7 +14,7 @@ router.get('/', requireToken, isAdmin, async (req, res, next) => {
   }
 });
 
-router.get('/:id', requireToken, isAdmin, async (req, res, next) => {
+router.get('/:id', async (req, res, next) => {
   try {
     const singlePromo = await Promo_Code.findByPk(req.params.id, {
       include: Order,
