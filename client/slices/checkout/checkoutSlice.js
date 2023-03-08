@@ -41,6 +41,8 @@ export const checkout = createAsyncThunk(
 
       const { data: order } = await axios.post('/api/orders', orderPayload);
 
+      // trying to kill the zombie cart
+      window.localStorage.removeItem('cart');
       let res = await axios.post('/api/orders/checkout', order);
 
       return res.data;
