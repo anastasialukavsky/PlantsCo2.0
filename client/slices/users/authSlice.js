@@ -52,25 +52,31 @@ const authSlice = createSlice({
     auth: {},
     error: '',
     status: '',
+    loginMessage: false,
+    logoutMessage: false,
   },
   reducers: {
     resetStatus: (state) => {
       state.status = '';
       state.error = '';
+      state.loginMessage = false;
+      state.logoutMessage = false;
     },
     logOut: (state) => {
       state.auth = {};
       state.token = '';
       state.status = '';
       localStorage.clear();
+      state.logoutMessage = true;
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(logIn.fulfilled, (state, { payload }) => {
         state.token = payload.token;
-        state.status = 'success';
+        state.status = 'logged in';
         state.error = '';
+        state.loginMessage = true;
       })
       .addCase(logIn.pending, (state, { payload }) => {
         state.status = 'loading';
@@ -113,5 +119,7 @@ const authSlice = createSlice({
 export const { resetStatus, logOut } = authSlice.actions;
 
 export const selectAuth = (state) => state.auth;
+export const selectLoginMessage = (state) => state.auth.loginMessage;
+export const selectLogoutMessage = (state) => state.auth.logoutMessage;
 
 export default authSlice.reducer;

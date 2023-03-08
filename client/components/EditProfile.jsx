@@ -7,6 +7,7 @@ import {
   resetStatus,
 } from '../slices/users/authSlice';
 import { updateSingleUser, selectUsers } from '../slices/users/userSlice';
+import toast, { Toaster } from 'react-hot-toast';
 
 const EditProfile = () => {
   const dispatch = useDispatch();
@@ -38,6 +39,7 @@ const EditProfile = () => {
 
   const updateUser = (evt) => {
     evt.preventDefault();
+    toast.success('Account info successfully changed');
     const updates = { firstName, lastName, email };
     dispatch(updateSingleUser({ id, token, updates }));
   };
@@ -124,6 +126,7 @@ const EditProfile = () => {
           </button>
         </div>
       </div>
+      <Toaster />
     </div>
   );
 };
