@@ -29,7 +29,6 @@ const EditProduct = () => {
   const [invalidName, setInvalidName] = useState(false);
   const [invalidRate, setInvalidRate] = useState(false);
   const [invalidStatus, setInvalidStatus] = useState(false);
-  const [navAway, setNavAway] = useState(false);
 
   const invalidClass =
     'appearance-none block w-full bg-white-200 text-gray-700 border border-red-500 rounded py-3 px-4  leading-tight focus:outline-none focus:bg-white focus:border-gray-500';
@@ -212,9 +211,6 @@ const EditProduct = () => {
                       setStatus(evt.target.value);
                     }}
                   >
-                    {/* <option value="" disabled>
-                      <em>select status</em>
-                    </option> */}
                     <option value={true}>true</option>
                     <option value={false}>false</option>
                   </select>
