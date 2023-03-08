@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { fetchCart, selectCart } from '../slices/users/cartSlice';
 import CartCard from './CartCard.jsx';
 import CartSubtotal from './CartSubtotal.jsx';
+import { adjustFilter } from '../slices/product/productSlice';
 
 export default function CartView(props) {
   const dispatch = useDispatch();
@@ -20,11 +21,13 @@ export default function CartView(props) {
         <h2 className="my-8 text-xl">
           Can we recommend something from our shop?
         </h2>
-        <Link
-          to={'/products'}
-          className="border-2, px-6 py-3 bg-primary-deep-green text-white rounded-lg inline-block"
-        >
-          Shop Now
+        <Link to={'/products'} className="">
+          <div
+            onClick={() => dispatch(adjustFilter(''))}
+            className="border-2, px-6 py-3 bg-primary-deep-green text-white rounded-lg inline-block"
+          >
+            <p className="">Shop Now</p>
+          </div>
         </Link>
       </div>
     );
