@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { checkout } from '../slices/checkout/checkoutSlice';
 import { selectCheckout } from '../slices/checkout/checkoutSlice';
 import { selectUsers } from '../slices/users/userSlice';
@@ -8,7 +7,6 @@ import { fetchSingleUser } from '../slices/users/userSlice';
 import { selectAuth } from '../slices/users/authSlice';
 
 export default function Checkout() {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const checkoutState = useSelector(selectCheckout);
@@ -113,11 +111,11 @@ export default function Checkout() {
   }, [checkoutState]);
 
   return (
-    <div className="bg-cover bg-center bg-[url('/assets/misc_bg/shipping.jpg')] h-[calc(100vh_-_5rem)]">
-      <div className="w-full max-w-sm m-auto pt-5">
+    <div className="bg-cover bg-center bg-[url('/assets/misc_bg/shipping.jpg')] ">
+      <div className="w-full max-w-sm m-auto pt-10">
         <h2 className="text-center text-4xl font-bold">Shipping Information</h2>
-        <section className="flex flex-col flex-wrap gap-10 justify-center mt-10 ">
-          <form onSubmit={handleSubmit}>
+        <section className="flex flex-col mt-10 ">
+          <form onSubmit={handleSubmit} >
             <div className="mb-3">
               <label
                 className="block text-gray-700 text-sm font-bold mb-1"
@@ -126,7 +124,7 @@ export default function Checkout() {
                 First Name
               </label>
               <input
-                className="shadow appearance-none border rounded w-96 py-1 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline"
+                className="shadow appearance-none border rounded w-96 py-1 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline text-md"
                 id="firstName"
                 type="text"
                 name="firstName"
@@ -144,7 +142,7 @@ export default function Checkout() {
                 Last Name
               </label>
               <input
-                className="shadow appearance-none border rounded w-96 py-1 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline"
+                className="shadow appearance-none border rounded w-96 py-1 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline text-md"
                 type="text"
                 name="lastName"
                 placeholder={isInvalid ? 'Enter your last name' : null}
@@ -162,7 +160,7 @@ export default function Checkout() {
                 Email
               </label>
               <input
-                className="shadow appearance-none border rounded w-96 py-1 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline"
+                className="shadow appearance-none border rounded w-96 py-1 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline text-md"
                 type="text"
                 name="email"
                 placeholder={isInvalid ? 'Enter your email' : null}
@@ -180,7 +178,7 @@ export default function Checkout() {
                 Street1
               </label>
               <input
-                className="shadow appearance-none border rounded w-96 py-1 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline"
+                className="shadow appearance-none border rounded w-96 py-1 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline text-md"
                 type="text"
                 name="street1"
                 placeholder={isInvalid ? 'Enter your address' : null}
@@ -198,7 +196,7 @@ export default function Checkout() {
                 Street2
               </label>
               <input
-                className="shadow appearance-none border rounded w-96 py-1 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline"
+                className="shadow appearance-none border rounded w-96 py-1 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline text-md"
                 type="text"
                 name="street2"
                 id="street2"
@@ -215,7 +213,7 @@ export default function Checkout() {
                 City
               </label>
               <input
-                className="shadow appearance-none border rounded w-96 py-1 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline"
+                className="shadow appearance-none border rounded w-96 py-1 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline text-md"
                 type="text"
                 name="city"
                 placeholder={isInvalid ? 'Enter your city' : null}
@@ -233,7 +231,7 @@ export default function Checkout() {
                 State
               </label>
               <input
-                className="shadow appearance-none border rounded w-96 py-1 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline"
+                className="shadow appearance-none border rounded w-96 py-1 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline text-md"
                 type="text"
                 name="state"
                 placeholder={isInvalid ? 'Enter your state' : null}
@@ -251,7 +249,7 @@ export default function Checkout() {
                 Zip
               </label>
               <input
-                className="shadow appearance-none border rounded w-96 py-1 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline"
+                className="shadow appearance-none border rounded w-96 py-1 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline text-md"
                 type="text"
                 name="zip"
                 placeholder={isInvalid ? 'Enter your zip' : null}
@@ -269,7 +267,7 @@ export default function Checkout() {
                 Promo Code
               </label>
               <input
-                className="shadow appearance-none border rounded w-96 py-1 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline"
+                className="shadow appearance-none border rounded w-96 py-1 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline text-md"
                 type="text"
                 name="promoCode"
                 id="promoCode"
@@ -286,7 +284,7 @@ export default function Checkout() {
 
           <div>
             <button
-              className="ease-in duration-500  hover:bg-primary-button-hover w-full bg-primary-deep-green text-white py-2 rounded-2xl mx-auto block text-xl hover:transition-all mt-10"
+              className="ease-in duration-500  hover:bg-primary-button-hover w-full bg-primary-deep-green text-white py-2 rounded-2xl mx-auto block text-xl hover:transition-all mt-5"
               type="submit"
               onClick={handleSubmit}
             >
