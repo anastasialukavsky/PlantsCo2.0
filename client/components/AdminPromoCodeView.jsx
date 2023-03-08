@@ -18,7 +18,9 @@ const AdminPromoCodeView = () => {
   const { promos } = useSelector(selectPromos);
 
   useEffect(() => {
-    dispatch(fetchAllPromos({ token }));
+    if (token) {
+      dispatch(fetchAllPromos({ token }));
+    }
 
     return () => {
       resetAuthStatus();
