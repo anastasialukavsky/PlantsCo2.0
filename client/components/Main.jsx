@@ -22,6 +22,9 @@ import {
   Wishlist,
   EditProduct,
   AddNewProduct,
+  AdminProductView,
+  AdminUserMgmt,
+  AdminPromoCodeView,
 } from './index';
 import { selectAuth, attemptTokenLogin } from '../slices/users/authSlice';
 
@@ -58,6 +61,15 @@ export default function Main() {
           />
           <Route path="/*" element={<NotFound />} />
           <Route path="/account/admin" element={<AdminDashboard />} />
+          <Route
+            path="/account/admin/products"
+            element={<AdminProductView />}
+          />
+          <Route
+            path="/account/admin/promos"
+            element={<AdminPromoCodeView />}
+          />
+          <Route path="/account/admin/users" element={<AdminUserMgmt />} />
           <Route
             path="/account/admin/editproduct/:productId"
             element={<EditProduct />}
