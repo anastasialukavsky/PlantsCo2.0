@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { adjustFilter, selectFilterBy } from '../slices/product/productSlice';
+import {
+  adjustFilter,
+  selectFilterBy,
+  selectUseSearch,
+} from '../slices/product/productSlice';
 import FilterDropdownMenu from './UI/FilterDropdownMenu.jsx';
 
 const FilterSection = () => {
@@ -8,7 +12,7 @@ const FilterSection = () => {
   const [display, setDisplay] = useState('hidden');
 
   const filters = useSelector(selectFilterBy);
-
+  const useSearch = useSelector(selectUseSearch);
   const handleHover = () => {
     setDisplay('absolute');
   };
@@ -34,7 +38,9 @@ const FilterSection = () => {
         >
           <button>
             <li className={`relative group`}>
-              Filter By{filters.length ? `: ${filters.join(', ')}` : ': All'}{' '}
+              {useSearch
+                ? 'Filter By: Search Term'
+                : `Filter By: ${filters.length ? filters.join(', ') : 'All'}`}
             </li>
           </button>
         </div>

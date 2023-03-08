@@ -8,6 +8,8 @@ const WishlistCard = ({ product }) => {
 
   const wishlist = useSelector(selectWishlist);
 
+  console.log('product', product);
+
   const handleRemove = (productId) => {
     console.log(wishlist[0]?.id, productId);
     dispatch(
@@ -33,7 +35,9 @@ const WishlistCard = ({ product }) => {
           <Link to={`/products/${product.id}`}>
             <h1 className="text-3xl hover:underline">{product.name}</h1>
           </Link>
-          <p className="text-gray-600 text-xs italic">TAGS WILL GO HERE</p>
+          <p className="text-gray-600 text-xs italic">
+            {product?.tags?.map(({ tagName }) => tagName).join(', ')}
+          </p>
           <p>${product.price}</p>
         </div>
         <div className="ml-8">
