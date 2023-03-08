@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   addProduct,
   resetStatusError as resetProductStatus,
   selectSingleProduct,
   selectStatus,
 } from '../slices/product/productSlice';
-import {
-  selectAuth,
-  resetStatus as resetAuthStatus,
-} from '../slices/users/authSlice';
+import { selectAuth } from '../slices/users/authSlice';
 
 const AddNewProduct = () => {
   const dispatch = useDispatch();
