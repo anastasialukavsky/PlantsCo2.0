@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { fetchCart, selectCart, purgeCart } from '../slices/users/cartSlice';
 import CartCard from './CartCard.jsx';
 import CartSubtotal from './CartSubtotal.jsx';
@@ -37,7 +37,7 @@ export default function CartView(props) {
       <div>
         <h1 className="text-3xl text-center">CART</h1>
       </div>
-      <div className="max-h-[75vh] overflow-scroll">
+      <div className="max-h-[60vh] overflow-scroll">
         {cart.expandedCart &&
           cart.expandedCart.map((item) => {
             return (
@@ -48,7 +48,13 @@ export default function CartView(props) {
           })}
       </div>
       <CartSubtotal />
-      <div className="flex justify-end pr-10">
+      <div className="flex flex-col items-center gap-14 w-1/2 mx-auto mb-6">
+        <Link
+          className="ease-in duration-500 text-center hover:bg-primary-button-hover w-full bg-primary-deep-green text-white py-2 rounded-2xl mx-auto block text-xl hover:transition-all mt-5"
+          to="/shipping"
+        >
+          Proceed To Payment
+        </Link>
         <button onClick={emptyCart} className="">
           Empty Cart
         </button>
