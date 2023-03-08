@@ -23,6 +23,7 @@ import {
   AdminProductView,
   AdminUserMgmt,
   AdminPromoCodeView,
+  EditPromos,
 } from './index';
 import { selectAuth, attemptTokenLogin } from '../slices/users/authSlice';
 
@@ -64,6 +65,10 @@ export default function Main() {
           <Route
             path="/account/admin/promos"
             element={<AdminPromoCodeView />}
+          />
+          <Route
+            path="/account/admin/editpromos/:promoId"
+            element={<EditPromos />}
           />
           <Route path="/account/admin/users" element={<AdminUserMgmt />} />
           <Route

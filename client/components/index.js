@@ -19,3 +19,4 @@ export { default as AddNewProduct } from './AddNewProduct.jsx';
 export { default as AdminProductView } from './AdminProductView.jsx';
 export { default as AdminPromoCodeView } from './AdminPromoCodeView.jsx';
 export { default as AdminUserMgmt } from './AdminUserMgmt.jsx';
+export { default as EditPromos } from './EditPromos.jsx';
