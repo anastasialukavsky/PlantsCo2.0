@@ -5,6 +5,7 @@ import { selectCheckout } from '../slices/checkout/checkoutSlice';
 import { selectUsers } from '../slices/users/userSlice';
 import { fetchSingleUser } from '../slices/users/userSlice';
 import { selectAuth } from '../slices/users/authSlice';
+import axios from 'axios';
 
 export default function Checkout() {
   const dispatch = useDispatch();
@@ -150,12 +151,21 @@ export default function Checkout() {
 
     let invalid = false;
 
+    if (formData.promoCode !== '') {
+      let promoCheck = await axios.get(
+        '/api/promos/byName/' + formData.promoCode
+      );
+      if (promoCheck.id === undefined) {
+        setIsInvalid(true);
+        setFormData({ ...formData, promoCode: '' });
+      }
+    }
+
     if (!validateEmail(formData.email)) {
       setFormData({ ...formData, email: '' });
       setInvalidEmailMessage('Invalid email format');
       setIsInvalid(true);
       invalid = true;
-      
     }
 
     if (!validateZip(formData.zip)) {
@@ -177,7 +187,6 @@ export default function Checkout() {
     ) {
       setIsInvalid(true);
       invalid = true;
-      
     }
     if (invalid) return;
 
@@ -201,14 +210,8 @@ export default function Checkout() {
   };
 
   useEffect(() => {
-    
     if (checkoutState && checkoutState.checkout) {
       window.location = checkoutState.checkout;
-    }
-
-    if (checkoutState && checkoutState.error === 'Invalid promo code') {
-      const promo = document.querySelector('#promoCode');
-      promo.value = '';
     }
   }, [checkoutState]);
 

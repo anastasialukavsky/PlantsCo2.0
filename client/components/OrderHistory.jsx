@@ -19,7 +19,9 @@ const OrderHistory = () => {
   const { order, status } = useSelector(selectOrders);
 
   useEffect(() => {
-    dispatch(fetchUserOrders({ id, token }));
+    if (auth && auth.id) {
+      dispatch(fetchUserOrders({ id, token }));
+    }
     return () => {
       dispatch(resetStatus());
     };

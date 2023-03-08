@@ -35,6 +35,57 @@ export const fetchSinglePromo = createAsyncThunk(
   }
 );
 
+export const editPromo = createAsyncThunk(
+  'editPromo',
+  async ({ promoId, updates, token }, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.put(`/api/promos/${promoId}`, updates, {
+        headers: {
+          authorization: token,
+        },
+      });
+      return data;
+    } catch (error) {
+      console.log('axios error updating single promo');
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const addPromo = createAsyncThunk(
+  'addPromo',
+  async ({ token, newPromo }, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.post(`/api/promos/`, newPromo, {
+        headers: {
+          authorization: token,
+        },
+      });
+      return data;
+    } catch (error) {
+      console.log('axios error adding new promo');
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const deletePromo = createAsyncThunk(
+  'deletePromo',
+  async ({ promoId, token }, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.delete(`/api/promos/${promoId}`, {
+        headers: {
+          authorization: token,
+        },
+      });
+      return data;
+    } catch (error) {
+      console.log('axios error updating single promo');
+      return rejectWithValue(error);
+    }
+  }
+);
+
 const promoSlice = createSlice({
   name: 'promos',
   initialState: {
@@ -73,6 +124,45 @@ const promoSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(fetchSinglePromo.rejected, (state, { payload }) => {
+        state.status = 'failed';
+        console.log('failed payload', payload);
+        state.error = payload.message;
+      })
+      .addCase(editPromo.fulfilled, (state, { payload }) => {
+        state.promo = payload;
+        state.status = 'success';
+        state.error = '';
+      })
+      .addCase(editPromo.pending, (state, { payload }) => {
+        state.status = 'loading';
+      })
+      .addCase(editPromo.rejected, (state, { payload }) => {
+        state.status = 'failed';
+        console.log('failed payload', payload);
+        state.error = payload.message;
+      })
+      .addCase(addPromo.fulfilled, (state, { payload }) => {
+        state.promo = payload;
+        state.status = 'success';
+        state.error = '';
+      })
+      .addCase(addPromo.pending, (state, { payload }) => {
+        state.status = 'loading';
+      })
+      .addCase(addPromo.rejected, (state, { payload }) => {
+        state.status = 'failed';
+        console.log('failed payload', payload);
+        state.error = payload.message;
+      })
+      .addCase(deletePromo.fulfilled, (state, { payload }) => {
+        state.promo = payload;
+        state.status = 'success';
+        state.error = '';
+      })
+      .addCase(deletePromo.pending, (state, { payload }) => {
+        state.status = 'loading';
+      })
+      .addCase(deletePromo.rejected, (state, { payload }) => {
         state.status = 'failed';
         console.log('failed payload', payload);
         state.error = payload.message;

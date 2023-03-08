@@ -13,7 +13,7 @@ const UserAccount = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { auth, status } = useSelector(selectAuth);
+  const { auth } = useSelector(selectAuth);
 
   useEffect(() => {
     dispatch(attemptTokenLogin());
@@ -28,7 +28,7 @@ const UserAccount = () => {
     navigate('/');
   };
 
-  if (status !== 'success') return <h1>Page Loading...</h1>;
+  if (!auth) return <h1>Page Loading...</h1>;
 
   return (
     <div className="bg-cover bg-center h-[calc(100vh_-_5rem)] bg-[url('/assets/bg_img/wishlist_page.jpg')]">
@@ -81,7 +81,6 @@ const UserAccount = () => {
           </button>
         </div>
       </div>
-      <Toaster />
     </div>
   );
 };

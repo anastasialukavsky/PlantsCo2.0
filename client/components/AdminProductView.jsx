@@ -41,18 +41,23 @@ const AdminProductView = () => {
             </div>
             <div className="flex flex-col gap-3">
               <div className="bg-green-900 text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
-                <button className="flex flex-row">
+                <button className="text-left">
                   <Link to={'/account/admin/products'}>PRODUCTS</Link>
                 </button>
               </div>
               <div className="hover:bg-green-900 hover:text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
-                <button className="flex flex-row">
+                <button className="text-left">
                   <Link to={'/account/admin/addproduct'}>ADD NEW PRODUCT</Link>
                 </button>
               </div>
               <div className="hover:bg-green-900 hover:text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
                 <button className="text-left">
-                  <Link to={'/account/admin/promos'}>PROMOCODES</Link>
+                  <Link to={'/account/admin/promos'}>PROMOS</Link>
+                </button>
+              </div>
+              <div className="hover:bg-green-900 hover:text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
+                <button className="text-left">
+                  <Link to={'/account/admin/addpromo'}>ADD NEW PROMO</Link>
                 </button>
               </div>
               <div className="hover:bg-green-900 hover:text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
@@ -66,7 +71,6 @@ const AdminProductView = () => {
             <Link to={'/account'}>Back</Link>
           </button>
         </aside>
-
         <div className="p-4 w-3/4 h-[calc(100vh_-_5rem)] overflow-auto">
           <div className="p-4">
             <div className="flex flex-col h-[calc(100vh_-_10rem)] rounded-xl overflow-auto">
@@ -103,27 +107,27 @@ const AdminProductView = () => {
                               key={product.id}
                               className="text-sm odd:bg-white even:bg-slate-50"
                             >
-                              <th scope="col" className="px-6 py-3">
+                              <td scope="col" className="px-6 py-3 text-center">
                                 {product.id}
-                              </th>
-                              <th scope="col" className="px-6 py-3 text-left">
+                              </td>
+                              <td scope="col" className="px-6 py-3 text-left">
                                 {product.name}
-                              </th>
-                              <th scope="col" className="px-6 py-3">
+                              </td>
+                              <td scope="col" className="px-6 py-3 text-center">
                                 {'$'}
                                 {product.price}
-                              </th>
-                              <th scope="col" className="px-6 py-3">
+                              </td>
+                              <td scope="col" className="px-6 py-3 text-center">
                                 {product.qty}
-                              </th>
-                              <th scope="col" className="px-6 py-3">
+                              </td>
+                              <td scope="col" className="px-6 py-3 text-center">
                                 <Link
                                   className="hover:text-primary-promo-banner"
                                   to={`/account/admin/editproduct/${product.id}`}
                                 >
                                   {'Edit / Delete'}
                                 </Link>
-                              </th>
+                              </td>
                             </tr>
                           );
                         })

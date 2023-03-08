@@ -44,18 +44,23 @@ const AdminPromoCodeView = () => {
             </div>
             <div className="flex flex-col gap-3">
               <div className="hover:bg-green-900 hover:text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
-                <button className="flex flex-row">
+                <button className="text-left">
                   <Link to={'/account/admin/products'}>PRODUCTS</Link>
                 </button>
               </div>
               <div className="hover:bg-green-900 hover:text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
-                <button className="flex flex-row">
+                <button className="text-left">
                   <Link to={'/account/admin/addproduct'}>ADD NEW PRODUCT</Link>
                 </button>
               </div>
               <div className="bg-green-900 text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
                 <button className="text-left">
-                  <Link to={'/account/admin/promos'}>PROMOCODES</Link>
+                  <Link to={'/account/admin/promos'}>PROMOS</Link>
+                </button>
+              </div>
+              <div className="hover:bg-green-900 hover:text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
+                <button className="text-left">
+                  <Link to={'/account/admin/addpromo'}>ADD NEW PROMO</Link>
                 </button>
               </div>
               <div className="hover:bg-green-900 hover:text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
@@ -106,27 +111,27 @@ const AdminPromoCodeView = () => {
                               key={promo.id}
                               className="text-sm odd:bg-white even:bg-slate-50"
                             >
-                              <th scope="col" className="px-6 py-3">
+                              <td scope="col" className="px-6 py-3 text-center">
                                 {promo.id}
-                              </th>
-                              <th scope="col" className="px-6 py-3 text-left">
+                              </td>
+                              <td scope="col" className="px-6 py-3 text-left">
                                 {promo.name}
-                              </th>
-                              <th scope="col" className="px-6 py-3">
+                              </td>
+                              <td scope="col" className="px-6 py-3 text-center">
                                 {(promo.discountRate * 100).toFixed()}
                                 {'%'}
-                              </th>
-                              <th scope="col" className="px-6 py-3">
+                              </td>
+                              <td scope="col" className="px-6 py-3 text-center">
                                 {promo.status.toString()}
-                              </th>
-                              <th scope="col" className="px-6 py-3">
+                              </td>
+                              <td scope="col" className="px-6 py-3 text-center">
                                 <Link
                                   className="hover:text-primary-promo-banner"
-                                  to={`/account/admin/editpromo/${promo.id}`}
+                                  to={`/account/admin/editpromos/${promo.id}`}
                                 >
                                   {'Edit / Delete'}
                                 </Link>
-                              </th>
+                              </td>
                             </tr>
                           );
                         })
