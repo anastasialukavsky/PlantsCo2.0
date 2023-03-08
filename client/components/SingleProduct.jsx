@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import PromoBanner from './UI/PromoBanner.jsx';
 import box from '../../public/assets/box.svg';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,10 +12,15 @@ import {
 import LikedProduct from './UI/LikedProduct.jsx';
 import { addOneToCart } from '../slices/users/cartSlice.js';
 import SimilarProducts from './SimilarProducts.jsx';
+import toast, { Toaster } from 'react-hot-toast';
 
 const singleProduct = () => {
   const dispatch = useDispatch();
   const { productId } = useParams();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     dispatch(fetchSingleProduct(productId));
@@ -28,6 +33,8 @@ const singleProduct = () => {
   function addToCart() {
     dispatch(addOneToCart(productId));
   }
+
+  const notify = () => toast.success('Product added to cart!');
 
   return (
     <>
@@ -60,7 +67,10 @@ const singleProduct = () => {
             <p className="mb-8 leading-tight">{singleProduct.description}</p>
             <div className="border-b-4 pb-4 mb-3">
               <button
-                onClick={addToCart}
+                onClick={() => {
+                  notify();
+                  addToCart();
+                }}
                 className="hover:bg-primary-button-green w-full bg-primary-deep-green text-white py-3 rounded-2xl mx-auto block text-xl hover:transition-all"
               >
                 ADD TO CART
@@ -74,6 +84,7 @@ const singleProduct = () => {
         </section>
       </main>
       <SimilarProducts />
+      <Toaster />
     </>
   );
 };
