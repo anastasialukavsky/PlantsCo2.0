@@ -11,6 +11,11 @@ export default function Signup() {
   const auth = useSelector(selectAuth);
 
   const [isInvalid, setIsInvalid] = useState(false);
+  const [isInvalidFirstName, setIsInvalidFirstName] = useState(false);
+  const [isInvalidLastName, setIsInvalidLastName] = useState(false);
+  const [isInvalidEmail, setIsInvalidEmail] = useState(false);
+  const [isInvalidPassword, setIsInvalidPassword] = useState(false);
+
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -20,10 +25,10 @@ export default function Signup() {
   });
 
   const validClass =
-    'appearance-none border rounded w-96 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline';
+    'appearance-none border rounded w-96 py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline';
 
   const invalidClass =
-    'appearance-none border border-red-500 rounded w-96 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline';
+    'appearance-none border border-red-500 rounded w-96 py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline';
 
   const token = window.localStorage.getItem('token');
   useEffect(() => {
@@ -31,22 +36,50 @@ export default function Signup() {
       dispatch(attemptTokenLogin());
       navigate('/products');
     }
-  }, [token]);
+  }, [token, isInvalid]);
+
+  const checkFormValidation = () => {
+    if (formData.firstName === '') {
+      setIsInvalidFirstName(true);
+      setIsInvalid(true);
+    }
+    if (formData.lastName === '') {
+      setIsInvalidLastName(true);
+      setIsInvalid(true);
+    }
+    if (formData.email === '') {
+      setIsInvalidEmail(true);
+      setIsInvalid(true);
+    }
+    if (formData.password === '' || formData.password.length < 8) {
+      setIsInvalidPassword(true);
+      setIsInvalid(true);
+    }
+  };
+
+  const resetFormValidation = () => {
+    if (formData.firstName === '') {
+      setIsInvalidFirstName(true);
+      setIsInvalid(true);
+    }
+    if (formData.lastName === '') {
+      setIsInvalidLastName(true);
+      setIsInvalid(true);
+    }
+    if (formData.email === '') {
+      setIsInvalidEmail(true);
+      setIsInvalid(true);
+    }
+    if (formData.password === '' || formData.password.length < 8) {
+      setIsInvalidPassword(true);
+      setIsInvalid(true);
+    }
+  };
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
-
-    if (
-      formData.firstName === '' ||
-      formData.lastName === '' ||
-      formData.email === '' ||
-      formData.password === ''
-    ) {
-      setIsInvalid(true);
-      return;
-    }
-
-    dispatch(signUp(formData));
+    checkFormValidation();
+    if (!isInvalid) dispatch(signUp(formData));
   };
 
   const login = () => {
@@ -67,19 +100,22 @@ export default function Signup() {
                 First Name
               </label>
               <input
-                className={isInvalid ? invalidClass : validClass}
+                className={isInvalidFirstName ? invalidClass : validClass}
                 id="firstName"
                 type="text"
                 placeholder="first name"
                 value={formData.firstName}
                 name="firstName"
-                onChange={(e) =>
-                  setFormData({ ...formData, firstName: e.target.value })
-                }
+                onChange={(e) => {
+                  setIsInvalidFirstName(false);
+                  setFormData({ ...formData, firstName: e.target.value });
+                }}
               />
               <p
                 className={
-                  isInvalid ? 'text-xs mt-2 text-red-500' : 'collapse -mt-2'
+                  isInvalidFirstName
+                    ? 'text-xs mt-2 text-red-500'
+                    : 'collapse -mt-2'
                 }
               >
                 Please enter your first name!
@@ -94,19 +130,22 @@ export default function Signup() {
                 Last Name
               </label>
               <input
-                className={isInvalid ? invalidClass : validClass}
+                className={isInvalidLastName ? invalidClass : validClass}
                 id="lastName"
                 type="text"
                 placeholder="last name"
                 value={formData.lastName}
                 name="lastName"
-                onChange={(e) =>
-                  setFormData({ ...formData, lastName: e.target.value })
-                }
+                onChange={(e) => {
+                  setIsInvalidLastName(false);
+                  setFormData({ ...formData, lastName: e.target.value });
+                }}
               />
               <p
                 className={
-                  isInvalid ? 'text-xs mt-2 text-red-500' : 'collapse -mt-2'
+                  isInvalidLastName
+                    ? 'text-xs mt-2 text-red-500'
+                    : 'collapse -mt-2'
                 }
               >
                 Please enter your last name!
@@ -121,19 +160,22 @@ export default function Signup() {
                 Email
               </label>
               <input
-                className={isInvalid ? invalidClass : validClass}
+                className={isInvalidEmail ? invalidClass : validClass}
                 id="email"
-                type="text"
+                type="email"
                 placeholder="email"
                 value={formData.email}
                 name="email"
-                onChange={(e) =>
-                  setFormData({ ...formData, email: e.target.value })
-                }
+                onChange={(e) => {
+                  setIsInvalidEmail(false);
+                  setFormData({ ...formData, email: e.target.value });
+                }}
               />
               <p
                 className={
-                  isInvalid ? 'text-xs mt-2 text-red-500' : 'collapse -mt-2'
+                  isInvalidEmail
+                    ? 'text-xs mt-2 text-red-500'
+                    : 'collapse -mt-2'
                 }
               >
                 Please enter a valid email!
@@ -148,23 +190,25 @@ export default function Signup() {
                 Password
               </label>
               <input
-                className={isInvalid ? invalidClass : validClass}
+                className={isInvalidPassword ? invalidClass : validClass}
                 id="password"
                 type="password"
                 placeholder="************"
                 value={formData.password}
                 name="password"
-                min={8}
-                onChange={(e) =>
-                  setFormData({ ...formData, password: e.target.value })
-                }
+                onChange={(e) => {
+                  setIsInvalidPassword(false);
+                  setFormData({ ...formData, password: e.target.value });
+                }}
               />
               <p
                 className={
-                  isInvalid ? 'text-xs mt-2 text-red-500' : 'collapse -mt-2'
+                  isInvalidPassword
+                    ? 'text-xs mt-2 text-red-500'
+                    : 'collapse -mt-2'
                 }
               >
-                Please enter a password!
+                Please enter a valid password (at least 8 chars)!
               </p>
             </div>
 
