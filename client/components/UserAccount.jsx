@@ -81,7 +81,6 @@ const UserAccount = () => {
           </button>
         </div>
       </div>
-      <Toaster />
     </div>
   );
 };
