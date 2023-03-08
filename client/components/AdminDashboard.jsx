@@ -221,6 +221,18 @@ const AdminDashboard = () => {
                       </th>
                     </tr>
                   </thead>
+                  <tr>
+                    <th className="px-6 py-3 sticky top-0">
+                      <p className="text-lg ml-6 pt-3 pb-3">
+                        <Link
+                          to={'/account/admin/addproduct'}
+                          className="hover:text-primary-promo-banner"
+                        >
+                          Add New Product
+                        </Link>
+                      </p>
+                    </th>
+                  </tr>
                   <tbody>
                     {products && products.length
                       ? products.map((product) => {
@@ -309,16 +321,6 @@ const AdminDashboard = () => {
               <div id="admin" className={adminTable}>
                 <p>{`Howdy, ${auth.firstName}!`}</p>
                 <p>{"You're an admin... Nice!"}</p>
-                <div>
-                  <span>
-                    <button className="py-3 px-5 mr-2 m-5 text-center text-text-primary-deep-green-900 bg-white rounded-lg border hover:bg-gray-100">
-                      Add Product
-                    </button>
-                    <button className="py-3 px-5 mr-2 m-5 text-center text-text-primary-deep-green-900 bg-white rounded-lg border hover:bg-gray-100">
-                      Add Promo
-                    </button>
-                  </span>
-                </div>
               </div>
             </div>
           </div>
