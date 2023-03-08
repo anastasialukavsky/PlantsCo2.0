@@ -15,3 +15,4 @@ export { default as CartView } from './CartView.jsx';
 export { default as AdminDashboard } from './AdminDashboard.jsx';
 export { default as Wishlist } from './Wishlist.jsx';
 export { default as EditProduct } from './EditProduct.jsx';
+export { default as AddNewProduct } from './AddNewProduct.jsx';

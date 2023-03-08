@@ -38,6 +38,11 @@ export default function Signup() {
     }
   }, [token, isInvalid]);
 
+  const validateEmail = (email) => {
+    let res = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    return res.test(email);
+  };
+
   const checkFormValidation = () => {
     if (formData.firstName === '') {
       setIsInvalidFirstName(true);
@@ -47,10 +52,17 @@ export default function Signup() {
       setIsInvalidLastName(true);
       setIsInvalid(true);
     }
+
     if (formData.email === '') {
       setIsInvalidEmail(true);
       setIsInvalid(true);
     }
+
+    if (!validateEmail(formData.email)) {
+      setIsInvalidEmail(true);
+      setIsInvalid(true);
+    }
+
     if (formData.password === '' || formData.password.length < 8) {
       setIsInvalidPassword(true);
       setIsInvalid(true);
@@ -139,7 +151,6 @@ export default function Signup() {
               <input
                 className={isInvalidEmail ? invalidClass : validClass}
                 id="email"
-                type="email"
                 placeholder="email"
                 value={formData.email}
                 name="email"
