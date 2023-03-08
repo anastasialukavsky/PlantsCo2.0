@@ -102,8 +102,8 @@ const AddNewProduct = () => {
           </button>
         </aside>
         <div className="p-4 w-3/4 h-[calc(100vh_-_5rem)] overflow-auto">
-          <section className="flex flex-col w-5/6">
-            <form className="w-5/6 pl-10 pr-10" onSubmit={submitProduct}>
+          <section className="flex flex-col w-full">
+            <form className="w-full pl-10 pr-10" onSubmit={submitProduct}>
               <div className="flex flex-wrap -mx-3 mb-6">
                 <div
                   className={
