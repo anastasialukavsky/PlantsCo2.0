@@ -9,6 +9,7 @@ const {
   Order_Detail,
   Promo_Code,
   Order,
+  Tag,
 } = require('../../DB');
 
 router.get('/', requireToken, isAdmin, async (req, res, next) => {
@@ -219,7 +220,9 @@ router.get('/:userId/wishlists', requireToken, async (req, res, next) => {
   }
   try {
     const user = await User.findByPk(userId);
-    const wishlists = await user.getWishlists({ include: [Product] });
+    const wishlists = await user.getWishlists({
+      include: { model: Product, include: { model: Tag } },
+    });
     res.status(200).json(wishlists);
   } catch (err) {
     next(err);
