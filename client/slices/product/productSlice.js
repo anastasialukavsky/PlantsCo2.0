@@ -55,6 +55,23 @@ export const editSingleProduct = createAsyncThunk(
   }
 );
 
+export const addProduct = createAsyncThunk(
+  'addProduct',
+  async ({ token, newProduct }, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.post(`/api/products`, newProduct, {
+        headers: {
+          authorization: token,
+        },
+      });
+      return data;
+    } catch (error) {
+      console.log('axios error adding new product');
+      return rejectWithValue(error);
+    }
+  }
+);
+
 export const deleteSingleProduct = createAsyncThunk(
   'deleteProduct',
   async ({ productId, token }, { rejectWithValue }) => {
@@ -121,19 +138,19 @@ const productSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchAllProducts.fulfilled, (state, action) => {
-      state.products = action.payload;
-      state.status = 'success';
-      state.error = '';
-    });
-    builder.addCase(fetchAllProducts.pending, (state, action) => {
-      state.status = 'loading';
-    });
-    builder.addCase(fetchAllProducts.rejected, (state, action) => {
-      state.status = 'failed';
-      state.error = action.error.message;
-    });
     builder
+      .addCase(fetchAllProducts.fulfilled, (state, action) => {
+        state.products = action.payload;
+        state.status = 'success';
+        state.error = '';
+      })
+      .addCase(fetchAllProducts.pending, (state, action) => {
+        state.status = 'loading';
+      })
+      .addCase(fetchAllProducts.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      })
       .addCase(fetchSingleProduct.fulfilled, (state, action) => {
         state.status = 'success';
         state.error = '';
@@ -148,6 +165,19 @@ const productSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(editSingleProduct.rejected, (state, { payload }) => {
+        state.status = 'failed';
+        console.log('failed payload', payload);
+        state.error = payload.message;
+      })
+      .addCase(addProduct.fulfilled, (state, { payload }) => {
+        state.singleProduct = payload;
+        state.status = 'success';
+        state.error = '';
+      })
+      .addCase(addProduct.pending, (state, { payload }) => {
+        state.status = 'loading';
+      })
+      .addCase(addProduct.rejected, (state, { payload }) => {
         state.status = 'failed';
         console.log('failed payload', payload);
         state.error = payload.message;

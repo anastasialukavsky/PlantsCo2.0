@@ -63,10 +63,10 @@ const AdminDashboard = () => {
       <div className="flex flex-row">
         <aside
           id="default-sidebar"
-          className=" w-1/4 h-[calc(100vh_-_5rem)] transition-transform -translate-x-full sm:translate-x-0 flex flex-col gap-10"
+          className=" w-1/4 h-[calc(100vh_-_5rem)] transition-transform -translate-x-full sm:translate-x-0 flex flex-col gap-5"
           aria-label="Sidebar"
         >
-          <div className="pt-5">
+          <div className="flex flex-col pt-5 gap-3">
             <div className={adminButtonStatus}>
               <button
                 onClick={() => {
@@ -84,7 +84,7 @@ const AdminDashboard = () => {
                 {'ADMIN DASHBOARD'}
               </button>
             </div>
-            <div>
+            <div className="flex flex-col gap-3">
               <div className={prodButtonStatus}>
                 <button
                   onClick={() => {
@@ -221,6 +221,18 @@ const AdminDashboard = () => {
                       </th>
                     </tr>
                   </thead>
+                  <tr>
+                    <th className="px-6 py-3 sticky top-0">
+                      <p className="text-lg ml-6 pt-3 pb-3">
+                        <Link
+                          to={'/account/admin/addproduct'}
+                          className="hover:text-primary-promo-banner"
+                        >
+                          Add New Product
+                        </Link>
+                      </p>
+                    </th>
+                  </tr>
                   <tbody>
                     {products && products.length
                       ? products.map((product) => {
@@ -309,16 +321,6 @@ const AdminDashboard = () => {
               <div id="admin" className={adminTable}>
                 <p>{`Howdy, ${auth.firstName}!`}</p>
                 <p>{"You're an admin... Nice!"}</p>
-                <div>
-                  <span>
-                    <button className="py-3 px-5 mr-2 m-5 text-center text-text-primary-deep-green-900 bg-white rounded-lg border hover:bg-gray-100">
-                      Add Product
-                    </button>
-                    <button className="py-3 px-5 mr-2 m-5 text-center text-text-primary-deep-green-900 bg-white rounded-lg border hover:bg-gray-100">
-                      Add Promo
-                    </button>
-                  </span>
-                </div>
               </div>
             </div>
           </div>
