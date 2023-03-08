@@ -56,7 +56,7 @@ export const addPromo = createAsyncThunk(
   'addPromo',
   async ({ token, newPromo }, { rejectWithValue }) => {
     try {
-      const { data } = await axios.post(`/api/promo`, newPromo, {
+      const { data } = await axios.post(`/api/promos/`, newPromo, {
         headers: {
           authorization: token,
         },
@@ -71,7 +71,7 @@ export const addPromo = createAsyncThunk(
 
 export const deletePromo = createAsyncThunk(
   'deletePromo',
-  async ({ promotId, token }, { rejectWithValue }) => {
+  async ({ promoId, token }, { rejectWithValue }) => {
     try {
       const { data } = await axios.delete(`/api/promos/${promoId}`, {
         headers: {
