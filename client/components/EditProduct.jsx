@@ -53,6 +53,7 @@ const EditProduct = () => {
 
   const deleteProduct = async () => {
     await dispatch(deleteSingleProduct({ productId, token }));
+    navigate('/account/admin');
   };
 
   return (
