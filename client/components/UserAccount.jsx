@@ -43,12 +43,12 @@ const UserAccount = () => {
           >
             Edit Profile
           </Link>
-          <Link
-            tpo={'/account/updatepassword'}
+          {/* <Link
+            to={'/account/updatepassword'}
             className="py-3 px-5 mr-2 mb-2 text-center text-text-primary-deep-green-900 bg-white rounded-lg border hover:bg-gray-100"
           >
             Update Password
-          </Link>
+          </Link> */}
           <Link
             to={'/account/orderhistory'}
             className="py-3 px-5 mr-2 mb-2 text-center text-text-primary-deep-green-900 bg-white rounded-lg border hover:bg-gray-100"
