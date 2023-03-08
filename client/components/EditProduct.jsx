@@ -1,12 +1,57 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useParams } from 'react-router-dom';
+import {
+  selectSingleProduct,
+  fetchSingleProduct,
+  resetStatusError as resetProductStatus,
+  editSingleProduct,
+} from '../slices/product/productSlice';
+import {
+  selectAuth,
+  resetStatus as resetAuthStatus,
+} from '../slices/users/authSlice';
 
 const EditProduct = () => {
   const dispatch = useDispatch();
+  const { productId } = useParams();
+  const singleProduct = useSelector(selectSingleProduct);
+  const { auth, token } = useSelector(selectAuth);
 
-  const updateProduct = () => {};
-  const deleteProduct = () => {};
+  const [name, setName] = useState('');
+  const [qty, setQty] = useState('');
+  const [description, setDescription] = useState('');
+  const [price, setPrice] = useState('');
+  const [imageURL, setImageURL] = useState('');
+
+  useEffect(() => {
+    dispatch(fetchSingleProduct(productId));
+
+    return () => {
+      resetProductStatus();
+      resetAuthStatus();
+    };
+  }, [productId]);
+
+  useEffect(() => {
+    setName(singleProduct.name || '');
+    setDescription(singleProduct.description || '');
+    setQty(singleProduct.qty || 0);
+    setPrice(singleProduct.price || 0);
+    setImageURL(singleProduct.imageURL || '');
+  }, [singleProduct]);
+
+  const updateProduct = (evt) => {
+    evt.preventDefault();
+    const updates = { name, qty, description, price, imageURL };
+    const id = +productId;
+    dispatch(editSingleProduct({ id, token, updates }));
+    dispatch(fetchSingleProduct(productId));
+  };
+
+  const deleteProduct = () => {
+    console.log('DELETE');
+  };
 
   return (
     <div className="bg-cover bg-center h-[calc(100vh_-_5rem)] bg-[url('/assets/bg_img/admin.jpg')]">
@@ -25,12 +70,17 @@ const EditProduct = () => {
             </button>
           </div>
         </aside>
-
-        {/* <div className="p-4 w-3/4  h-[calc(100vh_-_5rem)] overflow-auto">
-          <div className="p-4 border-2 border-primary-button-hover border-dashed rounded-lg"> */}
-        {/* <div className="flex flex-col h-[calc(100vh_-_10rem)] rounded bg-gray-50 dark:bg-gray-800 overflow-auto"> */}
-        <section className="flex w-3/4 justify-center mt-5">
-          <form className="w-5/6">
+        <section className="flex flex-col w-5/6 mt-5">
+          <div className=" w-5/6 justify-center pb-10">
+            <p className="text-center m-auto text-4xl font-extrabold pb-5 text-primary-deep-green">
+              {singleProduct.name}
+            </p>
+            <img
+              src={imageURL}
+              className="object-scale-down h-48 w-96 m-auto"
+            />
+          </div>
+          <form className="w-5/6 pl-10 pr-10" onSubmit={updateProduct}>
             <div className="flex flex-wrap -mx-3 mb-6">
               <div className="w-full px-3">
                 <label
@@ -43,6 +93,8 @@ const EditProduct = () => {
                   className="appearance-none block w-full bg-white-200 text-gray-700 border border-gray-200 rounded py-3 px-4  leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                   id="grid-name"
                   type="text"
+                  value={name}
+                  onChange={(evt) => setName(evt.target.value)}
                 />
               </div>
             </div>
@@ -52,12 +104,15 @@ const EditProduct = () => {
                   className="block uppercase tracking-wide text-primary-deep-green text-xs font-bold mb-2"
                   htmlFor="grid-first-qty"
                 >
-                  Quantity
+                  Quantity In Stock
                 </label>
                 <input
                   className="appearance-none block w-full bg-white-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                   id="grid-qty"
                   type="number"
+                  min={0}
+                  value={qty}
+                  onChange={(evt) => setQty(evt.target.value)}
                 />
               </div>
               <div className="w-full md:w-1/2 px-3">
@@ -73,7 +128,9 @@ const EditProduct = () => {
                   type="number"
                   min="0.00"
                   max="10000.00"
-                  step="0.5"
+                  step="0.01"
+                  value={price}
+                  onChange={(evt) => setPrice(evt.target.value)}
                 />
               </div>
             </div>
@@ -89,6 +146,9 @@ const EditProduct = () => {
                   className="appearance-none block w-full bg-white-200 text-gray-700 border border-gray-200 rounded py-3 px-4  leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                   id="grid-description"
                   type="text"
+                  rows="7"
+                  value={description}
+                  onChange={(evt) => setDescription(evt.target.value)}
                 />
               </div>
             </div>
@@ -104,6 +164,7 @@ const EditProduct = () => {
                   className="appearance-none block w-full text-md text-gray-700 border border-gray-200 rounded cursor-pointer bg-primary-bright-white"
                   id="imageURL"
                   type="file"
+                  onChange={(evt) => setImageURL(evt.target.value)}
                 />
               </div>
             </div>
@@ -114,15 +175,12 @@ const EditProduct = () => {
               >
                 Save
               </button>
-              <button
-                type="submit"
-                className="text-red-600 py-2 rounded-lg mx-auto block text-sm hover:text-primary-promo-banner mt-5"
-              >
-                Delete
-              </button>
             </div>
             <div className="flex justify-center"></div>
           </form>
+          <button className="text-red-600 w-5/6 py-2 rounded-lg block text-sm hover:text-primary-promo-banner mt-5">
+            Delete
+          </button>
         </section>
       </div>
     </div>
