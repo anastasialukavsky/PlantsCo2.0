@@ -53,7 +53,6 @@ const AddNewProduct = () => {
   };
 
   useEffect(() => {
-    console.log('success');
     if (singleProduct.name === name) navigate('/account/admin');
 
     return () => {
