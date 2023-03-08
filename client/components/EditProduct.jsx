@@ -46,7 +46,6 @@ const EditProduct = () => {
   const updateProduct = (evt) => {
     evt.preventDefault();
     const updates = { name, qty, description, price, imageURL };
-    const id = +productId;
     dispatch(editSingleProduct({ productId, token, updates }));
     dispatch(fetchSingleProduct(productId));
   };
