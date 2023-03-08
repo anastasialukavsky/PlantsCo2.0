@@ -22,11 +22,6 @@ const EditProfile = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
-  const [role, setRole] = useState('');
-  // const [password, setPassword] = useState('');
-  // const [shipping, setShipping] = useState('');
-  // const [payment, setPayment] = useState('');
-  // const [currency, setCurrency] = useState('');
 
   useEffect(() => {
     dispatch(attemptTokenLogin());
@@ -115,7 +110,7 @@ const EditProfile = () => {
               <div className="flex items-center justify-between">
                 <button
                   type="submit"
-                  className="hover:bg-primary-button-green w-full bg-primary-deep-green text-white py-2 rounded-lg mx-auto block text-xl hover:transition-all mt-5"
+                  className="hover:bg-primary-button-hover w-full bg-primary-deep-green text-white py-2 rounded-lg mx-auto block text-xl hover:transition-all mt-5"
                 >
                   Save
                 </button>

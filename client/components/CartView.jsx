@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchCart, selectCart } from '../slices/users/cartSlice';
+import { fetchCart, selectCart, purgeCart } from '../slices/users/cartSlice';
 import CartCard from './CartCard.jsx';
 import CartSubtotal from './CartSubtotal.jsx';
 import { adjustFilter } from '../slices/product/productSlice';
@@ -32,6 +32,10 @@ export default function CartView(props) {
       </div>
     );
 
+  function emptyCart() {
+    dispatch(purgeCart());
+  }
+
   return (
     <>
       <div>
@@ -48,6 +52,11 @@ export default function CartView(props) {
           })}
       </div>
       <CartSubtotal />
+      <div className="flex justify-end pr-10">
+        <button onClick={emptyCart} className="">
+          Empty Cart
+        </button>
+      </div>
     </>
   );
 }

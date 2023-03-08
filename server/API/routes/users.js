@@ -12,8 +12,6 @@ const {
   Tag,
 } = require('../../DB');
 
-// router.use('/:id/wishlist', require('./wishlist'));
-
 router.get('/', requireToken, isAdmin, async (req, res, next) => {
   // fetch all users info (ADMIN ONLY)
   // any includes? payments/shipments? cart? wishlists?
@@ -231,31 +229,31 @@ router.get('/:userId/wishlists', requireToken, async (req, res, next) => {
   }
 });
 
-router.get(
-  '/:userId/wishlists/:wishlistId',
-  requireToken,
-  async (req, res, next) => {
-    try {
-      if (req.user.id === +req.params.userId || req.user.isAdmin) {
-        const wishlistId = +req.params.wishlistId;
+// router.get(
+//   '/:userId/wishlists/:wishlistId',
+//   requireToken,
+//   async (req, res, next) => {
+//     try {
+//       if (req.user.id === +req.params.userId || req.user.isAdmin) {
+//         const wishlistId = +req.params.wishlistId;
 
-        const wishlist = await Wishlist.findByPk(wishlistId, {
-          include: { model: Product, include: { model: Tag } },
-        });
+//         const wishlist = await Wishlist.findByPk(wishlistId, {
+//           include: [Product],
+//         });
 
-        if (wishlist) return res.status(200).json(wishlist);
-      } else {
-        res
-          .status(403)
-          .send(
-            'Inadequate access rights / Requested user does not match logged-in user'
-          );
-      }
-    } catch (err) {
-      next(err);
-    }
-  }
-);
+//         if (wishlist) return res.status(200).json(wishlist);
+//       } else {
+//         res
+//           .status(403)
+//           .send(
+//             'Inadequate access rights / Requested user does not match logged-in user'
+//           );
+//       }
+//     } catch (err) {
+//       next(err);
+//     }
+//   }
+// );
 
 router.post('/:userId/wishlists', requireToken, async (req, res, next) => {
   try {
@@ -430,16 +428,22 @@ router.put('/:id/cart', requireToken, async (req, res, next) => {
 // DELETE - remove cart items (frontend - when qty is 0, user removes from cart, and when user completes an order)
 router.delete('/:id/cart', requireToken, async (req, res, next) => {
   try {
-    if (req.user.id === +req.params.id || req.user.isAdmin) {
-      const cartItem = await Cart.findOne({
-        where: {
-          userId: req.params.id,
-          productId: req.body.productId,
-        },
-      });
-      if (!cartItem) return res.status(404).send('No product to delete!');
-      await cartItem.destroy();
-      res.json(cartItem);
+    const userId = +req.params.id;
+    if (req.user.id === userId || req.user.isAdmin) {
+      if (req.body.action === 'purge') {
+        await Cart.destroy({ where: { userId: userId } });
+        res.sendStatus(204);
+      } else {
+        const cartItem = await Cart.findOne({
+          where: {
+            userId: userId,
+            productId: req.body.productId,
+          },
+        });
+        if (!cartItem) return res.status(404).send('No product to delete!');
+        await cartItem.destroy();
+        res.json(cartItem);
+      }
     } else {
       res
         .status(403)
