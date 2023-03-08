@@ -79,7 +79,7 @@ const AdminDashboard = () => {
                   setPromoButtonStatus(inactiveButtonClass);
                   setUserButtonStatus(inactiveButtonClass);
                 }}
-                className=""
+                className="text-left"
               >
                 {'ADMIN DASHBOARD'}
               </button>
@@ -114,7 +114,7 @@ const AdminDashboard = () => {
                     setPromoButtonStatus(activeButtonClass);
                     setUserButtonStatus(inactiveButtonClass);
                   }}
-                  className=""
+                  className="text-left"
                 >
                   {'PROMOCODES'}
                 </button>
@@ -131,13 +131,13 @@ const AdminDashboard = () => {
                     setPromoButtonStatus(inactiveButtonClass);
                     setUserButtonStatus(activeButtonClass);
                   }}
-                  className=""
+                  className="text-left"
                 >
                   {'USER MANAGEMENT'}
                 </button>
               </div>
               <div className={inactiveButtonClass}>
-                <p className="">PLANTS&CO SHOPS</p>
+                <p className="text-left">PLANTS&CO SHOPS</p>
               </div>
             </div>
           </div>
