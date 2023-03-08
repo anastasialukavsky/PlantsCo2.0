@@ -2,6 +2,7 @@ const Sequelize = require('sequelize');
 const db = require('../database');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const Wishlist = require('./Wishlist');
 const dotenv = require('dotenv').config();
 
 const SECRET = process.env.JWT;
@@ -101,6 +102,13 @@ User.beforeValidate((user) => {
 
 User.beforeCreate(async (user) => {
   user.password = await bcrypt.hash(user.password, SALT_ROUNDS);
+});
+
+User.afterCreate(async (user) => {
+  const wishlist = await Wishlist.create({
+    userId: user.id,
+    wishlistName: 'default wishlist',
+  });
 });
 
 // User.beforeUpdate(async (user) => {
