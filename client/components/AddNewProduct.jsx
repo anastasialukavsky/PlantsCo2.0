@@ -28,8 +28,6 @@ const AddNewProduct = () => {
   const [invalidQty, setInvalidQty] = useState(false);
   const [invalidPrice, setInvalidPrice] = useState(false);
   const [invalidDescription, setInvalidDescription] = useState(false);
-  const [navAway, setNavAway] = useState(false);
-  const [attemptSubmission, setAttemptSubmission] = useState(false);
 
   const invalidClass =
     'appearance-none block w-full bg-white-200 text-gray-700 border border-red-500 rounded py-3 px-4  leading-tight focus:outline-none focus:bg-white focus:border-gray-500';
@@ -39,10 +37,6 @@ const AddNewProduct = () => {
     if (qty < 1) setInvalidQty(true);
     if (price === '') setInvalidPrice(true);
     if (!description) setInvalidDescription(true);
-
-    if (!invalidName && !invalidQty && !invalidPrice && !invalidDescription) {
-      setNavAway(true);
-    }
   };
 
   const submitProduct = (evt) => {
@@ -53,7 +47,7 @@ const AddNewProduct = () => {
   };
 
   useEffect(() => {
-    if (singleProduct.name === name) navigate('/account/admin');
+    if (singleProduct.name === name) navigate('/account/admin/products');
 
     return () => {
       dispatch(resetProductStatus());
