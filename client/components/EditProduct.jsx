@@ -12,6 +12,7 @@ import {
   selectAuth,
   resetStatus as resetAuthStatus,
 } from '../slices/users/authSlice';
+import toast, { Toaster } from 'react-hot-toast';
 
 const EditProduct = () => {
   const dispatch = useDispatch();
@@ -47,6 +48,7 @@ const EditProduct = () => {
     evt.preventDefault();
     const updates = { name, qty, description, price, imageURL };
     dispatch(editSingleProduct({ productId, token, updates }));
+    toast.success('Account info successfully changed');
     dispatch(fetchSingleProduct(productId));
   };
 
@@ -219,6 +221,7 @@ const EditProduct = () => {
           </section>
         </div>
       </div>
+      <Toaster />
     </div>
   );
 };
