@@ -77,6 +77,13 @@ export default function Signup() {
                   setFormData({ ...formData, firstName: e.target.value })
                 }
               />
+              <p
+                className={
+                  isInvalid ? 'text-xs mt-2 text-red-500' : 'collapse -mt-2'
+                }
+              >
+                Please enter your first name!
+              </p>
             </div>
 
             <div className="mb-3">
@@ -97,6 +104,13 @@ export default function Signup() {
                   setFormData({ ...formData, lastName: e.target.value })
                 }
               />
+              <p
+                className={
+                  isInvalid ? 'text-xs mt-2 text-red-500' : 'collapse -mt-2'
+                }
+              >
+                Please enter your last name!
+              </p>
             </div>
 
             <div className="mb-3">
@@ -117,6 +131,13 @@ export default function Signup() {
                   setFormData({ ...formData, email: e.target.value })
                 }
               />
+              <p
+                className={
+                  isInvalid ? 'text-xs mt-2 text-red-500' : 'collapse -mt-2'
+                }
+              >
+                Please enter a valid email!
+              </p>
             </div>
 
             <div className="mb-3">
@@ -133,10 +154,18 @@ export default function Signup() {
                 placeholder="************"
                 value={formData.password}
                 name="password"
+                min={8}
                 onChange={(e) =>
                   setFormData({ ...formData, password: e.target.value })
                 }
               />
+              <p
+                className={
+                  isInvalid ? 'text-xs mt-2 text-red-500' : 'collapse -mt-2'
+                }
+              >
+                Please enter a password!
+              </p>
             </div>
 
             <div>
