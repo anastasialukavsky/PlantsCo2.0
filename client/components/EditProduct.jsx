@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import {
   selectSingleProduct,
   fetchSingleProduct,
   resetStatusError as resetProductStatus,
   editSingleProduct,
+  deleteSingleProduct,
 } from '../slices/product/productSlice';
 import {
   selectAuth,
@@ -14,6 +15,7 @@ import {
 
 const EditProduct = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { productId } = useParams();
   const singleProduct = useSelector(selectSingleProduct);
   const { auth, token } = useSelector(selectAuth);
@@ -45,12 +47,13 @@ const EditProduct = () => {
     evt.preventDefault();
     const updates = { name, qty, description, price, imageURL };
     const id = +productId;
-    dispatch(editSingleProduct({ id, token, updates }));
+    dispatch(editSingleProduct({ productId, token, updates }));
     dispatch(fetchSingleProduct(productId));
   };
 
   const deleteProduct = () => {
-    console.log('DELETE');
+    dispatch(deleteSingleProduct({ productId, token }));
+    navigate('/account/admin');
   };
 
   return (
@@ -178,7 +181,10 @@ const EditProduct = () => {
             </div>
             <div className="flex justify-center"></div>
           </form>
-          <button className="text-red-600 w-5/6 py-2 rounded-lg block text-sm hover:text-primary-promo-banner mt-5">
+          <button
+            className="text-red-600 w-5/6 py-2 rounded-lg block text-sm hover:text-primary-promo-banner mt-5"
+            onClick={deleteProduct}
+          >
             Delete
           </button>
         </section>
