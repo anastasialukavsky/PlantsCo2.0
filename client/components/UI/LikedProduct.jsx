@@ -59,7 +59,7 @@ const LikedProduct = () => {
           alt="heart outline icon"
         />
       </button>
-      <Toaster />
+      {/* <Toaster /> */}
     </>
   );
 };

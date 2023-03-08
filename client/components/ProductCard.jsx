@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addOneToCart } from '../slices/users/cartSlice';
+import toast, { Toaster } from 'react-hot-toast';
 
 const ProductCard = (props) => {
   const { product } = props;
@@ -9,6 +10,7 @@ const ProductCard = (props) => {
 
   function addToCart() {
     dispatch(addOneToCart(product.id));
+    toast.success('Product added to cart!');
   }
 
   return (
@@ -32,9 +34,7 @@ const ProductCard = (props) => {
         <p className="text-2xl mb-1">{product.name}</p>
         <p className="text-sm">${product.price}</p>
       </Link>
-      {/* <button className="bg-primary-deep-green w-full text-white absolute bottom-14 rounded-xl py-1 invisible group-hover:visible mx-auto opacity-60 transition duration-100 ease-in-out hover:opacity-100">
-                  Add To Cart
-                </button> */}
+      <Toaster gutter={15} />
     </div>
   );
 };
