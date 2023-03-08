@@ -4,7 +4,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import {
   selectPromos,
   fetchSinglePromo,
-  resetPromoStatus,
+  resetStatus as resetPromoStatus,
   editPromo,
   deletePromo,
 } from '../slices/product/promoSlice';
@@ -26,8 +26,17 @@ const EditProduct = () => {
   const [discountRate, setDiscountRate] = useState('');
   const [status, setStatus] = useState('');
 
+  const [invalidName, setInvalidName] = useState(false);
+  const [invalidRate, setInvalidRate] = useState(false);
+  const [invalidStatus, setInvalidStatus] = useState(false);
+  const [navAway, setNavAway] = useState(false);
+  const [attemptSubmission, setAttemptSubmission] = useState(false);
+
+  const invalidClass =
+    'appearance-none block w-full bg-white-200 text-gray-700 border border-red-500 rounded py-3 px-4  leading-tight focus:outline-none focus:bg-white focus:border-gray-500';
+
   useEffect(() => {
-    dispatch(fetchSinglePromo({ promoId, token }));
+    dispatch(fetchSinglePromo({ id, token }));
 
     return () => {
       resetPromoStatus();
@@ -41,8 +50,19 @@ const EditProduct = () => {
     setStatus(promo.status || '');
   }, [promo]);
 
+  const checkFormValidation = () => {
+    if (!name) setInvalidName(true);
+    if (discountRate > 1 || discountRate === '') setInvalidRate(true);
+    if (status === '') setInvalidStatus(true);
+
+    if (!invalidName && !invalidRate && !invalidStatus) {
+      setNavAway(true);
+    }
+  };
+
   const updatePromo = (evt) => {
     evt.preventDefault();
+    checkFormValidation();
     const updates = { name, discountRate, status };
     console.log('updates:', updates);
 
@@ -50,9 +70,17 @@ const EditProduct = () => {
     dispatch(fetchSinglePromo({ id, token }));
   };
 
+  useEffect(() => {
+    if (promo.name === name) navigate('/account/admin/promos');
+
+    return () => {
+      dispatch(resetPromoStatus());
+    };
+  }, [promo]);
+
   const deletePromo = async () => {
-    await dispatch(deleteSinglePromo({ promoId, token }));
-    if (!promo.name) navigate('/account/admin');
+    await dispatch(deletePromo({ promoId, token }));
+    if (!promo.name) navigate('/account/admin/promos');
   };
 
   return (
@@ -70,7 +98,7 @@ const EditProduct = () => {
               </button>
             </div>
             <div className="flex flex-col gap-3">
-              <div className="bg-green-900 text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
+              <div className="hover:bg-green-900 hover:text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
                 <button className="flex flex-row">
                   <Link to={'/account/admin/products'}>PRODUCTS/EDIT</Link>
                 </button>
@@ -80,9 +108,9 @@ const EditProduct = () => {
                   <Link to={'/account/admin/addproduct'}>ADD NEW PRODUCT</Link>
                 </button>
               </div>
-              <div className="hover:bg-green-900 hover:text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
+              <div className="bg-green-900 text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
                 <button className="text-left">
-                  <Link to={'/account/admin/promos'}>PROMOCODES</Link>
+                  <Link to={'/account/admin/promos'}>PROMOCODES/EDIT</Link>
                 </button>
               </div>
               <div className="hover:bg-green-900 hover:text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
@@ -100,6 +128,16 @@ const EditProduct = () => {
           <section className="flex flex-col w-full">
             <form className="pl-10 pr-10" onSubmit={updatePromo}>
               <div className="flex flex-wrap -mx-3 mb-6">
+                <div
+                  className={
+                    invalidName || invalidRate || invalidStatus
+                      ? 'text-red-500 text-xs'
+                      : 'collapse text-xs'
+                  }
+                >
+                  <p>Submission Failed!</p>
+                  <p> Please complete all required fields</p>
+                </div>
                 <div className="w-full px-3">
                   <label
                     className="block uppercase tracking-wide text-primary-deep-green text-xs font-bold mb-2"
@@ -108,11 +146,18 @@ const EditProduct = () => {
                     Name
                   </label>
                   <input
-                    className="appearance-none block w-full bg-white-200 text-gray-700 border border-gray-200 rounded py-3 px-4  leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    className={
+                      invalidName
+                        ? invalidClass
+                        : 'appearance-none block w-full bg-white-200 text-gray-700 border border-gray-200 rounded py-3 px-4  leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
+                    }
                     id="grid-name"
                     type="text"
                     value={name}
-                    onChange={(evt) => setName(evt.target.value)}
+                    onChange={(evt) => {
+                      setInvalidName(false);
+                      setName(evt.target.value);
+                    }}
                   />
                 </div>
               </div>
@@ -125,14 +170,21 @@ const EditProduct = () => {
                     PROMO RATE
                   </label>
                   <input
-                    className="appearance-none block w-full bg-white-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    className={
+                      invalidRate
+                        ? invalidClass
+                        : 'appearance-none block w-full bg-white-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
+                    }
                     id="grid-qty"
                     type="number"
                     min={0}
                     max={1}
-                    step={0.05}
+                    step={0.01}
                     value={discountRate}
-                    onChange={(evt) => setDiscountRate(evt.target.value)}
+                    onChange={(evt) => {
+                      setInvalidRate(false);
+                      setDiscountRate(evt.target.value);
+                    }}
                   />
                 </div>
                 <div className="w-full md:w-1/2 px-3">
@@ -143,15 +195,22 @@ const EditProduct = () => {
                     STATUS
                   </label>
                   <select
-                    className="appearance-none block w-full bg-white-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    className={
+                      invalidStatus
+                        ? invalidClass
+                        : 'appearance-none block w-full bg-white-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
+                    }
                     id="grid-price"
                     type="text"
                     value={status}
-                    onChange={(evt) => setStatus(evt.target.value)}
+                    onChange={(evt) => {
+                      setInvalidStatus(false);
+                      setStatus(evt.target.value);
+                    }}
                   >
-                    <option value="" disabled>
+                    {/* <option value="" disabled>
                       <em>select status</em>
-                    </option>
+                    </option> */}
                     <option value={true}>true</option>
                     <option value={false}>false</option>
                   </select>
