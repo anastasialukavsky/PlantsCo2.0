@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  fetchCart,
-  selectCart,
   addOneToCart,
   removeOneFromCart,
   removeCartRow,
@@ -15,10 +13,6 @@ const CartCard = (props) => {
   const dispatch = useDispatch();
 
   const { product, item } = props;
-
-  useEffect(() => {
-    dispatch(fetchCart());
-  }, [dispatch]);
 
   function decrementCart(productId) {
     dispatch(removeOneFromCart(productId));

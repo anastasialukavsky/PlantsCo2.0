@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCart, selectCart } from '../slices/users/cartSlice';
+import { selectCart } from '../slices/users/cartSlice';
 import CartCard from './CartCard.jsx';
 import CartSubtotal from './CartSubtotal.jsx';
 
@@ -8,10 +8,6 @@ export default function CartView(props) {
   const dispatch = useDispatch();
   const [subTotal, setSubTotal] = useState(0);
   const cart = useSelector(selectCart);
-
-  useEffect(() => {
-    dispatch(fetchCart());
-  }, [dispatch]);
 
   if (!cart || !cart.cart || !cart.cart.length > 0)
     return <h1>Your cart is empty...</h1>;
