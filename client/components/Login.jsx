@@ -27,8 +27,16 @@ const Login = () => {
   const invalidClass =
     'appearance-none border border-red-500 rounded w-96 py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline';
 
+  const validateEmail = (email) => {
+    let res = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    return res.test(email);
+  };
+
   const checkFormValidation = () => {
     if (email === '') {
+      setIsInvalidEmail(true);
+    }
+    if (!validateEmail(email)) {
       setIsInvalidEmail(true);
     }
     if (password === '' || password.length < 8) {
@@ -73,7 +81,7 @@ const Login = () => {
                   logInFail ? 'text-red-500 text-xs' : 'collapse text-xs'
                 }
               >
-                Invalid email or password!
+                Invalid login credentials!
               </p>
               <label
                 className="block text-primary-deep-green text-sm font-bold mb-2"
@@ -86,7 +94,6 @@ const Login = () => {
                   isInvalidEmail || logInFail ? invalidClass : validClass
                 }
                 id="email"
-                type="email"
                 placeholder="email"
                 value={email}
                 onChange={(evt) => {
