@@ -16,3 +16,6 @@ export { default as AdminDashboard } from './AdminDashboard.jsx';
 export { default as Wishlist } from './Wishlist.jsx';
 export { default as EditProduct } from './EditProduct.jsx';
 export { default as AddNewProduct } from './AddNewProduct.jsx';
+export { default as AdminProductView } from './AdminProductView.jsx';
+export { default as AdminPromoCodeView } from './AdminPromoCodeView.jsx';
+export { default as AdminUserMgmt } from './AdminUserMgmt.jsx';
