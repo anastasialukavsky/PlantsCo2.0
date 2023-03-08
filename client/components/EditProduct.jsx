@@ -53,7 +53,6 @@ const EditProduct = () => {
 
   const deleteProduct = async () => {
     await dispatch(deleteSingleProduct({ productId, token }));
-    console.log(data);
   };
 
   return (
