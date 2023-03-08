@@ -111,27 +111,27 @@ const AdminPromoCodeView = () => {
                               key={promo.id}
                               className="text-sm odd:bg-white even:bg-slate-50"
                             >
-                              <th scope="col" className="px-6 py-3">
+                              <td scope="col" className="px-6 py-3 text-center">
                                 {promo.id}
-                              </th>
-                              <th scope="col" className="px-6 py-3 text-left">
+                              </td>
+                              <td scope="col" className="px-6 py-3 text-left">
                                 {promo.name}
-                              </th>
-                              <th scope="col" className="px-6 py-3">
+                              </td>
+                              <td scope="col" className="px-6 py-3 text-center">
                                 {(promo.discountRate * 100).toFixed()}
                                 {'%'}
-                              </th>
-                              <th scope="col" className="px-6 py-3">
+                              </td>
+                              <td scope="col" className="px-6 py-3 text-center">
                                 {promo.status.toString()}
-                              </th>
-                              <th scope="col" className="px-6 py-3">
+                              </td>
+                              <td scope="col" className="px-6 py-3">
                                 <Link
                                   className="hover:text-primary-promo-banner"
                                   to={`/account/admin/editpromos/${promo.id}`}
                                 >
                                   {'Edit / Delete'}
                                 </Link>
-                              </th>
+                              </td>
                             </tr>
                           );
                         })
