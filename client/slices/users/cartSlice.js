@@ -169,9 +169,7 @@ export const removeOneFromCart = createAsyncThunk(
     if (!found) return; // exit early without hitting db / resetting localstorage
 
     // remove zero qty lines
-    console.log('localCart before filter', localCart);
     localCart = localCart.filter((cartItem) => cartItem.qty > 0);
-    console.log('localCart after filter', localCart);
     window.localStorage.setItem('cart', JSON.stringify(localCart));
 
     // if there was a token (and a user ID), use it to update DB cart
