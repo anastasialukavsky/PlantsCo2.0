@@ -238,9 +238,11 @@ export const removeCartRow = createAsyncThunk(
 );
 
 export const purgeCart = createAsyncThunk('cart/purgeCart', async () => {
+  console.log('hello from purgeCart');
   let userId = null;
 
   const token = window.localStorage.getItem('token');
+  window.localStorage.removeItem('cart');
 
   if (token) {
     let res = await axios.get(`/api/auth`, {
@@ -256,13 +258,12 @@ export const purgeCart = createAsyncThunk('cart/purgeCart', async () => {
   let axiosPayload = { action: 'purge' };
 
   if (token && userId !== null) {
+    console.log('sending delete request');
     await axios.delete(`/api/users/${userId}/cart`, {
       headers: { authorization: token },
       data: axiosPayload,
     });
   }
-
-  window.localStorage.removeItem('cart');
 
   return;
 });
