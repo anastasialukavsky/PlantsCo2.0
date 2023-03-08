@@ -52,7 +52,12 @@ const AdminProductView = () => {
               </div>
               <div className="hover:bg-green-900 hover:text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
                 <button className="text-left">
-                  <Link to={'/account/admin/promos'}>PROMOCODES</Link>
+                  <Link to={'/account/admin/promos'}>PROMOS</Link>
+                </button>
+              </div>
+              <div className="hover:bg-green-900 hover:text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
+                <button className="text-left">
+                  <Link to={'/account/admin/addpromo'}>ADD NEW PROMO</Link>
                 </button>
               </div>
               <div className="hover:bg-green-900 hover:text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
@@ -66,7 +71,6 @@ const AdminProductView = () => {
             <Link to={'/account'}>Back</Link>
           </button>
         </aside>
-
         <div className="p-4 w-3/4 h-[calc(100vh_-_5rem)] overflow-auto">
           <div className="p-4">
             <div className="flex flex-col h-[calc(100vh_-_10rem)] rounded-xl overflow-auto">

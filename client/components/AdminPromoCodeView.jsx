@@ -53,7 +53,12 @@ const AdminPromoCodeView = () => {
               </div>
               <div className="bg-green-900 text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
                 <button className="text-left">
-                  <Link to={'/account/admin/promos'}>PROMOCODES</Link>
+                  <Link to={'/account/admin/promos'}>PROMOS</Link>
+                </button>
+              </div>
+              <div className="hover:bg-green-900 hover:text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
+                <button className="text-left">
+                  <Link to={'/account/admin/addpromo'}>ADD NEW PROMO</Link>
                 </button>
               </div>
               <div className="hover:bg-green-900 hover:text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">

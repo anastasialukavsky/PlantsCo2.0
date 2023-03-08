@@ -24,6 +24,7 @@ import {
   AdminUserMgmt,
   AdminPromoCodeView,
   EditPromos,
+  AddNewPromo,
 } from './index';
 import { selectAuth, attemptTokenLogin } from '../slices/users/authSlice';
 
@@ -76,6 +77,7 @@ export default function Main() {
             element={<EditProduct />}
           />
           <Route path="/account/admin/addproduct" element={<AddNewProduct />} />
+          <Route path="/account/admin/addpromo" element={<AddNewPromo />} />
         </Routes>
       </div>
     </React.Fragment>

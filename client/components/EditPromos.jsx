@@ -30,7 +30,6 @@ const EditProduct = () => {
   const [invalidRate, setInvalidRate] = useState(false);
   const [invalidStatus, setInvalidStatus] = useState(false);
   const [navAway, setNavAway] = useState(false);
-  const [attemptSubmission, setAttemptSubmission] = useState(false);
 
   const invalidClass =
     'appearance-none block w-full bg-white-200 text-gray-700 border border-red-500 rounded py-3 px-4  leading-tight focus:outline-none focus:bg-white focus:border-gray-500';
@@ -100,7 +99,7 @@ const EditProduct = () => {
             <div className="flex flex-col gap-3">
               <div className="hover:bg-green-900 hover:text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
                 <button className="flex flex-row">
-                  <Link to={'/account/admin/products'}>PRODUCTS/EDIT</Link>
+                  <Link to={'/account/admin/products'}>PRODUCTS</Link>
                 </button>
               </div>
               <div className="hover:bg-green-900 hover:text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
@@ -110,7 +109,12 @@ const EditProduct = () => {
               </div>
               <div className="bg-green-900 text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
                 <button className="text-left">
-                  <Link to={'/account/admin/promos'}>PROMOCODES/EDIT</Link>
+                  <Link to={'/account/admin/promos'}>PROMOS/EDIT</Link>
+                </button>
+              </div>
+              <div className="hover:bg-green-900 hover:text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
+                <button className="text-left">
+                  <Link to={'/account/admin/addpromo'}>ADD NEW PROMO</Link>
                 </button>
               </div>
               <div className="hover:bg-green-900 hover:text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
