@@ -32,12 +32,12 @@ const AdminDashboard = () => {
             </div>
             <div className="flex flex-col gap-3">
               <div className="hover:bg-green-900 hover:text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
-                <button className="flex flex-row">
+                <button className="flex flex-row text-left">
                   <Link to={'/account/admin/products'}>PRODUCTS</Link>
                 </button>
               </div>
               <div className="hover:bg-green-900 hover:text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
-                <button className="flex flex-row">
+                <button className="flex flex-row text-left">
                   <Link to={'/account/admin/addproduct'}>ADD NEW PRODUCT</Link>
                 </button>
               </div>
