@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import PromoBanner from './UI/PromoBanner.jsx';
 import box from '../../public/assets/box.svg';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,6 +17,10 @@ import toast, { Toaster } from 'react-hot-toast';
 const singleProduct = () => {
   const dispatch = useDispatch();
   const { productId } = useParams();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     dispatch(fetchSingleProduct(productId));

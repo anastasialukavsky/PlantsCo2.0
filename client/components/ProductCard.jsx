@@ -16,7 +16,12 @@ const ProductCard = (props) => {
   return (
     <div key={product.id} className="group">
       <div className="relative">
-        <Link to={`/products/${product.id}`}>
+        <Link
+          onClick={() => {
+            window.scrollTo(0, 0);
+          }}
+          to={`/products/${product.id}`}
+        >
           <img
             src={`${product.imageURL}`}
             alt="Picture of plant on a counter"
