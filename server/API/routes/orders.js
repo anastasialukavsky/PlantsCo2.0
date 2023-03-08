@@ -1,7 +1,6 @@
 const dotenv = require('dotenv').config();
 const stripe = require('stripe')(process.env.STRIPE_DEMO);
 const router = require('express').Router();
-const { de } = require('date-fns/locale');
 const {
   User,
   Order,
