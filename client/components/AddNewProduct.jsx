@@ -5,7 +5,6 @@ import {
   addProduct,
   resetStatusError as resetProductStatus,
   selectSingleProduct,
-  selectStatus,
 } from '../slices/product/productSlice';
 import { selectAuth } from '../slices/users/authSlice';
 
@@ -14,7 +13,6 @@ const AddNewProduct = () => {
   const navigate = useNavigate();
   const { token } = useSelector(selectAuth);
   const singleProduct = useSelector(selectSingleProduct);
-  const status = useSelector(selectStatus);
 
   const [name, setName] = useState('');
   const [qty, setQty] = useState('');
