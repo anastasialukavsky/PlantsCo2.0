@@ -11,6 +11,9 @@ export default function Signup() {
   const auth = useSelector(selectAuth);
 
   const [isInvalid, setIsInvalid] = useState(false);
+  const [shortPassword, setShortPassword] = useState(false);
+  const [invalidEmailMessage, setInvalidEmailMessage] =
+    useState('Enter your email');
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -27,20 +30,39 @@ export default function Signup() {
     }
   }, [token]);
 
+  function validateEmail(email) {
+    // from https://www.w3docs.com/snippets/javascript/how-to-validate-an-e-mail-using-javascript.html
+    let res = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    return res.test(email);
+  }
+
   const handleSubmit = async (evt) => {
     evt.preventDefault();
 
-    if (
-      formData.firstName === '' ||
-      formData.lastName === '' ||
-      formData.email === '' ||
-      formData.password === ''
-    ) {
+    if (formData.password.length < 8) {
+      setShortPassword(true);
+      setFormData({ ...formData, password: '' });
+    } else setShortPassword(false);
+
+    if (!validateEmail(formData.email)) {
+      setFormData({ ...formData, email: '' });
+      setInvalidEmailMessage('Invalid email format');
+      setIsInvalid(true);
+      return;
+    }
+
+    if (formData.firstName === '' || formData.lastName === '') {
       setIsInvalid(true);
       return;
     }
 
     dispatch(signUp(formData));
+  };
+
+  const passwordValidationMessage = () => {
+    if (shortPassword) return 'Must be at least 8 characters';
+    if (isInvalid && formData.password === '') return 'Please enter a password';
+    return null;
   };
 
   const login = () => {
@@ -104,7 +126,7 @@ export default function Signup() {
                 className=" appearance-none border rounded w-96 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline"
                 id="email"
                 type="text"
-                placeholder={isInvalid ? 'Enter your email' : null}
+                placeholder={isInvalid ? invalidEmailMessage : null}
                 value={formData.email}
                 name="email"
                 onChange={(e) =>
@@ -124,7 +146,7 @@ export default function Signup() {
                 className=" appearance-none border rounded w-96 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline"
                 id="password"
                 type="password"
-                placeholder={isInvalid ? 'Enter your password' : null}
+                placeholder={passwordValidationMessage()}
                 value={formData.password}
                 name="password"
                 onChange={(e) =>
