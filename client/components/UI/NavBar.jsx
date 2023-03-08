@@ -32,7 +32,9 @@ const NavBar = (props) => {
       </div>
       <div className="flex gap-10">
         <div className="flex gap-1 stroke-green-900">
-          <img src={searchIcon} alt="magnifying glass" className="w-6" />
+          <button onClick={handleSearch}>
+            <img src={searchIcon} alt="magnifying glass" className="w-6" />
+          </button>
           <form onSubmit={handleSearch}>
             <input
               type="text"

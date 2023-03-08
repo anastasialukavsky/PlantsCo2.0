@@ -17,7 +17,10 @@ const AllProducts = () => {
   useEffect(() => {
     dispatch(fetchAllProducts());
 
-    return () => dispatch(resetStatusError());
+    return () => {
+      dispatch(resetStatusError());
+      dispatch(adjustFilter(''));
+    };
   }, [dispatch]);
 
   return (
