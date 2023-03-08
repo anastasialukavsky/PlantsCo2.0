@@ -45,7 +45,9 @@ export default function OrderConfirmation() {
               </p>
             </div>
           ) : (
-            <p>Checkout canceled</p>
+            <p className="text-center text-xl text-primary-bright-white">
+              Checkout canceled
+            </p>
           )}
           <div className="text-center text-primary-bright-white text-xl tracking-wide mt-10">
             <p className="font-light">
