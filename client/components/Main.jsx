@@ -19,6 +19,7 @@ import {
   AdminDashboard,
   Wishlist,
   EditProduct,
+  AddNewProduct,
 } from './index';
 import { selectAuth, attemptTokenLogin } from '../slices/users/authSlice';
 
@@ -57,6 +58,7 @@ export default function Main() {
             path="/account/admin/editproduct/:productId"
             element={<EditProduct />}
           />
+          <Route path="/account/admin/addproduct" element={<AddNewProduct />} />
         </Routes>
       </div>
     </React.Fragment>
