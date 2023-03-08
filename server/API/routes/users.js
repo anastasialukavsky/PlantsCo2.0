@@ -427,16 +427,22 @@ router.put('/:id/cart', requireToken, async (req, res, next) => {
 // DELETE - remove cart items (frontend - when qty is 0, user removes from cart, and when user completes an order)
 router.delete('/:id/cart', requireToken, async (req, res, next) => {
   try {
-    if (req.user.id === +req.params.id || req.user.isAdmin) {
-      const cartItem = await Cart.findOne({
-        where: {
-          userId: req.params.id,
-          productId: req.body.productId,
-        },
-      });
-      if (!cartItem) return res.status(404).send('No product to delete!');
-      await cartItem.destroy();
-      res.json(cartItem);
+    const userId = +req.params.id;
+    if (req.user.id === userId || req.user.isAdmin) {
+      if (req.body.action === 'purge') {
+        await Cart.destroy({ where: { userId: userId } });
+        res.sendStatus(204);
+      } else {
+        const cartItem = await Cart.findOne({
+          where: {
+            userId: userId,
+            productId: req.body.productId,
+          },
+        });
+        if (!cartItem) return res.status(404).send('No product to delete!');
+        await cartItem.destroy();
+        res.json(cartItem);
+      }
     } else {
       res
         .status(403)
