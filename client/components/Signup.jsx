@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { signUp } from '../slices/users/authSlice';
 import { attemptTokenLogin } from '../slices/users/authSlice';
@@ -11,9 +11,11 @@ export default function Signup() {
   const auth = useSelector(selectAuth);
 
   const [isInvalid, setIsInvalid] = useState(false);
-  const [shortPassword, setShortPassword] = useState(false);
-  const [invalidEmailMessage, setInvalidEmailMessage] =
-    useState('Enter your email');
+  const [isInvalidFirstName, setIsInvalidFirstName] = useState(false);
+  const [isInvalidLastName, setIsInvalidLastName] = useState(false);
+  const [isInvalidEmail, setIsInvalidEmail] = useState(false);
+  const [isInvalidPassword, setIsInvalidPassword] = useState(false);
+
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -22,13 +24,38 @@ export default function Signup() {
     password: '',
   });
 
+  const validClass =
+    'appearance-none border rounded w-96 py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline';
+
+  const invalidClass =
+    'appearance-none border border-red-500 rounded w-96 py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline';
+
   const token = window.localStorage.getItem('token');
   useEffect(() => {
     if (token) {
       dispatch(attemptTokenLogin());
       navigate('/products');
     }
-  }, [token]);
+  }, [token, isInvalid]);
+
+  const checkFormValidation = () => {
+    if (formData.firstName === '') {
+      setIsInvalidFirstName(true);
+      setIsInvalid(true);
+    }
+    if (formData.lastName === '') {
+      setIsInvalidLastName(true);
+      setIsInvalid(true);
+    }
+    if (formData.email === '') {
+      setIsInvalidEmail(true);
+      setIsInvalid(true);
+    }
+    if (formData.password === '' || formData.password.length < 8) {
+      setIsInvalidPassword(true);
+      setIsInvalid(true);
+    }
+  };
 
   function validateEmail(email) {
     // from https://www.w3docs.com/snippets/javascript/how-to-validate-an-e-mail-using-javascript.html
@@ -38,35 +65,8 @@ export default function Signup() {
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
-
-    if (formData.password.length < 8) {
-      setShortPassword(true);
-      setFormData({ ...formData, password: '' });
-    } else setShortPassword(false);
-
-    if (!validateEmail(formData.email)) {
-      setFormData({ ...formData, email: '' });
-      setInvalidEmailMessage('Invalid email format');
-      setIsInvalid(true);
-      return;
-    }
-
-    if (formData.firstName === '' || formData.lastName === '') {
-      setIsInvalid(true);
-      return;
-    }
-
-    dispatch(signUp(formData));
-  };
-
-  const passwordValidationMessage = () => {
-    if (shortPassword) return 'Must be at least 8 characters';
-    if (isInvalid && formData.password === '') return 'Please enter a password';
-    return null;
-  };
-
-  const login = () => {
-    navigate('/login');
+    checkFormValidation();
+    if (!isInvalid) dispatch(signUp(formData));
   };
 
   return (
@@ -83,16 +83,26 @@ export default function Signup() {
                 First Name
               </label>
               <input
-                className=" appearance-none border rounded w-96 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline"
+                className={isInvalidFirstName ? invalidClass : validClass}
                 id="firstName"
                 type="text"
-                placeholder={isInvalid ? 'Enter your first name' : null}
+                placeholder="first name"
                 value={formData.firstName}
                 name="firstName"
-                onChange={(e) =>
-                  setFormData({ ...formData, firstName: e.target.value })
-                }
+                onChange={(e) => {
+                  setIsInvalidFirstName(false);
+                  setFormData({ ...formData, firstName: e.target.value });
+                }}
               />
+              <p
+                className={
+                  isInvalidFirstName
+                    ? 'text-xs mt-2 text-red-500'
+                    : 'collapse -mt-2'
+                }
+              >
+                Please enter your first name!
+              </p>
             </div>
 
             <div className="mb-3">
@@ -103,16 +113,26 @@ export default function Signup() {
                 Last Name
               </label>
               <input
-                className=" appearance-none border rounded w-96 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline"
+                className={isInvalidLastName ? invalidClass : validClass}
                 id="lastName"
                 type="text"
-                placeholder={isInvalid ? 'Enter your last name' : null}
+                placeholder="last name"
                 value={formData.lastName}
                 name="lastName"
-                onChange={(e) =>
-                  setFormData({ ...formData, lastName: e.target.value })
-                }
+                onChange={(e) => {
+                  setIsInvalidLastName(false);
+                  setFormData({ ...formData, lastName: e.target.value });
+                }}
               />
+              <p
+                className={
+                  isInvalidLastName
+                    ? 'text-xs mt-2 text-red-500'
+                    : 'collapse -mt-2'
+                }
+              >
+                Please enter your last name!
+              </p>
             </div>
 
             <div className="mb-3">
@@ -123,16 +143,26 @@ export default function Signup() {
                 Email
               </label>
               <input
-                className=" appearance-none border rounded w-96 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline"
+                className={isInvalidEmail ? invalidClass : validClass}
                 id="email"
-                type="text"
-                placeholder={isInvalid ? invalidEmailMessage : null}
+                type="email"
+                placeholder="email"
                 value={formData.email}
                 name="email"
-                onChange={(e) =>
-                  setFormData({ ...formData, email: e.target.value })
-                }
+                onChange={(e) => {
+                  setIsInvalidEmail(false);
+                  setFormData({ ...formData, email: e.target.value });
+                }}
               />
+              <p
+                className={
+                  isInvalidEmail
+                    ? 'text-xs mt-2 text-red-500'
+                    : 'collapse -mt-2'
+                }
+              >
+                Please enter a valid email!
+              </p>
             </div>
 
             <div className="mb-3">
@@ -143,21 +173,31 @@ export default function Signup() {
                 Password
               </label>
               <input
-                className=" appearance-none border rounded w-96 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline"
+                className={isInvalidPassword ? invalidClass : validClass}
                 id="password"
                 type="password"
-                placeholder={passwordValidationMessage()}
+                placeholder="************"
                 value={formData.password}
                 name="password"
-                onChange={(e) =>
-                  setFormData({ ...formData, password: e.target.value })
-                }
+                onChange={(e) => {
+                  setIsInvalidPassword(false);
+                  setFormData({ ...formData, password: e.target.value });
+                }}
               />
+              <p
+                className={
+                  isInvalidPassword
+                    ? 'text-xs mt-2 text-red-500'
+                    : 'collapse -mt-2'
+                }
+              >
+                Please enter a valid password (at least 8 chars)!
+              </p>
             </div>
 
             <div>
               <button
-                className="ease-in duration-500  hover:bg-primary-button-hover w-full bg-primary-deep-green text-white py-2 rounded-2xl mx-auto block text-xl hover:transition-all mt-10"
+                className="ease-in duration-500  hover:bg-primary-button-hover w-full bg-primary-deep-green text-white py-2 rounded-xl mx-auto block text-xl hover:transition-all mt-10"
                 type="submit"
               >
                 Submit
@@ -165,11 +205,8 @@ export default function Signup() {
             </div>
           </form>
           <div className="flex justify-center">
-            <button
-              onClick={login}
-              className="inline-block align-baseline font-bold text-sm hover:text-primary-promo-banner"
-            >
-              Already have an account? Log in!
+            <button className="inline-block align-baseline font-bold text-sm hover:text-primary-promo-banner">
+              <Link to={'/login'}>Already have an account? Log in!</Link>
             </button>
           </div>
         </section>

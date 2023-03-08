@@ -7,6 +7,7 @@ import {
   resetStatus,
 } from '../slices/users/authSlice';
 import { updateSingleUser, selectUsers } from '../slices/users/userSlice';
+import toast, { Toaster } from 'react-hot-toast';
 
 const EditProfile = () => {
   const dispatch = useDispatch();
@@ -21,11 +22,6 @@ const EditProfile = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
-  const [role, setRole] = useState('');
-  // const [password, setPassword] = useState('');
-  // const [shipping, setShipping] = useState('');
-  // const [payment, setPayment] = useState('');
-  // const [currency, setCurrency] = useState('');
 
   useEffect(() => {
     dispatch(attemptTokenLogin());
@@ -43,6 +39,7 @@ const EditProfile = () => {
 
   const updateUser = (evt) => {
     evt.preventDefault();
+    toast.success('Account info successfully changed');
     const updates = { firstName, lastName, email };
     dispatch(updateSingleUser({ id, token, updates }));
   };
@@ -113,7 +110,7 @@ const EditProfile = () => {
               <div className="flex items-center justify-between">
                 <button
                   type="submit"
-                  className="hover:bg-primary-button-green w-full bg-primary-deep-green text-white py-2 rounded-lg mx-auto block text-xl hover:transition-all mt-5"
+                  className="hover:bg-primary-button-hover w-full bg-primary-deep-green text-white py-2 rounded-lg mx-auto block text-xl hover:transition-all mt-5"
                 >
                   Save
                 </button>
@@ -129,6 +126,7 @@ const EditProfile = () => {
           </button>
         </div>
       </div>
+      <Toaster />
     </div>
   );
 };

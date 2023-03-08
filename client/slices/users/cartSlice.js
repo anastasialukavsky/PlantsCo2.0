@@ -237,6 +237,36 @@ export const removeCartRow = createAsyncThunk(
   }
 );
 
+export const purgeCart = createAsyncThunk('cart/purgeCart', async () => {
+  let userId = null;
+
+  const token = window.localStorage.getItem('token');
+
+  if (token) {
+    let res = await axios.get(`/api/auth`, {
+      headers: {
+        authorization: token,
+      },
+    });
+
+    // extract userId from token response
+    userId = res.data.id;
+  }
+
+  let axiosPayload = { action: 'purge' };
+
+  if (token && userId !== null) {
+    await axios.delete(`/api/users/${userId}/cart`, {
+      headers: { authorization: token },
+      data: axiosPayload,
+    });
+  }
+
+  window.localStorage.removeItem('cart');
+
+  return;
+});
+
 const cartSlice = createSlice({
   name: 'cart',
   initialState: {
@@ -261,6 +291,10 @@ const cartSlice = createSlice({
       if (!payload) return; // thunk will return null if nothing to remove
       state.cart = payload.localCart;
       state.expandedCart = payload.expandedCart;
+    });
+    builder.addCase(purgeCart.fulfilled, (state, action) => {
+      state.cart = [];
+      state.expandedCart = [];
     });
   },
 });
