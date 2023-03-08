@@ -19,7 +19,9 @@ const AdminUserMgmt = () => {
   const { auth, token } = useSelector(selectAuth);
 
   useEffect(() => {
-    dispatch(fetchAllUsers({ token }));
+    if (auth && token) {
+      dispatch(fetchAllUsers({ token }));
+    }
 
     return () => {
       resetAuthStatus();
@@ -96,7 +98,10 @@ const AdminUserMgmt = () => {
                       >
                         {'EMAIL'}
                       </th>
-                      <th scope="col" className="px-6 py-3 top-0 sticky">
+                      <th
+                        scope="col"
+                        className="px-6 py-3 top-0 sticky text-left"
+                      >
                         {'ROLE'}
                       </th>
                       <th scope="col" className="px-6 py-3 top-0 sticky">
@@ -112,21 +117,21 @@ const AdminUserMgmt = () => {
                               key={user.id}
                               className="text-sm odd:bg-white even:bg-slate-50"
                             >
-                              <th scope="col" className="px-6 py-3">
+                              <td scope="col" className="px-6 py-3 text-center">
                                 {user.id}
-                              </th>
-                              <th scope="col" className="px-6 py-3 text-left">
+                              </td>
+                              <td scope="col" className="px-6 py-3 text-left">
                                 {user.fullName}
-                              </th>
-                              <th scope="col" className="px-6 py-3 text-left">
+                              </td>
+                              <td scope="col" className="px-6 py-3 text-left">
                                 {user.email}
-                              </th>
-                              <th scope="col" className="px-6 py-3">
+                              </td>
+                              <td scope="col" className="px-6 py-3">
                                 {user.role}
-                              </th>
-                              <th scope="col" className="px-6 py-3">
+                              </td>
+                              <td scope="col" className="px-6 py-3 text-center">
                                 {user.isAdmin.toString()}
-                              </th>
+                              </td>
                             </tr>
                           );
                         })

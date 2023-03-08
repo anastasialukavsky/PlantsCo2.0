@@ -22,11 +22,14 @@ const OrderHistoryDetails = () => {
   const { orderDetails, order } = useSelector(selectOrders);
 
   const userId = auth.id;
+  const id = auth.id;
   const orderId = +params.orderId;
 
   useEffect(() => {
-    dispatch(fetchUserOrders({ userId, token }));
-    dispatch(fetchOrderDetails({ userId, orderId, token }));
+    if (auth && auth.id) {
+      dispatch(fetchUserOrders({ id, token }));
+      dispatch(fetchOrderDetails({ userId, orderId, token }));
+    }
 
     return () => {
       dispatch(resetStatus());

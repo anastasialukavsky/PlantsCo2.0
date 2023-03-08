@@ -107,27 +107,27 @@ const AdminProductView = () => {
                               key={product.id}
                               className="text-sm odd:bg-white even:bg-slate-50"
                             >
-                              <th scope="col" className="px-6 py-3">
+                              <td scope="col" className="px-6 py-3 text-center">
                                 {product.id}
-                              </th>
-                              <th scope="col" className="px-6 py-3 text-left">
+                              </td>
+                              <td scope="col" className="px-6 py-3 text-left">
                                 {product.name}
-                              </th>
-                              <th scope="col" className="px-6 py-3">
+                              </td>
+                              <td scope="col" className="px-6 py-3 text-center">
                                 {'$'}
                                 {product.price}
-                              </th>
-                              <th scope="col" className="px-6 py-3">
+                              </td>
+                              <td scope="col" className="px-6 py-3 text-center">
                                 {product.qty}
-                              </th>
-                              <th scope="col" className="px-6 py-3">
+                              </td>
+                              <td scope="col" className="px-6 py-3 text-center">
                                 <Link
                                   className="hover:text-primary-promo-banner"
                                   to={`/account/admin/editproduct/${product.id}`}
                                 >
                                   {'Edit / Delete'}
                                 </Link>
-                              </th>
+                              </td>
                             </tr>
                           );
                         })
