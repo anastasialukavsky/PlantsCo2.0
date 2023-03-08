@@ -19,6 +19,12 @@ export default function Signup() {
     password: '',
   });
 
+  const validClass =
+    'appearance-none border rounded w-96 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline';
+
+  const invalidClass =
+    'appearance-none border border-red-500 rounded w-96 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline';
+
   const token = window.localStorage.getItem('token');
   useEffect(() => {
     if (token) {
@@ -61,10 +67,10 @@ export default function Signup() {
                 First Name
               </label>
               <input
-                className=" appearance-none border rounded w-96 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline"
+                className={isInvalid ? invalidClass : validClass}
                 id="firstName"
                 type="text"
-                placeholder={isInvalid ? 'Enter your first name' : null}
+                placeholder="first name"
                 value={formData.firstName}
                 name="firstName"
                 onChange={(e) =>
@@ -81,10 +87,10 @@ export default function Signup() {
                 Last Name
               </label>
               <input
-                className=" appearance-none border rounded w-96 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline"
+                className={isInvalid ? invalidClass : validClass}
                 id="lastName"
                 type="text"
-                placeholder={isInvalid ? 'Enter your last name' : null}
+                placeholder="last name"
                 value={formData.lastName}
                 name="lastName"
                 onChange={(e) =>
@@ -101,10 +107,10 @@ export default function Signup() {
                 Email
               </label>
               <input
-                className=" appearance-none border rounded w-96 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline"
+                className={isInvalid ? invalidClass : validClass}
                 id="email"
                 type="text"
-                placeholder={isInvalid ? 'Enter your email' : null}
+                placeholder="email"
                 value={formData.email}
                 name="email"
                 onChange={(e) =>
@@ -121,10 +127,10 @@ export default function Signup() {
                 Password
               </label>
               <input
-                className=" appearance-none border rounded w-96 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline"
+                className={isInvalid ? invalidClass : validClass}
                 id="password"
                 type="password"
-                placeholder={isInvalid ? 'Enter your password' : null}
+                placeholder="************"
                 value={formData.password}
                 name="password"
                 onChange={(e) =>
@@ -135,7 +141,7 @@ export default function Signup() {
 
             <div>
               <button
-                className="ease-in duration-500  hover:bg-primary-button-hover w-full bg-primary-deep-green text-white py-2 rounded-2xl mx-auto block text-xl hover:transition-all mt-10"
+                className="ease-in duration-500  hover:bg-primary-button-hover w-full bg-primary-deep-green text-white py-2 rounded-xl mx-auto block text-xl hover:transition-all mt-10"
                 type="submit"
               >
                 Submit
