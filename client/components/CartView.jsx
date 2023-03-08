@@ -17,7 +17,6 @@ export default function CartView(props) {
     return <h1>Your cart is empty...</h1>;
 
   function emptyCart() {
-    console.log('emptyCart()');
     dispatch(purgeCart());
   }
 
@@ -25,7 +24,6 @@ export default function CartView(props) {
     <>
       <div>
         <h1 className="text-3xl text-center">CART</h1>
-        <button onClick={emptyCart}>Empty Cart</button>
       </div>
       <div className="max-h-[75vh] overflow-scroll">
         {/* <ul className="flex flex-col flex-nowrap gap-4 w-1/6"> */}
@@ -39,6 +37,11 @@ export default function CartView(props) {
           })}
       </div>
       <CartSubtotal />
+      <div className="flex justify-end pr-10">
+        <button onClick={emptyCart} className="">
+          Empty Cart
+        </button>
+      </div>
     </>
   );
 }
