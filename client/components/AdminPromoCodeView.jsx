@@ -124,7 +124,7 @@ const AdminPromoCodeView = () => {
                               <td scope="col" className="px-6 py-3 text-center">
                                 {promo.status.toString()}
                               </td>
-                              <td scope="col" className="px-6 py-3">
+                              <td scope="col" className="px-6 py-3 text-center">
                                 <Link
                                   className="hover:text-primary-promo-banner"
                                   to={`/account/admin/editpromos/${promo.id}`}

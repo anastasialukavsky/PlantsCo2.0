@@ -120,7 +120,7 @@ const AdminProductView = () => {
                               <td scope="col" className="px-6 py-3 text-center">
                                 {product.qty}
                               </td>
-                              <td scope="col" className="px-6 py-3">
+                              <td scope="col" className="px-6 py-3 text-center">
                                 <Link
                                   className="hover:text-primary-promo-banner"
                                   to={`/account/admin/editproduct/${product.id}`}
