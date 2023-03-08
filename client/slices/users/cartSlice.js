@@ -241,6 +241,7 @@ export const purgeCart = createAsyncThunk('cart/purgeCart', async () => {
   let userId = null;
 
   const token = window.localStorage.getItem('token');
+  window.localStorage.removeItem('cart');
 
   if (token) {
     let res = await axios.get(`/api/auth`, {
@@ -261,8 +262,6 @@ export const purgeCart = createAsyncThunk('cart/purgeCart', async () => {
       data: axiosPayload,
     });
   }
-
-  window.localStorage.removeItem('cart');
 
   return;
 });

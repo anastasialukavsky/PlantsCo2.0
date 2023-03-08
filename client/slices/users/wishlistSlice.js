@@ -60,7 +60,6 @@ export const adjustWishlist = createAsyncThunk(
           headers: { authorization: token },
         }
       );
-      console.log('axios wishlist put data', data);
       return data;
     }
   }

@@ -16,10 +16,6 @@ const CartCard = (props) => {
 
   const { product, item } = props;
 
-  useEffect(() => {
-    dispatch(fetchCart());
-  }, [dispatch]);
-
   function decrementCart(productId) {
     dispatch(removeOneFromCart(productId));
   }
