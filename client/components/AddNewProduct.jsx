@@ -66,18 +66,43 @@ const AddNewProduct = () => {
       <div className="flex flex-row">
         <aside
           id="default-sidebar"
-          className=" w-1/4 h-[calc(100vh_-_5rem)] transition-transform -translate-x-full sm:translate-x-0 flex flex-col gap-10"
+          className=" w-1/4 h-[calc(100vh_-_5rem)] transition-transform -translate-x-full sm:translate-x-0 flex flex-col gap-5"
           aria-label="Sidebar"
         >
-          <div className="pt-5">
-            <div className="bg-green-900 text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
-              <div className="">{'ADD NEW PRODUCT'}</div>
+          <div className="flex flex-col pt-5 gap-3">
+            <div className="hover:bg-green-900 hover:text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
+              <button className="text-left">
+                <Link to={'/account/admin'}>ADMIN DASHBOARD</Link>
+              </button>
             </div>
-            <button className="text-left pl-5 pt-5 font-bold text-sm hover:text-primary-promo-banner py-1">
-              <Link to={'/account/admin'}>Back</Link>
-            </button>
+            <div className="flex flex-col gap-3">
+              <div className="hover:bg-green-900 hover:text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
+                <button className="flex flex-row">
+                  <Link to={'/account/admin/products'}>PRODUCTS</Link>
+                </button>
+              </div>
+              <div className="bg-green-900 text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
+                <button className="flex flex-row">
+                  <Link to={'/account/admin/addproduct'}>ADD NEW PRODUCT</Link>
+                </button>
+              </div>
+              <div className="hover:bg-green-900 hover:text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
+                <button className="text-left">
+                  <Link to={'/account/admin/promos'}>PROMOCODES</Link>
+                </button>
+              </div>
+              <div className="hover:bg-green-900 hover:text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
+                <button className="text-left">
+                  <Link to={'/account/admin/users'}>USER MANAGEMENT</Link>
+                </button>
+              </div>
+            </div>
           </div>
+          <button className="text-left pl-5 font-bold text-sm hover:text-primary-promo-banner py-1">
+            <Link to={'/account'}>Back</Link>
+          </button>
         </aside>
+
         <section className="flex flex-col w-5/6 mt-5">
           <form className="w-5/6 pl-10 pr-10" onSubmit={submitProduct}>
             <div className="flex flex-wrap -mx-3 mb-6">
