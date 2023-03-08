@@ -31,6 +31,16 @@ const Order = db.define('order', {
       min: 0,
     },
   },
+  status: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      isIn: [['pending', 'complete', 'failed']],
+      notEmpty: true,
+      notNull: true,
+    },
+    defaultValue: 'complete',
+  },
 });
 
 // Order.beforeValidate('finalPrice', (order) => {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import PromoBanner from './UI/PromoBanner.jsx';
 import box from '../../public/assets/box.svg';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,33 +9,37 @@ import {
   resetStatusError,
   fetchAllProducts,
 } from '../slices/product/productSlice.js';
+import LikedProduct from './UI/LikedProduct.jsx';
 import { addOneToCart } from '../slices/users/cartSlice.js';
-import ProductCard from './ProductCard.jsx';
 import SimilarProducts from './SimilarProducts.jsx';
+import toast, { Toaster } from 'react-hot-toast';
 
 const singleProduct = () => {
   const dispatch = useDispatch();
   const { productId } = useParams();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     dispatch(fetchSingleProduct(productId));
     dispatch(fetchAllProducts());
-
     return () => dispatch(resetStatusError());
   }, [dispatch, productId]);
 
   const singleProduct = useSelector(selectSingleProduct);
 
-  const handleDescriptionClick = (e) => {};
-
   function addToCart() {
     dispatch(addOneToCart(productId));
   }
 
+  const notify = () => toast.success('Product added to cart!');
+
   return (
     <>
       <PromoBanner />
-      <main className="font-serif flex h-[700px] ">
+      <main className="font-serif flex h-[700px]">
         <section className="flex gap-20 justify-center mt-16 ">
           <div className="">
             <img
@@ -45,11 +49,11 @@ const singleProduct = () => {
             />
           </div>
           <div className="w-1/3">
-            <div className="flex justify-between">
-              <header className=" text-green-900 text-3xl mb-8">
+            <div className="flex justify-between items-center mb-8">
+              <header className=" text-green-900 text-3xl">
                 {singleProduct.name}
               </header>
-              <p className="text-2xl">❤️</p>
+              <LikedProduct />
             </div>
 
             <div className="flex justify-between border-b-4 pb-2 mb-4">
@@ -63,7 +67,10 @@ const singleProduct = () => {
             <p className="mb-8 leading-tight">{singleProduct.description}</p>
             <div className="border-b-4 pb-4 mb-3">
               <button
-                onClick={addToCart}
+                onClick={() => {
+                  notify();
+                  addToCart();
+                }}
                 className="hover:bg-primary-button-green w-full bg-primary-deep-green text-white py-3 rounded-2xl mx-auto block text-xl hover:transition-all"
               >
                 ADD TO CART
@@ -77,6 +84,7 @@ const singleProduct = () => {
         </section>
       </main>
       <SimilarProducts />
+      <Toaster />
     </>
   );
 };

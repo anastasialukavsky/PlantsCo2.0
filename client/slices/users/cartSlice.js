@@ -169,9 +169,7 @@ export const removeOneFromCart = createAsyncThunk(
     if (!found) return; // exit early without hitting db / resetting localstorage
 
     // remove zero qty lines
-    console.log('localCart before filter', localCart);
     localCart = localCart.filter((cartItem) => cartItem.qty > 0);
-    console.log('localCart after filter', localCart);
     window.localStorage.setItem('cart', JSON.stringify(localCart));
 
     // if there was a token (and a user ID), use it to update DB cart
@@ -196,6 +194,78 @@ export const removeOneFromCart = createAsyncThunk(
   }
 );
 
+export const removeCartRow = createAsyncThunk(
+  'cart/removeCartRow',
+  async (productId) => {
+    if (typeof productId === 'string') productId = parseInt(productId);
+    let res;
+
+    const token = localStorage.getItem('token');
+    let userId = null;
+
+    if (token) {
+      res = await axios.get(`/api/auth`, {
+        headers: {
+          authorization: token,
+        },
+      });
+
+      // extract userId from token response
+      userId = res.data.id;
+    }
+
+    let localCart = JSON.parse(window.localStorage.getItem('cart')) || [];
+
+    localCart = localCart.filter((cartRow) => cartRow.productId !== productId);
+
+    res = await axios.post('/api/products/cart', localCart);
+    const expandedCart = res.data;
+
+    window.localStorage.setItem('cart', JSON.stringify(localCart));
+
+    if (userId !== null && token) {
+      await axios.post(
+        `/api/users/${userId}/cart`,
+        { cart: localCart },
+        {
+          headers: { authorization: token },
+        }
+      );
+    }
+
+    return { localCart, expandedCart };
+  }
+);
+
+export const purgeCart = createAsyncThunk('cart/purgeCart', async () => {
+  let userId = null;
+
+  const token = window.localStorage.getItem('token');
+  window.localStorage.removeItem('cart');
+
+  if (token) {
+    let res = await axios.get(`/api/auth`, {
+      headers: {
+        authorization: token,
+      },
+    });
+
+    // extract userId from token response
+    userId = res.data.id;
+  }
+
+  let axiosPayload = { action: 'purge' };
+
+  if (token && userId !== null) {
+    await axios.delete(`/api/users/${userId}/cart`, {
+      headers: { authorization: token },
+      data: axiosPayload,
+    });
+  }
+
+  return;
+});
+
 const cartSlice = createSlice({
   name: 'cart',
   initialState: {
@@ -215,6 +285,15 @@ const cartSlice = createSlice({
       if (!payload) return; // thunk will return null if nothing to remove
       state.cart = payload.localCart;
       state.expandedCart = payload.expandedCart;
+    });
+    builder.addCase(removeCartRow.fulfilled, (state, { payload }) => {
+      if (!payload) return; // thunk will return null if nothing to remove
+      state.cart = payload.localCart;
+      state.expandedCart = payload.expandedCart;
+    });
+    builder.addCase(purgeCart.fulfilled, (state, action) => {
+      state.cart = [];
+      state.expandedCart = [];
     });
   },
 });

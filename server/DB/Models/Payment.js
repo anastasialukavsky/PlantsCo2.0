@@ -6,7 +6,7 @@ const Payment = db.define('payment', {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      isIn: [['cc', 'paypal', 'venmo', 'gift card']],
+      isIn: [['cc', 'paypal', 'venmo', 'gift card', 'stripe']],
       notEmpty: true,
       notNull: true,
     },

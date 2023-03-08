@@ -16,6 +16,15 @@ import {
   CartView,
   NotFound,
   OrderHistoryDetails,
+  Checkout,
+  OrderConfirmation,
+  AdminDashboard,
+  Wishlist,
+  EditProduct,
+  AddNewProduct,
+  AdminProductView,
+  AdminUserMgmt,
+  AdminPromoCodeView,
 } from './index';
 import { selectAuth, attemptTokenLogin } from '../slices/users/authSlice';
 
@@ -42,12 +51,30 @@ export default function Main() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/account/editprofile" element={<EditProfile />} />
           <Route path="/account/orderhistory" element={<OrderHistory />} />
+          <Route path="/account/wishlist" element={<Wishlist />} />
           <Route path="/cart" element={<CartView />} />
-          <Route path="/*" element={<NotFound />} />
+          <Route path="/shipping" element={<Checkout />} />
+          <Route path="/confirmation" element={<OrderConfirmation />} />
           <Route
             path="/account/orderhistory/:orderId"
             element={<OrderHistoryDetails />}
           />
+          <Route path="/*" element={<NotFound />} />
+          <Route path="/account/admin" element={<AdminDashboard />} />
+          <Route
+            path="/account/admin/products"
+            element={<AdminProductView />}
+          />
+          <Route
+            path="/account/admin/promos"
+            element={<AdminPromoCodeView />}
+          />
+          <Route path="/account/admin/users" element={<AdminUserMgmt />} />
+          <Route
+            path="/account/admin/editproduct/:productId"
+            element={<EditProduct />}
+          />
+          <Route path="/account/admin/addproduct" element={<AddNewProduct />} />
         </Routes>
       </div>
     </React.Fragment>
