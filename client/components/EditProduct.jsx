@@ -51,9 +51,9 @@ const EditProduct = () => {
     dispatch(fetchSingleProduct(productId));
   };
 
-  const deleteProduct = () => {
-    dispatch(deleteSingleProduct({ productId, token }));
-    navigate('/account/admin');
+  const deleteProduct = async () => {
+    await dispatch(deleteSingleProduct({ productId, token }));
+    console.log(data);
   };
 
   return (
@@ -190,9 +190,6 @@ const EditProduct = () => {
         </section>
       </div>
     </div>
-    //   </div>
-    // </div>
-    // </div>
   );
 };
 

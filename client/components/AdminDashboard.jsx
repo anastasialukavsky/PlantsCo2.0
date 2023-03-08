@@ -244,6 +244,7 @@ const AdminDashboard = () => {
                               </th>
                               <th scope="col" className="px-6 py-3">
                                 <Link
+                                  className="hover:text-primary-promo-banner"
                                   to={`/account/admin/editproduct/${product.id}`}
                                 >
                                   {'Edit / Delete'}
