@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { signUp } from '../slices/users/authSlice';
 import { attemptTokenLogin } from '../slices/users/authSlice';
@@ -57,33 +57,10 @@ export default function Signup() {
     }
   };
 
-  const resetFormValidation = () => {
-    if (formData.firstName === '') {
-      setIsInvalidFirstName(true);
-      setIsInvalid(true);
-    }
-    if (formData.lastName === '') {
-      setIsInvalidLastName(true);
-      setIsInvalid(true);
-    }
-    if (formData.email === '') {
-      setIsInvalidEmail(true);
-      setIsInvalid(true);
-    }
-    if (formData.password === '' || formData.password.length < 8) {
-      setIsInvalidPassword(true);
-      setIsInvalid(true);
-    }
-  };
-
   const handleSubmit = async (evt) => {
     evt.preventDefault();
     checkFormValidation();
     if (!isInvalid) dispatch(signUp(formData));
-  };
-
-  const login = () => {
-    navigate('/login');
   };
 
   return (
@@ -222,11 +199,8 @@ export default function Signup() {
             </div>
           </form>
           <div className="flex justify-center">
-            <button
-              onClick={login}
-              className="inline-block align-baseline font-bold text-sm hover:text-primary-promo-banner"
-            >
-              Already have an account? Log in!
+            <button className="inline-block align-baseline font-bold text-sm hover:text-primary-promo-banner">
+              <Link to={'/login'}>Already have an account? Log in!</Link>
             </button>
           </div>
         </section>
