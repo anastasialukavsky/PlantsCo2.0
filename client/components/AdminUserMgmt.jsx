@@ -19,7 +19,9 @@ const AdminUserMgmt = () => {
   const { auth, token } = useSelector(selectAuth);
 
   useEffect(() => {
-    dispatch(fetchAllUsers({ token }));
+    if (auth && token) {
+      dispatch(fetchAllUsers({ token }));
+    }
 
     return () => {
       resetAuthStatus();
