@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {
   fetchCart,
-  selectCart,
   addOneToCart,
   removeOneFromCart,
   removeCartRow,
@@ -10,6 +9,7 @@ import {
 import minus from '../../public/assets/minus.svg';
 import plus from '../../public/assets/plus.svg';
 import { Link } from 'react-router-dom';
+import toast, { Toaster } from 'react-hot-toast';
 
 const CartCard = (props) => {
   const dispatch = useDispatch();
@@ -28,6 +28,7 @@ const CartCard = (props) => {
     dispatch(addOneToCart(productId));
   }
   function removeFromCart(productId) {
+    toast.error('Product removed from cart!');
     dispatch(removeCartRow(productId));
   }
 
@@ -45,7 +46,9 @@ const CartCard = (props) => {
           <Link to={`/products/${product.id}`}>
             <h1 className="text-3xl hover:underline">{product.name}</h1>
           </Link>
-          <p className="text-gray-600 text-xs italic">TAGS WILL GO HERE</p>
+          <p className="text-gray-600 text-xs italic">
+            {product?.tags.map(({ tagName }) => tagName).join(', ')}
+          </p>
           <p>${product.price}</p>
           <div className="flex gap-2">
             <button onClick={() => decrementCart(product.id)}>
@@ -59,7 +62,9 @@ const CartCard = (props) => {
         </div>
         <div className="ml-8">
           <button
-            onClick={() => removeFromCart(product.id)}
+            onClick={() => {
+              removeFromCart(product.id);
+            }}
             className="border-2  px-4 py-2 block rounded hover:bg-gray-200"
           >
             remove
@@ -67,6 +72,7 @@ const CartCard = (props) => {
         </div>
       </div>
       <div className="w-5/6 mx-auto border-b-2 border-gray-300"></div>
+      <Toaster />
     </>
   );
 };

@@ -7,6 +7,7 @@ import {
   selectAuth,
   resetStatus,
 } from '../slices/users/authSlice';
+import toast, { Toaster } from 'react-hot-toast';
 
 const UserAccount = () => {
   const dispatch = useDispatch();
@@ -80,6 +81,7 @@ const UserAccount = () => {
           </button>
         </div>
       </div>
+      <Toaster />
     </div>
   );
 };
