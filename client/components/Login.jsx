@@ -32,7 +32,7 @@ const Login = () => {
   return (
     <div className="bg-cover bg-center bg-[url('/assets/bg_img/login_signin_page.jpg')] h-[calc(100vh_-_5rem)]">
       <div className="w-full max-w-sm m-auto pt-16">
-        <h2 className="text-center text-4xl font-bold">Log In</h2>
+        <h2 className="text-center text-4xl font-bold">Login</h2>
         <section className="flex flex-col gap-5 justify-center mt-16 ">
           <form onSubmit={onSubmit}>
             <div className="mb-4">
@@ -73,9 +73,9 @@ const Login = () => {
             <div className="flex items-center justify-between">
               <button
                 type="submit"
-                className="hover:bg-primary-button-hover w-full bg-primary-deep-green text-white py-2 rounded-2xl mx-auto block text-xl hover:transition-all"
+                className="hover:bg-primary-button-hover w-full bg-primary-deep-green text-white py-2 rounded-xl mx-auto block text-xl hover:transition-all"
               >
-                Log In
+                Login
               </button>
             </div>
           </form>
