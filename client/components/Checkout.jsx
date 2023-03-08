@@ -111,14 +111,15 @@ export default function Checkout() {
   }, [checkoutState]);
 
   return (
-    <div className="bg-cover bg-center bg-[url('/assets/misc_bg/shipping.jpg')] ">
-      <div className="w-full max-w-sm m-auto pt-10">
-        <h2 className="text-center text-4xl font-bold">Shipping Information</h2>
-        <section className="flex flex-col mt-10 ">
+    <div className="bg-cover bg-center bg-no-repeat bg-[url('/assets/misc_bg/shipping.jpg')]  h-[calc(100vh_-_5rem)]">
+    <h2 className="text-center text-4xl font-bold py-6">Shipping Information</h2>
+      <div className="flex justify-center ">
+      <div className="max-w-lg p-6  bg-opacity-50 rounded-md bg-lime-900">
+        <section className="flex flex-col mt-3">
           <form onSubmit={handleSubmit} >
             <div className="mb-3">
               <label
-                className="block text-gray-700 text-sm font-bold mb-1"
+                className="block text-slate-50 text-sm font-bold mb-1"
                 htmlFor="firstName"
               >
                 First Name
@@ -136,7 +137,7 @@ export default function Checkout() {
 
             <div className="mb-3">
               <label
-                className="block text-gray-700 text-sm font-bold mb-1"
+                className="block  text-slate-50 text-sm font-bold mb-1"
                 htmlFor="lastName"
               >
                 Last Name
@@ -154,7 +155,7 @@ export default function Checkout() {
 
             <div className="mb-3">
               <label
-                className="block text-gray-700 text-sm font-bold mb-1"
+                className="block  text-slate-50 text-sm font-bold mb-1"
                 htmlFor="email"
               >
                 Email
@@ -172,7 +173,7 @@ export default function Checkout() {
 
             <div className="mb-3">
               <label
-                className="block text-gray-700 text-sm font-bold mb-1"
+                className="block  text-slate-50 text-sm font-bold mb-1"
                 htmlFor="street1"
               >
                 Street1
@@ -190,7 +191,7 @@ export default function Checkout() {
 
             <div className="mb-3">
               <label
-                className="block text-gray-700 text-sm font-bold mb-1"
+                className="block  text-slate-50 text-sm font-bold mb-1"
                 htmlFor="street1"
               >
                 Street2
@@ -207,7 +208,7 @@ export default function Checkout() {
 
             <div className="mb-3">
               <label
-                className="block text-gray-700 text-sm font-bold mb-1"
+                className="block  text-slate-50 text-sm font-bold mb-1"
                 htmlFor="city"
               >
                 City
@@ -225,7 +226,7 @@ export default function Checkout() {
 
             <div className="mb-3">
               <label
-                className="block text-gray-700 text-sm font-bold mb-1"
+                className="block  text-slate-50 text-sm font-bold mb-1"
                 htmlFor="state"
               >
                 State
@@ -243,7 +244,7 @@ export default function Checkout() {
 
             <div className="mb-3">
               <label
-                className="block text-gray-700 text-sm font-bold mb-1"
+                className="block text-slate-50 text-sm font-bold mb-1"
                 htmlFor="state"
               >
                 Zip
@@ -261,7 +262,7 @@ export default function Checkout() {
 
             <div className="mb-3">
               <label
-                className="block text-gray-700 text-sm font-bold mb-1"
+                className="block text-slate-50 text-sm font-bold mb-1"
                 htmlFor="state"
               >
                 Promo Code
@@ -288,10 +289,11 @@ export default function Checkout() {
               type="submit"
               onClick={handleSubmit}
             >
-              Submit
+              Proceed To Payment
             </button>
           </div>
         </section>
+        </div>
       </div>
     </div>
   );

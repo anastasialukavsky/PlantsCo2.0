@@ -48,7 +48,7 @@ export default function Main() {
           <Route path="/account/orderhistory" element={<OrderHistory />} />
           <Route path="/account/wishlist" element={<Wishlist />} />
           <Route path="/cart" element={<CartView />} />
-          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/shipping" element={<Checkout />} />
           <Route path="/confirmation" element={<OrderConfirmation />} />
           <Route
             path="/account/orderhistory/:orderId"
