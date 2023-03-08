@@ -38,10 +38,26 @@ export const fetchSingleProduct = createAsyncThunk(
 
 export const editSingleProduct = createAsyncThunk(
   'editProduct',
-  async ({ id, updates, token }, { rejectWithValue }) => {
+  async ({ productId, updates, token }, { rejectWithValue }) => {
     try {
-      console.log(id, updates, token);
-      const { data } = await axios.put(`/api/products/${id}`, updates, {
+      const { data } = await axios.put(`/api/products/${productId}`, updates, {
+        headers: {
+          authorization: token,
+        },
+      });
+      return data;
+    } catch (error) {
+      console.log('axios error updating single product');
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const deleteSingleProduct = createAsyncThunk(
+  'deleteProduct',
+  async ({ productId, token }, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.delete(`/api/products/${productId}`, {
         headers: {
           authorization: token,
         },
@@ -113,7 +129,7 @@ const productSlice = createSlice({
         state.singleProduct = action.payload;
       })
       .addCase(editSingleProduct.fulfilled, (state, { payload }) => {
-        state.product = payload;
+        state.singleProduct = payload;
         state.status = 'success';
         state.error = '';
       })
@@ -121,6 +137,19 @@ const productSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(editSingleProduct.rejected, (state, { payload }) => {
+        state.status = 'failed';
+        console.log('failed payload', payload);
+        state.error = payload.message;
+      })
+      .addCase(deleteSingleProduct.fulfilled, (state, { payload }) => {
+        state.singleProduct = payload;
+        state.status = 'success';
+        state.error = '';
+      })
+      .addCase(deleteSingleProduct.pending, (state, { payload }) => {
+        state.status = 'loading';
+      })
+      .addCase(deleteSingleProduct.rejected, (state, { payload }) => {
         state.status = 'failed';
         console.log('failed payload', payload);
         state.error = payload.message;
