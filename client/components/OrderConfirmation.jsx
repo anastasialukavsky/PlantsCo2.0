@@ -18,6 +18,7 @@ export default function OrderConfirmation() {
     if (status && orderId) {
       dispatch(updateOrderStatus({ orderId, status }));
       if (status === 'complete') {
+        window.localStorage.removeItem('cart');
         dispatch(purgeCart());
       }
     }
