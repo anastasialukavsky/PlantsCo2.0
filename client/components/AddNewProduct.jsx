@@ -101,150 +101,151 @@ const AddNewProduct = () => {
             <Link to={'/account'}>Back</Link>
           </button>
         </aside>
-
-        <section className="flex flex-col w-5/6 mt-5">
-          <form className="w-5/6 pl-10 pr-10" onSubmit={submitProduct}>
-            <div className="flex flex-wrap -mx-3 mb-6">
-              <div
-                className={
-                  invalidName ||
-                  invalidQty ||
-                  invalidPrice ||
-                  invalidDescription
-                    ? 'text-red-500 text-xs'
-                    : 'collapse text-xs'
-                }
-              >
-                <p>Submission Failed!</p>
-                <p> Please complete all required fields</p>
-              </div>
-              <div className="w-full px-3">
-                <label
-                  className="block uppercase tracking-wide text-primary-deep-green text-xs font-bold mb-2"
-                  htmlFor="grid-name"
-                >
-                  Name
-                </label>
-                <input
+        <div className="p-4 w-3/4 h-[calc(100vh_-_5rem)] overflow-auto">
+          <section className="flex flex-col w-5/6">
+            <form className="w-5/6 pl-10 pr-10" onSubmit={submitProduct}>
+              <div className="flex flex-wrap -mx-3 mb-6">
+                <div
                   className={
-                    invalidName
-                      ? invalidClass
-                      : 'appearance-none block w-full bg-white-200 text-gray-700 border border-gray-200 rounded py-3 px-4  leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
-                  }
-                  id="grid-name"
-                  type="text"
-                  value={name}
-                  onChange={(evt) => {
-                    setInvalidName(false);
-                    setName(evt.target.value);
-                  }}
-                />
-              </div>
-            </div>
-            <div className="flex flex-wrap -mx-3 mb-6">
-              <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                <label
-                  className="block uppercase tracking-wide text-primary-deep-green text-xs font-bold mb-2"
-                  htmlFor="grid-first-qty"
-                >
-                  Quantity In Stock
-                </label>
-                <input
-                  className={
-                    invalidQty
-                      ? invalidClass
-                      : 'appearance-none block w-full bg-white-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
-                  }
-                  id="grid-qty"
-                  type="number"
-                  min={1}
-                  placeholder="0"
-                  value={qty}
-                  onChange={(evt) => {
-                    setInvalidQty(false);
-                    setQty(evt.target.value);
-                  }}
-                />
-              </div>
-              <div className="w-full md:w-1/2 px-3">
-                <label
-                  className="block uppercase tracking-wide text-primary-deep-green text-xs font-bold mb-2"
-                  htmlFor="grid-price"
-                >
-                  Price
-                </label>
-                <input
-                  className={
-                    invalidPrice
-                      ? invalidClass
-                      : 'appearance-none block w-full bg-white-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
-                  }
-                  id="grid-price"
-                  type="number"
-                  placeholder={0.0}
-                  min="0.00"
-                  max="10000.00"
-                  step="0.01"
-                  value={price}
-                  onChange={(evt) => {
-                    setInvalidPrice(false);
-                    setPrice(evt.target.value);
-                  }}
-                />
-              </div>
-            </div>
-            <div className="flex flex-wrap -mx-3 mb-6">
-              <div className="w-full px-3">
-                <label
-                  className="block uppercase tracking-wide text-primary-deep-green text-xs font-bold mb-2"
-                  htmlFor="grid-description"
-                >
-                  Description
-                </label>
-                <textarea
-                  className={
+                    invalidName ||
+                    invalidQty ||
+                    invalidPrice ||
                     invalidDescription
-                      ? invalidClass
-                      : 'appearance-none block w-full bg-white-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
+                      ? 'text-red-500 text-xs'
+                      : 'collapse text-xs'
                   }
-                  id="grid-description"
-                  type="text"
-                  rows="7"
-                  value={description}
-                  onChange={(evt) => {
-                    setInvalidDescription(false);
-                    setDescription(evt.target.value);
-                  }}
-                />
-              </div>
-            </div>
-            <div className="flex flex-wrap -mx-3 mb-6">
-              <div className="w-full px-3">
-                <label
-                  className="block uppercase tracking-wide text-primary-deep-green text-xs font-bold mb-2"
-                  htmlFor="imageURL"
                 >
-                  Upload image
-                </label>
-                <input
-                  className="appearance-none block w-full text-md text-gray-700 border border-gray-200 rounded cursor-pointer bg-primary-bright-white"
-                  id="imageURL"
-                  type="file"
-                  onChange={(evt) => setImageURL(evt.target.value)}
-                />
+                  <p>Submission Failed!</p>
+                  <p> Please complete all required fields</p>
+                </div>
+                <div className="w-full px-3">
+                  <label
+                    className="block uppercase tracking-wide text-primary-deep-green text-xs font-bold mb-2"
+                    htmlFor="grid-name"
+                  >
+                    Name
+                  </label>
+                  <input
+                    className={
+                      invalidName
+                        ? invalidClass
+                        : 'appearance-none block w-full bg-white-200 text-gray-700 border border-gray-200 rounded py-3 px-4  leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
+                    }
+                    id="grid-name"
+                    type="text"
+                    value={name}
+                    onChange={(evt) => {
+                      setInvalidName(false);
+                      setName(evt.target.value);
+                    }}
+                  />
+                </div>
               </div>
-            </div>
-            <div className="flex flex-col items-center justify-between">
-              <button
-                type="submit"
-                className="hover:bg-primary-button-hover w-full bg-primary-deep-green text-white py-2 rounded-lg mx-auto block text-xl hover:transition-all mt-5"
-              >
-                Add
-              </button>
-            </div>
-            <div className="flex justify-center"></div>
-          </form>
-        </section>
+              <div className="flex flex-wrap -mx-3 mb-6">
+                <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                  <label
+                    className="block uppercase tracking-wide text-primary-deep-green text-xs font-bold mb-2"
+                    htmlFor="grid-first-qty"
+                  >
+                    Quantity In Stock
+                  </label>
+                  <input
+                    className={
+                      invalidQty
+                        ? invalidClass
+                        : 'appearance-none block w-full bg-white-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
+                    }
+                    id="grid-qty"
+                    type="number"
+                    min={1}
+                    placeholder="0"
+                    value={qty}
+                    onChange={(evt) => {
+                      setInvalidQty(false);
+                      setQty(evt.target.value);
+                    }}
+                  />
+                </div>
+                <div className="w-full md:w-1/2 px-3">
+                  <label
+                    className="block uppercase tracking-wide text-primary-deep-green text-xs font-bold mb-2"
+                    htmlFor="grid-price"
+                  >
+                    Price
+                  </label>
+                  <input
+                    className={
+                      invalidPrice
+                        ? invalidClass
+                        : 'appearance-none block w-full bg-white-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
+                    }
+                    id="grid-price"
+                    type="number"
+                    placeholder={0.0}
+                    min="0.00"
+                    max="10000.00"
+                    step="0.01"
+                    value={price}
+                    onChange={(evt) => {
+                      setInvalidPrice(false);
+                      setPrice(evt.target.value);
+                    }}
+                  />
+                </div>
+              </div>
+              <div className="flex flex-wrap -mx-3 mb-6">
+                <div className="w-full px-3">
+                  <label
+                    className="block uppercase tracking-wide text-primary-deep-green text-xs font-bold mb-2"
+                    htmlFor="grid-description"
+                  >
+                    Description
+                  </label>
+                  <textarea
+                    className={
+                      invalidDescription
+                        ? invalidClass
+                        : 'appearance-none block w-full bg-white-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
+                    }
+                    id="grid-description"
+                    type="text"
+                    rows="7"
+                    value={description}
+                    onChange={(evt) => {
+                      setInvalidDescription(false);
+                      setDescription(evt.target.value);
+                    }}
+                  />
+                </div>
+              </div>
+              <div className="flex flex-wrap -mx-3 mb-6">
+                <div className="w-full px-3">
+                  <label
+                    className="block uppercase tracking-wide text-primary-deep-green text-xs font-bold mb-2"
+                    htmlFor="imageURL"
+                  >
+                    Upload image
+                  </label>
+                  <input
+                    className="appearance-none block w-full text-md text-gray-700 border border-gray-200 rounded cursor-pointer bg-primary-bright-white"
+                    id="imageURL"
+                    type="file"
+                    onChange={(evt) => setImageURL(evt.target.value)}
+                  />
+                </div>
+              </div>
+              <div className="flex flex-col items-center justify-between">
+                <button
+                  type="submit"
+                  className="hover:bg-primary-button-hover w-full bg-primary-deep-green text-white py-2 rounded-lg mx-auto block text-xl hover:transition-all mt-5"
+                >
+                  Add
+                </button>
+              </div>
+              <div className="flex justify-center"></div>
+            </form>
+          </section>
+        </div>
       </div>
     </div>
   );
