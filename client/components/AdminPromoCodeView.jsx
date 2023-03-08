@@ -120,7 +120,7 @@ const AdminPromoCodeView = () => {
                               <th scope="col" className="px-6 py-3">
                                 <Link
                                   className="hover:text-primary-promo-banner"
-                                  to={`/account/admin/editpromo/${promo.id}`}
+                                  to={`/account/admin/editpromos/${promo.id}`}
                                 >
                                   {'Edit / Delete'}
                                 </Link>
