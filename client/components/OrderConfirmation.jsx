@@ -19,7 +19,9 @@ export default function OrderConfirmation() {
       dispatch(updateOrderStatus({ orderId, status }));
       if (status === 'complete') {
         window.localStorage.removeItem('cart');
-        dispatch(purgeCart());
+        setTimeout(() => {
+          dispatch(purgeCart());
+        }, 1000);
       }
     }
   }, [orderId, status]);
