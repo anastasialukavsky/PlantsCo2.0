@@ -1,56 +1,85 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import {
-  addProduct,
-  resetStatusError as resetProductStatus,
-  selectSingleProduct,
-} from '../slices/product/productSlice';
-import { selectAuth } from '../slices/users/authSlice';
+  selectPromos,
+  fetchSinglePromo,
+  resetStatus as resetPromoStatus,
+  editPromo,
+  deletePromo,
+} from '../slices/product/promoSlice';
+import {
+  selectAuth,
+  resetStatus as resetAuthStatus,
+} from '../slices/users/authSlice';
 
-const AddNewProduct = () => {
+const EditProduct = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { token } = useSelector(selectAuth);
-  const singleProduct = useSelector(selectSingleProduct);
+
+  const { promoId } = useParams();
+  const id = promoId;
+  const { promo } = useSelector(selectPromos);
+  const { auth, token } = useSelector(selectAuth);
 
   const [name, setName] = useState('');
-  const [qty, setQty] = useState('');
-  const [description, setDescription] = useState('');
-  const [price, setPrice] = useState('');
-  const [imageURL, setImageURL] = useState(
-    'https://images.pexels.com/photos/776656/pexels-photo-776656.jpeg?auto=compress&cs=tinysrgb&w=1600'
-  );
+  const [discountRate, setDiscountRate] = useState('');
+  const [status, setStatus] = useState('');
 
   const [invalidName, setInvalidName] = useState(false);
-  const [invalidQty, setInvalidQty] = useState(false);
-  const [invalidPrice, setInvalidPrice] = useState(false);
-  const [invalidDescription, setInvalidDescription] = useState(false);
+  const [invalidRate, setInvalidRate] = useState(false);
+  const [invalidStatus, setInvalidStatus] = useState(false);
 
   const invalidClass =
     'appearance-none block w-full bg-white-200 text-gray-700 border border-red-500 rounded py-3 px-4  leading-tight focus:outline-none focus:bg-white focus:border-gray-500';
 
+  useEffect(() => {
+    dispatch(fetchSinglePromo({ id, token }));
+
+    return () => {
+      resetPromoStatus();
+      resetAuthStatus();
+    };
+  }, [promoId]);
+
+  useEffect(() => {
+    setName(promo.name || '');
+    setDiscountRate(promo.discountRate || '');
+    setStatus(promo.status || '');
+  }, [promo]);
+
   const checkFormValidation = () => {
     if (!name) setInvalidName(true);
-    if (qty < 1) setInvalidQty(true);
-    if (price === '') setInvalidPrice(true);
-    if (!description) setInvalidDescription(true);
+    if (discountRate > 1 || discountRate === '') setInvalidRate(true);
+    if (status === '') setInvalidStatus(true);
+
+    if (!invalidName && !invalidRate && !invalidStatus) {
+      setNavAway(true);
+    }
   };
 
-  const submitProduct = (evt) => {
+  const updatePromo = (evt) => {
     evt.preventDefault();
     checkFormValidation();
-    const newProduct = { name, qty, description, price, imageURL };
-    dispatch(addProduct({ token, newProduct }));
+    const updates = { name, discountRate, status };
+    console.log('updates:', updates);
+
+    dispatch(editPromo({ promoId, token, updates }));
+    dispatch(fetchSinglePromo({ id, token }));
   };
 
   useEffect(() => {
-    if (singleProduct.name === name) navigate('/account/admin/products');
+    if (promo.name === name) navigate('/account/admin/promos');
 
     return () => {
-      dispatch(resetProductStatus());
+      dispatch(resetPromoStatus());
     };
-  }, [singleProduct]);
+  }, [promo]);
+
+  const deletePromo = async () => {
+    await dispatch(deletePromo({ promoId, token }));
+    if (!promo.name) navigate('/account/admin/promos');
+  };
 
   return (
     <div className="bg-cover bg-center h-[calc(100vh_-_5rem)] bg-[url('/assets/bg_img/admin.jpg')]">
@@ -72,14 +101,14 @@ const AddNewProduct = () => {
                   <Link to={'/account/admin/products'}>PRODUCTS</Link>
                 </button>
               </div>
-              <div className="bg-green-900 text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
+              <div className="hover:bg-green-900 hover:text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
                 <button className="text-left">
                   <Link to={'/account/admin/addproduct'}>ADD NEW PRODUCT</Link>
                 </button>
               </div>
-              <div className="hover:bg-green-900 hover:text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
+              <div className="bg-green-900 text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
                 <button className="text-left">
-                  <Link to={'/account/admin/promos'}>PROMOS</Link>
+                  <Link to={'/account/admin/promos'}>PROMOS/EDIT</Link>
                 </button>
               </div>
               <div className="hover:bg-green-900 hover:text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
@@ -100,14 +129,11 @@ const AddNewProduct = () => {
         </aside>
         <div className="p-4 w-3/4 h-[calc(100vh_-_5rem)] overflow-auto">
           <section className="flex flex-col w-full">
-            <form className="w-full pl-10 pr-10" onSubmit={submitProduct}>
+            <form className="pl-10 pr-10" onSubmit={updatePromo}>
               <div className="flex flex-wrap -mx-3 mb-6">
                 <div
                   className={
-                    invalidName ||
-                    invalidQty ||
-                    invalidPrice ||
-                    invalidDescription
+                    invalidName || invalidRate || invalidStatus
                       ? 'text-red-500 text-xs'
                       : 'collapse text-xs'
                   }
@@ -144,22 +170,23 @@ const AddNewProduct = () => {
                     className="block uppercase tracking-wide text-primary-deep-green text-xs font-bold mb-2"
                     htmlFor="grid-first-qty"
                   >
-                    Quantity In Stock
+                    PROMO RATE
                   </label>
                   <input
                     className={
-                      invalidQty
+                      invalidRate
                         ? invalidClass
                         : 'appearance-none block w-full bg-white-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
                     }
                     id="grid-qty"
                     type="number"
-                    min={1}
-                    placeholder="0"
-                    value={qty}
+                    min={0}
+                    max={1}
+                    step={0.01}
+                    value={discountRate}
                     onChange={(evt) => {
-                      setInvalidQty(false);
-                      setQty(evt.target.value);
+                      setInvalidRate(false);
+                      setDiscountRate(evt.target.value);
                     }}
                   />
                 </div>
@@ -168,67 +195,25 @@ const AddNewProduct = () => {
                     className="block uppercase tracking-wide text-primary-deep-green text-xs font-bold mb-2"
                     htmlFor="grid-price"
                   >
-                    Price
+                    STATUS
                   </label>
-                  <input
+                  <select
                     className={
-                      invalidPrice
+                      invalidStatus
                         ? invalidClass
                         : 'appearance-none block w-full bg-white-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
                     }
                     id="grid-price"
-                    type="number"
-                    placeholder={0.0}
-                    min="0.00"
-                    max="10000.00"
-                    step="0.01"
-                    value={price}
-                    onChange={(evt) => {
-                      setInvalidPrice(false);
-                      setPrice(evt.target.value);
-                    }}
-                  />
-                </div>
-              </div>
-              <div className="flex flex-wrap -mx-3 mb-6">
-                <div className="w-full px-3">
-                  <label
-                    className="block uppercase tracking-wide text-primary-deep-green text-xs font-bold mb-2"
-                    htmlFor="grid-description"
-                  >
-                    Description
-                  </label>
-                  <textarea
-                    className={
-                      invalidDescription
-                        ? invalidClass
-                        : 'appearance-none block w-full bg-white-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
-                    }
-                    id="grid-description"
                     type="text"
-                    rows="7"
-                    value={description}
+                    value={status}
                     onChange={(evt) => {
-                      setInvalidDescription(false);
-                      setDescription(evt.target.value);
+                      setInvalidStatus(false);
+                      setStatus(evt.target.value);
                     }}
-                  />
-                </div>
-              </div>
-              <div className="flex flex-wrap -mx-3 mb-6">
-                <div className="w-full px-3">
-                  <label
-                    className="block uppercase tracking-wide text-primary-deep-green text-xs font-bold mb-2"
-                    htmlFor="imageURL"
                   >
-                    Upload image
-                  </label>
-                  <input
-                    className="appearance-none block w-full text-md text-gray-700 border border-gray-200 rounded cursor-pointer bg-primary-bright-white"
-                    id="imageURL"
-                    type="file"
-                    onChange={(evt) => setImageURL(evt.target.value)}
-                  />
+                    <option value={true}>true</option>
+                    <option value={false}>false</option>
+                  </select>
                 </div>
               </div>
               <div className="flex flex-col items-center justify-between">
@@ -236,11 +221,17 @@ const AddNewProduct = () => {
                   type="submit"
                   className="hover:bg-primary-button-hover w-full bg-primary-deep-green text-white py-2 rounded-lg mx-auto block text-xl hover:transition-all mt-5"
                 >
-                  Add
+                  Save
                 </button>
               </div>
               <div className="flex justify-center"></div>
             </form>
+            <button
+              className="text-red-600 w-full py-2 rounded-lg block text-sm hover:text-primary-promo-banner mt-5"
+              onClick={deletePromo}
+            >
+              Delete
+            </button>
           </section>
         </div>
       </div>
@@ -248,4 +239,4 @@ const AddNewProduct = () => {
   );
 };
 
-export default AddNewProduct;
+export default EditProduct;

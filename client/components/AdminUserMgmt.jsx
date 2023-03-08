@@ -43,18 +43,23 @@ const AdminUserMgmt = () => {
             </div>
             <div className="flex flex-col gap-3">
               <div className="hover:bg-green-900 hover:text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
-                <button className="flex flex-row">
+                <button className="text-left">
                   <Link to={'/account/admin/products'}>PRODUCTS</Link>
                 </button>
               </div>
               <div className="hover:bg-green-900 hover:text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
-                <button className="flex flex-row">
+                <button className="text-left">
                   <Link to={'/account/admin/addproduct'}>ADD NEW PRODUCT</Link>
                 </button>
               </div>
               <div className="hover:bg-green-900 hover:text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
                 <button className="text-left">
-                  <Link to={'/account/admin/promos'}>PROMOCODES</Link>
+                  <Link to={'/account/admin/promos'}>PROMOS</Link>
+                </button>
+              </div>
+              <div className="hover:bg-green-900 hover:text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
+                <button className="text-left">
+                  <Link to={'/account/admin/addpromo'}>ADD NEW PROMO</Link>
                 </button>
               </div>
               <div className="bg-green-900 text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
@@ -94,6 +99,9 @@ const AdminUserMgmt = () => {
                       <th scope="col" className="px-6 py-3 top-0 sticky">
                         {'ROLE'}
                       </th>
+                      <th scope="col" className="px-6 py-3 top-0 sticky">
+                        {'IS ADMIN'}
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
@@ -115,6 +123,9 @@ const AdminUserMgmt = () => {
                               </th>
                               <th scope="col" className="px-6 py-3">
                                 {user.role}
+                              </th>
+                              <th scope="col" className="px-6 py-3">
+                                {user.isAdmin.toString()}
                               </th>
                             </tr>
                           );

@@ -12,6 +12,7 @@ import {
   selectAuth,
   resetStatus as resetAuthStatus,
 } from '../slices/users/authSlice';
+import toast, { Toaster } from 'react-hot-toast';
 
 const EditProduct = () => {
   const dispatch = useDispatch();
@@ -47,12 +48,13 @@ const EditProduct = () => {
     evt.preventDefault();
     const updates = { name, qty, description, price, imageURL };
     dispatch(editSingleProduct({ productId, token, updates }));
+    toast.success('Account info successfully changed');
     dispatch(fetchSingleProduct(productId));
   };
 
   const deleteProduct = async () => {
     await dispatch(deleteSingleProduct({ productId, token }));
-    navigate('/account/admin');
+    navigate('/account/admin/products');
   };
 
   return (
@@ -71,18 +73,23 @@ const EditProduct = () => {
             </div>
             <div className="flex flex-col gap-3">
               <div className="bg-green-900 text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
-                <button className="flex flex-row">
+                <button className="text-left">
                   <Link to={'/account/admin/products'}>PRODUCTS/EDIT</Link>
                 </button>
               </div>
               <div className="hover:bg-green-900 hover:text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
-                <button className="flex flex-row">
+                <button className="text-left">
                   <Link to={'/account/admin/addproduct'}>ADD NEW PRODUCT</Link>
                 </button>
               </div>
               <div className="hover:bg-green-900 hover:text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
                 <button className="text-left">
-                  <Link to={'/account/admin/promos'}>PROMOCODES</Link>
+                  <Link to={'/account/admin/promos'}>PROMOS</Link>
+                </button>
+              </div>
+              <div className="hover:bg-green-900 hover:text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
+                <button className="text-left">
+                  <Link to={'/account/admin/addpromo'}>ADD NEW PROMO</Link>
                 </button>
               </div>
               <div className="hover:bg-green-900 hover:text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
@@ -214,6 +221,7 @@ const EditProduct = () => {
           </section>
         </div>
       </div>
+      <Toaster />
     </div>
   );
 };
