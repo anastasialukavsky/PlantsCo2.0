@@ -63,10 +63,10 @@ const AdminDashboard = () => {
       <div className="flex flex-row">
         <aside
           id="default-sidebar"
-          className=" w-1/4 h-[calc(100vh_-_5rem)] transition-transform -translate-x-full sm:translate-x-0 flex flex-col gap-10"
+          className=" w-1/4 h-[calc(100vh_-_5rem)] transition-transform -translate-x-full sm:translate-x-0 flex flex-col gap-5"
           aria-label="Sidebar"
         >
-          <div className="pt-5">
+          <div className="flex flex-col pt-5 gap-3">
             <div className={adminButtonStatus}>
               <button
                 onClick={() => {
@@ -84,7 +84,7 @@ const AdminDashboard = () => {
                 {'ADMIN DASHBOARD'}
               </button>
             </div>
-            <div>
+            <div className="flex flex-col gap-3">
               <div className={prodButtonStatus}>
                 <button
                   onClick={() => {
