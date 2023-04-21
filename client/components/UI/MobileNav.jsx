@@ -26,13 +26,13 @@ const MobileNav = ({ expand, setExpand }) => {
 
   return (
     <div
-      className="w-72 bg-gray-100 h-[calc(100vh-80px)] mt-20 absolute z-10 top-0 transition-all lg:hidden"
+      className="absolute top-0 z-10 mt-20 h-[calc(100vh-80px)] w-72 bg-gray-100 transition-all lg:hidden"
       style={{
         right: `${expand ? '0' : '-18rem'}`,
       }}
     >
-      <ul className="text-2xl text-center flex flex-col basis-16 justify-center items-center">
-        <div className="flex gap-1 stroke-green-900 border-b-2 w-5/6 mx-auto h-16 py-4">
+      <ul className="flex basis-16 flex-col items-center justify-center text-center text-2xl">
+        <div className="mx-auto flex h-16 w-5/6 gap-1 border-b-2 stroke-green-900 py-4">
           <button onClick={handleSearch}>
             <img src={searchIcon} alt="magnifying glass" className="w-8 pt-1" />
           </button>
@@ -40,34 +40,40 @@ const MobileNav = ({ expand, setExpand }) => {
             <input
               type="text"
               placeholder="succulent..."
-              className="border-2 border-green-700 bg-gray-100 text-base h-8 rounded-full pl-3 w-full"
+              className="h-8 w-full rounded-full border-2 border-green-700 bg-gray-100 pl-3 text-base"
               value={searchTerm}
               onChange={(e) => dispatch(adjustSearchBy(e.target.value))}
             />
           </form>
         </div>
         <div
-          className="w-full hover:bg-slate-200 transition-all"
+          className="w-full transition-all hover:bg-slate-200"
           onClick={handleClick}
         >
-          <Link to="/account">
-            <li className="border-b-2 w-5/6 mx-auto h-16 py-4">Account</li>
-          </Link>
+          {localStorage.getItem('token') ? (
+            <Link to="/account">
+              <li className="mx-auto h-16 w-5/6 border-b-2 py-4">Account</li>
+            </Link>
+          ) : (
+            <Link to="/login">
+              <li className="mx-auto h-16 w-5/6 border-b-2 py-4">Login</li>
+            </Link>
+          )}
         </div>
         <div
-          className="w-full hover:bg-slate-200 transition-all"
+          className="w-full transition-all hover:bg-slate-200"
           onClick={handleClick}
         >
           <Link to="/products">
-            <li className="border-b-2 w-5/6 mx-auto h-16 py-4">Shop</li>
+            <li className="mx-auto h-16 w-5/6 border-b-2 py-4">Shop</li>
           </Link>
         </div>
         <div
-          className="w-full hover:bg-slate-200 transition-all"
+          className="w-full transition-all hover:bg-slate-200"
           onClick={handleClick}
         >
           <Link to="/cart">
-            <li className="border-b-2 w-5/6 mx-auto h-16 py-4">Cart</li>
+            <li className="mx-auto h-16 w-5/6 border-b-2 py-4">Cart</li>
           </Link>
         </div>
       </ul>

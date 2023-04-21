@@ -16,6 +16,12 @@ const UserAccount = () => {
   const { auth } = useSelector(selectAuth);
 
   useEffect(() => {
+    if (!localStorage.getItem('token')) {
+      navigate('/');
+    }
+  }, []);
+
+  useEffect(() => {
     dispatch(attemptTokenLogin());
 
     return () => {
