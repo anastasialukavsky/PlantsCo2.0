@@ -49,40 +49,40 @@ const EditProfile = () => {
   };
 
   return (
-    <div className="bg-cover bg-center h-[calc(100vh_-_5rem)] bg-[url('/assets/bg_img/wishlist_page.jpg')]">
-      <div className="w-full max-w-sm absolute top-40 right-10 mr-20 pt-16">
-        <p className="text-center text-4xl font-extrabold pb-2 text-primary-deep-green">
+    <div className="h-[calc(100vh_-_5rem)] bg-[#EBEBEB] bg-cover bg-center md:bg-[url('/assets/bg_img/wishlist_page.jpg')]">
+      <div className="absolute top-40 left-1/2 right-20 w-full max-w-sm -translate-x-1/2 pt-16 md:left-auto md:translate-x-0">
+        <p className="font-extrabold pb-2 text-center text-4xl text-primary-deep-green">
           Welcome Back,
         </p>
-        <p className="text-center text-4xl font-extrabold">{auth.firstName}</p>
-        <div className="flex flex-col mt-8 gap-3">
-          <h2 className="text-center font-bold mt-3 mb-3">EDIT PROFILE</h2>
-          <section className="flex gap-20 justify-center ">
+        <p className="font-extrabold text-center text-4xl">{auth.firstName}</p>
+        <div className="mt-8 flex flex-col gap-3">
+          <h2 className="font-bold mt-3 mb-3 text-center">EDIT PROFILE</h2>
+          <section className="flex justify-center gap-20 ">
             <form className="w-full max-w-lg" onSubmit={updateUser}>
-              <div className="flex flex-wrap -mx-3 mb-6">
-                <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+              <div className="-mx-3 mb-6 flex flex-wrap">
+                <div className="mb-6 w-full px-3 md:mb-0 md:w-1/2">
                   <label
-                    className="block uppercase tracking-wide text-primary-deep-green text-xs font-bold mb-2"
+                    className="font-bold mb-2 block text-xs uppercase tracking-wide text-primary-deep-green"
                     htmlFor="grid-first-name"
                   >
                     First Name
                   </label>
                   <input
-                    className="appearance-none block w-full bg-white-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    className="bg-white-200 block w-full appearance-none rounded border border-gray-200 py-3 px-4 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none"
                     type="text"
                     value={firstName}
                     onChange={(evt) => setFirstName(evt.target.value)}
                   />
                 </div>
-                <div className="w-full md:w-1/2 px-3">
+                <div className="w-full px-3 md:w-1/2">
                   <label
-                    className="block uppercase tracking-wide text-primary-deep-green text-xs font-bold mb-2"
+                    className="font-bold mb-2 block text-xs uppercase tracking-wide text-primary-deep-green"
                     htmlFor="grid-last-name"
                   >
                     Last Name
                   </label>
                   <input
-                    className="appearance-none block w-full bg-white-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    className="bg-white-200 block w-full appearance-none rounded border border-gray-200 py-3 px-4 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none"
                     id="grid-last-name"
                     type="text"
                     value={lastName}
@@ -90,16 +90,16 @@ const EditProfile = () => {
                   />
                 </div>
               </div>
-              <div className="flex flex-wrap -mx-3 mb-6">
+              <div className="-mx-3 mb-6 flex flex-wrap">
                 <div className="w-full px-3">
                   <label
-                    className="block uppercase tracking-wide text-primary-deep-green text-xs font-bold mb-2"
+                    className="font-bold mb-2 block text-xs uppercase tracking-wide text-primary-deep-green"
                     htmlFor="grid-email"
                   >
                     Email
                   </label>
                   <input
-                    className="appearance-none block w-full bg-white-200 text-gray-700 border border-gray-200 rounded py-3 px-4  leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    className="bg-white-200 block w-full appearance-none rounded border border-gray-200 py-3 px-4 leading-tight  text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none"
                     id="grid-email"
                     type="text"
                     value={email}
@@ -110,7 +110,7 @@ const EditProfile = () => {
               <div className="flex items-center justify-between">
                 <button
                   type="submit"
-                  className="hover:bg-primary-button-hover w-full bg-primary-deep-green text-white py-2 rounded-lg mx-auto block text-xl hover:transition-all mt-5"
+                  className="mx-auto mt-5 block w-full rounded-lg bg-primary-deep-green py-2 text-xl text-white hover:bg-primary-button-hover hover:transition-all"
                 >
                   Save
                 </button>
@@ -119,7 +119,7 @@ const EditProfile = () => {
             </form>
           </section>
           <button
-            className="inline-block align-baseline font-bold text-sm hover:text-primary-promo-banner py-1"
+            className="font-bold inline-block py-1 align-baseline text-sm hover:text-primary-promo-banner"
             onClick={goBack}
           >
             Back

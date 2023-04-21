@@ -49,12 +49,12 @@ const OrderHistoryDetails = () => {
 
   if (details.length < 1)
     return (
-      <div className="bg-cover bg-center h-[calc(100vh_-_5rem)] bg-[url('/assets/bg_img/cart.jpg')]">
-        <div className="flex flex-col gap-10 w-full max-w-xl absolute top-30 left-10 pt-16">
-          <p className="text-center text-4xl font-extrabold text-primary-deep-green">
+      <div className="h-[calc(100vh_-_5rem)] bg-[url('/assets/bg_img/cart.jpg')] bg-cover bg-center">
+        <div className="top-30 absolute left-10 flex w-full max-w-xl flex-col gap-10 pt-16">
+          <p className="font-extrabold text-center text-4xl text-primary-deep-green">
             No Orders!
           </p>
-          <button className="inline-block align-baseline font-bold text-sm hover:text-primary-promo-banner py-1">
+          <button className="font-bold inline-block py-1 align-baseline text-sm hover:text-primary-promo-banner">
             <Link to="/account">Back</Link>
           </button>
         </div>
@@ -63,20 +63,20 @@ const OrderHistoryDetails = () => {
     );
 
   return (
-    <div className="bg-cover bg-center h-[calc(100vh_-_5rem)] bg-[url('/assets/bg_img/cart.jpg')]">
-      <div className="flex flex-col gap-10 w-full max-w-xl absolute top-30 left-10 pt-16">
-        <p className="text-center text-4xl font-extrabold text-primary-deep-green">
+    <div className="h-[calc(100vh_-_5rem)] bg-[url('/assets/bg_img/cart.jpg')] bg-cover bg-center">
+      <div className="top-30 absolute left-10 flex w-full max-w-xl flex-col gap-10 pt-16">
+        <p className="font-extrabold text-center text-4xl text-primary-deep-green">
           Previous Orders
         </p>
 
-        <div className="flex flex-col gap-5 relative overflow-x-auto text-primary-deep-green">
+        <div className="relative flex flex-col gap-5 overflow-x-auto text-primary-deep-green">
           <div>
             <p>DATE: {date}</p>
             <p>ORDER ID: {orderId}</p>
             <p>ITEMS: {userOrder.totalQty}</p>
           </div>
-          <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 bg-white rounded-xl">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 rounded-xl">
+          <table className="w-full rounded-xl bg-white text-left text-sm text-gray-500 dark:text-gray-400">
+            <thead className="rounded-xl bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
               <tr>
                 <th scope="col" className="px-6 py-3">
                   Product Name
@@ -113,19 +113,19 @@ const OrderHistoryDetails = () => {
               <tr>
                 <th className="text-md px-6 pt-3">Shipping</th>
                 <th></th>
-                <th className="text-right text-md px-6 pt-3 ">Free</th>
+                <th className="text-md px-6 pt-3 text-right ">Free</th>
               </tr>
               <tr>
                 <th className="text-md px-6 pt-3">Discount</th>
                 <th></th>
-                <th className="text-right text-md px-6 pt-3 ">
+                <th className="text-md px-6 pt-3 text-right ">
                   -${(details[0].totalPrice * userOrder.promoRate).toFixed(2)}
                 </th>
               </tr>
               <tr>
                 <th className="text-md px-6 py-3">Total</th>
                 <th></th>
-                <th className="text-right text-md px-6 py-3">
+                <th className="text-md px-6 py-3 text-right">
                   ${userOrder.finalPrice}
                 </th>
               </tr>
@@ -164,7 +164,7 @@ const OrderHistoryDetails = () => {
           </div>
         </div>
         <div className="pt-50 m-auto">
-          <button className="align-baseline align-text-left font-bold text-sm hover:text-primary-promo-banner py-1">
+          <button className="align-text-left font-bold py-1 align-baseline text-sm hover:text-primary-promo-banner">
             <Link to="/account/orderhistory">Back</Link>
           </button>
         </div>

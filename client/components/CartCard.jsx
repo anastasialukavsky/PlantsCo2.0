@@ -30,7 +30,7 @@ const CartCard = (props) => {
 
   return (
     <>
-      <div className=" mx-8 flex h-52 gap-6 items-center">
+      <div className="mx-3 flex h-52 items-center gap-2 sm:mx-8 sm:gap-6">
         <div className="h-48">
           <img
             src={`${product.imageURL}`}
@@ -38,11 +38,11 @@ const CartCard = (props) => {
             className="h-48"
           />
         </div>
-        <div className=" flex flex-col gap-3 w-48">
+        <div className="flex w-48 flex-col gap-3">
           <Link to={`/products/${product.id}`}>
             <h1 className="text-3xl hover:underline">{product.name}</h1>
           </Link>
-          <p className="text-gray-600 text-xs italic">
+          <p className="text-xs italic text-gray-600">
             {product?.tags.map(({ tagName }) => tagName).join(', ')}
           </p>
           <p>${product.price}</p>
@@ -56,18 +56,18 @@ const CartCard = (props) => {
             </button>
           </div>
         </div>
-        <div className="ml-8">
+        <div className="sm:ml-8">
           <button
             onClick={() => {
               removeFromCart(product.id);
             }}
-            className="border-2  px-4 py-2 block rounded hover:bg-gray-200"
+            className="block  py-2 hover:bg-gray-200 sm:rounded sm:border-2 sm:px-4"
           >
             remove
           </button>
         </div>
       </div>
-      <div className="w-5/6 mx-auto border-b-2 border-gray-300"></div>
+      <div className="mx-auto w-5/6 border-b-2 border-gray-300"></div>
       <Toaster />
     </>
   );

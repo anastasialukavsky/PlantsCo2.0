@@ -5,6 +5,7 @@ import {
   logIn,
   attemptTokenLogin,
   selectAuth,
+  selectAuthLoading,
 } from '../slices/users/authSlice';
 
 const Login = () => {
@@ -17,9 +18,12 @@ const Login = () => {
   const [logInAttempt, setLogInAttempt] = useState(false);
   const [isInvalidEmail, setIsInvalidEmail] = useState(false);
   const [isInvalidPassword, setIsInvalidPassword] = useState(false);
+  const authLoading = useSelector(selectAuthLoading);
   const [isInvalid, setIsInvalid] = useState(false);
 
   const { auth, status } = useSelector(selectAuth);
+
+  console.log('auth loading:', authLoading);
 
   const validClass =
     'appearance-none border rounded w-96 py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline';
@@ -70,21 +74,21 @@ const Login = () => {
   const forgotPassword = () => {};
 
   return (
-    <div className="bg-cover bg-center bg-[url('/assets/bg_img/login_signin_page.jpg')] h-[calc(100vh_-_5rem)]">
-      <div className="w-full max-w-sm m-auto pt-16">
-        <h2 className="text-center text-4xl font-bold">Login</h2>
-        <section className="flex flex-col gap-5 justify-center mt-16 ">
+    <div className="h-[calc(100vh_-_5rem)] bg-[#E4e4e4] bg-cover bg-center">
+      <div className="m-auto w-full max-w-sm pt-16">
+        <h2 className="font-bold text-center text-4xl">Login</h2>
+        <section className="mt-4 flex flex-col justify-center gap-5 ">
           <form onSubmit={onSubmit}>
             <div className="mb-4">
               <p
                 className={
-                  logInFail ? 'text-red-500 text-xs' : 'collapse text-xs'
+                  logInFail ? 'text-xs text-red-500' : 'collapse text-xs'
                 }
               >
                 Invalid login credentials!
               </p>
               <label
-                className="block text-primary-deep-green text-sm font-bold mb-2"
+                className="font-bold mb-2 block text-sm text-primary-deep-green"
                 htmlFor="email"
               >
                 Email
@@ -105,7 +109,7 @@ const Login = () => {
               />
               <p
                 className={
-                  isInvalidEmail ? 'text-red-500 text-xs' : 'collapse text-xs'
+                  isInvalidEmail ? 'text-xs text-red-500' : 'collapse text-xs'
                 }
               >
                 Enter email!
@@ -114,7 +118,7 @@ const Login = () => {
 
             <div className="mb-6">
               <label
-                className="block text-primary-deep-green text-sm font-bold mb-2"
+                className="font-bold mb-2 block text-sm text-primary-deep-green"
                 htmlFor="password"
               >
                 Password
@@ -137,7 +141,7 @@ const Login = () => {
               <p
                 className={
                   isInvalidPassword
-                    ? 'text-red-500 text-xs'
+                    ? 'text-xs text-red-500'
                     : 'collapse text-xs'
                 }
               >
@@ -147,22 +151,22 @@ const Login = () => {
             <div className="flex items-center justify-between">
               <button
                 type="submit"
-                className="hover:bg-primary-button-hover w-full bg-primary-deep-green text-white py-2 rounded-xl mx-auto block text-xl hover:transition-all"
+                className="mx-auto block w-full rounded-xl bg-primary-deep-green py-2 text-xl text-white hover:bg-primary-button-hover hover:transition-all"
               >
-                Login
+                {authLoading ? 'Loading..' : 'Login'}
               </button>
             </div>
           </form>
           <div className="flex justify-center">
             <button
               onClick={forgotPassword}
-              className="inline-block align-baseline font-bold text-sm hover:text-primary-promo-banner py-3"
+              className="font-bold inline-block py-3 align-baseline text-sm hover:text-primary-promo-banner"
             >
               Forgot Password?
             </button>
           </div>
           <div className="flex justify-center">
-            <button className="inline-block align-baseline font-bold text-sm hover:text-primary-promo-banner">
+            <button className="font-bold inline-block align-baseline text-sm hover:text-primary-promo-banner">
               <Link to={'/signup'}>Don't have an account? Sign up!</Link>
             </button>
           </div>

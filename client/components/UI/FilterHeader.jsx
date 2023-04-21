@@ -2,7 +2,7 @@ import React from 'react';
 
 const FilterHeader = (props) => {
   return (
-    <h2 className="text-2xl mb-2 underline text-primary-button-green">
+    <h2 className="mb-2 text-2xl text-primary-button-green underline">
       {props.children}
     </h2>
   );

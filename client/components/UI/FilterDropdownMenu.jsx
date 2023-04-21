@@ -9,7 +9,7 @@ const FilterDropdownMenu = (props) => {
     <div
       onMouseEnter={handleHover}
       onMouseLeave={handleHide}
-      className={`top-36 h-44 w-screen ${display} flex gap-6 justify-center z-10 bg-gray-100 border-t-2 border-primary-deep-green text-center left-0`}
+      className={`top-36 h-44 w-screen ${display} left-0 z-10 flex justify-center gap-6 border-t-2 border-primary-deep-green bg-gray-100 text-center`}
     >
       <div className="">
         <FilterHeader>Size</FilterHeader>

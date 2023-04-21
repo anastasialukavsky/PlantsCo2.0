@@ -58,73 +58,73 @@ const EditProduct = () => {
   };
 
   return (
-    <div className="bg-cover bg-center h-[calc(100vh_-_5rem)] bg-[url('/assets/bg_img/admin.jpg')]">
+    <div className="h-[calc(100vh_-_5rem)] bg-[url('/assets/bg_img/admin.jpg')] bg-cover bg-center">
       <div className="flex flex-row">
         <aside
           id="default-sidebar"
-          className=" w-1/4 h-[calc(100vh_-_5rem)] transition-transform -translate-x-full sm:translate-x-0 flex flex-col gap-5"
+          className=" flex h-[calc(100vh_-_5rem)] w-1/4 -translate-x-full flex-col gap-5 transition-transform sm:translate-x-0"
           aria-label="Sidebar"
         >
-          <div className="flex flex-col pt-5 gap-3">
-            <div className="hover:bg-green-900 hover:text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
+          <div className="flex flex-col gap-3 pt-5">
+            <div className="mr-5 rounded-r-full p-3 pl-5 hover:bg-green-900 hover:text-primary-bright-white">
               <button className="text-left">
                 <Link to={'/account/admin'}>ADMIN DASHBOARD</Link>
               </button>
             </div>
             <div className="flex flex-col gap-3">
-              <div className="bg-green-900 text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
+              <div className="mr-5 rounded-r-full bg-green-900 p-3 pl-5 text-primary-bright-white">
                 <button className="text-left">
                   <Link to={'/account/admin/products'}>PRODUCTS/EDIT</Link>
                 </button>
               </div>
-              <div className="hover:bg-green-900 hover:text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
+              <div className="mr-5 rounded-r-full p-3 pl-5 hover:bg-green-900 hover:text-primary-bright-white">
                 <button className="text-left">
                   <Link to={'/account/admin/addproduct'}>ADD NEW PRODUCT</Link>
                 </button>
               </div>
-              <div className="hover:bg-green-900 hover:text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
+              <div className="mr-5 rounded-r-full p-3 pl-5 hover:bg-green-900 hover:text-primary-bright-white">
                 <button className="text-left">
                   <Link to={'/account/admin/promos'}>PROMOS</Link>
                 </button>
               </div>
-              <div className="hover:bg-green-900 hover:text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
+              <div className="mr-5 rounded-r-full p-3 pl-5 hover:bg-green-900 hover:text-primary-bright-white">
                 <button className="text-left">
                   <Link to={'/account/admin/addpromo'}>ADD NEW PROMO</Link>
                 </button>
               </div>
-              <div className="hover:bg-green-900 hover:text-primary-bright-white pl-5 p-3 rounded-r-full mr-5">
+              <div className="mr-5 rounded-r-full p-3 pl-5 hover:bg-green-900 hover:text-primary-bright-white">
                 <button className="text-left">
                   <Link to={'/account/admin/users'}>USER MANAGEMENT</Link>
                 </button>
               </div>
             </div>
           </div>
-          <button className="text-left pl-5 font-bold text-sm hover:text-primary-promo-banner py-1">
+          <button className="font-bold py-1 pl-5 text-left text-sm hover:text-primary-promo-banner">
             <Link to={'/account'}>Back</Link>
           </button>
         </aside>
-        <div className="p-4 w-3/4 h-[calc(100vh_-_5rem)] overflow-auto">
-          <section className="flex flex-col w-full">
+        <div className="h-[calc(100vh_-_5rem)] w-3/4 overflow-auto p-4">
+          <section className="flex w-full flex-col">
             <div className="w-full justify-center pb-10">
-              <p className="text-center m-auto text-4xl font-extrabold pb-5 text-primary-deep-green">
+              <p className="font-extrabold m-auto pb-5 text-center text-4xl text-primary-deep-green">
                 {singleProduct.name}
               </p>
               <img
                 src={imageURL}
-                className="object-scale-down h-48 w-96 m-auto"
+                className="m-auto h-48 w-96 object-scale-down"
               />
             </div>
             <form className="pl-10 pr-10" onSubmit={updateProduct}>
-              <div className="flex flex-wrap -mx-3 mb-6">
+              <div className="-mx-3 mb-6 flex flex-wrap">
                 <div className="w-full px-3">
                   <label
-                    className="block uppercase tracking-wide text-primary-deep-green text-xs font-bold mb-2"
+                    className="font-bold mb-2 block text-xs uppercase tracking-wide text-primary-deep-green"
                     htmlFor="grid-name"
                   >
                     Name
                   </label>
                   <input
-                    className="appearance-none block w-full bg-white-200 text-gray-700 border border-gray-200 rounded py-3 px-4  leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    className="bg-white-200 block w-full appearance-none rounded border border-gray-200 py-3 px-4 leading-tight  text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none"
                     id="grid-name"
                     type="text"
                     value={name}
@@ -132,16 +132,16 @@ const EditProduct = () => {
                   />
                 </div>
               </div>
-              <div className="flex flex-wrap -mx-3 mb-6">
-                <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+              <div className="-mx-3 mb-6 flex flex-wrap">
+                <div className="mb-6 w-full px-3 md:mb-0 md:w-1/2">
                   <label
-                    className="block uppercase tracking-wide text-primary-deep-green text-xs font-bold mb-2"
+                    className="font-bold mb-2 block text-xs uppercase tracking-wide text-primary-deep-green"
                     htmlFor="grid-first-qty"
                   >
                     Quantity In Stock
                   </label>
                   <input
-                    className="appearance-none block w-full bg-white-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    className="bg-white-200 block w-full appearance-none rounded border border-gray-200 py-3 px-4 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none"
                     id="grid-qty"
                     type="number"
                     min={0}
@@ -149,15 +149,15 @@ const EditProduct = () => {
                     onChange={(evt) => setQty(evt.target.value)}
                   />
                 </div>
-                <div className="w-full md:w-1/2 px-3">
+                <div className="w-full px-3 md:w-1/2">
                   <label
-                    className="block uppercase tracking-wide text-primary-deep-green text-xs font-bold mb-2"
+                    className="font-bold mb-2 block text-xs uppercase tracking-wide text-primary-deep-green"
                     htmlFor="grid-price"
                   >
                     Price
                   </label>
                   <input
-                    className="appearance-none block w-full bg-white-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    className="bg-white-200 block w-full appearance-none rounded border border-gray-200 py-3 px-4 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none"
                     id="grid-price"
                     type="number"
                     min="0.00"
@@ -168,16 +168,16 @@ const EditProduct = () => {
                   />
                 </div>
               </div>
-              <div className="flex flex-wrap -mx-3 mb-6">
+              <div className="-mx-3 mb-6 flex flex-wrap">
                 <div className="w-full px-3">
                   <label
-                    className="block uppercase tracking-wide text-primary-deep-green text-xs font-bold mb-2"
+                    className="font-bold mb-2 block text-xs uppercase tracking-wide text-primary-deep-green"
                     htmlFor="grid-description"
                   >
                     Description
                   </label>
                   <textarea
-                    className="appearance-none block w-full bg-white-200 text-gray-700 border border-gray-200 rounded py-3 px-4  leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    className="bg-white-200 block w-full appearance-none rounded border border-gray-200 py-3 px-4 leading-tight  text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none"
                     id="grid-description"
                     type="text"
                     rows="7"
@@ -186,16 +186,16 @@ const EditProduct = () => {
                   />
                 </div>
               </div>
-              <div className="flex flex-wrap -mx-3 mb-6">
+              <div className="-mx-3 mb-6 flex flex-wrap">
                 <div className="w-full px-3">
                   <label
-                    className="block uppercase tracking-wide text-primary-deep-green text-xs font-bold mb-2"
+                    className="font-bold mb-2 block text-xs uppercase tracking-wide text-primary-deep-green"
                     htmlFor="imageURL"
                   >
                     Upload image
                   </label>
                   <input
-                    className="appearance-none block w-full text-md text-gray-700 border border-gray-200 rounded cursor-pointer bg-primary-bright-white"
+                    className="text-md block w-full cursor-pointer appearance-none rounded border border-gray-200 bg-primary-bright-white text-gray-700"
                     id="imageURL"
                     type="file"
                     onChange={(evt) => setImageURL(evt.target.value)}
@@ -205,7 +205,7 @@ const EditProduct = () => {
               <div className="flex flex-col items-center justify-between">
                 <button
                   type="submit"
-                  className="hover:bg-primary-button-hover w-full bg-primary-deep-green text-white py-2 rounded-lg mx-auto block text-xl hover:transition-all mt-5"
+                  className="mx-auto mt-5 block w-full rounded-lg bg-primary-deep-green py-2 text-xl text-white hover:bg-primary-button-hover hover:transition-all"
                 >
                   Save
                 </button>
@@ -213,7 +213,7 @@ const EditProduct = () => {
               <div className="flex justify-center"></div>
             </form>
             <button
-              className="text-red-600 w-full py-2 rounded-lg block text-sm hover:text-primary-promo-banner mt-5"
+              className="mt-5 block w-full rounded-lg py-2 text-sm text-red-600 hover:text-primary-promo-banner"
               onClick={deleteProduct}
             >
               Delete

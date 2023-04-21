@@ -7,6 +7,7 @@ const initialState = {
   filterBy: [],
   searchBy: '',
   error: '',
+  loading: false,
   status: '',
   similarPage: 0,
   productPage: 0,
@@ -142,14 +143,17 @@ const productSlice = createSlice({
       .addCase(fetchAllProducts.fulfilled, (state, action) => {
         state.products = action.payload;
         state.status = 'success';
+        state.loading = false;
         state.error = '';
       })
       .addCase(fetchAllProducts.pending, (state, action) => {
         state.status = 'loading';
+        state.loading = true;
       })
       .addCase(fetchAllProducts.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
+        state.loading = false;
       })
       .addCase(fetchSingleProduct.fulfilled, (state, action) => {
         state.status = 'success';
@@ -209,7 +213,8 @@ export const {
 
 export const selectAllProducts = (state) => state.products.products;
 export const selectSingleProduct = (state) => state.products.singleProduct;
-export const selectStatus = (state) => state.products.status;
+export const selectProductStatus = (state) => state.products.status;
+export const selectProductLoading = (state) => state.products.loading;
 export const selectFilterBy = (state) => state.products.filterBy;
 // Page for scrolling through similar items
 export const selectSimilarPage = (state) => state.products.similarPage;

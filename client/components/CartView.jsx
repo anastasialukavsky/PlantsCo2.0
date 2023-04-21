@@ -10,9 +10,43 @@ export default function CartView(props) {
   const dispatch = useDispatch();
   const cart = useSelector(selectCart);
 
+  if (cart.loading) {
+    return (
+      <div className="mx-auto w-screen max-w-7xl">
+        <div
+          className="mx-auto mt-6 h-48 w-full bg-red-300 px-12"
+          style={{
+            background: '#ccc',
+            animation: 'fade 2s ease-in-out infinite alternate',
+            backgroundSize: '200% 100%',
+            animation: 'pulse 2s ease-in-out infinite',
+          }}
+        ></div>
+        <div
+          style={{
+            background: '#ccc',
+            animation: 'fade 2s ease-in-out infinite alternate',
+            backgroundSize: '200% 100%',
+            animation: 'pulse 2s ease-in-out infinite',
+          }}
+          className="mx-auto mt-6 h-48 w-full bg-red-300 px-12"
+        ></div>
+        <div
+          style={{
+            background: '#ccc',
+            animation: 'fade 2s ease-in-out infinite alternate',
+            backgroundSize: '200% 100%',
+            animation: 'pulse 2s ease-in-out infinite',
+          }}
+          className="mx-auto mt-6 h-48 w-full bg-red-300 px-12"
+        ></div>
+      </div>
+    );
+  }
+
   if (!cart || !cart.cart || !cart.cart.length > 0)
     return (
-      <div className="text-center mt-44">
+      <div className="mt-44 text-center">
         <h1 className="text-3xl">Your cart is empty...</h1>
         <h2 className="my-8 text-xl">
           Can we recommend something from our shop?
@@ -20,7 +54,7 @@ export default function CartView(props) {
         <Link to={'/products'} className="">
           <div
             onClick={() => dispatch(adjustFilter(''))}
-            className="border-2, px-6 py-3 bg-primary-deep-green text-white rounded-lg inline-block"
+            className="border-2, inline-block rounded-lg bg-primary-deep-green px-6 py-3 text-white"
           >
             <p className="">Shop Now</p>
           </div>
@@ -35,9 +69,9 @@ export default function CartView(props) {
   return (
     <>
       <div>
-        <h1 className="text-3xl text-center">CART</h1>
+        <h1 className="text-center text-3xl">CART</h1>
       </div>
-      <div className="max-h-[60vh] overflow-scroll">
+      <div className="h-[calc(100vh_-_5rem_-_156px)] overflow-y-scroll">
         {cart.expandedCart &&
           cart.expandedCart.map((item) => {
             return (
@@ -48,9 +82,9 @@ export default function CartView(props) {
           })}
       </div>
       <CartSubtotal />
-      <div className="flex flex-col items-center gap-14 w-1/2 mx-auto mb-6">
+      <div className="mx-auto my-3 mb-6 flex w-1/2 flex-col items-center">
         <Link
-          className="ease-in duration-500 text-center hover:bg-primary-button-hover w-full bg-primary-deep-green text-white py-2 rounded-2xl mx-auto block text-xl hover:transition-all mt-5"
+          className="mx-auto block w-full rounded-2xl bg-primary-deep-green py-2 text-center text-xl text-white duration-500 ease-in hover:bg-primary-button-hover hover:transition-all"
           to="/shipping"
         >
           Proceed To Payment

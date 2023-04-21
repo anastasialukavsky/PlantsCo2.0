@@ -31,41 +31,41 @@ const UserAccount = () => {
   if (!auth) return <h1>Page Loading...</h1>;
 
   return (
-    <div className="bg-cover bg-center h-[calc(100vh_-_5rem)] bg-[url('/assets/bg_img/wishlist_page.jpg')]">
-      <div className="w-full max-w-sm absolute top-40 right-10 mr-20 pt-16">
-        <p className="text-center text-4xl font-extrabold pb-2 text-primary-deep-green">
+    <div className="h-[calc(100vh_-_5rem)] w-screen bg-[#EBEBEB] bg-cover bg-center md:bg-[url('/assets/bg_img/wishlist_page.jpg')]">
+      <div className="20 absolute top-40 left-1/2 w-full max-w-sm -translate-x-1/2 pt-16 md:left-auto md:right-20 md:translate-x-0">
+        <p className="font-extrabold pb-2 text-center text-4xl text-primary-deep-green">
           Welcome Back,
         </p>
-        <p className="text-center text-4xl font-extrabold">{auth.firstName}</p>
-        <div className="flex flex-col mt-8 gap-3">
+        <p className="font-extrabold text-center text-4xl">{auth.firstName}</p>
+        <div className="mt-8 flex flex-col gap-3">
           <Link
             to={'/account/editprofile'}
-            className="py-3 px-5 mr-2 mb-2 text-center text-text-primary-deep-green-900 bg-white rounded-lg border hover:bg-gray-100"
+            className="text-text-primary-deep-green-900  mb-2 rounded-lg border bg-white py-3 px-5 text-center hover:bg-gray-100"
           >
             Edit Profile
           </Link>
           {/* <Link
             to={'/account/updatepassword'}
-            className="py-3 px-5 mr-2 mb-2 text-center text-text-primary-deep-green-900 bg-white rounded-lg border hover:bg-gray-100"
+            className="py-3 px-5  mb-2 text-center text-text-primary-deep-green-900 bg-white rounded-lg border hover:bg-gray-100"
           >
             Update Password
           </Link> */}
           <Link
             to={'/account/orderhistory'}
-            className="py-3 px-5 mr-2 mb-2 text-center text-text-primary-deep-green-900 bg-white rounded-lg border hover:bg-gray-100"
+            className="text-text-primary-deep-green-900  mb-2 rounded-lg border bg-white py-3 px-5 text-center hover:bg-gray-100"
           >
             Order History
           </Link>
           <Link
             to={'/account/wishlist'}
-            className="py-3 px-5 mr-2 mb-2 text-center text-text-primary-deep-green-900 bg-white rounded-lg border hover:bg-gray-100"
+            className="text-text-primary-deep-green-900  mb-2 rounded-lg border bg-white py-3 px-5 text-center hover:bg-gray-100"
           >
             Wishlist
           </Link>
           {auth.isAdmin ? (
             <Link
               to={'/account/admin'}
-              className="py-3 px-5 mr-2 mb-2 text-center text-text-primary-deep-green-900 bg-white rounded-lg border hover:bg-gray-100"
+              className="text-text-primary-deep-green-900  mb-2 rounded-lg border bg-white py-3 px-5 text-center hover:bg-gray-100"
             >
               Admin Settings
             </Link>
@@ -75,7 +75,7 @@ const UserAccount = () => {
 
           <button
             onClick={attemptLogOut}
-            className="text-primary-deep-green hover:text-primary-promo-banner pb-16 text-sm"
+            className="pb-16 text-sm text-primary-deep-green hover:text-primary-promo-banner"
           >
             Log Out
           </button>

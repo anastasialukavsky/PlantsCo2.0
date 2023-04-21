@@ -216,23 +216,23 @@ export default function Checkout() {
   }, [checkoutState]);
 
   return (
-    <div className="relative bg-cover bg-center bg-no-repeat bg-[url('/assets/misc_bg/shipping.jpg')] h-[calc(100vh_-_5rem)]">
-      <h2 className="text-center text-4xl font-bold py-6">
+    <div className="relative h-[calc(100vh_-_5rem)] bg-[url('/assets/misc_bg/shipping.jpg')] bg-cover bg-center bg-no-repeat">
+      <h2 className="font-bold py-6 text-center text-4xl">
         Shipping Information
       </h2>
       <div className="flex justify-center ">
-        <div className="max-w-lg p-6  bg-opacity-50 rounded-md bg-lime-900">
-          <section className="flex flex-col mt-3">
+        <div className="max-w-lg rounded-md  bg-lime-900 bg-opacity-50 p-6">
+          <section className="mt-3 flex flex-col">
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
                 <label
-                  className="block text-slate-50 text-sm font-bold mb-1"
+                  className="font-bold mb-1 block text-sm text-slate-50"
                   htmlFor="firstName"
                 >
                   First Name
                 </label>
                 <input
-                  className="shadow appearance-none border rounded w-96 py-1 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline text-md"
+                  className="focus:shadow-outline text-md w-96 appearance-none rounded border py-1 px-4 leading-tight text-gray-700 shadow focus:bg-white focus:outline-none"
                   id="firstName"
                   type="text"
                   name="firstName"
@@ -244,13 +244,13 @@ export default function Checkout() {
 
               <div className="mb-3">
                 <label
-                  className="block  text-slate-50 text-sm font-bold mb-1"
+                  className="font-bold  mb-1 block text-sm text-slate-50"
                   htmlFor="lastName"
                 >
                   Last Name
                 </label>
                 <input
-                  className="shadow appearance-none border rounded w-96 py-1 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline text-md"
+                  className="focus:shadow-outline text-md w-96 appearance-none rounded border py-1 px-4 leading-tight text-gray-700 shadow focus:bg-white focus:outline-none"
                   type="text"
                   name="lastName"
                   placeholder={isInvalid ? 'Enter your last name' : null}
@@ -262,13 +262,13 @@ export default function Checkout() {
 
               <div className="mb-3">
                 <label
-                  className="block  text-slate-50 text-sm font-bold mb-1"
+                  className="font-bold  mb-1 block text-sm text-slate-50"
                   htmlFor="email"
                 >
                   Email
                 </label>
                 <input
-                  className="shadow appearance-none border rounded w-96 py-1 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline text-md"
+                  className="focus:shadow-outline text-md w-96 appearance-none rounded border py-1 px-4 leading-tight text-gray-700 shadow focus:bg-white focus:outline-none"
                   type="email"
                   name="email"
                   placeholder={isInvalid ? invalidEmailMessage : null}
@@ -280,13 +280,13 @@ export default function Checkout() {
 
               <div className="mb-3">
                 <label
-                  className="block  text-slate-50 text-sm font-bold mb-1"
+                  className="font-bold  mb-1 block text-sm text-slate-50"
                   htmlFor="street1"
                 >
                   Street1
                 </label>
                 <input
-                  className="shadow appearance-none border rounded w-96 py-1 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline text-md"
+                  className="focus:shadow-outline text-md w-96 appearance-none rounded border py-1 px-4 leading-tight text-gray-700 shadow focus:bg-white focus:outline-none"
                   type="text"
                   name="street1"
                   placeholder={isInvalid ? 'Enter your address' : null}
@@ -298,13 +298,13 @@ export default function Checkout() {
 
               <div className="mb-3">
                 <label
-                  className="block  text-slate-50 text-sm font-bold mb-1"
+                  className="font-bold  mb-1 block text-sm text-slate-50"
                   htmlFor="street1"
                 >
                   Street2
                 </label>
                 <input
-                  className="shadow appearance-none border rounded w-96 py-1 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline text-md"
+                  className="focus:shadow-outline text-md w-96 appearance-none rounded border py-1 px-4 leading-tight text-gray-700 shadow focus:bg-white focus:outline-none"
                   type="text"
                   name="street2"
                   id="street2"
@@ -315,13 +315,13 @@ export default function Checkout() {
 
               <div className="mb-3">
                 <label
-                  className="block  text-slate-50 text-sm font-bold mb-1"
+                  className="font-bold  mb-1 block text-sm text-slate-50"
                   htmlFor="city"
                 >
                   City
                 </label>
                 <input
-                  className="shadow appearance-none border rounded w-96 py-1 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline text-md"
+                  className="focus:shadow-outline text-md w-96 appearance-none rounded border py-1 px-4 leading-tight text-gray-700 shadow focus:bg-white focus:outline-none"
                   type="text"
                   name="city"
                   placeholder={isInvalid ? 'Enter your city' : null}
@@ -333,13 +333,13 @@ export default function Checkout() {
 
               <div className="mb-3">
                 <label
-                  className="block  text-slate-50 text-sm font-bold mb-1"
+                  className="font-bold  mb-1 block text-sm text-slate-50"
                   htmlFor="state"
                 >
                   State
                 </label>
                 <select
-                  className="shadow appearance-none border rounded w-96 py-1 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline text-md"
+                  className="focus:shadow-outline text-md w-96 appearance-none rounded border py-1 px-4 leading-tight text-gray-700 shadow focus:bg-white focus:outline-none"
                   name="state"
                   id="state"
                   value={formData.state}
@@ -356,13 +356,13 @@ export default function Checkout() {
 
               <div className="mb-3">
                 <label
-                  className="block text-slate-50 text-sm font-bold mb-1"
+                  className="font-bold mb-1 block text-sm text-slate-50"
                   htmlFor="state"
                 >
                   Zip
                 </label>
                 <input
-                  className="shadow appearance-none border rounded w-96 py-1 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline text-md"
+                  className="focus:shadow-outline text-md w-96 appearance-none rounded border py-1 px-4 leading-tight text-gray-700 shadow focus:bg-white focus:outline-none"
                   type="text"
                   name="zip"
                   minLength="5"
@@ -376,13 +376,13 @@ export default function Checkout() {
 
               <div className="mb-3">
                 <label
-                  className="block text-slate-50 text-sm font-bold mb-1"
+                  className="font-bold mb-1 block text-sm text-slate-50"
                   htmlFor="state"
                 >
                   Promo Code
                 </label>
                 <input
-                  className="shadow appearance-none border rounded w-96 py-1 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline text-md"
+                  className="focus:shadow-outline text-md w-96 appearance-none rounded border py-1 px-4 leading-tight text-gray-700 shadow focus:bg-white focus:outline-none"
                   type="text"
                   name="promoCode"
                   id="promoCode"
@@ -399,7 +399,7 @@ export default function Checkout() {
 
             <div>
               <button
-                className="ease-in duration-500  hover:bg-primary-button-hover w-full bg-primary-deep-green text-white py-2 rounded-2xl mx-auto block text-xl hover:transition-all mt-5"
+                className="mx-auto mt-5  block w-full rounded-2xl bg-primary-deep-green py-2 text-xl text-white duration-500 ease-in hover:bg-primary-button-hover hover:transition-all"
                 type="submit"
                 onClick={handleSubmit}
               >

@@ -8,15 +8,19 @@ import {
   fetchSingleProduct,
   resetStatusError,
   fetchAllProducts,
+  selectProductLoading,
 } from '../slices/product/productSlice.js';
 import LikedProduct from './UI/LikedProduct.jsx';
 import { addOneToCart } from '../slices/users/cartSlice.js';
 import SimilarProducts from './SimilarProducts.jsx';
 import toast, { Toaster } from 'react-hot-toast';
+import ProductSkeleton from './UI/ProductSkeleton.jsx';
 
 const singleProduct = () => {
   const dispatch = useDispatch();
   const { productId } = useParams();
+
+  const productLoading = useSelector(selectProductLoading);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -39,51 +43,61 @@ const singleProduct = () => {
   return (
     <>
       <PromoBanner />
-      <main className="font-serif flex h-[700px]">
-        <section className="flex gap-20 justify-center mt-16 ">
-          <div className="">
-            <img
-              className="h-5/6"
-              src={`${singleProduct.imageURL}`}
-              alt="error showing photo"
-            />
-          </div>
-          <div className="w-1/3">
-            <div className="flex justify-between items-center mb-8">
-              <header className=" text-green-900 text-3xl">
-                {singleProduct.name}
-              </header>
-              <LikedProduct />
+      {!productLoading ? (
+        <main className="font-serif flex md:h-[470px]">
+          <section className="mt-8 flex flex-col justify-center md:flex-row md:gap-20">
+            <div className="mx-auto md:mx-0">
+              <img
+                className="h-96 md:h-full"
+                src={`${singleProduct.imageURL}`}
+                alt="error showing photo"
+              />
             </div>
+            <div className="mx-8 md:mx-0 md:w-1/3">
+              <div className="mb-8 flex items-center justify-between">
+                <header className=" text-3xl text-green-900">
+                  {singleProduct.name}
+                </header>
+                <LikedProduct />
+              </div>
 
-            <div className="flex justify-between border-b-4 pb-2 mb-4">
-              <p>
-                {singleProduct?.tags?.map(({ tagName }) => tagName).join(', ')}
+              <div className="mb-4 flex justify-between border-b-4 pb-2">
+                <p>
+                  {singleProduct?.tags
+                    ?.map(({ tagName }) => tagName)
+                    .join(', ')}
+                </p>
+              </div>
+              <p className="font-bold mb-4 text-3xl text-primary-deep-green">
+                ${singleProduct.price}
               </p>
+              <p className="mb-8 leading-tight">
+                {singleProduct.shortDescription}
+              </p>
+              <div className="mb-3 border-b-4 pb-4">
+                <button
+                  onClick={() => {
+                    notify();
+                    addToCart();
+                  }}
+                  className="mx-auto block w-full rounded-2xl bg-primary-deep-green py-3 text-xl text-white hover:bg-primary-button-green hover:transition-all"
+                >
+                  ADD TO CART
+                </button>
+              </div>
+              <div className="flex items-center gap-2">
+                <img src={box} alt="shipping box icon" className="w-6" />
+                <p className="text-sm">Free shipping in the USA</p>
+              </div>
             </div>
-            <p className="text-primary-deep-green text-3xl font-bold mb-4">
-              ${singleProduct.price}
-            </p>
-            <p className="mb-8 leading-tight">{singleProduct.description}</p>
-            <div className="border-b-4 pb-4 mb-3">
-              <button
-                onClick={() => {
-                  notify();
-                  addToCart();
-                }}
-                className="hover:bg-primary-button-green w-full bg-primary-deep-green text-white py-3 rounded-2xl mx-auto block text-xl hover:transition-all"
-              >
-                ADD TO CART
-              </button>
-            </div>
-            <div className="flex gap-2 items-center">
-              <img src={box} alt="shipping box icon" className="w-6" />
-              <p className="text-sm">Free shipping in the USA</p>
-            </div>
-          </div>
-        </section>
-      </main>
+          </section>
+        </main>
+      ) : (
+        <ProductSkeleton />
+      )}
+      {/* <div className="hidden md:block"> */}
       <SimilarProducts />
+      {/* </div> */}
       <Toaster />
     </>
   );

@@ -11,7 +11,10 @@ const FilterTag = (props) => {
   };
 
   return (
-    <button className="block hover:underline" onClick={handleFilterClick}>
+    <button
+      className="block hover:underline text-center text-sm xs:text-lg"
+      onClick={handleFilterClick}
+    >
       <li>{props.children}</li>
     </button>
   );

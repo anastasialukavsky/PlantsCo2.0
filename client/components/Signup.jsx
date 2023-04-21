@@ -76,14 +76,14 @@ export default function Signup() {
   };
 
   return (
-    <div className="bg-cover bg-center bg-[url('/assets/bg_img/login_signin_page.jpg')] h-[calc(100vh_-_5rem)]">
-      <div className="w-full max-w-sm m-auto pt-16">
-        <h2 className="text-center text-4xl font-bold">Sign Up</h2>
-        <section className="flex flex-col gap-10 justify-center mt-16 ">
+    <div className="h-[calc(100vh_-_5rem)] bg-[url('/assets/bg_img/login_signin_page.jpg')] bg-cover bg-center">
+      <div className="m-auto w-full max-w-sm pt-16">
+        <h2 className="font-bold text-center text-4xl">Sign Up</h2>
+        <section className="mt-16 flex flex-col justify-center gap-10 ">
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
               <label
-                className="block text-primary-deep-green text-sm font-bold mb-2"
+                className="font-bold mb-2 block text-sm text-primary-deep-green"
                 htmlFor="firstName"
               >
                 First Name
@@ -104,7 +104,7 @@ export default function Signup() {
               <p
                 className={
                   isInvalidFirstName
-                    ? 'text-xs mt-2 text-red-500'
+                    ? 'mt-2 text-xs text-red-500'
                     : 'collapse -mt-2'
                 }
               >
@@ -114,7 +114,7 @@ export default function Signup() {
 
             <div className="mb-3">
               <label
-                className="block text-primary-deep-green text-sm font-bold mb-2"
+                className="font-bold mb-2 block text-sm text-primary-deep-green"
                 htmlFor="lastName"
               >
                 Last Name
@@ -135,7 +135,7 @@ export default function Signup() {
               <p
                 className={
                   isInvalidLastName
-                    ? 'text-xs mt-2 text-red-500'
+                    ? 'mt-2 text-xs text-red-500'
                     : 'collapse -mt-2'
                 }
               >
@@ -145,7 +145,7 @@ export default function Signup() {
 
             <div className="mb-3">
               <label
-                className="block text-primary-deep-green text-sm font-bold mb-2"
+                className="font-bold mb-2 block text-sm text-primary-deep-green"
                 htmlFor="email"
               >
                 Email
@@ -165,7 +165,7 @@ export default function Signup() {
               <p
                 className={
                   isInvalidEmail
-                    ? 'text-xs mt-2 text-red-500'
+                    ? 'mt-2 text-xs text-red-500'
                     : 'collapse -mt-2'
                 }
               >
@@ -175,7 +175,7 @@ export default function Signup() {
 
             <div className="mb-3">
               <label
-                className="block text-primary-deep-green text-sm font-bold mb-2"
+                className="font-bold mb-2 block text-sm text-primary-deep-green"
                 htmlFor="password"
               >
                 Password
@@ -196,7 +196,7 @@ export default function Signup() {
               <p
                 className={
                   isInvalidPassword
-                    ? 'text-xs mt-2 text-red-500'
+                    ? 'mt-2 text-xs text-red-500'
                     : 'collapse -mt-2'
                 }
               >
@@ -206,7 +206,7 @@ export default function Signup() {
 
             <div>
               <button
-                className="ease-in duration-500  hover:bg-primary-button-hover w-full bg-primary-deep-green text-white py-2 rounded-xl mx-auto block text-xl hover:transition-all mt-10"
+                className="mx-auto mt-10  block w-full rounded-xl bg-primary-deep-green py-2 text-xl text-white duration-500 ease-in hover:bg-primary-button-hover hover:transition-all"
                 type="submit"
               >
                 Submit
@@ -214,7 +214,7 @@ export default function Signup() {
             </div>
           </form>
           <div className="flex justify-center">
-            <button className="inline-block align-baseline font-bold text-sm hover:text-primary-promo-banner">
+            <button className="font-bold inline-block align-baseline text-sm hover:text-primary-promo-banner">
               <Link to={'/login'}>Already have an account? Log in!</Link>
             </button>
           </div>

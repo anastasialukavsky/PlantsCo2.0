@@ -54,6 +54,7 @@ const authSlice = createSlice({
     status: '',
     loginMessage: false,
     logoutMessage: false,
+    loading: false,
   },
   reducers: {
     resetStatus: (state) => {
@@ -77,12 +78,15 @@ const authSlice = createSlice({
         state.status = 'logged in';
         state.error = '';
         state.loginMessage = true;
+        state.loading = false;
       })
       .addCase(logIn.pending, (state, { payload }) => {
         state.status = 'loading';
         state.error = '';
+        state.loading = true;
       })
       .addCase(logIn.rejected, (state, { payload }) => {
+        state.loading = false;
         state.status = 'failed';
         state.error = payload.message;
       })
@@ -121,5 +125,6 @@ export const { resetStatus, logOut } = authSlice.actions;
 export const selectAuth = (state) => state.auth;
 export const selectLoginMessage = (state) => state.auth.loginMessage;
 export const selectLogoutMessage = (state) => state.auth.logoutMessage;
+export const selectAuthLoading = (state) => state.auth.loading;
 
 export default authSlice.reducer;

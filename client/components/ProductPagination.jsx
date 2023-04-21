@@ -18,9 +18,9 @@ const ProductPagination = () => {
   };
 
   return (
-    <div className="flex gap-4 justify-center items-center text-2xl h-16">
+    <div className="flex h-16 items-center justify-center gap-4 text-2xl">
       <button
-        className="block h-full max-w-sm min-w-[52px]"
+        className="block h-full min-w-[52px] max-w-sm"
         onClick={() => handlePageChange('previous')}
       >
         <img src={leftArrow} alt="left arrow icon" className="w-12" />
@@ -28,7 +28,7 @@ const ProductPagination = () => {
       <p>prev</p>
       next
       <button
-        className="block h-full max-w-sm min-w-[52px]"
+        className="block h-full min-w-[52px] max-w-sm"
         onClick={() => handlePageChange(['next', filteredProducts?.length])}
       >
         <img src={rightArrow} alt="right arrow icon" className="w-12" />

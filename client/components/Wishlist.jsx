@@ -15,7 +15,7 @@ const Wishlist = () => {
   return (
     <div>
       <div>
-        <h1 className="text-3xl text-center">Wishlist</h1>
+        <h1 className="text-center text-3xl">Wishlist</h1>
       </div>
       {wishlist[0]?.products.map((product) => {
         return <WishlistCard key={product.id} product={product} />;

@@ -24,6 +24,9 @@ module.exports = {
         'primary-button-hover': '#4d783c',
       },
       display: ['group-hover'],
+      screens: {
+        xs: '400px',
+      },
     },
   },
   plugins: [],

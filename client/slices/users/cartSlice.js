@@ -271,27 +271,39 @@ const cartSlice = createSlice({
   initialState: {
     cart: [],
     expandedCart: [],
+    loading: false,
   },
   extraReducers: (builder) => {
     builder.addCase(fetchCart.fulfilled, (state, { payload }) => {
       state.cart = payload.simpleCart;
+      state.loading = false;
       state.expandedCart = payload.expandedCart;
     });
+    builder.addCase(fetchCart.pending, (state, { payload }) => {
+      state.loading = true;
+    });
+    builder.addCase(fetchCart.rejected, (state, { payload }) => {
+      state.loading = false;
+    });
     builder.addCase(addOneToCart.fulfilled, (state, { payload }) => {
+      state.loading = false;
       state.cart = payload.localCart;
       state.expandedCart = payload.expandedCart;
     });
     builder.addCase(removeOneFromCart.fulfilled, (state, { payload }) => {
+      state.loading = false;
       if (!payload) return; // thunk will return null if nothing to remove
       state.cart = payload.localCart;
       state.expandedCart = payload.expandedCart;
     });
     builder.addCase(removeCartRow.fulfilled, (state, { payload }) => {
+      state.loading = false;
       if (!payload) return; // thunk will return null if nothing to remove
       state.cart = payload.localCart;
       state.expandedCart = payload.expandedCart;
     });
     builder.addCase(purgeCart.fulfilled, (state, action) => {
+      state.loading = false;
       state.cart = [];
       state.expandedCart = [];
     });
