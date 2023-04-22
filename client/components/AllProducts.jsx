@@ -11,6 +11,7 @@ import AllProductsSection from './AllProductsSection.jsx';
 import ProductPagination from './ProductPagination.jsx';
 import Sort from './Sort.jsx';
 import { selectProductLoading } from '../slices/product/productSlice';
+import PromoBanner from './UI/PromoBanner.jsx';
 
 const AllProducts = () => {
   const dispatch = useDispatch();
@@ -30,16 +31,19 @@ const AllProducts = () => {
 
   return !productsLoading ? (
     // return !true ? (
-    <div className="flex justify-center">
-      <section>
-        <FilterSection />
-        <Sort />
-        <AllProductsSection />
-        <ProductPagination />
-      </section>
-    </div>
+    <>
+      <PromoBanner />
+      <div className="flex justify-center">
+        <section>
+          <FilterSection />
+          <Sort />
+          <AllProductsSection />
+          <ProductPagination />
+        </section>
+      </div>
+    </>
   ) : (
-    <div className="w-full max-w-7xl mx-auto">
+    <div className="mx-auto w-full max-w-7xl">
       <FilterSection />
       {/* <Sort /> */}
       <div className="flex flex-wrap justify-center gap-12 ">
@@ -52,10 +56,10 @@ const AllProducts = () => {
                 backgroundSize: '200% 100%',
                 animation: 'pulse 2s ease-in-out infinite',
               }}
-              className="bg-gray-300 w-full h-80 block mb-2 animate-pulse rounded-md mx-auto"
+              className="mx-auto mb-2 block h-80 w-full animate-pulse rounded-md bg-gray-300"
             ></div>
             <div
-              className="h-6 w-full mx-auto pr-12"
+              className="mx-auto h-6 w-full pr-12"
               style={{
                 background: '#ccc',
                 animation: 'fade 2s ease-in-out infinite alternate',
