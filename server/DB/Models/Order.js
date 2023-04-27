@@ -28,13 +28,23 @@ const Order = db.define('order', {
     validate: {
       notEmpty: true,
       notNull: true,
-      min: 1,
+      min: 0,
     },
+  },
+  status: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      isIn: [['pending', 'complete', 'failed']],
+      notEmpty: true,
+      notNull: true,
+    },
+    defaultValue: 'complete',
   },
 });
 
-Order.beforeValidate('finalPrice', (order) => {
-  order.finalPrice *= 1 - order.promoRate;
-});
+// Order.beforeValidate('finalPrice', (order) => {
+//   order.finalPrice *= 1 - order.promoRate;
+// });
 
 module.exports = Order;

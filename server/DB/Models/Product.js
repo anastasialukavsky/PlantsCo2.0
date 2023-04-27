@@ -63,10 +63,10 @@ const Product = db.define('product', {
     type: Sequelize.VIRTUAL,
     get() {
       const rawDescription = this.getDataValue('description');
-      if (rawDescription.length <= 100) {
+      if (rawDescription.length <= 200) {
         return rawDescription;
       }
-      return rawDescription.substring(0, 100) + '...';
+      return rawDescription.substring(0, 200) + '...';
     },
     set(value) {
       throw new Error('Do not try to set shortDescription value');
