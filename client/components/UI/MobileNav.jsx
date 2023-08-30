@@ -5,7 +5,8 @@ import {
   adjustSearchBy,
   selectSearchBy,
 } from '../../slices/product/productSlice';
-import searchIcon from '../../../public/assets/search-icon.svg';
+import searchIcon from '../../../public/assets/search-icon-white.svg';
+import whiteX from '../../../public/assets/white-x.svg';
 
 const MobileNav = ({ expand, setExpand }) => {
   const dispatch = useDispatch();
@@ -26,11 +27,31 @@ const MobileNav = ({ expand, setExpand }) => {
 
   return (
     <div
-      className="absolute top-0 left-0 z-50 h-screen  w-screen bg-[#344e41] font-gloock  text-white  transition-all md:hidden"
+      className="absolute top-0 left-0 z-50 h-screen  w-screen bg-[url('/assets/bg_img/home1.jpg')] font-gloock  text-white   md:hidden"
       style={{
         right: `${expand ? '0' : '-18rem'}`,
       }}
     >
+      {/**search section and X btn section*/}
+      <div className="flex flex-row-reverse">
+        <img src={whiteX} alt="x icon" className="w-5" />
+
+        <div className="item-end mx-auto flex h-16 w-screen justify-center gap-2 ">
+          <button onClick={handleSearch}>
+            <img src={searchIcon} alt="magnifying glass" className="w-8 pt-1" />
+          </button>
+          <form onSubmit={handleSearch}>
+            <input
+              type="text"
+              placeholder="succulent..."
+              className="h-8 w-full rounded-full  bg-gray-100 pl-3 text-base text-black placeholder:text-[3.5vw]"
+              value={searchTerm}
+              onChange={(e) => dispatch(adjustSearchBy(e.target.value))}
+            />
+          </form>
+        </div>
+      </div>
+
       <ul className="flex  flex-col  pt-[50%] text-[6vw]">
         <div
           className="w-full text-center transition-all"
@@ -71,22 +92,6 @@ const MobileNav = ({ expand, setExpand }) => {
           </Link>
         </div>
       </ul>
-
-      {/**search section */}
-      <div className="mx-auto flex h-16 w-5/6 gap-2 py-10">
-        <button onClick={handleSearch}>
-          <img src={searchIcon} alt="magnifying glass" className="w-8 pt-1" />
-        </button>
-        <form onSubmit={handleSearch}>
-          <input
-            type="text"
-            placeholder="succulent..."
-            className="h-8 w-full rounded-full  bg-gray-100 pl-3 text-base placeholder:text-[3.5vw] input:text-black"
-            value={searchTerm}
-            onChange={(e) => dispatch(adjustSearchBy(e.target.value))}
-          />
-        </form>
-      </div>
     </div>
   );
 };
