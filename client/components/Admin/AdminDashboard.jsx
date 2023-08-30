@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Outlet, NavLink } from 'react-router-dom';
 import {
   selectAuth,
   resetStatus as resetAuthStatus,
@@ -23,7 +23,7 @@ const AdminDashboard = () => {
           className=" flex w-1/4 -translate-x-full flex-col gap-5 transition-transform sm:translate-x-0"
           aria-label="Sidebar"
         >
-          <div className="flex flex-col gap-3 pt-5">
+          <div id="admin-nav" className="flex flex-col gap-3 pt-5">
             <Link
               to={'/account/admin'}
               className="mr-5 rounded-r-full bg-green-900 p-3 pl-5 text-left text-primary-bright-white"
@@ -32,36 +32,36 @@ const AdminDashboard = () => {
             </Link>
 
             <div className="nav-link-container flex flex-col gap-3">
-              <Link
+              <NavLink
                 to={'/account/admin/products'}
                 className="mr-5 rounded-r-full p-3 pl-5 text-left hover:bg-green-900 hover:text-primary-bright-white"
               >
                 PRODUCTS
-              </Link>
-              <Link
+              </NavLink>
+              <NavLink
                 to={'/account/admin/addproduct'}
                 className="mr-5 rounded-r-full p-3 pl-5 text-left hover:bg-green-900 hover:text-primary-bright-white"
               >
                 ADD NEW PRODUCT
-              </Link>
-              <Link
+              </NavLink>
+              <NavLink
                 to={'/account/admin/promos'}
                 className="mr-5 rounded-r-full p-3 pl-5 text-left hover:bg-green-900 hover:text-primary-bright-white"
               >
                 PROMOS
-              </Link>
-              <Link
+              </NavLink>
+              <NavLink
                 to={'/account/admin/addpromo'}
                 className="mr-5 rounded-r-full p-3 pl-5 text-left hover:bg-green-900 hover:text-primary-bright-white"
               >
                 ADD NEW PROMO
-              </Link>
-              <Link
+              </NavLink>
+              <NavLink
                 to={'/account/admin/users'}
                 className="mr-5 rounded-r-full p-3 pl-5 text-left hover:bg-green-900 hover:text-primary-bright-white"
               >
                 USER MANAGEMENT
-              </Link>
+              </NavLink>
               <Link
                 to={'/account'}
                 className="mr-5 rounded-r-full p-3 pl-5 text-left text-sm hover:border hover:border-green-900"
@@ -72,10 +72,11 @@ const AdminDashboard = () => {
           </div>
         </nav>
 
-        <div className="h-full w-4/5 overflow-auto p-4">
-          <div className="flex h-screen w-screen flex-col overflow-auto rounded-xl">
-            <p>Howdy, {auth.firstName}!</p>
-            <p>Do cool admin stuff here :)</p>
+        <div className="h-[80vh] w-4/5 p-4">
+          <div className="flex h-full flex-col overflow-hidden rounded-xl">
+            <Outlet />
+            {/* <p>Howdy, {auth.firstName}!</p>
+            <p>Do cool admin stuff here :)</p> */}
           </div>
         </div>
       </div>

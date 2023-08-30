@@ -71,26 +71,15 @@ export default function Main() {
             element={<OrderHistoryDetails />}
           />
           <Route path="/*" element={<NotFound />} />
-          <Route path="/account/admin" element={<AdminDashboard />} />
-          <Route
-            path="/account/admin/products"
-            element={<AdminProductView />}
-          />
-          <Route
-            path="/account/admin/promos"
-            element={<AdminPromoCodeView />}
-          />
-          <Route
-            path="/account/admin/editpromos/:promoId"
-            element={<EditPromos />}
-          />
-          <Route path="/account/admin/users" element={<AdminUserMgmt />} />
-          <Route
-            path="/account/admin/editproduct/:productId"
-            element={<EditProduct />}
-          />
-          <Route path="/account/admin/addproduct" element={<AddNewProduct />} />
-          <Route path="/account/admin/addpromo" element={<AddNewPromo />} />
+          <Route path="/account/admin" element={<AdminDashboard />}>
+            <Route path="products" element={<AdminProductView />} />
+            <Route path="addproduct" element={<AddNewProduct />} />
+            <Route path="promos" element={<AdminPromoCodeView />} />
+            <Route path="addpromo" element={<AddNewPromo />} />
+            <Route path="users" element={<AdminUserMgmt />} />
+            <Route path="editpromos/:promoId" element={<EditPromos />} />
+            <Route path="editproduct/:productId" element={<EditProduct />} />
+          </Route>
         </Routes>
       </div>
     </React.Fragment>
