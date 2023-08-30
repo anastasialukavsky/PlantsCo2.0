@@ -10,8 +10,6 @@ const ProductCard = (props) => {
 
   const productsLoading = useSelector(selectProductLoading);
 
-  console.log('products loading from card?', productsLoading);
-
   function addToCart() {
     dispatch(addOneToCart(product.id));
     toast.success('Product added to cart!');
