@@ -44,9 +44,9 @@ const singleProduct = () => {
     <>
       <PromoBanner />
       {!productLoading ? (
-        <main className="font-serif flex md:h-[470px]">
+        <main className="font-serif flex justify-center md:h-[470px]">
           <section className="mt-8 flex flex-col justify-center md:flex-row md:gap-20">
-            <div className="mx-auto md:mx-0">
+            <div className="mx-auto aspect-[3/4] md:mx-0 md:h-full">
               <img
                 className="h-96 md:h-full"
                 src={`${singleProduct.imageURL}`}
