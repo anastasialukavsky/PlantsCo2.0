@@ -18,8 +18,6 @@ const AllProducts = () => {
 
   const productsLoading = useSelector(selectProductLoading);
 
-  console.log('products loading?', productsLoading);
-
   useEffect(() => {
     dispatch(fetchAllProducts());
 
@@ -47,8 +45,8 @@ const AllProducts = () => {
       <FilterSection />
       {/* <Sort /> */}
       <div className="flex flex-wrap justify-center gap-12 ">
-        {[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1].map((e) => (
-          <div className="block w-64">
+        {[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1].map((e, idx) => (
+          <div className="block w-64" key={idx}>
             <div
               style={{
                 background: '#ccc',
