@@ -8,10 +8,7 @@ const WishlistCard = ({ product }) => {
 
   const wishlist = useSelector(selectWishlist);
 
-  console.log('product', product);
-
   const handleRemove = (productId) => {
-    console.log(wishlist[0]?.id, productId);
     dispatch(
       adjustWishlist({
         productId,
@@ -23,7 +20,7 @@ const WishlistCard = ({ product }) => {
 
   return (
     <>
-      <div className=" mx-8 flex h-52 items-center gap-6">
+      <div className="mx-8 flex h-52 items-center gap-6 rounded-xl">
         <div className="h-48">
           <img
             src={`${product.imageURL}`}
