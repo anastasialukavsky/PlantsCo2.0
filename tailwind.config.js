@@ -9,7 +9,10 @@ module.exports = {
       outfit: ['Outfit', 'sans-serif'],
       montserrat: ['Montserrat', 'monospace'],
       hubbali: ['Hubballi', 'sans-serif'],
-      tabac: 'Tabac Big Glam Black'
+      tabac: 'Tabac Big Glam Black',
+      osvald: ['Osvald', 'sans-serif'],
+      quicksand: ['Quicksand', 'sans-serif'],
+      
     },
     fontWeight: {
       thin: 100,
