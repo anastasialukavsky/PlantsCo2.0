@@ -47,7 +47,7 @@ const ProductCard = (props) => {
         <p className="mb-1 text-2xl">{product.name}</p>
         <p className="text-sm">${product.price}</p>
       </Link>
-      <Toaster gutter={15} />
+      {/* <Toaster gutter={15} /> */}
     </div>
   ) : (
     <div>

@@ -105,7 +105,7 @@ const singleProduct = () => {
       {/* <div className="hidden md:block"> */}
       <SimilarProducts />
       {/* </div> */}
-      <Toaster />
+      {/* <Toaster /> */}
     </>
   );
 };

@@ -125,7 +125,7 @@ const EditProfile = () => {
             Back
           </button>
         </div>
-        <Toaster />
+        {/* <Toaster /> */}
       </div>
     </div>
   );

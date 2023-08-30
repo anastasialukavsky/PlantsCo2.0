@@ -47,7 +47,7 @@ Shop Now
 </div>
 */}
 
-        <Toaster />
+        {/* <Toaster /> */}
       </div>
     </>
   );

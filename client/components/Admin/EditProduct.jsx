@@ -178,7 +178,7 @@ const EditProduct = () => {
           </section>
         </div>
       </div>
-      <Toaster />
+      {/* <Toaster /> */}
     </>
   );
 };

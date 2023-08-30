@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import searchIcon from '../../../public/assets/search-icon.svg';
 import { useDispatch, useSelector } from 'react-redux';
-import triangle from '../../../public/assets/line.svg'
+import triangle from '../../../public/assets/line.svg';
+
+import { Toaster } from 'react-hot-toast';
 
 import {
   selectSearchedItems,
@@ -30,7 +32,8 @@ const NavBar = (props) => {
 
   return (
     <header>
-      <nav className="flex h-20 w-screen flex-col pt-2 items-center justify-around tracking-tighter text-green-gray relative z-50">
+      <Toaster position="top-right" />
+      <nav className="relative z-50 flex h-20 w-screen flex-col items-center justify-around pt-2 tracking-tighter text-green-gray">
         <div>
           <Link to={'/'}>
             <h1 className="font-tabac text-5xl md:text-[3vw]">plants&co</h1>
@@ -55,7 +58,6 @@ const NavBar = (props) => {
       </div>
     */}
 
-    
           <ul className="flex gap-10 font-outfit md:text-[1.9vw] lg:text-[1.3vw]">
             <Link to={`/products`}>
               <li onClick={() => dispatch(adjustFilter(''))}>SHOP</li>
@@ -74,7 +76,6 @@ const NavBar = (props) => {
             </Link>
           </ul>
         </div>
-
 
         {/**decorated navbar border */}
         <div className="relative flex w-[90vw]">
