@@ -15,19 +15,22 @@ const LikedProduct = () => {
   const navigate = useNavigate();
   const { productId } = useParams();
 
+  const wishlist = useSelector(selectWishlist);
+
   useEffect(() => {
     dispatch(fetchWishlist());
   }, []);
 
-  const notify = () =>
-    productIsLiked
-      ? toast.error('Item removed from wishlist', { duration: 1000 })
-      : toast.success('Item added to wishlist');
-
   const handleHeartClick = () => {
     if (!wishlist) {
-      navigate('/signup');
+      toast('Please login to mark favorites.', { duration: 2000 });
     } else {
+      if (productIsLiked) {
+        toast.error('Item removed from wishlist', { duration: 1000 });
+      } else {
+        toast.success('Item added to wishlist');
+      }
+
       dispatch(
         adjustWishlist({
           productId,
@@ -38,7 +41,6 @@ const LikedProduct = () => {
     }
   };
 
-  const wishlist = useSelector(selectWishlist);
   // Boolean of if product is in the wishlist
   let productIsLiked = false;
   if (wishlist) {
@@ -50,7 +52,7 @@ const LikedProduct = () => {
       <button
         className="w-8"
         onClick={() => {
-          notify();
+          // notify();
           handleHeartClick();
         }}
       >
