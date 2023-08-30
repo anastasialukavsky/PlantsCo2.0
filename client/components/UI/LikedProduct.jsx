@@ -48,7 +48,7 @@ const LikedProduct = () => {
   return (
     <>
       <button
-        className="w-8"
+        className="w-6 3xl:w-[8]"
         onClick={() => {
           notify();
           handleHeartClick();
