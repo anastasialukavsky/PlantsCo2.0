@@ -28,26 +28,29 @@ export default function Homepage() {
 
   return (
     <>
-      <div className="mx-auto  h-screen absolute top-0 w-[100vw] bg-cover bg-[url('/assets/bg_img/homepage13.jpg')] bg-right">
+      <div className="absolute  top-0 mx-auto h-screen w-[100vw]   bg-[url('/assets/bg_img/home1.jpg')]  bg-cover text-white md:bg-[url('/assets/bg_img/homepage13.jpg')] md:bg-right md:text-green-gray">
+        {/**homepage txt section */}
+        <div className="absolute top-48 left-1/2 w-[80vw] -translate-x-1/2 flex-col gap-5 text-center md:bottom-auto   md:min-w-[500px] lg:top-72 lg:left-32 lg:translate-x-0 lg:text-left">
+          <div className="mb-4 w-full font-quicksand">
+            <p className="mb-2 font-quicksand text-[7vw] font-light uppercase leading-none lg:text-[4.8vw]">
+              Your perfect plant,
+            </p>
+            <p className="text-[4vw] font-semibold leading-none md:text-[1.5vw]">
+              one click away
+            </p>
+          </div>
+          <div className="mb-[90%] flex flex-col font-quicksand text-[5vw] font-semibold sm:text-2xl md:mb-16 md:text-[2vw]">
+            <p>Transform your space.</p>
+            <p>No green thumb needed</p>
+          </div>
 
-{/**
-<div className="absolute top-36 left-1/2 min-w-[500px] -translate-x-1/2 flex-col gap-5 text-center text-4xl tracking-wide sm:text-[3.5rem] md:bottom-auto lg:top-96 lg:left-36 lg:translate-x-0 lg:text-left">
-<div className="mb-4 w-full">
-<p className="mb-2 leading-none">Your perfect plant,</p>
-<p className="">one click away</p>
-</div>
-<div className="mb-16 flex flex-col text-xl sm:text-2xl">
-<p>Transform your space.</p>
-<p>No green thumb needed</p>
-</div>
-<Link to="/products">
-<button className="w-full max-w-xs rounded-xl bg-primary-deep-green py-2 text-xl text-white">
-Shop Now
-</button>
-</Link>
-</div>
-*/}
-       
+          <Link to="/products">
+            <button className="w-full max-w-xs bg-[#6f9283] py-2 font-tabac text-xl font-semibold tracking-widest text-white shadow-xl">
+              SHOP NOW
+            </button>
+          </Link>
+        </div>
+
         <Toaster />
       </div>
     </>
