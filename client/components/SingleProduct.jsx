@@ -45,7 +45,7 @@ const singleProduct = () => {
 
   return (
     <>
-      <PromoBanner />
+      {/* <PromoBanner /> */}
       {!productLoading ? (
         <main className="font-serif flex justify-center md:h-[470px]">
           <section className="mt-8 flex flex-col justify-center md:flex-row md:gap-20">
