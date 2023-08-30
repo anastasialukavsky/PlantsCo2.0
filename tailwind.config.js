@@ -7,6 +7,9 @@ module.exports = {
       raleway: ['Raleway', 'sans-serif'],
       gloock: ['Gloock', 'serif'],
       outfit: ['Outfit', 'sans-serif'],
+      montserrat: ['Montserrat', 'monospace'],
+      hubbali: ['Hubballi', 'sans-serif'],
+      tabac: 'Tabac Big Glam Black'
     },
     fontWeight: {
       thin: 100,
@@ -22,6 +25,7 @@ module.exports = {
         'primary-offwhite': '#f4f4f4',
         'primary-bright-white': '#FFFFFF',
         'primary-button-hover': '#4d783c',
+        'green-gray': '#354f52'
       },
       display: ['group-hover'],
       screens: {
