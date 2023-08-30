@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, Navigate } from 'react-router-dom';
-import { fetchCart, selectCart, purgeCart } from '../slices/users/cartSlice';
+import { Link } from 'react-router-dom';
+import { selectCart, purgeCart } from '../slices/users/cartSlice';
 import CartCard from './CartCard.jsx';
 import CartSubtotal from './CartSubtotal.jsx';
-import { adjustFilter } from '../slices/product/productSlice';
 
-export default function CartView(props) {
+export default function CartView() {
   const dispatch = useDispatch();
   const cart = useSelector(selectCart);
 
