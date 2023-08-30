@@ -35,20 +35,17 @@ const OrderHistory = () => {
     navigate(`/account/orderhistory/${orderId}`);
   };
 
-  if (userOrders.length < 1)
-    return (
-      <div className="absolute top-0 right-0 bg-[url('/assets/bg_img/cart.webp')] bg-cover bg-center pt-36">
-        <div className="top-30 absolute left-10 flex w-full max-w-xl flex-col gap-10 pt-16">
-          <p className="font-extrabold text-center text-4xl text-primary-deep-green">
-            No orders found...
-          </p>
-          <button className="font-bold inline-block py-1 align-baseline text-sm hover:text-primary-promo-banner">
-            <Link to="/account">Back</Link>
-          </button>
-        </div>
-        <div className="pt-50 m-auto"></div>
-      </div>
-    );
+  // <div className="absolute top-0 right-0 bg-[url('/assets/bg_img/cart.webp')] bg-cover bg-center pt-36">
+  //   <div className="top-30 absolute left-10 flex w-full max-w-xl flex-col gap-10 pt-16">
+  //     <p className="font-extrabold text-center text-4xl text-primary-deep-green">
+  //       No orders found...
+  //     </p>
+  //     <button className="font-bold inline-block py-1 align-baseline text-sm hover:text-primary-promo-banner">
+  //       <Link to="/account">Back</Link>
+  //     </button>
+  //   </div>
+  //   <div className="pt-50 m-auto"></div>
+  // </div>
 
   return (
     <div className="absolute top-0 left-0 min-h-screen w-screen bg-[url('/assets/bg_img/cart.webp')] bg-cover bg-center pt-36">
@@ -57,52 +54,55 @@ const OrderHistory = () => {
           Previous Orders
         </p>
 
-        <div className="relative overflow-x-auto rounded-xl border border-primary-deep-green">
-          <table className="w-full bg-white text-left text-sm text-gray-500 dark:text-gray-400">
-            <thead className="bg-primary-deep-green text-xs uppercase text-white">
-              <tr>
-                <th scope="col" className="px-6 py-3">
-                  Order Id
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Date of Order
-                </th>
-                <th scope="col" className="px-6 py-3 text-center">
-                  Item Qty
-                </th>
-                <th scope="col" className="px-6 py-3 text-right">
-                  Total
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {userOrders && userOrders.length
-                ? userOrders.map((order) => {
-                    return (
-                      <tr
-                        onClick={() => orderDetails(order.id)}
-                        key={order.id}
-                        className="cursor-pointer hover:text-primary-promo-banner"
-                      >
-                        <th scope="col" className="px-6 py-3">
-                          {order.id}
-                        </th>
-                        <th scope="col" className="px-6 py-3">
-                          {order.createdAt.slice(0, 10)}
-                        </th>
-                        <th scope="col" className="px-6 py-3 text-center">
-                          {order.totalQty}
-                        </th>
-                        <th scope="col" className="px-6 py-3 text-right">
-                          ${order.finalPrice}
-                        </th>
-                      </tr>
-                    );
-                  })
-                : 'No past orders!'}
-            </tbody>
-          </table>
-        </div>
+        {userOrders?.length > 0 ? (
+          <div className="relative overflow-x-auto rounded-xl border border-primary-deep-green">
+            <table className="w-full bg-white text-left text-sm text-gray-500 dark:text-gray-400">
+              <thead className="bg-primary-deep-green text-xs uppercase text-white">
+                <tr>
+                  <th scope="col" className="px-6 py-3">
+                    Order Id
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Date of Order
+                  </th>
+                  <th scope="col" className="px-6 py-3 text-center">
+                    Item Qty
+                  </th>
+                  <th scope="col" className="px-6 py-3 text-right">
+                    Total
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {userOrders.map((order) => {
+                  return (
+                    <tr
+                      onClick={() => orderDetails(order.id)}
+                      key={order.id}
+                      className="cursor-pointer hover:text-primary-promo-banner"
+                    >
+                      <th scope="col" className="px-6 py-3">
+                        {order.id}
+                      </th>
+                      <th scope="col" className="px-6 py-3">
+                        {order.createdAt.slice(0, 10)}
+                      </th>
+                      <th scope="col" className="px-6 py-3 text-center">
+                        {order.totalQty}
+                      </th>
+                      <th scope="col" className="px-6 py-3 text-right">
+                        ${order.finalPrice}
+                      </th>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <p className="mx-auto">No Previous Orders</p>
+        )}
+
         <div className="pt-50 m-auto">
           <button className="font-bold inline-block py-1 align-baseline text-sm hover:text-primary-promo-banner">
             <Link to="/account">Back</Link>
