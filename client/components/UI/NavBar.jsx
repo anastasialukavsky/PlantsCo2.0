@@ -59,7 +59,7 @@ const NavBar = (props) => {
     */}
 
 
-          <ul className="flex gap-16 2xl:gap-28 6xl:gap-32 font-outfit md:text-[1.9vw] lg:text-[1.2vw] 4xl:text-[1vw]">
+          <ul className="flex gap-16 2xl:gap-28 6xl:gap-32 font-outfit md:text-[1.5vw] lg:text-[1.2vw] 4xl:text-[1vw]">
             <Link to={`/products`}>
               <li onClick={() => dispatch(adjustFilter(''))}>SHOP</li>
             </Link>
