@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import searchIcon from '../../../public/assets/search-icon.svg';
 import { useDispatch, useSelector } from 'react-redux';
-import triangle from '../../../public/assets/line.svg'
+import decoratedLine from '../../../public/assets/line.svg'
 
 import {
   selectSearchedItems,
@@ -30,10 +30,10 @@ const NavBar = (props) => {
 
   return (
     <header>
-      <nav className="flex h-20 w-screen flex-col pt-2 items-center justify-around tracking-tighter text-green-gray relative z-50">
+      <nav className="flex h-20 w-screen md:flex-col md:pt-2 items-center md:justify-around justify-between px-5 tracking-tighter text-green-gray relative z-50">
         <div>
           <Link to={'/'}>
-            <h1 className="font-tabac text-5xl md:text-[3vw]">plants&co</h1>
+            <h1 className="font-tabac text-[8vw] md:text-[3vw]">plants&co</h1>
           </Link>
         </div>
 
@@ -55,7 +55,7 @@ const NavBar = (props) => {
       </div>
     */}
 
-    
+
           <ul className="flex gap-10 font-outfit md:text-[1.9vw] lg:text-[1.3vw]">
             <Link to={`/products`}>
               <li onClick={() => dispatch(adjustFilter(''))}>SHOP</li>
@@ -77,17 +77,19 @@ const NavBar = (props) => {
 
 
         {/**decorated navbar border */}
-        <div className="relative flex w-[90vw]">
-          <img src={triangle} alt="" className="absolute w-full " />
+        <div className="relative md:flex w-[90vw] hidden">
+          <img src={decoratedLine} alt="" className="absolute w-full " />
         </div>
 
         <button
           className="z-30  md:hidden"
           onClick={() => setExpand((prev) => !prev)}
         >
-          <img src={menu} alt="dropdown menu icon" className=" w-10" />
+          <img src={menu} alt="dropdown menu icon" className=" w-12" />
         </button>
+       
         <MobileNav expand={expand} setExpand={setExpand} />
+     
       </nav>
     </header>
   );
