@@ -23,6 +23,9 @@ const NavBar = (props) => {
   const searchTerm = useSelector(selectSearchBy);
 
   const handleSearch = (e) => {
+    if(expand) {
+      setExpand(false)
+    }
     e.preventDefault();
     dispatch(adjustSearchBy(searchTerm));
     navigate('/products');
@@ -33,7 +36,7 @@ const NavBar = (props) => {
       <nav className="flex h-20 w-screen md:flex-col md:pt-2 items-center md:justify-around justify-between px-5 tracking-tighter text-green-gray relative z-50">
         <div>
           <Link to={'/'}>
-            <h1 className="font-tabac text-[8vw] md:text-[3vw]">plants&co</h1>
+            <h1 className="font-tabac text-[8vw] mt-2 5xl:mt-16 6xl:mt-24 md:text-[3vw] 3xl:text-[2.4vw]">plants&co</h1>
           </Link>
         </div>
 
@@ -56,7 +59,7 @@ const NavBar = (props) => {
     */}
 
 
-          <ul className="flex gap-10 font-outfit md:text-[1.9vw] lg:text-[1.3vw]">
+          <ul className="flex gap-16 2xl:gap-28 6xl:gap-32 font-outfit md:text-[1.9vw] lg:text-[1.2vw] 4xl:text-[1vw]">
             <Link to={`/products`}>
               <li onClick={() => dispatch(adjustFilter(''))}>SHOP</li>
             </Link>
@@ -81,14 +84,20 @@ const NavBar = (props) => {
           <img src={decoratedLine} alt="" className="absolute w-full " />
         </div>
 
+        {/**hamburger menu */}
+        
         <button
-          className="z-30  md:hidden"
-          onClick={() => setExpand((prev) => !prev)}
+        className="z-30  md:hidden"
+        onClick={() => {
+          setExpand((prev) => !prev)}
+        }
         >
-          <img src={menu} alt="dropdown menu icon" className=" w-12" />
+        <img src={menu} alt="dropdown menu icon" className=" w-12" />
         </button>
-       
-        <MobileNav expand={expand} setExpand={setExpand} />
+        
+        {expand &&
+          <MobileNav expand={expand} setExpand={setExpand} />
+        }
      
       </nav>
     </header>
