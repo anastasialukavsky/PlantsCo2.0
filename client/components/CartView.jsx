@@ -14,10 +14,6 @@ export default function CartView(props) {
     dispatch(purgeCart());
   }
 
-  useEffect(() => {
-    console.log('cart:', cart);
-  }, [cart]);
-
   if (cart.loading) {
     return (
       <div className="mx-auto w-screen max-w-7xl">
