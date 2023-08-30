@@ -14,6 +14,9 @@ import {
 } from '../../slices/product/productSlice';
 import menu from '../../../public/assets/menu.svg';
 import MobileNav from './MobileNav.jsx';
+import CartLink from './CartLink.jsx';
+
+import { fetchCart, selectCart } from '../../slices/users/cartSlice';
 
 const NavBar = (props) => {
   const dispatch = useDispatch();
@@ -23,6 +26,11 @@ const NavBar = (props) => {
 
   const searchedItems = useSelector(selectSearchedItems);
   const searchTerm = useSelector(selectSearchBy);
+  const cart = useSelector(selectCart);
+
+  useEffect(() => {
+    dispatch(fetchCart());
+  }, []);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -32,7 +40,15 @@ const NavBar = (props) => {
 
   return (
     <header>
-      <Toaster position="top-right" />
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          iconTheme: {
+            primary: '#365314',
+            secondary: '#a7bfb4',
+          },
+        }}
+      />
       <nav className="relative z-50 flex h-20 w-screen flex-col items-center justify-around pt-2 tracking-tighter text-green-gray">
         <div>
           <Link to={'/'}>
@@ -72,7 +88,8 @@ const NavBar = (props) => {
               </Link>
             )}
             <Link to="/cart">
-              <li>CART</li>
+              <CartLink cartQty={cart?.expandedCart?.length} />
+              {/* <li>CART</li> */}
             </Link>
           </ul>
         </div>
@@ -86,7 +103,7 @@ const NavBar = (props) => {
           className="z-30  md:hidden"
           onClick={() => setExpand((prev) => !prev)}
         >
-          <img src={menu} alt="dropdown menu icon" className=" w-10" />
+          <img src={menu} alt="dropdown menu icon" className="w-10" />
         </button>
         <MobileNav expand={expand} setExpand={setExpand} />
       </nav>
