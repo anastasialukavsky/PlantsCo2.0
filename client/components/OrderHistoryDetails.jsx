@@ -43,7 +43,7 @@ const OrderHistoryDetails = () => {
   }, [orderDetails, auth]);
 
   if (details.length >= 1) {
-    addressArr = details[0].address.split('\n');
+    addressArr = details[0].address.split('  ');
     date = details[0].createdAt.slice(0, 10);
   }
 
@@ -53,7 +53,7 @@ const OrderHistoryDetails = () => {
     <div className="absolute top-0 left-0 min-h-screen w-screen bg-[url('/assets/bg_img/cart.webp')] bg-cover bg-center pt-36">
       <div className="top-30 absolute left-10 flex w-full max-w-xl flex-col gap-10 pt-16">
         <p className="font-extrabold text-center text-4xl text-primary-deep-green">
-          Previous Orders
+          Order Detail
         </p>
 
         <div className="relative flex flex-col gap-5 overflow-x-auto text-primary-deep-green">
@@ -118,7 +118,7 @@ const OrderHistoryDetails = () => {
                   </th>
                 </tr>
               </tfoot>
-            </table>{' '}
+            </table>
           </div>
           <div className="flex flex-row text-primary-deep-green">
             <div className="w-1/2">
@@ -131,24 +131,11 @@ const OrderHistoryDetails = () => {
             </div>
             <div className="w-1/2">
               <p>SHIPPING TO</p>
-              {addressArr.length === 4 ? (
-                <>
-                  <p>{details[0].userName}</p>
-                  <p>{addressArr[0]}</p>
-                  <p>
-                    {addressArr[1]}, {addressArr[2]} {addressArr[3]}
-                  </p>
-                </>
-              ) : (
-                <>
-                  <p>{details[0].userName}</p>
-                  <p>{addressArr[0]}</p>
-                  <p>{addressArr[2]}</p>
-                  <p>
-                    {addressArr[3]}, {addressArr[4]} {addressArr[5]}
-                  </p>
-                </>
-              )}
+              <p>{details[0].userName}</p>
+              <p>{addressArr[0]}</p>
+              <p>
+                {addressArr[1]} {addressArr[2]} {addressArr[3]}
+              </p>
             </div>
           </div>
         </div>
