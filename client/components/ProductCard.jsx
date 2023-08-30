@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addOneToCart } from '../slices/users/cartSlice';
@@ -10,7 +10,8 @@ const ProductCard = (props) => {
 
   const productsLoading = useSelector(selectProductLoading);
 
-  console.log('products loading from card?', productsLoading);
+
+
 
   function addToCart() {
     dispatch(addOneToCart(product.id));
@@ -18,7 +19,7 @@ const ProductCard = (props) => {
   }
 
   return productsLoading !== 'loading' ? (
-    <div key={product.id} className="group">
+    <div key={product.id} className="group font-raleway">
       <div className="relative">
         <Link
           onClick={() => {
@@ -34,19 +35,23 @@ const ProductCard = (props) => {
         </Link>
         <button
           onClick={addToCart}
-          className="invisible absolute bottom-0 mx-auto w-full  bg-primary-deep-green py-1 text-white opacity-60 transition duration-100 ease-in-out hover:opacity-100 group-hover:visible"
+          className="ease md:invisible  flex justify-center md:absolute bottom-0 mx-auto w-full  bg-green-gray py-1 font-medium text-white opacity-80 md:opacity-60 transition duration-500 hover:opacity-100 group-hover:visible"
         >
-          Add To Cart
+          ADD TO CART
         </button>
       </div>
       <Link to={`/products/${product.id}`}>
-        <p className="mb-1 text-2xl">{product.name}</p>
-        <p className="text-sm">${product.price}</p>
+        <p className="pt-1 text-center text-[3.9vw] font-medium-light uppercase md:mb-1 md:text-[2vw] lg:text-[1.5vw] 3xl:text-[1vw] 6xl:text-[.8vw]">
+          {product.name}
+        </p>
+        <p className="text-center text-[3.7vw] md:text-[1.3vw] 3xl:text-[.9vw] 6xl:text-[.7vw]">
+          ${product.price}
+        </p>
       </Link>
       <Toaster gutter={15} />
     </div>
   ) : (
-    <div>
+    <div className="font-raleway">
       <div
         key={product.id}
         style={{
