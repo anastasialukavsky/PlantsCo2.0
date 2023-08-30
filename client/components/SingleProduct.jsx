@@ -15,6 +15,7 @@ import { addOneToCart } from '../slices/users/cartSlice.js';
 import SimilarProducts from './SimilarProducts.jsx';
 import toast, { Toaster } from 'react-hot-toast';
 import ProductSkeleton from './UI/ProductSkeleton.jsx';
+import { setDefaultOptions } from 'date-fns';
 
 const singleProduct = () => {
   const dispatch = useDispatch();
@@ -33,18 +34,39 @@ const singleProduct = () => {
   }, [dispatch, productId]);
 
   const singleProduct = useSelector(selectSingleProduct);
+  console.log('DESC', singleProduct.description);
 
   function addToCart() {
     dispatch(addOneToCart(productId));
   }
 
+  const [fullDescription, setFullDescription] = useState(
+    singleProduct.shortDescription
+  );
+
+  const handleFullDescription = () => {
+    if(fullDescription === singleProduct.shortDescription) {
+      setFullDescription(singleProduct.description);
+
+    } else {
+      setFullDescription(singleProduct.shortDescription)
+    }
+  };
+
+  
+  useEffect(() => {
+    setFullDescription(singleProduct.shortDescription)
+  }, [singleProduct.shortDescription]);
+
   const notify = () => toast.success('Product added to cart!');
 
   return (
     <>
+      {/**
       <PromoBanner />
+    */}
       {!productLoading ? (
-        <main className="font-serif flex md:h-[470px]">
+        <main className="flex font-raleway text-[#212922] md:h-[470px]">
           <section className="mt-8 flex flex-col justify-center md:flex-row md:gap-20">
             <div className="mx-auto md:mx-0">
               <img
@@ -54,40 +76,54 @@ const singleProduct = () => {
               />
             </div>
             <div className="mx-8 md:mx-0 md:w-1/3">
-              <div className="mb-8 flex items-center justify-between">
-                <header className=" text-3xl text-green-900">
+              <div className="mb-[5%] flex  flex-col items-end justify-center">
+                <header className=" font-meduim-light self-center pr-6 font-outfit text-[2.3vw] uppercase text-green-gray">
                   {singleProduct.name}
                 </header>
                 <LikedProduct />
               </div>
 
-              <div className="mb-4 flex justify-between border-b-4 pb-2">
+              <div className="mb-4 flex justify-between border-b-4 pb-2 text-[1vw]">
                 <p>
                   {singleProduct?.tags
                     ?.map(({ tagName }) => tagName)
                     .join(', ')}
                 </p>
               </div>
-              <p className="font-bold mb-4 text-3xl text-primary-deep-green">
+              <p className="mb-4 text-[2vw] font-bold text-[#212922]">
                 ${singleProduct.price}
               </p>
-              <p className="mb-8 leading-tight">
-                {singleProduct.shortDescription}
-              </p>
+
+              {fullDescription && (
+                <p
+                  className="mb-8 cursor-pointer text-[1vw] leading-tight"
+                  onClick={handleFullDescription}
+                >
+                  {fullDescription}
+
+                  {fullDescription === singleProduct.shortDescription ? (
+                    <span className="font-bold"> see more</span>
+                  ) : (
+                    <span className="font-bold"> see less</span>
+                  )}
+                </p>
+              )}
+
               <div className="mb-3 border-b-4 pb-4">
                 <button
                   onClick={() => {
                     notify();
                     addToCart();
                   }}
-                  className="mx-auto block w-full rounded-2xl bg-primary-deep-green py-3 text-xl text-white hover:bg-primary-button-green hover:transition-all"
+                  className="mx-auto block w-full  bg-green-gray py-2 font-marcellus text-[2vw] text-white hover:bg-primary-button-green hover:transition-all"
                 >
                   ADD TO CART
                 </button>
+
               </div>
               <div className="flex items-center gap-2">
-                <img src={box} alt="shipping box icon" className="w-6" />
-                <p className="text-sm">Free shipping in the USA</p>
+                <img src={box} alt="shipping box icon" className="w-4" />
+                <p className="text-[1vw]">Free shipping in the USA</p>
               </div>
             </div>
           </section>
