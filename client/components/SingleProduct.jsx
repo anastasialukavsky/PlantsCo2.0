@@ -40,6 +40,9 @@ const singleProduct = () => {
 
   const notify = () => toast.success('Product added to cart!');
 
+  // strip the extension from the product image filename to be re-used as [.webp|.png]
+  const imageBaseURL = singleProduct?.imageURL?.split('.').at(0);
+
   return (
     <>
       <PromoBanner />
@@ -47,11 +50,15 @@ const singleProduct = () => {
         <main className="font-serif flex justify-center md:h-[470px]">
           <section className="mt-8 flex flex-col justify-center md:flex-row md:gap-20">
             <div className="mx-auto aspect-[3/4] md:mx-0 md:h-full">
-              <img
-                className="h-96 md:h-full"
-                src={`${singleProduct.imageURL}`}
-                alt="error showing photo"
-              />
+              <picture className="h-96 md:h-full">
+                <source type="image/webp" srcSet={imageBaseURL + '.webp'} />
+                <source type="image/png" srcSet={singleProduct?.imageURL} />
+                <img
+                  className="h-96 md:h-full"
+                  src={`${singleProduct.imageURL}`}
+                  alt="error showing photo"
+                />
+              </picture>
             </div>
             <div className="mx-8 md:mx-0 md:w-1/3">
               <div className="mb-8 flex items-center justify-between">

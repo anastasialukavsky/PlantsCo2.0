@@ -15,6 +15,8 @@ const ProductCard = (props) => {
     toast.success('Product added to cart!');
   }
 
+  const imageBaseURL = product?.imageURL.split('.').at(0);
+
   return productsLoading !== 'loading' ? (
     <div key={product.id} className="group">
       <div className="relative">
@@ -24,11 +26,15 @@ const ProductCard = (props) => {
           }}
           to={`/products/${product.id}`}
         >
-          <img
-            src={`${product.imageURL}`}
-            alt="Picture of plant on a counter"
-            className="group relative w-full"
-          />
+          <picture className="group relative w-full">
+            <source type="image/webp" srcSet={imageBaseURL + '.webp'} />
+            <source type="image/png" srcSet={product.imageURL} />
+            <img
+              src={`${product.imageURL}`}
+              alt="Picture of plant on a counter"
+              // className="group relative w-full"
+            />
+          </picture>
         </Link>
         <button
           onClick={addToCart}
