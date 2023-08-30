@@ -11,13 +11,12 @@ import AllProductsSection from './AllProductsSection.jsx';
 import ProductPagination from './ProductPagination.jsx';
 import Sort from './Sort.jsx';
 import { selectProductLoading } from '../slices/product/productSlice';
-import PromoBanner from './UI/PromoBanner.jsx';
 
 const AllProducts = () => {
   const dispatch = useDispatch();
 
-  // const productsLoading = useSelector(selectProductLoading);
-  const productsLoading = true;
+  const productsLoading = useSelector(selectProductLoading);
+  // const productsLoading = true;
 
   useEffect(() => {
     dispatch(fetchAllProducts());
