@@ -7,11 +7,11 @@ import {
   resetStatus as resetPromoStatus,
   editPromo,
   deletePromo,
-} from '../slices/product/promoSlice';
+} from '../../slices/product/promoSlice';
 import {
   selectAuth,
   resetStatus as resetAuthStatus,
-} from '../slices/users/authSlice';
+} from '../../slices/users/authSlice';
 
 const EditProduct = () => {
   const dispatch = useDispatch();

@@ -5,8 +5,8 @@ import {
   addProduct,
   resetStatusError as resetProductStatus,
   selectSingleProduct,
-} from '../slices/product/productSlice';
-import { selectAuth } from '../slices/users/authSlice';
+} from '../../slices/product/productSlice';
+import { selectAuth } from '../../slices/users/authSlice';
 
 const AddNewProduct = () => {
   const dispatch = useDispatch();

@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
-import { Main } from './components';
+import Main from './components/Main.jsx';
 import { Provider } from 'react-redux';
 import store from './store';
 

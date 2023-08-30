@@ -4,24 +4,27 @@ import { Link } from 'react-router-dom';
 import {
   selectAuth,
   resetStatus as resetAuthStatus,
-} from '../slices/users/authSlice';
+} from '../../slices/users/authSlice';
 import {
-  fetchAllProducts,
-  selectAllProducts,
-  resetStatusError as resetProductStatus,
-} from '../slices/product/productSlice';
+  fetchAllPromos,
+  selectPromos,
+  resetStatus as resetPromoStatus,
+} from '../../slices/product/promoSlice';
 
-const AdminProductView = () => {
+const AdminPromoCodeView = () => {
   const dispatch = useDispatch();
-  const products = useSelector(selectAllProducts);
+
   const { auth, token } = useSelector(selectAuth);
+  const { promos } = useSelector(selectPromos);
 
   useEffect(() => {
-    dispatch(fetchAllProducts());
+    if (token) {
+      dispatch(fetchAllPromos({ token }));
+    }
 
     return () => {
       resetAuthStatus();
-      resetProductStatus();
+      resetPromoStatus();
     };
   }, [auth]);
 
@@ -40,7 +43,7 @@ const AdminProductView = () => {
               </button>
             </div>
             <div className="flex flex-col gap-3">
-              <div className="mr-5 rounded-r-full bg-green-900 p-3 pl-5 text-primary-bright-white">
+              <div className="mr-5 rounded-r-full p-3 pl-5 hover:bg-green-900 hover:text-primary-bright-white">
                 <button className="text-left">
                   <Link to={'/account/admin/products'}>PRODUCTS</Link>
                 </button>
@@ -50,7 +53,7 @@ const AdminProductView = () => {
                   <Link to={'/account/admin/addproduct'}>ADD NEW PRODUCT</Link>
                 </button>
               </div>
-              <div className="mr-5 rounded-r-full p-3 pl-5 hover:bg-green-900 hover:text-primary-bright-white">
+              <div className="mr-5 rounded-r-full bg-green-900 p-3 pl-5 text-primary-bright-white">
                 <button className="text-left">
                   <Link to={'/account/admin/promos'}>PROMOS</Link>
                 </button>
@@ -71,6 +74,7 @@ const AdminProductView = () => {
             <Link to={'/account'}>Back</Link>
           </button>
         </aside>
+
         <div className="h-[calc(100vh_-_5rem)] w-3/4 overflow-auto p-4">
           <div className="p-4">
             <div className="flex h-[calc(100vh_-_10rem)] flex-col overflow-auto rounded-xl">
@@ -79,7 +83,7 @@ const AdminProductView = () => {
                   <thead className="sticky top-0 rounded-xl bg-gray-50 text-sm uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                       <th scope="col" className="sticky top-0 px-6 py-3">
-                        {'PRODUCT ID'}
+                        {'PROMO ID'}
                       </th>
                       <th
                         scope="col"
@@ -88,10 +92,10 @@ const AdminProductView = () => {
                         {'NAME'}
                       </th>
                       <th scope="col" className="sticky top-0 px-6 py-3">
-                        {'PRICE'}
+                        {'DISCOUNT RATE'}
                       </th>
                       <th scope="col" className="sticky top-0 px-6 py-3">
-                        {'QTY'}
+                        {'STATUS'}
                       </th>
                       <th scope="col" className="sticky top-0 px-6 py-3">
                         {'ACTIONS'}
@@ -100,30 +104,30 @@ const AdminProductView = () => {
                   </thead>
 
                   <tbody>
-                    {products && products.length
-                      ? products.map((product) => {
+                    {promos && promos.length
+                      ? promos.map((promo) => {
                           return (
                             <tr
-                              key={product.id}
+                              key={promo.id}
                               className="text-sm odd:bg-white even:bg-slate-50"
                             >
                               <td scope="col" className="px-6 py-3 text-center">
-                                {product.id}
+                                {promo.id}
                               </td>
                               <td scope="col" className="px-6 py-3 text-left">
-                                {product.name}
+                                {promo.name}
                               </td>
                               <td scope="col" className="px-6 py-3 text-center">
-                                {'$'}
-                                {product.price}
+                                {(promo.discountRate * 100).toFixed()}
+                                {'%'}
                               </td>
                               <td scope="col" className="px-6 py-3 text-center">
-                                {product.qty}
+                                {promo.status.toString()}
                               </td>
                               <td scope="col" className="px-6 py-3 text-center">
                                 <Link
                                   className="hover:text-primary-promo-banner"
-                                  to={`/account/admin/editproduct/${product.id}`}
+                                  to={`/account/admin/editpromos/${promo.id}`}
                                 >
                                   {'Edit / Delete'}
                                 </Link>
@@ -131,7 +135,7 @@ const AdminProductView = () => {
                             </tr>
                           );
                         })
-                      : 'Products Loading...'}
+                      : 'Promos Loading...'}
                   </tbody>
                 </table>
               </div>
@@ -143,4 +147,4 @@ const AdminProductView = () => {
   );
 };
 
-export default AdminProductView;
+export default AdminPromoCodeView;

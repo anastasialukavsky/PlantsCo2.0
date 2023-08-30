@@ -7,11 +7,11 @@ import {
   resetStatusError as resetProductStatus,
   editSingleProduct,
   deleteSingleProduct,
-} from '../slices/product/productSlice';
+} from '../../slices/product/productSlice';
 import {
   selectAuth,
   resetStatus as resetAuthStatus,
-} from '../slices/users/authSlice';
+} from '../../slices/users/authSlice';
 import toast, { Toaster } from 'react-hot-toast';
 
 const EditProduct = () => {

@@ -1,30 +1,31 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
-  selectAuth,
   resetStatus as resetAuthStatus,
-} from '../slices/users/authSlice';
+  selectAuth,
+} from '../../slices/users/authSlice';
 import {
-  fetchAllPromos,
-  selectPromos,
-  resetStatus as resetPromoStatus,
-} from '../slices/product/promoSlice';
+  fetchAllUsers,
+  resetStatus as resetUserStatus,
+  selectUsers,
+} from '../../slices/users/userSlice';
 
-const AdminPromoCodeView = () => {
+const AdminUserMgmt = () => {
   const dispatch = useDispatch();
 
+  const { users } = useSelector(selectUsers);
+
   const { auth, token } = useSelector(selectAuth);
-  const { promos } = useSelector(selectPromos);
 
   useEffect(() => {
-    if (token) {
-      dispatch(fetchAllPromos({ token }));
+    if (auth && token) {
+      dispatch(fetchAllUsers({ token }));
     }
 
     return () => {
       resetAuthStatus();
-      resetPromoStatus();
+      resetUserStatus();
     };
   }, [auth]);
 
@@ -53,7 +54,7 @@ const AdminPromoCodeView = () => {
                   <Link to={'/account/admin/addproduct'}>ADD NEW PRODUCT</Link>
                 </button>
               </div>
-              <div className="mr-5 rounded-r-full bg-green-900 p-3 pl-5 text-primary-bright-white">
+              <div className="mr-5 rounded-r-full p-3 pl-5 hover:bg-green-900 hover:text-primary-bright-white">
                 <button className="text-left">
                   <Link to={'/account/admin/promos'}>PROMOS</Link>
                 </button>
@@ -63,7 +64,7 @@ const AdminPromoCodeView = () => {
                   <Link to={'/account/admin/addpromo'}>ADD NEW PROMO</Link>
                 </button>
               </div>
-              <div className="mr-5 rounded-r-full p-3 pl-5 hover:bg-green-900 hover:text-primary-bright-white">
+              <div className="mr-5 rounded-r-full bg-green-900 p-3 pl-5 text-primary-bright-white">
                 <button className="text-left">
                   <Link to={'/account/admin/users'}>USER MANAGEMENT</Link>
                 </button>
@@ -83,7 +84,7 @@ const AdminPromoCodeView = () => {
                   <thead className="sticky top-0 rounded-xl bg-gray-50 text-sm uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                       <th scope="col" className="sticky top-0 px-6 py-3">
-                        {'PROMO ID'}
+                        {'USER ID'}
                       </th>
                       <th
                         scope="col"
@@ -91,51 +92,50 @@ const AdminPromoCodeView = () => {
                       >
                         {'NAME'}
                       </th>
-                      <th scope="col" className="sticky top-0 px-6 py-3">
-                        {'DISCOUNT RATE'}
+                      <th
+                        scope="col"
+                        className="sticky top-0 px-6 py-3 text-left"
+                      >
+                        {'EMAIL'}
+                      </th>
+                      <th
+                        scope="col"
+                        className="sticky top-0 px-6 py-3 text-left"
+                      >
+                        {'ROLE'}
                       </th>
                       <th scope="col" className="sticky top-0 px-6 py-3">
-                        {'STATUS'}
-                      </th>
-                      <th scope="col" className="sticky top-0 px-6 py-3">
-                        {'ACTIONS'}
+                        {'IS ADMIN'}
                       </th>
                     </tr>
                   </thead>
-
                   <tbody>
-                    {promos && promos.length
-                      ? promos.map((promo) => {
+                    {users && users.length
+                      ? users.map((user) => {
                           return (
                             <tr
-                              key={promo.id}
+                              key={user.id}
                               className="text-sm odd:bg-white even:bg-slate-50"
                             >
                               <td scope="col" className="px-6 py-3 text-center">
-                                {promo.id}
+                                {user.id}
                               </td>
                               <td scope="col" className="px-6 py-3 text-left">
-                                {promo.name}
+                                {user.fullName}
+                              </td>
+                              <td scope="col" className="px-6 py-3 text-left">
+                                {user.email}
+                              </td>
+                              <td scope="col" className="px-6 py-3">
+                                {user.role}
                               </td>
                               <td scope="col" className="px-6 py-3 text-center">
-                                {(promo.discountRate * 100).toFixed()}
-                                {'%'}
-                              </td>
-                              <td scope="col" className="px-6 py-3 text-center">
-                                {promo.status.toString()}
-                              </td>
-                              <td scope="col" className="px-6 py-3 text-center">
-                                <Link
-                                  className="hover:text-primary-promo-banner"
-                                  to={`/account/admin/editpromos/${promo.id}`}
-                                >
-                                  {'Edit / Delete'}
-                                </Link>
+                                {user.isAdmin.toString()}
                               </td>
                             </tr>
                           );
                         })
-                      : 'Promos Loading...'}
+                      : 'Users Loading...'}
                   </tbody>
                 </table>
               </div>
@@ -147,4 +147,4 @@ const AdminPromoCodeView = () => {
   );
 };
 
-export default AdminPromoCodeView;
+export default AdminUserMgmt;

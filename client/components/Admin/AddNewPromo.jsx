@@ -5,11 +5,11 @@ import {
   selectPromos,
   resetStatus as resetPromoStatus,
   addPromo,
-} from '../slices/product/promoSlice';
+} from '../../slices/product/promoSlice';
 import {
   selectAuth,
   resetStatus as resetAuthStatus,
-} from '../slices/users/authSlice';
+} from '../../slices/users/authSlice';
 
 const AddNewPromo = () => {
   const dispatch = useDispatch();

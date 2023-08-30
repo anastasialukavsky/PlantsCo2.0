@@ -1,31 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
   selectAuth,
   resetStatus as resetAuthStatus,
-} from '../slices/users/authSlice';
+} from '../../slices/users/authSlice';
 import {
-  fetchAllUsers,
-  selectUsers,
-  resetStatus as resetUserStatus,
-} from '../slices/users/userSlice';
+  fetchAllProducts,
+  selectAllProducts,
+  resetStatusError as resetProductStatus,
+} from '../../slices/product/productSlice';
 
-const AdminUserMgmt = () => {
+const AdminProductView = () => {
   const dispatch = useDispatch();
-
-  const { users } = useSelector(selectUsers);
-
-  const { auth, token } = useSelector(selectAuth);
+  const products = useSelector(selectAllProducts);
+  const { auth } = useSelector(selectAuth);
 
   useEffect(() => {
-    if (auth && token) {
-      dispatch(fetchAllUsers({ token }));
-    }
+    dispatch(fetchAllProducts());
 
     return () => {
       resetAuthStatus();
-      resetUserStatus();
+      resetProductStatus();
     };
   }, [auth]);
 
@@ -44,7 +40,7 @@ const AdminUserMgmt = () => {
               </button>
             </div>
             <div className="flex flex-col gap-3">
-              <div className="mr-5 rounded-r-full p-3 pl-5 hover:bg-green-900 hover:text-primary-bright-white">
+              <div className="mr-5 rounded-r-full bg-green-900 p-3 pl-5 text-primary-bright-white">
                 <button className="text-left">
                   <Link to={'/account/admin/products'}>PRODUCTS</Link>
                 </button>
@@ -64,7 +60,7 @@ const AdminUserMgmt = () => {
                   <Link to={'/account/admin/addpromo'}>ADD NEW PROMO</Link>
                 </button>
               </div>
-              <div className="mr-5 rounded-r-full bg-green-900 p-3 pl-5 text-primary-bright-white">
+              <div className="mr-5 rounded-r-full p-3 pl-5 hover:bg-green-900 hover:text-primary-bright-white">
                 <button className="text-left">
                   <Link to={'/account/admin/users'}>USER MANAGEMENT</Link>
                 </button>
@@ -75,7 +71,6 @@ const AdminUserMgmt = () => {
             <Link to={'/account'}>Back</Link>
           </button>
         </aside>
-
         <div className="h-[calc(100vh_-_5rem)] w-3/4 overflow-auto p-4">
           <div className="p-4">
             <div className="flex h-[calc(100vh_-_10rem)] flex-col overflow-auto rounded-xl">
@@ -84,7 +79,7 @@ const AdminUserMgmt = () => {
                   <thead className="sticky top-0 rounded-xl bg-gray-50 text-sm uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                       <th scope="col" className="sticky top-0 px-6 py-3">
-                        {'USER ID'}
+                        {'PRODUCT ID'}
                       </th>
                       <th
                         scope="col"
@@ -92,50 +87,51 @@ const AdminUserMgmt = () => {
                       >
                         {'NAME'}
                       </th>
-                      <th
-                        scope="col"
-                        className="sticky top-0 px-6 py-3 text-left"
-                      >
-                        {'EMAIL'}
-                      </th>
-                      <th
-                        scope="col"
-                        className="sticky top-0 px-6 py-3 text-left"
-                      >
-                        {'ROLE'}
+                      <th scope="col" className="sticky top-0 px-6 py-3">
+                        {'PRICE'}
                       </th>
                       <th scope="col" className="sticky top-0 px-6 py-3">
-                        {'IS ADMIN'}
+                        {'QTY'}
+                      </th>
+                      <th scope="col" className="sticky top-0 px-6 py-3">
+                        {'ACTIONS'}
                       </th>
                     </tr>
                   </thead>
+
                   <tbody>
-                    {users && users.length
-                      ? users.map((user) => {
+                    {products && products.length
+                      ? products.map((product) => {
                           return (
                             <tr
-                              key={user.id}
+                              key={product.id}
                               className="text-sm odd:bg-white even:bg-slate-50"
                             >
                               <td scope="col" className="px-6 py-3 text-center">
-                                {user.id}
+                                {product.id}
                               </td>
                               <td scope="col" className="px-6 py-3 text-left">
-                                {user.fullName}
-                              </td>
-                              <td scope="col" className="px-6 py-3 text-left">
-                                {user.email}
-                              </td>
-                              <td scope="col" className="px-6 py-3">
-                                {user.role}
+                                {product.name}
                               </td>
                               <td scope="col" className="px-6 py-3 text-center">
-                                {user.isAdmin.toString()}
+                                {'$'}
+                                {product.price}
+                              </td>
+                              <td scope="col" className="px-6 py-3 text-center">
+                                {product.qty}
+                              </td>
+                              <td scope="col" className="px-6 py-3 text-center">
+                                <Link
+                                  className="hover:text-primary-promo-banner"
+                                  to={`/account/admin/editproduct/${product.id}`}
+                                >
+                                  {'Edit / Delete'}
+                                </Link>
                               </td>
                             </tr>
                           );
                         })
-                      : 'Users Loading...'}
+                      : 'Products Loading...'}
                   </tbody>
                 </table>
               </div>
@@ -147,4 +143,4 @@ const AdminUserMgmt = () => {
   );
 };
 
-export default AdminUserMgmt;
+export default AdminProductView;

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, lazy, Suspense } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 
@@ -18,16 +18,25 @@ import {
   OrderHistoryDetails,
   Checkout,
   OrderConfirmation,
-  AdminDashboard,
   Wishlist,
-  EditProduct,
-  AddNewProduct,
-  AdminProductView,
-  AdminUserMgmt,
-  AdminPromoCodeView,
-  EditPromos,
-  AddNewPromo,
 } from './index';
+
+import AdminDashboard from './Admin/AdminDashboard.jsx';
+import AddNewProduct from './Admin/AddNewProduct.jsx';
+import AddNewPromo from './Admin/AddNewPromo.jsx';
+import AdminProductView from './Admin/AdminProductView.jsx';
+import AdminPromoCodeView from './Admin/AdminPromoCodeView.jsx';
+import AdminUserMgmt from './Admin/AdminUserMgmt.jsx';
+import EditProduct from './Admin/EditProduct.jsx';
+import EditPromos from './Admin/EditPromos.jsx';
+// const AddNewProduct = lazy(() => import('./Admin/AddNewProduct.jsx'));
+// const AddNewPromo = lazy(() => import('./Admin/AddNewPromo.jsx'));
+// const AdminProductView = lazy(() => import('./Admin/AdminProductView.jsx'));
+// const AdminPromoCodeView = lazy(() => import('./Admin/AdminPromoCodeView.jsx'));
+// const AdminUserMgmt = lazy(() => import('./Admin/AdminUserMgmt.jsx'));
+// const EditProduct = lazy(() => import('./Admin/EditProduct.jsx'));
+// const EditPromos = lazy(() => import('./Admin/EditPromos.jsx'));
+
 import { selectAuth, attemptTokenLogin } from '../slices/users/authSlice';
 
 export default function Main() {
