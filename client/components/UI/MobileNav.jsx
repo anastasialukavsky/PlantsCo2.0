@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import {
@@ -25,6 +25,18 @@ const MobileNav = ({ expand, setExpand }) => {
     navigate('/products');
   };
 
+
+  //prevent scroll on overflow when the menu is open
+  useEffect(() => {
+    if(expand) {
+
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = '';
+      };
+    }
+  }, []);
+
   return (
     <div
       className="absolute top-0 left-0 z-50 h-screen  w-screen bg-[url('/assets/bg_img/home1.jpg')] font-gloock  text-white   md:hidden"
@@ -33,12 +45,12 @@ const MobileNav = ({ expand, setExpand }) => {
       }}
     >
       {/**search section and X btn section*/}
-      <div className="flex flex-row-reverse">
-        <img src={whiteX} alt="x icon" className="w-5" />
+      <div className="flex flex-row-reverse justify-between p-5">
+        <img src={whiteX} alt="x icon" className="w-5" onClick={handleClick} />
 
-        <div className="item-end mx-auto flex h-16 w-screen justify-center gap-2 ">
+        <div className="flex h-9 flex-row-reverse  gap-2 ">
           <button onClick={handleSearch}>
-            <img src={searchIcon} alt="magnifying glass" className="w-8 pt-1" />
+            <img src={searchIcon} alt="magnifying glass" className="w-8 " />
           </button>
           <form onSubmit={handleSearch}>
             <input
@@ -65,7 +77,7 @@ const MobileNav = ({ expand, setExpand }) => {
             </Link>
           ) : (
             <Link to="/login">
-              <li className=" mx-auto max-h-16 w-3/6 border-b  pb-1">
+              <li className=" mx-auto max-h-16 w-full border-b  pb-1">
                 <span className="self-start pr-2 text-[2vw]">01</span>LOGIN
               </li>
             </Link>
