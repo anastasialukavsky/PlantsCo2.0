@@ -7,7 +7,6 @@ import {
   selectAuth,
   resetStatus,
 } from '../slices/users/authSlice';
-import toast, { Toaster } from 'react-hot-toast';
 
 const UserAccount = () => {
   const dispatch = useDispatch();
@@ -50,12 +49,6 @@ const UserAccount = () => {
           >
             Edit Profile
           </Link>
-          {/* <Link
-            to={'/account/updatepassword'}
-            className="py-3 px-5  mb-2 text-center text-text-primary-deep-green-900 bg-white rounded-lg border hover:bg-gray-100"
-          >
-            Update Password
-          </Link> */}
           <Link
             to={'/account/orderhistory'}
             className="text-text-primary-deep-green-900  mb-2 rounded-lg border bg-white py-3 px-5 text-center hover:bg-gray-100"
@@ -68,20 +61,18 @@ const UserAccount = () => {
           >
             Wishlist
           </Link>
-          {auth.isAdmin ? (
+          {auth.isAdmin && (
             <Link
               to={'/account/admin'}
               className="text-text-primary-deep-green-900  mb-2 rounded-lg border bg-white py-3 px-5 text-center hover:bg-gray-100"
             >
               Admin Settings
             </Link>
-          ) : (
-            ''
           )}
 
           <button
             onClick={attemptLogOut}
-            className="pb-16 text-sm text-primary-deep-green hover:text-primary-promo-banner"
+            className="rounded-lg py-3 px-5 text-sm text-primary-deep-green hover:border hover:border-primary-bright-white"
           >
             Log Out
           </button>
