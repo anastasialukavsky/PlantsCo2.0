@@ -47,23 +47,10 @@ const OrderHistoryDetails = () => {
     date = details[0].createdAt.slice(0, 10);
   }
 
-  if (details.length < 1)
-    return (
-      <div className="h-[calc(100vh_-_5rem)] bg-[url('/assets/bg_img/cart.webp')] bg-cover bg-center">
-        <div className="top-30 absolute left-10 flex w-full max-w-xl flex-col gap-10 pt-16">
-          <p className="font-extrabold text-center text-4xl text-primary-deep-green">
-            No Orders!
-          </p>
-          <button className="font-bold inline-block py-1 align-baseline text-sm hover:text-primary-promo-banner">
-            <Link to="/account">Back</Link>
-          </button>
-        </div>
-        <div className="pt-50 m-auto"></div>
-      </div>
-    );
+  if (details.length < 1) return <h2>Loading...</h2>;
 
   return (
-    <div className="h-[calc(100vh_-_5rem)] bg-[url('/assets/bg_img/cart.webp')] bg-cover bg-center">
+    <div className="absolute top-0 left-0 min-h-screen w-screen bg-[url('/assets/bg_img/cart.webp')] bg-cover bg-center pt-36">
       <div className="top-30 absolute left-10 flex w-full max-w-xl flex-col gap-10 pt-16">
         <p className="font-extrabold text-center text-4xl text-primary-deep-green">
           Previous Orders
@@ -75,62 +62,64 @@ const OrderHistoryDetails = () => {
             <p>ORDER ID: {orderId}</p>
             <p>ITEMS: {userOrder.totalQty}</p>
           </div>
-          <table className="w-full rounded-xl bg-white text-left text-sm text-gray-500 dark:text-gray-400">
-            <thead className="rounded-xl bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
-              <tr>
-                <th scope="col" className="px-6 py-3">
-                  Product Name
-                </th>
-                <th scope="col" className="px-6 py-3 text-center">
-                  Qty
-                </th>
-                <th scope="col" className="px-6 py-3 text-right">
-                  Subtotal
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {details && details.length
-                ? details.map((item) => {
-                    return (
-                      <tr key={item.id}>
-                        <th scope="col" className="px-6 py-3">
-                          {item.productName}
-                        </th>
+          <div className="table-wrapper rounded-xl border border-primary-deep-green bg-primary-deep-green">
+            <table className="w-full overflow-clip rounded-xl bg-white text-left text-sm text-gray-500 dark:text-gray-400">
+              <thead className="rounded-xl bg-primary-deep-green text-xs uppercase text-white">
+                <tr>
+                  <th scope="col" className="px-6 py-3">
+                    Product Name
+                  </th>
+                  <th scope="col" className="px-6 py-3 text-center">
+                    Qty
+                  </th>
+                  <th scope="col" className="px-6 py-3 text-right">
+                    Subtotal
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {details && details.length
+                  ? details.map((item) => {
+                      return (
+                        <tr key={item.id}>
+                          <th scope="col" className="px-6 py-3">
+                            {item.productName}
+                          </th>
 
-                        <th scope="col" className="px-6 py-3 text-center">
-                          {item.qty}
-                        </th>
-                        <th scope="col" className="px-6 py-3 text-right">
-                          ${item.totalPrice.toFixed(2)}
-                        </th>
-                      </tr>
-                    );
-                  })
-                : 'No past orders!'}
-            </tbody>
-            <tfoot>
-              <tr>
-                <th className="text-md px-6 pt-3">Shipping</th>
-                <th></th>
-                <th className="text-md px-6 pt-3 text-right ">Free</th>
-              </tr>
-              <tr>
-                <th className="text-md px-6 pt-3">Discount</th>
-                <th></th>
-                <th className="text-md px-6 pt-3 text-right ">
-                  -${(details[0].totalPrice * userOrder.promoRate).toFixed(2)}
-                </th>
-              </tr>
-              <tr>
-                <th className="text-md px-6 py-3">Total</th>
-                <th></th>
-                <th className="text-md px-6 py-3 text-right">
-                  ${userOrder.finalPrice}
-                </th>
-              </tr>
-            </tfoot>
-          </table>
+                          <th scope="col" className="px-6 py-3 text-center">
+                            {item.qty}
+                          </th>
+                          <th scope="col" className="px-6 py-3 text-right">
+                            ${item.totalPrice.toFixed(2)}
+                          </th>
+                        </tr>
+                      );
+                    })
+                  : 'No past orders!'}
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th className="text-md px-6 pt-3">Shipping</th>
+                  <th></th>
+                  <th className="text-md px-6 pt-3 text-right ">Free</th>
+                </tr>
+                <tr>
+                  <th className="text-md px-6 pt-3">Discount</th>
+                  <th></th>
+                  <th className="text-md px-6 pt-3 text-right ">
+                    -${(details[0].totalPrice * userOrder.promoRate).toFixed(2)}
+                  </th>
+                </tr>
+                <tr>
+                  <th className="text-md px-6 py-3">Total</th>
+                  <th></th>
+                  <th className="text-md px-6 py-3 text-right">
+                    ${userOrder.finalPrice}
+                  </th>
+                </tr>
+              </tfoot>
+            </table>{' '}
+          </div>
           <div className="flex flex-row text-primary-deep-green">
             <div className="w-1/2">
               <p>PAYMENT METHOD</p>

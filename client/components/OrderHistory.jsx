@@ -37,10 +37,10 @@ const OrderHistory = () => {
 
   if (userOrders.length < 1)
     return (
-      <div className="h-[calc(100vh_-_5rem)] bg-[url('/assets/bg_img/cart.webp')] bg-cover bg-center">
+      <div className="absolute top-0 right-0 bg-[url('/assets/bg_img/cart.webp')] bg-cover bg-center pt-36">
         <div className="top-30 absolute left-10 flex w-full max-w-xl flex-col gap-10 pt-16">
           <p className="font-extrabold text-center text-4xl text-primary-deep-green">
-            No Orders!
+            No orders found...
           </p>
           <button className="font-bold inline-block py-1 align-baseline text-sm hover:text-primary-promo-banner">
             <Link to="/account">Back</Link>
@@ -51,15 +51,15 @@ const OrderHistory = () => {
     );
 
   return (
-    <div className="h-[calc(100vh_-_5rem)] bg-[url('/assets/bg_img/cart.webp')] bg-cover bg-center">
+    <div className="absolute top-0 left-0 min-h-screen w-screen bg-[url('/assets/bg_img/cart.webp')] bg-cover bg-center pt-36">
       <div className="top-30 absolute left-10 flex w-full max-w-xl flex-col gap-10 pt-16">
         <p className="font-extrabold text-center text-4xl text-primary-deep-green">
           Previous Orders
         </p>
 
-        <div className="relative overflow-x-auto">
-          <table className="w-full rounded-xl bg-white text-left text-sm text-gray-500 dark:text-gray-400">
-            <thead className="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
+        <div className="relative overflow-x-auto rounded-xl border border-primary-deep-green">
+          <table className="w-full bg-white text-left text-sm text-gray-500 dark:text-gray-400">
+            <thead className="bg-primary-deep-green text-xs uppercase text-white">
               <tr>
                 <th scope="col" className="px-6 py-3">
                   Order Id
