@@ -72,7 +72,7 @@ export default function CartView() {
 
   return (
     <main className="cart-page-wrapper absolute top-0 left-0 h-screen w-screen overflow-hidden bg-[url('/assets/bg_img/cart.webp')] bg-cover bg-fixed bg-bottom bg-no-repeat pt-36">
-      <h1 className="mb-4 text-center text-3xl">Your Cart</h1>
+      <h1 className="mb-4 text-center text-4xl">Your Cart</h1>
       <div className="mx-auto max-h-[70vh] w-[4/5] max-w-[1200px] overflow-y-auto rounded-2xl border border-primary-deep-green bg-white/80 p-4">
         {cart?.expandedCart.length > 0 ? (
           <>

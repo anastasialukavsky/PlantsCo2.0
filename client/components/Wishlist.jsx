@@ -17,7 +17,7 @@ export default function Wishlist() {
 
   return (
     <div className="absolute top-0 left-0 h-screen w-screen overflow-hidden bg-[url('/assets/bg_img/wishlist_page.webp')] bg-cover bg-fixed bg-bottom bg-no-repeat pt-36">
-      <h1 className="mb-8 text-center text-3xl">Your Wishlist</h1>
+      <h1 className="mb-8 text-center text-4xl">Your Wishlist</h1>
       <div className="mx-auto max-h-[70vh] w-[4/5] max-w-[1200px] overflow-y-auto rounded-2xl border border-primary-deep-green bg-white/80 p-4">
         {wishlist[0]?.products.length > 0 ? (
           wishlist[0]?.products.map((product) => {
