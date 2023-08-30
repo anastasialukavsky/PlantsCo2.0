@@ -14,6 +14,9 @@ module.exports = {
       quicksand: ['Quicksand', 'sans-serif'],
       archivo: ['Archivo Black', 'monospace'],
       josefin: ['Josefinn Sans', 'monospace'],
+      chonburi: ['Chonburi', 'monospace'],
+      fam: ['Familjen Grotesk', 'sans-serif'],
+      marcellus: ['Marcellus', 'serif']
     },
     fontWeight: {
       thin: 100,
