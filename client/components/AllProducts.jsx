@@ -18,7 +18,7 @@ const AllProducts = () => {
 
   const productsLoading = useSelector(selectProductLoading);
 
-  console.log('products loading?', productsLoading);
+  // console.log('products loading?', productsLoading);
 
   useEffect(() => {
     dispatch(fetchAllProducts());
