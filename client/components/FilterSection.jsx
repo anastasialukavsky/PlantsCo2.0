@@ -13,6 +13,8 @@ const FilterSection = () => {
 
   const filters = useSelector(selectFilterBy);
   const useSearch = useSelector(selectUseSearch);
+
+
   const handleHover = () => {
     setDisplay('absolute');
   };
@@ -25,10 +27,10 @@ const FilterSection = () => {
   };
 
   return (
-    <div className="my-9">
-      <ul className="flex justify-center gap-12 text-2xl">
+    <div className="my-[6%] md:my-[3%] 5xl:mt-[7%] 6xl:mt-[10%]">
+      <ul className="flex justify-center gap-12 3xl:text-[.9vw] 5xl:text-[.7vw] text-[4vw] md:text-[1.1vw] font-raleway">
         <button onClick={() => handleFilter('')}>
-          <li>All</li>
+          <li>ALL</li>
         </button>
         {/* <li>Popular</li> */}
         <div
@@ -37,7 +39,7 @@ const FilterSection = () => {
           className="relative group"
         >
           <button>
-            <li className={`relative group`}>
+            <li className={`relative group uppercase`}>
               {useSearch
                 ? 'Filter By: Search Term'
                 : `Filter By: ${filters.length ? filters.join(', ') : 'All'}`}
