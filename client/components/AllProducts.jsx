@@ -32,7 +32,9 @@ const AllProducts = () => {
   return !productsLoading ? (
     // return !true ? (
     <>
-      <PromoBanner />
+    {/**
+    <PromoBanner />
+  */}
       <div className="flex justify-center">
         <section>
           <FilterSection />
