@@ -44,7 +44,7 @@ const AllProducts = () => {
     <div className="mx-auto w-full max-w-7xl">
       <FilterSection />
       {/* <Sort /> */}
-      <main className="all-prods-skeleton mx-6 mb-4 grid max-w-7xl grid-cols-1 justify-items-center gap-x-4 gap-y-8 border border-red-500 xs:grid-cols-2 sm:mx-12 md:grid-cols-3 md:gap-x-8 lg:grid-cols-4">
+      <main className="all-prods-skeleton mx-6 mb-4 grid max-w-7xl grid-cols-1 justify-items-center gap-x-4 gap-y-8 xs:grid-cols-2 sm:mx-12 md:grid-cols-3 md:gap-x-8 lg:grid-cols-4">
         {Array(8)
           .fill(1)
           .map((_, idx) => (
