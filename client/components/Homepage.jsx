@@ -28,9 +28,8 @@ export default function Homepage() {
 
   return (
     <>
-      <div className="mx-auto  h-screen absolute top-0 w-[100vw] bg-cover bg-[url('/assets/bg_img/homepage13.jpg')] bg-right">
-
-{/**
+      <div className="absolute top-0 mx-auto h-screen w-[100vw] bg-[url('/assets/bg_img/homepage13.webp')] bg-cover bg-right">
+        {/**
 <div className="absolute top-36 left-1/2 min-w-[500px] -translate-x-1/2 flex-col gap-5 text-center text-4xl tracking-wide sm:text-[3.5rem] md:bottom-auto lg:top-96 lg:left-36 lg:translate-x-0 lg:text-left">
 <div className="mb-4 w-full">
 <p className="mb-2 leading-none">Your perfect plant,</p>
@@ -47,7 +46,7 @@ Shop Now
 </Link>
 </div>
 */}
-       
+
         <Toaster />
       </div>
     </>

@@ -53,7 +53,7 @@ const AddNewProduct = () => {
   }, [singleProduct]);
 
   return (
-    <div className="h-[calc(100vh_-_5rem)] bg-[url('/assets/bg_img/admin.jpg')] bg-cover bg-center">
+    <div className="h-[calc(100vh_-_5rem)] bg-[url('/assets/bg_img/admin.webp')] bg-cover bg-center">
       <div className="flex flex-row">
         <aside
           id="default-sidebar"

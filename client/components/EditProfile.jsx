@@ -49,7 +49,7 @@ const EditProfile = () => {
   };
 
   return (
-    <div className="h-[calc(100vh_-_5rem)] bg-[#EBEBEB] bg-cover bg-center md:bg-[url('/assets/bg_img/wishlist_page.jpg')]">
+    <div className="h-[calc(100vh_-_5rem)] bg-[#EBEBEB] bg-cover bg-center md:bg-[url('/assets/bg_img/wishlist_page.webp')]">
       <div className="absolute top-40 left-1/2 right-20 w-full max-w-sm -translate-x-1/2 pt-16 md:left-auto md:translate-x-0">
         <p className="font-extrabold pb-2 text-center text-4xl text-primary-deep-green">
           Welcome Back,

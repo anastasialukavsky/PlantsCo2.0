@@ -37,7 +37,7 @@ const OrderHistory = () => {
 
   if (userOrders.length < 1)
     return (
-      <div className="h-[calc(100vh_-_5rem)] bg-[url('/assets/bg_img/cart.jpg')] bg-cover bg-center">
+      <div className="h-[calc(100vh_-_5rem)] bg-[url('/assets/bg_img/cart.webp')] bg-cover bg-center">
         <div className="top-30 absolute left-10 flex w-full max-w-xl flex-col gap-10 pt-16">
           <p className="font-extrabold text-center text-4xl text-primary-deep-green">
             No Orders!
@@ -51,7 +51,7 @@ const OrderHistory = () => {
     );
 
   return (
-    <div className="h-[calc(100vh_-_5rem)] bg-[url('/assets/bg_img/cart.jpg')] bg-cover bg-center">
+    <div className="h-[calc(100vh_-_5rem)] bg-[url('/assets/bg_img/cart.webp')] bg-cover bg-center">
       <div className="top-30 absolute left-10 flex w-full max-w-xl flex-col gap-10 pt-16">
         <p className="font-extrabold text-center text-4xl text-primary-deep-green">
           Previous Orders

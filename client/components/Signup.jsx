@@ -76,7 +76,7 @@ export default function Signup() {
   };
 
   return (
-    <div className="h-[calc(100vh_-_5rem)] bg-[url('/assets/bg_img/login_signin_page.jpg')] bg-cover bg-center">
+    <div className="h-[calc(100vh_-_5rem)] bg-[url('/assets/bg_img/login_signin_page.webp')] bg-cover bg-center">
       <div className="m-auto w-full max-w-sm pt-16">
         <h2 className="font-bold text-center text-4xl">Sign Up</h2>
         <section className="mt-16 flex flex-col justify-center gap-10 ">
