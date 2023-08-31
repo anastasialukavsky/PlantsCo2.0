@@ -15,7 +15,6 @@ import { addOneToCart } from '../slices/users/cartSlice.js';
 import SimilarProducts from './SimilarProducts.jsx';
 import toast, { Toaster } from 'react-hot-toast';
 import ProductSkeleton from './UI/ProductSkeleton.jsx';
-import { setDefaultOptions } from 'date-fns';
 
 const singleProduct = () => {
   const dispatch = useDispatch();
