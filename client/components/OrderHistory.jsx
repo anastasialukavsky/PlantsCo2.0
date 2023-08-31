@@ -48,18 +48,18 @@ const OrderHistory = () => {
   // </div>
 
   return (
-    <div className="absolute top-0 left-0 min-h-screen w-screen bg-[url('/assets/bg_img/cart.webp')] bg-cover bg-center pt-36">
-      <div className="top-30 absolute left-10 flex w-full max-w-xl flex-col gap-10 pt-16">
-        <p className="font-extrabold text-center text-4xl text-primary-deep-green">
-          Previous Orders
+    <div className=" h-[calc(100vh_-_5rem)] w-screen bg-[url('/assets/misc_bg/acc5.webp')] bg-cover bg-center pt-36 font-outfit">
+      <div className="min-w-xxs w-sm absolute  top-16  mx-auto w-full  pt-16 2xl:top-28 5xl:top-44 5xl:max-w-xl 6xl:top-64  ">
+        <p className="font-extrabold text-center text-4xl font-bold text-white pb-3">
+          PREVIOUS ORDERS
         </p>
 
         {userOrders?.length > 0 ? (
-          <div className="relative overflow-x-auto rounded-xl border border-primary-deep-green">
-            <table className="w-full bg-white text-left text-sm text-gray-500 dark:text-gray-400">
-              <thead className="bg-primary-deep-green text-xs uppercase text-white">
-                <tr>
-                  <th scope="col" className="px-6 py-3">
+          <div className=" flex  flex-col items-center justify-center  overflow-x-auto font-outfit font-thin">
+            <table className="w-5/6 bg-white text-center text-xs text-gray-500 dark:text-gray-400">
+              <thead className="bg-primary-deep-green text-[1vw] uppercase text-white ">
+                <tr className="">
+                  <th scope="col" className="px-6 py-3 ">
                     Order Id
                   </th>
                   <th scope="col" className="px-6 py-3">
@@ -100,12 +100,14 @@ const OrderHistory = () => {
             </table>
           </div>
         ) : (
-          <p className="mx-auto">No Previous Orders</p>
+          <p className="mx-auto text-center text-lg text-white">
+            No previous orders
+          </p>
         )}
 
-        <div className="pt-50 m-auto">
-          <button className="font-bold inline-block py-1 align-baseline text-sm hover:text-primary-promo-banner">
-            <Link to="/account">Back</Link>
+        <div className=" m-auto flex justify-center pt-4">
+          <button className="inline-block w-1/4 border border-white py-1 align-baseline text-sm text-white transition-all duration-500 hover:bg-primary-bright-white/20 portrait:w-full portrait:xxs:w-[80%]">
+            <Link to="/account">back</Link>
           </button>
         </div>
       </div>
