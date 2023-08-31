@@ -68,16 +68,16 @@ const singleProduct = () => {
         <main className="flex justify-center font-raleway text-[#212922] md:h-[470px] 3xl:mt-[4%] 4xl:mx-auto 4xl:min-h-[690px] 4xl:w-[1700px] 6xl:w-[2200px]">
           <section className="mt-8 flex flex-col justify-center md:flex-row md:gap-20">
             {/**mobile header only */}
-            <div className="mx-auto md:mx-0 ">
+            <div className="mx-auto md:mx-0 w-fit">
               <header className=" font-meduim-light flex justify-center pb-4  text-center font-outfit text-[4.9vw] uppercase text-green-gray md:hidden ">
                 {singleProduct.name}
               </header>
 
-              <picture className="h-96 md:h-full">
+              <picture className="h-96 md:h-full ">
                 <source type="image/webp" srcSet={imageBaseURL + '.webp'} />
                 <source type="image/png" srcSet={singleProduct?.imageURL} />
                 <img
-                  className="h-96 md:h-full"
+                  className="h-96 md:h-full w-80 4xl:w-[460px]"
                   src={`${singleProduct.imageURL}`}
                   alt="error showing photo"
                 />
