@@ -46,17 +46,17 @@ const MobileNav = ({ expand, setExpand }) => {
     >
       {/**search section and X btn section*/}
       <div className="flex flex-row-reverse justify-between p-5">
-        <img src={whiteX} alt="x icon" className="w-5" onClick={handleClick} />
+        <img src={whiteX} alt="x icon" className="w-6" onClick={handleClick} />
 
         <div className="flex h-9 flex-row-reverse  gap-2 ">
           <button onClick={handleSearch}>
-            <img src={searchIcon} alt="magnifying glass" className="w-8 " />
+            <img src={searchIcon} alt="magnifying glass" className="w-7 " />
           </button>
           <form onSubmit={handleSearch}>
             <input
               type="text"
               placeholder="succulent..."
-              className="h-8 w-full rounded-full  bg-gray-100 pl-3 text-base text-black placeholder:text-[3.5vw]"
+              className="h-8 w-full rounded-full  bg-gray-100 pl-3 text-[3.8vw] text-[#121212] placeholder:text-[3.5vw]"
               value={searchTerm}
               onChange={(e) => dispatch(adjustSearchBy(e.target.value))}
             />
@@ -71,14 +71,14 @@ const MobileNav = ({ expand, setExpand }) => {
         >
           {localStorage.getItem('token') ? (
             <Link to="/account">
-              <li className="mx-auto max-h-16 w-full border-b pb-1 ">
-                <span className="self-start pr-2 text-[2vw]">01</span>ACCOUNT
+              <li className="mx-auto max-h-16 w-full border-b pb-1 tracking-wide">
+                <span className="self-start pr-2 text-[3vw] tracking-widest">01</span>ACCOUNT
               </li>
             </Link>
           ) : (
             <Link to="/login">
-              <li className=" mx-auto max-h-16 w-full border-b  pb-1">
-                <span className="self-start pr-2 text-[2vw]">01</span>LOGIN
+              <li className=" mx-auto max-h-16 w-full border-b tracking-wide pb-1">
+                <span className="self-start pr-2 text-[3vw] tracking-widest">01</span>LOGIN
               </li>
             </Link>
           )}
@@ -88,8 +88,8 @@ const MobileNav = ({ expand, setExpand }) => {
           onClick={handleClick}
         >
           <Link to="/products">
-            <li className="mx-auto max-h-16 w-full border-b pb-1 pt-2">
-              <span className="self-start pr-2 text-[2vw]">02</span>SHOP
+            <li className="mx-auto max-h-16 w-full border-b pb-1 tracking-wide pt-2">
+              <span className="self-start pr-2 text-[3vw] tracking-widest">02</span>SHOP
             </li>
           </Link>
         </div>
@@ -98,8 +98,8 @@ const MobileNav = ({ expand, setExpand }) => {
           onClick={handleClick}
         >
           <Link to="/cart">
-            <li className="mx-auto max-h-16 w-full border-b pb-1 pt-2">
-              <span className="self-start pr-2 text-[2vw]">03</span> CART
+            <li className="mx-auto max-h-16 w-full border-b tracking-wide pb-1 pt-2">
+              <span className="self-start pr-2 text-[3vw] tracking-widest">03</span>CART
             </li>
           </Link>
         </div>
