@@ -34,7 +34,6 @@ const singleProduct = () => {
   }, [dispatch, productId]);
 
   const singleProduct = useSelector(selectSingleProduct);
-  console.log('DESC', singleProduct.description);
 
   function addToCart() {
     dispatch(addOneToCart(productId));
