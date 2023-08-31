@@ -41,7 +41,7 @@ const NavBar = (props) => {
 
   return (
     <header>
-      <nav className="flex h-20  w-screen md:flex-col md:pt-2 items-center md:justify-around justify-between px-5 tracking-tighter relative text-green-gray  z-50">
+      <nav className="flex h-20  w-screen md:flex-col md:pt-2 items-center md:justify-around justify-between px-5 tracking-tighter relative text-green-gray  z-50 ">
 
             <Toaster
         position="top-right"
