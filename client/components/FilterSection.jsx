@@ -27,7 +27,7 @@ const FilterSection = () => {
   };
 
   return (
-    <div className="my-[6%] md:my-[3%] 5xl:mt-[7%] 6xl:mt-[10%]">
+    <div className="my-[6%] md:my-[3%] 5xl:mt-[7%] 6xl:mt-[10%]  flex justify-center items-center relative">
       <ul className="flex justify-center gap-12 3xl:text-[.9vw] 5xl:text-[.7vw] text-[4vw] md:text-[1.1vw] font-raleway">
         <button onClick={() => handleFilter('')}>
           <li>ALL</li>
