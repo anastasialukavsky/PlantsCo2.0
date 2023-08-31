@@ -35,7 +35,7 @@ const ProductCard = (props) => {
         </Link>
         <button
           onClick={addToCart}
-          className="ease md:invisible  flex justify-center md:absolute bottom-0 mx-auto w-full  bg-green-gray py-1 font-medium text-white opacity-80 md:opacity-60 transition duration-500 hover:opacity-100 group-hover:visible"
+          className="ease  bottom-0  mx-auto flex w-full justify-center bg-green-gray py-1  font-medium text-white opacity-80 transition duration-500 hover:opacity-100 group-hover:visible md:invisible md:absolute md:opacity-60"
         >
           ADD TO CART
         </button>
