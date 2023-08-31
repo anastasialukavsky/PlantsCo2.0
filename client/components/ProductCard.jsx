@@ -1,9 +1,10 @@
-import React, { Suspense, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addOneToCart } from '../slices/users/cartSlice';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { selectProductLoading } from '../slices/product/productSlice';
+
 const ProductCard = (props) => {
   const { product } = props;
   const dispatch = useDispatch();
@@ -26,30 +27,28 @@ const ProductCard = (props) => {
           }}
           to={`/products/${product.id}`}
         >
-          <Suspense fallback={<p>loading...</p>}>
-            <picture className="group relative w-full">
-              {/* Product images are a few pixels off of given h/w below, but this is good enough for preventing layout shift */}
-              <source
-                type="image/webp"
-                srcSet={imageBaseURL + '.webp'}
-                width={1070}
-                height={1400}
-              />
-              <source
-                type="image/png"
-                srcSet={product.imageURL}
-                width={1070}
-                height={1400}
-              />
-              <img
-                src={`${product.imageURL}`}
-                alt="Picture of plant on a counter"
-                width={1070}
-                height={1400}
-                // className="group relative w-full"
-              />
-            </picture>
-          </Suspense>
+          <picture className="group relative w-full">
+            {/* Product images are a few pixels off of given h/w below, but this is good enough for preventing layout shift */}
+            <source
+              type="image/webp"
+              srcSet={imageBaseURL + '.webp'}
+              width={1070}
+              height={1400}
+            />
+            <source
+              type="image/png"
+              srcSet={product.imageURL}
+              width={1070}
+              height={1400}
+            />
+            <img
+              src={`${product.imageURL}`}
+              alt="Picture of plant on a counter"
+              width={1070}
+              height={1400}
+              // className="group relative w-full"
+            />
+          </picture>
         </Link>
         <button
           onClick={addToCart}
@@ -66,7 +65,6 @@ const ProductCard = (props) => {
           ${product.price}
         </p>
       </Link>
-      {/* <Toaster gutter={15} /> */}
     </div>
   ) : (
     <div className="font-raleway">
