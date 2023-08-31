@@ -27,17 +27,17 @@ export default function OrderConfirmation() {
   }, [orderId, status]);
 
   return (
-    <div className="relative bg-cover bg-center bg-[url('/assets/bg_img/order_conf_page.jpg')] h-[calc(100vh_-_5rem)]">
-      <div className="flex justify-center items-center h-full">
+    <div className="relative h-[calc(100vh_-_5rem)] bg-[url('/assets/bg_img/order_conf_page.webp')] bg-cover bg-center">
+      <div className="flex h-full items-center justify-center">
         <div className="absolute inset-0"></div>
-        <div className="p-14 py-16 bg-primary-deep-green rounded-md bg-opacity-60 relative z-10">
+        <div className="relative z-10 rounded-md bg-primary-deep-green bg-opacity-60 p-14 py-16">
           {status && status === 'complete' ? (
             <div className="">
-              <h1 className="text-center font-extrabold text-primary-bright-white text-[2.5rem] tracking-wide pb-7 ">
+              <h1 className="font-extrabold pb-7 text-center text-[2.5rem] tracking-wide text-primary-bright-white ">
                 Thank you for your purchase!
               </h1>
               <div>
-                <p className="text-center text-primary-bright-white text-xl tracking-wide mb-6">
+                <p className="mb-6 text-center text-xl tracking-wide text-primary-bright-white">
                   Your order confirmation is #{orderId}
                 </p>
               </div>
@@ -51,7 +51,7 @@ export default function OrderConfirmation() {
               Checkout canceled
             </p>
           )}
-          <div className="text-center text-primary-bright-white text-xl tracking-wide mt-10">
+          <div className="mt-10 text-center text-xl tracking-wide text-primary-bright-white">
             <p className="font-light">
               Take me back to{' '}
               <Link to={'/products'} className="font-semibold">

@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import searchIcon from '../../../public/assets/search-icon.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import decoratedLine from '../../../public/assets/line.svg'
-
+import { Toaster } from 'react-hot-toast';
 import {
   selectSearchedItems,
   adjustSearchBy,
@@ -12,6 +12,9 @@ import {
 } from '../../slices/product/productSlice';
 import menu from '../../../public/assets/menu.svg';
 import MobileNav from './MobileNav.jsx';
+import CartLink from './CartLink.jsx';
+
+import { fetchCart, selectCart } from '../../slices/users/cartSlice';
 
 const NavBar = (props) => {
   const dispatch = useDispatch();
@@ -21,6 +24,11 @@ const NavBar = (props) => {
 
   const searchedItems = useSelector(selectSearchedItems);
   const searchTerm = useSelector(selectSearchBy);
+  const cart = useSelector(selectCart);
+
+  useEffect(() => {
+    dispatch(fetchCart());
+  }, []);
 
   const handleSearch = (e) => {
     if(expand) {
@@ -34,6 +42,18 @@ const NavBar = (props) => {
   return (
     <header>
       <nav className="flex h-20  w-screen md:flex-col md:pt-2 items-center md:justify-around justify-between px-5 tracking-tighter relative text-green-gray  z-50">
+
+            <Toaster
+        position="top-right"
+        toastOptions={{
+          iconTheme: {
+            primary: '#365314',
+            secondary: '#a7bfb4',
+          },
+        }}
+      />
+
+      
         <div>
           <Link to={'/'}>
             <h1 className="font-tabac text-[8vw] mt-2 5xl:mt-16 6xl:mt-24 md:text-[3vw] 3xl:text-[2.4vw]">plants&co</h1>
@@ -73,11 +93,11 @@ const NavBar = (props) => {
               </Link>
             )}
             <Link to="/cart">
-              <li>CART</li>
+              <CartLink cartQty={cart?.expandedCart?.length} />
+              {/* <li>CART</li> */}
             </Link>
           </ul>
         </div>
-
 
         {/**decorated navbar border */}
         <div className="relative md:flex w-[90vw] hidden">

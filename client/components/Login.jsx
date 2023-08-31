@@ -23,8 +23,6 @@ const Login = () => {
 
   const { auth, status } = useSelector(selectAuth);
 
-  console.log('auth loading:', authLoading);
-
   const validClass =
     'appearance-none border portrait:w-72 w-96 3xl:py-2 py-3 px-4 text-gray-700 text-[3vw] md:text-[1.3vw] 5xl:text-[1vw] 6xl:text-[.8vw] leading-tight focus:outline-none focus:bg-white focus:shadow-outline';
 

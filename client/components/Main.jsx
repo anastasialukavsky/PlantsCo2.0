@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, lazy, Suspense } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 
@@ -18,16 +18,25 @@ import {
   OrderHistoryDetails,
   Checkout,
   OrderConfirmation,
-  AdminDashboard,
   Wishlist,
-  EditProduct,
-  AddNewProduct,
-  AdminProductView,
-  AdminUserMgmt,
-  AdminPromoCodeView,
-  EditPromos,
-  AddNewPromo,
 } from './index';
+
+import AdminDashboard from './Admin/AdminDashboard.jsx';
+import AddNewProduct from './Admin/AddNewProduct.jsx';
+import AddNewPromo from './Admin/AddNewPromo.jsx';
+import AdminProductView from './Admin/AdminProductView.jsx';
+import AdminPromoCodeView from './Admin/AdminPromoCodeView.jsx';
+import AdminUserMgmt from './Admin/AdminUserMgmt.jsx';
+import EditProduct from './Admin/EditProduct.jsx';
+import EditPromos from './Admin/EditPromos.jsx';
+// const AddNewProduct = lazy(() => import('./Admin/AddNewProduct.jsx'));
+// const AddNewPromo = lazy(() => import('./Admin/AddNewPromo.jsx'));
+// const AdminProductView = lazy(() => import('./Admin/AdminProductView.jsx'));
+// const AdminPromoCodeView = lazy(() => import('./Admin/AdminPromoCodeView.jsx'));
+// const AdminUserMgmt = lazy(() => import('./Admin/AdminUserMgmt.jsx'));
+// const EditProduct = lazy(() => import('./Admin/EditProduct.jsx'));
+// const EditPromos = lazy(() => import('./Admin/EditPromos.jsx'));
+
 import { selectAuth, attemptTokenLogin } from '../slices/users/authSlice';
 
 export default function Main() {
@@ -35,6 +44,7 @@ export default function Main() {
 
   useEffect(() => {
     dispatch(attemptTokenLogin());
+    preloadImages();
   }, []);
 
   const { auth } = useSelector(selectAuth);
@@ -62,28 +72,49 @@ export default function Main() {
             element={<OrderHistoryDetails />}
           />
           <Route path="/*" element={<NotFound />} />
-          <Route path="/account/admin" element={<AdminDashboard />} />
-          <Route
-            path="/account/admin/products"
-            element={<AdminProductView />}
-          />
-          <Route
-            path="/account/admin/promos"
-            element={<AdminPromoCodeView />}
-          />
-          <Route
-            path="/account/admin/editpromos/:promoId"
-            element={<EditPromos />}
-          />
-          <Route path="/account/admin/users" element={<AdminUserMgmt />} />
-          <Route
-            path="/account/admin/editproduct/:productId"
-            element={<EditProduct />}
-          />
-          <Route path="/account/admin/addproduct" element={<AddNewProduct />} />
-          <Route path="/account/admin/addpromo" element={<AddNewPromo />} />
+          <Route path="/account/admin" element={<AdminDashboard />}>
+            <Route path="products" element={<AdminProductView />} />
+            <Route path="addproduct" element={<AddNewProduct />} />
+            <Route path="promos" element={<AdminPromoCodeView />} />
+            <Route path="addpromo" element={<AddNewPromo />} />
+            <Route path="users" element={<AdminUserMgmt />} />
+            <Route path="editpromos/:promoId" element={<EditPromos />} />
+            <Route path="editproduct/:productId" element={<EditProduct />} />
+          </Route>
         </Routes>
       </div>
     </React.Fragment>
   );
+}
+
+async function preloadImages() {
+  async function preloadImage(src) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.src = src;
+
+      img.onload = () => resolve(img);
+      img.onerror = () => reject(src);
+    });
+  }
+
+  const bgImages = [
+    '/assets/bg_img/cart.webp',
+    '/assets/misc_bg/shipping.webp',
+    '/assets/bg_img/wishlist_page.webp',
+    '/assets/bg_img/homepage13.webp',
+    '/assets/bg_img/not_found_page1.webp',
+    '/assets/bg_img/order_conf_page.webp',
+    '/assets/bg_img/login_signin_page.webp',
+  ];
+
+  const promiseList = [];
+
+  for (let img of bgImages) {
+    promiseList.push(preloadImage(img));
+  }
+
+  const res = await Promise.all(promiseList);
+
+  console.log('done!', res);
 }

@@ -16,7 +16,7 @@ const initialState = {
 
 export const fetchAllProducts = createAsyncThunk(
   'products/fetchAll',
-  async (x, { rejectWithValue }) => {
+  async (_, { rejectWithValue }) => {
     try {
       const { data } = await axios.get(`/api/products`);
       return data;

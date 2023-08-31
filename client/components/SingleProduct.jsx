@@ -58,6 +58,9 @@ const singleProduct = () => {
 
   const notify = () => toast.success('Product added to cart!');
 
+  // strip the extension from the product image filename to be re-used as [.webp|.png]
+  const imageBaseURL = singleProduct?.imageURL?.split('.').at(0);
+
   return (
     <>
       {/**
@@ -68,15 +71,19 @@ const singleProduct = () => {
           <section className="mt-8 flex flex-col justify-center md:flex-row md:gap-20">
             {/**mobile header only */}
             <div className="mx-auto md:mx-0 ">
-            <header className=" font-meduim-light flex justify-center pb-4  text-center font-outfit text-[4.9vw] uppercase text-green-gray md:hidden ">
-            {singleProduct.name}
-            </header>
+              <header className=" font-meduim-light flex justify-center pb-4  text-center font-outfit text-[4.9vw] uppercase text-green-gray md:hidden ">
+                {singleProduct.name}
+              </header>
 
-              <img
-                className="h-96 md:h-full"
-                src={`${singleProduct.imageURL}`}
-                alt="error showing photo"
-              />
+              <picture className="h-96 md:h-full">
+                <source type="image/webp" srcSet={imageBaseURL + '.webp'} />
+                <source type="image/png" srcSet={singleProduct?.imageURL} />
+                <img
+                  className="h-96 md:h-full"
+                  src={`${singleProduct.imageURL}`}
+                  alt="error showing photo"
+                />
+              </picture>
             </div>
             {/**desktop header */}
             <div className="mx-8 md:mx-0 md:w-1/3">
@@ -87,20 +94,20 @@ const singleProduct = () => {
                 <LikedProduct />
               </div>
 
-              <div className="md:mb-4 mb-0 flex justify-between md:border-b-4 p-2 md:p-0 text-[2.5vw] md:text-[1vw] 3xl:text-[.7vw]">
+              <div className="mb-0 flex justify-between p-2 text-[2.5vw] md:mb-4 md:border-b-4 md:p-0 md:text-[1vw] 3xl:text-[.7vw]">
                 <p>
                   {singleProduct?.tags
                     ?.map(({ tagName }) => tagName)
                     .join(', ')}
                 </p>
               </div>
-              <p className="md:mb-4 mb-2 md:text-[2vw] text-[3.7vw] font-bold text-[#212922] xl:text-[1.6vw] 4xl:text-[1.3vw]">
+              <p className="mb-2 text-[3.7vw] font-bold text-[#212922] md:mb-4 md:text-[2vw] xl:text-[1.6vw] 4xl:text-[1.3vw]">
                 ${singleProduct.price}
               </p>
 
               {fullDescription && (
                 <p
-                  className="mb-8 min-w-full cursor-pointer text-justify text-[2.8vw] md:text-[1vw] leading-tight 4xl:text-[.7vw]"
+                  className="mb-8 min-w-full cursor-pointer text-justify text-[2.8vw] leading-tight md:text-[1vw] 4xl:text-[.7vw]"
                   onClick={handleFullDescription}
                 >
                   {fullDescription}
@@ -119,7 +126,7 @@ const singleProduct = () => {
                     notify();
                     addToCart();
                   }}
-                  className="mx-auto block w-full  bg-green-gray py-2 font-marcellus text-[3.8vw] md:text-[2vw] text-white hover:bg-primary-button-green hover:transition-all 4xl:text-[1.5vw] 5xl:text-[1.2vw]"
+                  className="mx-auto block w-full  bg-green-gray py-2 font-marcellus text-[3.8vw] text-white hover:bg-primary-button-green hover:transition-all md:text-[2vw] 4xl:text-[1.5vw] 5xl:text-[1.2vw]"
                 >
                   ADD TO CART
                 </button>
@@ -130,7 +137,7 @@ const singleProduct = () => {
                   alt="shipping box icon"
                   className="w-4 4xl:w-[6]"
                 />
-                <p className="md:text-[1vw] text-[2.5vw] 4xl:text-[.8vw] 5xl:text-[.7vw]">
+                <p className="text-[2.5vw] md:text-[1vw] 4xl:text-[.8vw] 5xl:text-[.7vw]">
                   Free shipping in the USA
                 </p>
               </div>
@@ -143,7 +150,7 @@ const singleProduct = () => {
       {/* <div className="hidden md:block"> */}
       <SimilarProducts />
       {/* </div> */}
-      <Toaster />
+      {/* <Toaster /> */}
     </>
   );
 };

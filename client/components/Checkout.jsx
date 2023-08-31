@@ -216,7 +216,7 @@ export default function Checkout() {
   }, [checkoutState]);
 
   return (
-    <div className="relative h-[calc(100vh_-_5rem)] bg-[url('/assets/misc_bg/shipping.jpg')] bg-cover bg-center bg-no-repeat">
+    <div className="relative h-[calc(100vh_-_5rem)] bg-[url('/assets/misc_bg/shipping.webp')] bg-cover bg-center bg-no-repeat">
       <h2 className="font-bold py-6 text-center text-4xl">
         Shipping Information
       </h2>
