@@ -71,12 +71,12 @@ const Login = () => {
 
 
   return (
-    <div className="md:h-[calc(100vh_-_10vh)] portrait:absolute portrait:w-full portrait:top-0 portrait:h-screen right-0 bg-[url('/assets/misc_bg/login4.jpg')]  bg-cover  portrait:lg:mt-20 portrait:mt-20 bg-center bg-no-repeat font-outfit text-white md:bg-[url('/assets/bg_img/login.jpg')]">
+    <div className="right-0 h-[calc(100dvh_-_5rem)] bg-[url('/assets/bg_img/home2.jpg')] bg-cover bg-center bg-no-repeat font-outfit text-white md:h-[calc(100vh_-_4rem)] md:bg-[url('/assets/misc_bg/login.webp')] lg:h-[calc(100dvh_-_82px)] xl:h-[calc(100dvh_-_100px)] 2xl:h-[calc(100dvh_-_105px)]  5xl:h-[calc(100dvh_-_159px)]  6xl:h-[calc(100dvh_-_200px)] portrait:absolute portrait:top-0 portrait:mt-20 portrait:h-[calc(100dvh_-_5rem)] portrait:w-full portrait:lg:mt-20">
       <div className="m-auto w-full max-w-sm  pt-14">
-        <h2 className="text-center font-marcellus text-[7vw] md:text-[4vw] 3xl:text-[3vw] 5xl:text-[2vw]">
+        <h2 className="text-center font-outfit text-[7vw] font-semibold tracking-wide md:text-[4vw] 3xl:text-[3vw] 5xl:text-[2vw]">
           LOGIN
         </h2>
-        <section className="mt-2 flex flex-col justify-center items-center  gap-5 ">
+        <section className="mt-2 flex flex-col items-center justify-center  gap-5 ">
           <form onSubmit={onSubmit} className="">
             <div className="mb-2 ">
               <p
@@ -144,7 +144,7 @@ const Login = () => {
             <div className="flex items-center justify-between">
               <button
                 type="submit"
-                className="mx-auto block w-full bg-primary-deep-green 3xl:py-1 py-2 text-[4vw] md:text-[2.6vw] text-white hover:bg-primary-button-hover hover:transition-all lg:py-1  lg:text-[2.1vw] 3xl:text-[2.2vw] 4xl:text-[1.6vw] 5xl:text-[1.2vw] 6xl:text-[1vw]"
+                className="mx-auto block w-full bg-green-gray py-2 text-[4vw] text-white hover:bg-primary-button-hover hover:transition-all md:text-[2.6vw] lg:py-1 lg:text-[2.1vw]  3xl:py-1 3xl:text-[2.2vw] 4xl:text-[1.6vw] 5xl:text-[1.2vw] 6xl:text-[1vw]"
               >
                 {authLoading ? 'loading..' : 'login'}
               </button>
