@@ -121,16 +121,24 @@ const productSlice = createSlice({
       state.searchBy = '';
     },
     adjustSort(state, { payload }) {
-      state.products.sort((a, b) => {
-        if (payload === 'price') {
-          return +a[payload] > +b[payload]
-            ? 1
-            : +a[payload] < +b[payload]
-            ? -1
-            : 0;
-        }
-        return a[payload] > b[payload] ? 1 : a[payload] < b[payload] ? -1 : 0;
-      });
+      const sortKey = payload;
+
+      switch (sortKey) {
+        case 'name-asc':
+          state.products.sort((a, b) => (a.name >= b.name ? 1 : -1));
+          break;
+        case 'name-desc':
+          state.products.sort((a, b) => (a.name < b.name ? 1 : -1));
+          break;
+        case 'price-asc':
+          state.products.sort((a, b) => a.price - b.price);
+          break;
+        case 'price-desc':
+          state.products.sort((a, b) => b.price - a.price);
+          break;
+        default:
+          return;
+      }
     },
     adjustSearchBy(state, { payload }) {
       state.searchBy = payload || '';

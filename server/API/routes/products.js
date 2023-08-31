@@ -5,7 +5,10 @@ const { requireToken, isAdmin } = require('../authMiddleware');
 
 router.get('/', async (req, res, next) => {
   try {
-    const allProds = await Product.findAll({ include: Tag });
+    const allProds = await Product.findAll({
+      include: Tag,
+      order: ['name'],
+    });
     res.json(allProds);
   } catch (e) {
     console.error(chalk.bgRed('BACKEND ISSUE FETCHING ALL PRODUCTS'));

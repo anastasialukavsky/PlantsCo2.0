@@ -5,7 +5,6 @@ import { adjustSort } from '../slices/product/productSlice';
 const Sort = () => {
   const dispatch = useDispatch();
   const handleSort = (e) => {
-    // console.log(e.target.value);
     dispatch(adjustSort(e.target.value));
   };
 
@@ -15,9 +14,11 @@ const Sort = () => {
         SORT BY
       </label>
       <select name="sort" id="sort" onChange={handleSort}>
-        <option value="name">A-Z</option>
-        <option value="price">PRICE</option>
-        <option value="id">NONE</option>
+        <option value="name-asc">A-Z</option>
+        <option value="name-desc">Z-A</option>
+        <option value="price-asc">PRICE (low to high)</option>
+        <option value="price-desc">PRICE (high to low)</option>
+        {/* <option value="id">NONE</option> */}
       </select>
     </div>
   );
