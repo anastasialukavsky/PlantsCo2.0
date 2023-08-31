@@ -131,6 +131,4 @@ async function preloadImages() {
   }
 
   const res = await Promise.all(promiseList);
-
-  console.log('done!', res);
 }
