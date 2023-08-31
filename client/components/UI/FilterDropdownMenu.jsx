@@ -5,11 +5,14 @@ import FilterTag from './FilterTag.jsx';
 
 const FilterDropdownMenu = (props) => {
   const { handleHide, handleHover, display } = props;
+
+
+
   return (
-    <div
+    <div onClick={handleHide}
       onMouseEnter={handleHover}
       onMouseLeave={handleHide}
-      className={`top-36 h-44 w-screen ${display} left-0 z-10 flex justify-center gap-6 border-t-2 border-primary-deep-green bg-gray-100 text-center`}
+      className={`absolute 6xl:top-8 top-5  md:top-4 xl:top-6 h-[15dvh] md:h-[17dvh] 6xl:h-[13dvh] w-full portrait:w-full md:w-[45%] ${display} z-10 flex justify-center gap-10 bg-[#283f3b]/90 text-center font-outfit text-white`}
     >
       <div className="">
         <FilterHeader>Size</FilterHeader>
