@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addOneToCart } from '../slices/users/cartSlice';
@@ -9,9 +9,6 @@ const ProductCard = (props) => {
   const dispatch = useDispatch();
 
   const productsLoading = useSelector(selectProductLoading);
-
-
-
 
   function addToCart() {
     dispatch(addOneToCart(product.id));
@@ -29,19 +26,34 @@ const ProductCard = (props) => {
           }}
           to={`/products/${product.id}`}
         >
-          <picture className="group relative w-full">
-            <source type="image/webp" srcSet={imageBaseURL + '.webp'} />
-            <source type="image/png" srcSet={product.imageURL} />
-            <img
-              src={`${product.imageURL}`}
-              alt="Picture of plant on a counter"
-              // className="group relative w-full"
-            />
-          </picture>
+          <Suspense fallback={<p>loading...</p>}>
+            <picture className="group relative w-full">
+              {/* Product images are a few pixels off of given h/w below, but this is good enough for preventing layout shift */}
+              <source
+                type="image/webp"
+                srcSet={imageBaseURL + '.webp'}
+                width={1070}
+                height={1400}
+              />
+              <source
+                type="image/png"
+                srcSet={product.imageURL}
+                width={1070}
+                height={1400}
+              />
+              <img
+                src={`${product.imageURL}`}
+                alt="Picture of plant on a counter"
+                width={1070}
+                height={1400}
+                // className="group relative w-full"
+              />
+            </picture>
+          </Suspense>
         </Link>
         <button
           onClick={addToCart}
-          className="ease  bottom-0  mx-auto flex w-full justify-center bg-green-gray py-1  font-medium text-white opacity-80 transition duration-500 hover:opacity-100 group-hover:visible md:invisible md:absolute md:opacity-60"
+          className="ease bottom-0 mx-auto flex w-full justify-center bg-green-gray py-1  font-medium text-white opacity-80 transition duration-500 hover:opacity-100 group-hover:visible md:invisible md:absolute md:opacity-60"
         >
           ADD TO CART
         </button>
