@@ -44,6 +44,7 @@ export default function Main() {
 
   useEffect(() => {
     dispatch(attemptTokenLogin());
+    preloadImages();
   }, []);
 
   const { auth } = useSelector(selectAuth);
@@ -84,4 +85,36 @@ export default function Main() {
       </div>
     </React.Fragment>
   );
+}
+
+async function preloadImages() {
+  async function preloadImage(src) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.src = src;
+
+      img.onload = () => resolve(img);
+      img.onerror = () => reject(src);
+    });
+  }
+
+  const bgImages = [
+    '/assets/bg_img/cart.webp',
+    '/assets/misc_bg/shipping.webp',
+    '/assets/bg_img/wishlist_page.webp',
+    '/assets/bg_img/homepage13.webp',
+    '/assets/bg_img/not_found_page1.webp',
+    '/assets/bg_img/order_conf_page.webp',
+    '/assets/bg_img/login_signin_page.webp',
+  ];
+
+  const promiseList = [];
+
+  for (let img of bgImages) {
+    promiseList.push(preloadImage(img));
+  }
+
+  const res = await Promise.all(promiseList);
+
+  console.log('done!', res);
 }
