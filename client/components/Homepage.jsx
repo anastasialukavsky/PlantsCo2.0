@@ -28,24 +28,24 @@ export default function Homepage() {
 
   return (
     <>
-      <div className="absolute  top-0 mx-auto h-screen w-[100vw]   bg-[url('/assets/bg_img/home1.jpg')]  bg-cover text-white md:bg-[url('/assets/bg_img/homepage13.jpg')] md:bg-right md:text-green-gray">
+      <div className="absolute  top-0 mx-auto h-screen w-[100vw]   bg-[url('/assets/bg_img/home1.jpg')]  bg-cover text-white md:bg-[url('/assets/bg_img/homepage13.jpg')] md:bg-right md:text-green-gray portrait:bg-[url('/assets/bg_img/home1.jpg')]">
         {/**homepage txt section */}
-        <div className="absolute top-48 left-1/2 w-[80vw] -translate-x-1/2 flex-col gap-5 text-center md:bottom-auto   md:min-w-[500px] lg:top-72 lg:left-32 lg:translate-x-0 lg:text-left">
+        <div className="absolute top-64 left-1/2 w-[80vw] -translate-x-1/2 flex-col gap-5 text-center md:top-48 md:bottom-auto md:min-w-[500px]   lg:top-72 lg:left-32 lg:translate-x-0 lg:text-left portrait:lg:left-1/4">
           <div className="mb-4 w-full font-quicksand">
-            <p className="mb-2 font-quicksand text-[7vw] font-light uppercase leading-none lg:text-[4.8vw]">
-              Your perfect plant,
+            <p className="mb-2 font-archivo  text-[9vw] font-light uppercase leading-none md:font-quicksand md:text-[7vw] lg:text-[4.8vw] portrait:lg:font-archivo portrait:lg:text-[7vw]">
+              Your perfect plant
             </p>
-            <p className="text-[4vw] font-semibold leading-none md:text-[1.5vw]">
+            <p className="text-[4vw] font-semibold leading-none md:text-[1.5vw] portrait:lg:text-[wvw]">
               one click away
             </p>
           </div>
-          <div className="mb-[90%] flex flex-col font-quicksand text-[5vw] font-semibold sm:text-2xl md:mb-16 md:text-[2vw]">
+          <div className="mb-[10%] mt-[40%] flex flex-col font-quicksand text-[5vw] md:mt-0 md:mb-16   md:pt-0  md:text-[2vw]  md:font-semibold portrait:lg:text-[4vw]">
             <p>Transform your space.</p>
             <p>No green thumb needed</p>
           </div>
 
           <Link to="/products">
-            <button className="w-full max-w-xs bg-[#6f9283] py-2 font-tabac text-xl font-semibold tracking-widest text-white shadow-xl">
+            <button className=" w-full max-w-xs 5xl:max-w-lg bg-green-gray py-2 font-tabac text-xl font-semibold tracking-widest text-white shadow-xl md:bg-[#6f9283] portrait:lg:py-5 portrait:lg:text-[3.6vw] 5xl:text-[1.1vw] 5xl:py-5 6xl:py-6">
               SHOP NOW
             </button>
           </Link>
