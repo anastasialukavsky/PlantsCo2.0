@@ -365,6 +365,7 @@ router.post('/:id/cart', requireToken, async (req, res, next) => {
   try {
     const userId = +req.params.id;
     const { cart } = req.body;
+    
 
     if (!cart) return res.status(400).send('Must provide cart information');
 
@@ -373,9 +374,15 @@ router.post('/:id/cart', requireToken, async (req, res, next) => {
     });
 
     await Cart.destroy({ where: { userId: userId } });
+    const cartLookup = await Cart.findOne({where: {userId}});
 
-    const dbResponse = await Cart.bulkCreate(cleanCart, { validate: true });
-    res.status(200).send(dbResponse);
+
+    if (!cartLookup) {
+      const dbResponse = await Cart.bulkCreate(cleanCart, { validate: true });
+      return res.status(200).send(dbResponse);
+    }
+
+    res.status(304).send('Cart already exists and has not been updated')
   } catch (err) {
     next(err);
   }
