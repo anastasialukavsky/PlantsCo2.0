@@ -33,7 +33,7 @@ const NavBar = (props) => {
 
   return (
     <header>
-      <nav className="flex min-h-20 w-screen md:flex-col md:pt-2 items-center md:justify-around justify-between px-5 tracking-tighter text-green-gray relative z-50">
+      <nav className="flex h-20  w-screen md:flex-col md:pt-2 items-center md:justify-around justify-between px-5 tracking-tighter relative text-green-gray  z-50">
         <div>
           <Link to={'/'}>
             <h1 className="font-tabac text-[8vw] mt-2 5xl:mt-16 6xl:mt-24 md:text-[3vw] 3xl:text-[2.4vw]">plants&co</h1>
