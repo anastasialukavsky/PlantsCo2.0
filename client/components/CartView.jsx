@@ -71,9 +71,9 @@ export default function CartView() {
   // );
 
   return (
-    <main className="cart-page-wrapper absolute top-0 left-0 h-screen w-screen overflow-hidden bg-[url('/assets/bg_img/cart.webp')] bg-cover bg-fixed bg-bottom bg-no-repeat pt-36">
-      <h1 className="mb-4 text-center text-4xl">Your Cart</h1>
-      <div className="mx-auto max-h-[70vh] w-[4/5] max-w-[1200px] overflow-y-auto rounded-2xl border border-primary-deep-green bg-white/80 p-4">
+    <main className="cart-page-wrapper absolute top-0 left-0 h-screen w-screen overflow-hidden bg-[url('/assets/bg_img/cart.webp')] bg-cover bg-fixed bg-bottom bg-no-repeat pt-28 5xl:pt-48 6xl:pt-64 font-outfit font-green-gray">
+      <h1 className="mb-4 text-center  text-3xl md:text-4xl font-bold">YOUR CART</h1>
+      <div className="mx-auto  h-[75dvh] md:max-h-[60vh] w-full 3xl:w-3/4 5xl:w-3/6 6xl:w-2/6 overflow-y-auto  border border-primary-deep-green bg-white/80 p-4">
         {cart?.expandedCart.length > 0 ? (
           <>
             <div className="h-full overflow-y-auto">
@@ -87,27 +87,27 @@ export default function CartView() {
                 })}
             </div>
             <CartSubtotal />
-            <div className="mx-auto my-3 mb-6 flex w-1/2 flex-col items-center">
+            <div className="mx-auto my-3 mb-6 flex w-full md:w-1/2 flex-col items-center">
               <Link
-                className="mx-auto block w-full rounded-2xl bg-primary-deep-green py-2 text-center text-xl text-white duration-500 ease-in hover:bg-primary-button-hover hover:transition-all"
+                className="mx-auto block w-full md:w-3/4 2xl:w-2/4 5xl:w-2/4 bg-green-gray py-2 text-center text-xl text-white duration-500 ease-in hover:bg-primary-button-hover hover:transition-all"
                 to="/shipping"
               >
-                Proceed To Payment
+                PROCEED TO PAYMENT
               </Link>
               <button onClick={emptyCart} className="">
-                Empty Cart
+                empty cart
               </button>
             </div>
           </>
         ) : (
-          <div className="empty-cart-wrapper mx-auto flex w-fit flex-col items-start">
-            <h2 className="text-2xl">Your cart is empty...</h2>
-            <p>Can we recommend something from our shop?</p>
+          <div className="empty-cart-wrapper mx-auto flex w-fit flex-col  items-center">
+            <h2 className="md:text-2xl text-xl">Your cart is empty...</h2>
+            <p className='md:text-md text-sm text-center'>Can we recommend something from our shop?</p>
             <Link
-              className="mt-8 self-center rounded-xl bg-primary-deep-green py-3 px-4 text-white hover:bg-primary-button-hover"
+              className="mt-8 self-center  bg-green-gray py-2 px-4 text-white "
               to={'/products'}
             >
-              Shop Now
+              SHOP NOW
             </Link>
           </div>
         )}
