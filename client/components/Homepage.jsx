@@ -51,7 +51,6 @@ export default function Homepage() {
           </Link>
         </div>
 
-        <Toaster />
       </div>
     </>
   );
