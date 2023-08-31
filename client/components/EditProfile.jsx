@@ -49,14 +49,17 @@ const EditProfile = () => {
   };
 
   return (
-    <div className="h-[calc(100vh_-_5rem)]  bg-[url('/assets/misc_bg/acc5.webp')] bg-cover bg-center font-outfit">
+    <div className=" bg-[url('/assets/misc_bg/acc5.webp')] bg-cover bg-center font-outfit md:h-[calc(100dvh_-_4rem)] lg:h-[calc(100dvh_-_82px)] xl:h-[calc(100dvh_-_100px)]  2xl:h-[calc(100dvh_-_105px)] 5xl:h-[calc(100dvh_-_159px)] 6xl:h-[calc(100dvh_-_200px)] portrait:h-[calc(100dvh_-_5rem)] portrait:lg:h-[calc(100dvh_-_5.9rem)] ">
       <div className="absolute top-10 left-1/2 mx-auto w-full max-w-sm -translate-x-1/2 pt-16 2xl:top-28 5xl:top-44 5xl:max-w-xl 6xl:top-64 ">
         <div className="mt-8 flex flex-col gap-3">
           <h2 className="mt-3 mb-3 text-center text-3xl font-bold text-white">
             EDIT PROFILE
           </h2>
           <section className="flex justify-center gap-20  ">
-            <form className="md:w-full w-[80%]  max-w-lg " onSubmit={updateUser}>
+            <form
+              className="w-[80%] max-w-lg  md:w-full "
+              onSubmit={updateUser}
+            >
               <div className="-mx-3 mb-6 flex flex-wrap">
                 <div className="mb-6 w-full px-3 md:mb-0 md:w-1/2">
                   <label
@@ -113,16 +116,16 @@ const EditProfile = () => {
                   save
                 </button>
               </div>
-              </form>
-              </section>
-              <div className="flex justify-center">
-              <button
-              className="inline-block border border-white py-1 align-baseline text-sm text-white transition-all duration-500 hover:bg-primary-bright-white/20 portrait:xxs:w-[80%] portrait:w-full"
+            </form>
+          </section>
+          <div className="flex justify-center">
+            <button
+              className="inline-block w-full border border-white py-1 align-baseline text-sm text-white transition-all duration-500 hover:bg-primary-bright-white/20 portrait:w-[80%] portrait:md:w-full portrait:lg:w-full portrait:xxs:w-[80%]"
               onClick={goBack}
-              >
+            >
               back
-              </button>
-              </div>
+            </button>
+          </div>
         </div>
         {/* <Toaster /> */}
       </div>
