@@ -64,7 +64,7 @@ const NavBar = (props) => {
               <li onClick={() => dispatch(adjustFilter(''))}>SHOP</li>
             </Link>
             {auth.firstName ? (
-              <Link to={'/account'}>
+              <Link to={'/account'} className='uppercase'>
                 <li>Hi, {auth.firstName} </li>
               </Link>
             ) : (
