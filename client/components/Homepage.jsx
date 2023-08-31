@@ -28,7 +28,7 @@ export default function Homepage() {
 
   return (
     <>
-      <div className="absolute  top-0 mx-auto h-screen w-[100vw]   bg-[url('/assets/bg_img/home1.jpg')]  bg-cover text-white md:bg-[url('/assets/bg_img/homepage13.wepb')] md:bg-right md:text-green-gray portrait:bg-[url('/assets/bg_img/home1.jpg')]">
+      <div className="absolute  top-0 mx-auto h-screen w-[100vw]   bg-[url('/assets/bg_img/home1.jpg')]  bg-cover text-white md:bg-[url('/assets/bg_img/homepage13.jpg')] md:bg-right md:text-green-gray portrait:bg-[url('/assets/bg_img/home1.jpg')]">
         {/**homepage txt section */}
         <div className="absolute top-64 left-1/2 w-[80vw] -translate-x-1/2 flex-col gap-5 text-center md:top-48 md:bottom-auto md:min-w-[500px]   lg:top-72 lg:left-32 lg:translate-x-0 lg:text-left portrait:lg:left-1/4">
           <div className="mb-4 w-full font-quicksand">
