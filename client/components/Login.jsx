@@ -24,10 +24,10 @@ const Login = () => {
   const { auth, status } = useSelector(selectAuth);
 
   const validClass =
-    'appearance-none border rounded w-96 py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline';
+    'appearance-none border portrait:w-72 w-96 3xl:py-2 py-3 px-4 text-gray-700 text-[3vw] md:text-[1.3vw] 5xl:text-[1vw] 6xl:text-[.8vw] leading-tight focus:outline-none focus:bg-white focus:shadow-outline';
 
   const invalidClass =
-    'appearance-none border border-red-500 rounded w-96 py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline';
+    'appearance-none border portrait:w-72 border-red-700 text-[3vw] md:text-[1.3vw] 5xl:text-[1vw] 6xl:text-[.8vw] w-96 py-3 3xl:py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline';
 
   const validateEmail = (email) => {
     let res = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -69,26 +69,24 @@ const Login = () => {
     }
   }, [auth]);
 
-  const forgotPassword = () => {};
 
   return (
-    <div className="h-[calc(100vh_-_5rem)] bg-[#E4e4e4] bg-cover bg-center">
-      <div className="m-auto w-full max-w-sm pt-16">
-        <h2 className="font-bold text-center text-4xl">Login</h2>
-        <section className="mt-4 flex flex-col justify-center gap-5 ">
-          <form onSubmit={onSubmit}>
-            <div className="mb-4">
+    <div className="md:h-[calc(100vh_-_10vh)] portrait:absolute portrait:w-full portrait:top-0 portrait:h-screen right-0 bg-[url('/assets/misc_bg/login4.jpg')]  bg-cover  portrait:lg:mt-20 portrait:mt-20 bg-center bg-no-repeat font-outfit text-white md:bg-[url('/assets/bg_img/login.jpg')]">
+      <div className="m-auto w-full max-w-sm  pt-14">
+        <h2 className="text-center font-marcellus text-[7vw] md:text-[4vw] 3xl:text-[3vw] 5xl:text-[2vw]">
+          LOGIN
+        </h2>
+        <section className="mt-2 flex flex-col justify-center items-center  gap-5 ">
+          <form onSubmit={onSubmit} className="">
+            <div className="mb-2 ">
               <p
                 className={
-                  logInFail ? 'text-xs text-red-500' : 'collapse text-xs'
+                  logInFail ? 'text-xs text-red-700' : 'collapse text-xs'
                 }
               >
                 Invalid login credentials!
               </p>
-              <label
-                className="font-bold mb-2 block text-sm text-primary-deep-green"
-                htmlFor="email"
-              >
+              <label className="mb-1 block text-sm " htmlFor="email">
                 Email
               </label>
               <input
@@ -107,7 +105,7 @@ const Login = () => {
               />
               <p
                 className={
-                  isInvalidEmail ? 'text-xs text-red-500' : 'collapse text-xs'
+                  isInvalidEmail ? 'text-xs text-red-700' : 'collapse text-xs'
                 }
               >
                 Enter email!
@@ -115,10 +113,7 @@ const Login = () => {
             </div>
 
             <div className="mb-6">
-              <label
-                className="font-bold mb-2 block text-sm text-primary-deep-green"
-                htmlFor="password"
-              >
+              <label className="mb-1 block text-sm  " htmlFor="password">
                 Password
               </label>
               <input
@@ -127,7 +122,7 @@ const Login = () => {
                 }
                 id="password"
                 type="password"
-                placeholder="************"
+                placeholder="password"
                 value={password}
                 onChange={(evt) => {
                   setIsInvalidPassword(false);
@@ -139,7 +134,7 @@ const Login = () => {
               <p
                 className={
                   isInvalidPassword
-                    ? 'text-xs text-red-500'
+                    ? 'text-xs text-red-700'
                     : 'collapse text-xs'
                 }
               >
@@ -149,23 +144,19 @@ const Login = () => {
             <div className="flex items-center justify-between">
               <button
                 type="submit"
-                className="mx-auto block w-full rounded-xl bg-primary-deep-green py-2 text-xl text-white hover:bg-primary-button-hover hover:transition-all"
+                className="mx-auto block w-full bg-primary-deep-green 3xl:py-1 py-2 text-[4vw] md:text-[2.6vw] text-white hover:bg-primary-button-hover hover:transition-all lg:py-1  lg:text-[2.1vw] 3xl:text-[2.2vw] 4xl:text-[1.6vw] 5xl:text-[1.2vw] 6xl:text-[1vw]"
               >
-                {authLoading ? 'Loading..' : 'Login'}
+                {authLoading ? 'loading..' : 'login'}
               </button>
             </div>
           </form>
           <div className="flex justify-center">
-            <button
-              onClick={forgotPassword}
-              className="font-bold inline-block py-3 align-baseline text-sm hover:text-primary-promo-banner"
-            >
-              Forgot Password?
-            </button>
-          </div>
-          <div className="flex justify-center">
-            <button className="font-bold inline-block align-baseline text-sm hover:text-primary-promo-banner">
-              <Link to={'/signup'}>Don't have an account? Sign up!</Link>
+            <button className="inline-block align-baseline text-[3vw] md:text-[1.6vw] xl:text-[1.2vw] 3xl:text-[1vw] 5xl:text-[.8vw] 6xl:text-[.6vw] ">
+              don't have an account? sign up{' '}
+              <Link to={'/signup'} className="underline ">
+                {' '}
+                here
+              </Link>
             </button>
           </div>
         </section>

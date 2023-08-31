@@ -1,11 +1,12 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   adjustSearchBy,
   selectSearchBy,
 } from '../../slices/product/productSlice';
-import searchIcon from '../../../public/assets/search-icon.svg';
+import searchIcon from '../../../public/assets/search-icon-white.svg';
+import whiteX from '../../../public/assets/white-x.svg';
 
 const MobileNav = ({ expand, setExpand }) => {
   const dispatch = useDispatch();
@@ -24,56 +25,82 @@ const MobileNav = ({ expand, setExpand }) => {
     navigate('/products');
   };
 
+
+  //prevent scroll on overflow when the menu is open
+  useEffect(() => {
+    if(expand) {
+
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = '';
+      };
+    }
+  }, []);
+
   return (
     <div
-      className="absolute top-0 z-10 mt-20 h-[calc(100vh-80px)] w-72 bg-gray-100 transition-all lg:hidden"
+      className="absolute top-0 left-0 z-50 h-screen  w-screen bg-[url('/assets/bg_img/home1.jpg')] font-gloock  text-white   md:hidden"
       style={{
         right: `${expand ? '0' : '-18rem'}`,
       }}
     >
-      <ul className="flex basis-16 flex-col items-center justify-center text-center text-2xl">
-        <div className="mx-auto flex h-16 w-5/6 gap-1 border-b-2 stroke-green-900 py-4">
+      {/**search section and X btn section*/}
+      <div className="flex flex-row-reverse justify-between p-5">
+        <img src={whiteX} alt="x icon" className="w-6" onClick={handleClick} />
+
+        <div className="flex h-9 flex-row-reverse  gap-2 ">
           <button onClick={handleSearch}>
-            <img src={searchIcon} alt="magnifying glass" className="w-8 pt-1" />
+            <img src={searchIcon} alt="magnifying glass" className="w-7 " />
           </button>
           <form onSubmit={handleSearch}>
             <input
               type="text"
               placeholder="succulent..."
-              className="h-8 w-full rounded-full border-2 border-green-700 bg-gray-100 pl-3 text-base"
+              className="h-8 w-full rounded-full  bg-gray-100 pl-3 text-[3.8vw] text-[#121212] placeholder:text-[3.5vw]"
               value={searchTerm}
               onChange={(e) => dispatch(adjustSearchBy(e.target.value))}
             />
           </form>
         </div>
+      </div>
+
+      <ul className="flex  flex-col  pt-[50%] text-[6vw]">
         <div
-          className="w-full transition-all hover:bg-slate-200"
+          className="w-full text-center transition-all"
           onClick={handleClick}
         >
           {localStorage.getItem('token') ? (
             <Link to="/account">
-              <li className="mx-auto h-16 w-5/6 border-b-2 py-4">Account</li>
+              <li className="mx-auto max-h-16 w-full border-b pb-1 tracking-wide">
+                <span className="self-start pr-2 text-[3vw] tracking-widest">01</span>ACCOUNT
+              </li>
             </Link>
           ) : (
             <Link to="/login">
-              <li className="mx-auto h-16 w-5/6 border-b-2 py-4">Login</li>
+              <li className=" mx-auto max-h-16 w-full border-b tracking-wide pb-1">
+                <span className="self-start pr-2 text-[3vw] tracking-widest">01</span>LOGIN
+              </li>
             </Link>
           )}
         </div>
         <div
-          className="w-full transition-all hover:bg-slate-200"
+          className="w-full text-center transition-all "
           onClick={handleClick}
         >
           <Link to="/products">
-            <li className="mx-auto h-16 w-5/6 border-b-2 py-4">Shop</li>
+            <li className="mx-auto max-h-16 w-full border-b pb-1 tracking-wide pt-2">
+              <span className="self-start pr-2 text-[3vw] tracking-widest">02</span>SHOP
+            </li>
           </Link>
         </div>
         <div
-          className="w-full transition-all hover:bg-slate-200"
+          className="w-full text-center transition-all"
           onClick={handleClick}
         >
           <Link to="/cart">
-            <li className="mx-auto h-16 w-5/6 border-b-2 py-4">Cart</li>
+            <li className="mx-auto max-h-16 w-full border-b tracking-wide pb-1 pt-2">
+              <span className="self-start pr-2 text-[3vw] tracking-widest">03</span>CART
+            </li>
           </Link>
         </div>
       </ul>

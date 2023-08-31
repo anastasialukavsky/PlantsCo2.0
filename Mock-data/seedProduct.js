@@ -3,7 +3,7 @@ const products = [
     name: 'Snake plant',
     qty: 33,
     description:
-      'Dracaena trifasciata, commonly known as the snake plant, is one of the most popular and hardy species of houseplants. Up until 2017, it was botanically classified as Sansevieria trifasciata, but its commonalities with Dracaena species were too many to overlook. The plant features stiff, sword-like leaves and can range anywhere from six inches to eight feet tall. Snake plants can vary in color although many have green-banded leaves and commonly feature a yellow border. These plants are easy to grow and, in many cases, are nearly indestructible. They will thrive in very bright light or almost dark corners of the house. Snake plants generally grow slowly in indoor light, but increasing its exposure to light will boost growth if it receives a few hours of direct sun. Planting and repotting is best done in the spring.',
+      'Dracaena trifasciata, commonly known as the snake plant, is one of the most popular and hardy species of houseplants. Up until 2017, it was botanically classified as Sansevieria trifasciata, but its commonalities with Dracaena species were too many to overlook. The plant features stiff, sword-like leaves and can range anywhere from six inches to eight feet tall. Snake plants can vary in color although many have green-banded leaves and commonly feature a yellow border. These plants are easy to grow and, in many cases, are nearly indestructible.',
     price: 192.1,
     imageURL: '/assets/product_img/plant1.png',
   },
@@ -11,7 +11,7 @@ const products = [
     name: 'Monstera',
     qty: 5,
     description:
-      'Monstera Deliciosa genus of nearly 50 species of flowering plants of the arum family (Araceae), native to tropical America. Several are grown as popular ornamental foliage plants. Monstera plants are generally climbing and can be terrestrial or epiphytic. They have attractive leathery leaves that are often cut into lobes. The Swiss cheese plant, or Mexican breadfruit  is a common houseplant with showy, glossy, perforated leaves slashed to the margins; numerous horticultural varieties have been developed. When fully ripe, its sweet scaly fruit is edible and tastes like a combination of pineapple and mango. All other parts of the plant, including the unripe fruit, contain calcium oxalate and are considered mildly toxic if ingested by humans.',
+      'Monstera Deliciosa genus of nearly 50 species of flowering plants of the arum family (Araceae), native to tropical America. Several are grown as popular ornamental foliage plants. Monstera plants are generally climbing and can be terrestrial or epiphytic. They have attractive leathery leaves that are often cut into lobes. The Swiss cheese plant, or Mexican breadfruit  is a common houseplant with showy, glossy, perforated leaves slashed to the margins; numerous horticultural varieties have been developed. When fully ripe, its sweet scaly fruit is edible and tastes like a combination of pineapple and mango.',
     price: 161.1,
     imageURL: '/assets/product_img/plant2.png',
   },
@@ -27,7 +27,7 @@ const products = [
     name: 'Croton',
     qty: 13,
     description:
-      'Croton, (Codiaeum variegatum), also called variegated laurel, colourful-leaved plant of the spurge family (Euphorbiaceae) native to Malaysia and the Pacific and extensively cultivated. Numerous horticultural varieties of shrubs or small trees have been developed, and the plant is commonly grown outdoors in pots or as a houseplant. As with many members of the family, croton sap can be irritating to the skin, and the plant is considered poisonous. Croton trees can reach a height of about 6 metres (20 feet), though varieties kept as houseplants can be significantly smaller. The plants are evergreen with brilliantly coloured, glossy, leathery leaves. Leaf colours, mostly resulting from anthocyanin in the leaf, occur solid or in combinations of green, yellow, white, orange, pink, red, crimson, and purple. The 10–15-cm (4–6-inch) leaves vary from linear and lance-shaped to oval and lobed, depending on the variety. The plants can be propagated from stem cuttings.',
+      'Croton, (Codiaeum variegatum), also called variegated laurel, colourful-leaved plant of the spurge family (Euphorbiaceae) native to Malaysia and the Pacific and extensively cultivated. Numerous horticultural varieties of shrubs or small trees have been developed, and the plant is commonly grown outdoors in pots or as a houseplant. As with many members of the family, croton sap can be irritating to the skin, and the plant is considered poisonous. Croton trees can reach a height of about 6 metres (20 feet), though varieties kept as houseplants can be significantly smaller.',
     price: 80.7,
     imageURL: '/assets/product_img/plant4.png',
   },
@@ -75,7 +75,7 @@ const products = [
     name: 'Money Tree',
     qty: 22,
     description:
-      'Money tree, also commonly referred to as Guiana chestnut, is a species of tree native to Central and South America that has become an attractive, easy-care houseplant thanks to its hardy nature. First popularized as a houseplant in Taiwan during the 1980s, the money tree is prominent among those who practice feng shui and is believed to create positive “chi,” or energy, in the home. This alone has made it a staple in offices, banks, and homes alike. Money trees are most commonly sold as small plants with a braided trunk made up of three, five, or seven stems. The trees are braided by nurseries when they are young and will continue to grow this way as they mature. Rarely are they started at home from seed, but if you do plan to plant the tree outdoors, you should start it from seed in the spring. The trees will grow quickly indoors or outdoors, often adding up to 24 inches a year in height.',
+      'Money tree, also commonly referred to as Guiana chestnut, is a species of tree native to Central and South America that has become an attractive, easy-care houseplant thanks to its hardy nature. First popularized as a houseplant in Taiwan during the 1980s, the money tree is prominent among those who practice feng shui and is believed to create positive “chi,” or energy, in the home. This alone has made it a staple in offices, banks, and homes alike. Money trees are most commonly sold as small plants with a braided trunk made up of three, five, or seven stems.',
     price: 103.8,
     imageURL: '/assets/product_img/plant10.png',
   },
@@ -107,7 +107,7 @@ const products = [
     name: 'Ponytail Palm',
     qty: 33,
     description:
-      'Ponytail palm is a plant with a confused identity. Not a true palm (the family Arecaceae), it is one of seven species in the genus Beaucarnea or Nolina. The group has been included in the Nolinaceae, Agavaceae, and Ruscaceae. Regardless of its taxonomic designation, this group of small tropical trees is native to Mexico, Belize and Guatemala. Ponytail palm, Beaucarnea recurvata (or Nolina recurvata) from semi-desert areas of southeastern Mexico, is the species often grown as a low-maintenance houseplant in temperate climates, as well as being used as a landscape specimen in dry, warm climates (zones 9-10). This succulent is often mistakenly called a palm because of its single trunk with leaves at the top. Other common names include Bottle Palm and Elephants Foot Tree.',
+      'Ponytail palm is a plant with a confused identity. Not a true palm (the family Arecaceae), it is one of seven species in the genus Beaucarnea or Nolina. The group has been included in the Nolinaceae, Agavaceae, and Ruscaceae. Regardless of its taxonomic designation, this group of small tropical trees is native to Mexico, Belize and Guatemala. Ponytail palm, Beaucarnea recurvata (or Nolina recurvata) from semi-desert areas of southeastern Mexico, is the species often grown as a low-maintenance houseplant in temperate climates, as well as being used as a landscape specimen in dry, warm climates (zones 9-10).',
     price: 65.28,
     imageURL: '/assets/product_img/plant14.png',
   },
@@ -131,7 +131,7 @@ const products = [
     name: 'Maidenhair Fern',
     qty: 0,
     description:
-      'Maidenhair ferns have delicate fan-shaped leaf segments, typically clustered on wiry black stems, and their leaves are smaller than other types of ferns. In addition to being one of the most popular fern houseplants, the maidenhair fern can also be found in nature, growing in places where other plants typicallydo not, like on rock walls and in between rock fissures where the moisture from water seepage keeps them alive. Though they are visually stunning throughout all stages of their growth, they are considered a slow-growing fern, typically taking up to three years to reach their full mature size. Plant the fern outdoors any time during the year if you live in the right USDA zone where they will thrive.',
+      'Maidenhair ferns have delicate fan-shaped leaf segments, typically clustered on wiry black stems, and their leaves are smaller than other types of ferns. In addition to being one of the most popular fern houseplants, the maidenhair fern can also be found in nature, growing in places where other plants typicallydo not, like on rock walls and in between rock fissures where the moisture from water seepage keeps them alive. Though they are visually stunning throughout all stages of their growth, they are considered a slow-growing fern, typically taking up to three years to reach their full mature size.',
     price: 49.87,
     imageURL: '/assets/product_img/plant17.png',
   },
@@ -155,7 +155,7 @@ const products = [
     name: 'Prayer Plant',
     qty: 39,
     description:
-      'Named for Bartolomeo Maranta, an Italian physician and botanist of the 16th century, the Maranta genus includes a few dozen low-growing plants native to Brazil, among them the prayer plant (Maranta leuconeura). It gets its common name from the fact that its leaves stay flat during the day and then fold up like praying hands at night. The prayer plant is one of the most distinguishable tropicals, thanks to its beautiful decorative leaves. The popular tricolor variety has deep green, velvety leaves with yellow splotches down the midrib and arching red veins traveling to the leaf margins. A slow-grower, the prayer plant can eventually reach up to a foot in height indoors. They are fairly popular as houseplants and can be planted and cared for indoors during any time of the year, but they are not necessarily easy to keep growing over the long term.',
+      'Named for Bartolomeo Maranta, an Italian physician and botanist of the 16th century, the Maranta genus includes a few dozen low-growing plants native to Brazil, among them the prayer plant (Maranta leuconeura). It gets its common name from the fact that its leaves stay flat during the day and then fold up like praying hands at night. The prayer plant is one of the most distinguishable tropicals, thanks to its beautiful decorative leaves. The popular tricolor variety has deep green, velvety leaves with yellow splotches down the midrib and arching red veins traveling to the leaf margins. ',
     price: 49.74,
     imageURL: '/assets/product_img/plant20.png',
   },
@@ -219,7 +219,7 @@ const products = [
     name: 'Weeping Fig',
     qty: 29,
     description:
-      'Weeping fig (Ficus benjaminas common name is known as the ficus tree) grows as a large broadleaf evergreen tree in tropical and subtropical climates, but it is more often grown as a houseplant in homes, offices, and featured in interior commercial landscaping. The ficus tree is known for its longevity, living between 20 to 50 years. This elegant plant has slender branches that arch gracefully from a light gray trunk, with dense, glossy dark leaves. When the Ficus benjamina tree is grown indoors, the plants are normally pruned to keep them about 3 feet to 6 feet tall, and their trunks are sometimes braided for decorative appeal. It is a fast grower and may need to be repotted up to once per year, but do so in the early spring for best results. Weeping fig is toxic to humans and pets',
+      'Weeping fig (Ficus benjaminas common name is known as the ficus tree) grows as a large broadleaf evergreen tree in tropical and subtropical climates, but it is more often grown as a houseplant in homes, offices, and featured in interior commercial landscaping. The ficus tree is known for its longevity, living between 20 to 50 years. This elegant plant has slender branches that arch gracefully from a light gray trunk, with dense, glossy dark leaves. When the Ficus benjamina tree is grown indoors, the plants are normally pruned to keep them about 3 feet to 6 feet tall, and their trunks are sometimes braided for decorative appeal.',
     price: 80.24,
     imageURL: '/assets/product_img/plant28.png',
   },
@@ -275,7 +275,7 @@ const products = [
     name: 'Rubber Plant',
     qty: 37,
     description:
-      'India rubber plant, (Ficus elastica), also called India rubber tree, large tree of the family Moraceae, once an important source of an inferior natural rubber. It was largely replaced as a source of rubber by the unrelated rubber tree (Hevea brasiliensis) in the early 20th century. The India rubber plant is native to Southeast Asia and is commonly grown as an indoor pot plant elsewhere. The young plants are durable and grow well under less-than-ideal indoor conditions. The India rubber plant has large, thick, oblong leaves up to 30 cm (12 inches) long and figlike fruits in pairs along the branches. The trunk and stems exude a milky sap, or latex. Among the cultivated varieties offered are decora, with broader and darker green leaves, and a few variegated strains, with marbled gray, cream, and white leaves or with green leaves having white or yellow margins.',
+      'India rubber plant, (Ficus elastica), also called India rubber tree, large tree of the family Moraceae, once an important source of an inferior natural rubber. It was largely replaced as a source of rubber by the unrelated rubber tree (Hevea brasiliensis) in the early 20th century. The India rubber plant is native to Southeast Asia and is commonly grown as an indoor pot plant elsewhere. The young plants are durable and grow well under less-than-ideal indoor conditions. The India rubber plant has large, thick, oblong leaves up to 30 cm (12 inches) long and figlike fruits in pairs along the branches.',
     price: 85.56,
     imageURL: '/assets/product_img/plant35.png',
   },
@@ -323,7 +323,7 @@ const products = [
     name: 'Cast Iron Plant',
     qty: 45,
     description:
-      'The cast-iron plant (Aspidistra elatior) has earned its reputation as a hard-to-kill houseplant, along with being a beautiful outdoor foliage plant within its growing zones. This plant can survive lots of neglect and growing conditions that will kill many other plants, such as low light conditions. It has arching, lance-shaped, deep green, glossy leaves that can reach around 2 feet long and 4 inches wide. When grown outdoors, it sometimes produces insignificant cream and purple flowers near the base of the plant, but the blossoms usually do not appear when the plant is grown indoors. The cast-iron plant has a fairly slow growth rate, and spring is generally the best time to plant it.',
+      'The cast-iron plant (Aspidistra elatior) has earned its reputation as a hard-to-kill houseplant, along with being a beautiful outdoor foliage plant within its growing zones. This plant can survive lots of neglect and growing conditions that will kill many other plants, such as low light conditions. It has arching, lance-shaped, deep green, glossy leaves that can reach around 2 feet long and 4 inches wide. When grown outdoors, it sometimes produces insignificant cream and purple flowers near the base of the plant, but the blossoms usually do not appear when the plant is grown indoors. ',
     price: 27.63,
     imageURL: '/assets/product_img/plant41.png',
   },
@@ -387,7 +387,7 @@ const products = [
     name: 'African Violet',
     qty: 40,
     description:
-      'African violet, (genus Saintpaulia), genus of six species of flowering plants in the family Gesneriaceae native to higher elevations in tropical eastern Africa. African violets are common houseplants, especially Saintpaulia ionantha, and can thrive in low light conditions and bloom throughout the year. Hundreds of horticultural varieties have been developed for their various flower colours and shapes, including half-sized miniatures. The members of Saintpaulia are small perennial herbs with thick, hairy, ovate leaves. These dark green leaves have long petioles (leaf stems) and are arranged in a basal cluster at the base of the plant. The violet-like flowers are bilaterally symmetric with five petals and can be violet, white, or pink in colour. The tiny seeds are produced in a capsule. The plants are easily propagated from leaf cuttings.',
+      'African violet, (genus Saintpaulia), genus of six species of flowering plants in the family Gesneriaceae native to higher elevations in tropical eastern Africa. African violets are common houseplants, especially Saintpaulia ionantha, and can thrive in low light conditions and bloom throughout the year. Hundreds of horticultural varieties have been developed for their various flower colours and shapes, including half-sized miniatures. The members of Saintpaulia are small perennial herbs with thick, hairy, ovate leaves. These dark green leaves have long petioles (leaf stems) and are arranged in a basal cluster at the base of the plant. ',
     price: 2.25,
     imageURL: '/assets/product_img/plant49.png',
   },

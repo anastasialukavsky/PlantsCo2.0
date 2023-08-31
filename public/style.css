@@ -1,13 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,100;9..144,200;9..144,300;9..144,400&family=Gloock&family=Outfit:wght@100;200;300;400;500;600;700;800;900&family=Raleway:wght@100;200;300;400;500;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;900&family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;900&family=Oswald:wght@200;300;400;700&family=Outfit:wght@100;200;300;400;500;600;700;800;900&family=Quicksand:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Josefin+Sans:wght@100;200;300;400;500;700&family=Montserrat:wght@100;200;300;400;500;600;700;900&family=Oswald:wght@200;300;400;700&family=Outfit:wght@100;200;300;400;500;600;700;800;900&family=Quicksand:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Chonburi&family=Josefin+Sans:wght@100;200;300;400;500;700&family=Montserrat:wght@100;200;300;400;500;600;700;900&family=Oswald:wght@200;300;400;700&family=Outfit:wght@100;200;300;400;500;600;700;800;900&family=Quicksand:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Chonburi&family=Familjen+Grotesk:wght@400;700&family=Josefin+Sans:wght@100;200;300;400;500;700&family=Marcellus&family=Montserrat:wght@100;200;300;400;500;600;700;900&family=Oswald:wght@200;300;400;700&family=Outfit:wght@100;200;300;400;500;600;700;800;900&family=Quicksand:wght@300;400&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @font-face {
   font-family: Tabac Big Glam Black;
-  src: url('/public/fonts/Tabac Big Glam Black.otf') format('opentype');
+  src: url('../fonts/Tabac Big Glam Black.otf') format('opentype')
 }
+
 
 #admin-nav a.active {
   background-color: transparent;

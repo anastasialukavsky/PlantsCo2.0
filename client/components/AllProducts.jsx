@@ -16,7 +16,7 @@ const AllProducts = () => {
   const dispatch = useDispatch();
 
   const productsLoading = useSelector(selectProductLoading);
-  // const productsLoading = true;
+
 
   useEffect(() => {
     dispatch(fetchAllProducts());
@@ -30,7 +30,9 @@ const AllProducts = () => {
   return !productsLoading ? (
     // return !true ? (
     <>
-      {/* <PromoBanner /> */}
+    {/**
+    <PromoBanner />
+  */}
       <div className="flex justify-center">
         <section>
           <FilterSection />
