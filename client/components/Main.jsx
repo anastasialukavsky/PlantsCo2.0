@@ -2,24 +2,40 @@ import React, { useEffect, lazy, Suspense } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 
-import {
-  Homepage,
-  AllProducts,
-  SingleProduct,
-  NavBar,
-  Login,
-  UserAccount,
-  Cart,
-  Signup,
-  EditProfile,
-  OrderHistory,
-  CartView,
-  NotFound,
-  OrderHistoryDetails,
-  Checkout,
-  OrderConfirmation,
-  Wishlist,
-} from './index';
+// import // Homepage,
+// // AllProducts,
+// // SingleProduct,
+// // NavBar,
+// // Login,
+// // UserAccount,
+// // Cart,
+// // Signup,
+// // EditProfile,
+// // OrderHistory,
+// // CartView,
+// // NotFound,
+// // OrderHistoryDetails,
+// // Checkout,
+// // OrderConfirmation,
+// // Wishlist,
+// './index';
+
+import Homepage from './Homepage.jsx';
+import AllProducts from './AllProducts.jsx';
+import SingleProduct from './SingleProduct.jsx';
+import NavBar from './UI/NavBar.jsx';
+import Cart from './UI/Cart.jsx';
+import Login from './Login.jsx';
+import UserAccount from './UserAccount.jsx';
+import Signup from './Signup.jsx';
+import EditProfile from './EditProfile.jsx';
+import OrderHistory from './OrderHistory.jsx';
+import CartView from './CartView.jsx';
+import NotFound from './NotFound.jsx';
+import OrderHistoryDetails from './OrderHistoryDetails.jsx';
+import Checkout from './Checkout.jsx';
+import OrderConfirmation from './OrderConfirmation.jsx';
+import Wishlist from './Wishlist.jsx';
 
 import AdminDashboard from './Admin/AdminDashboard.jsx';
 import AddNewProduct from './Admin/AddNewProduct.jsx';
