@@ -30,29 +30,29 @@ const CartCard = (props) => {
 
   return (
     <>
-      <div className="mx-3 flex h-52 items-center gap-2 sm:mx-8 sm:gap-6">
-        <div className="h-48">
+      <div className="mx-3 flex h-52 items-center justify-around gap-2 sm:mx-8 sm:gap-6 text-green-gray">
+        <div className="h-36">
           <img
             src={`${product.imageURL}`}
             alt={`product photo of ${product.name}`}
-            className="h-48"
+            className="h-36"
           />
         </div>
-        <div className="flex w-48 flex-col gap-3">
+        <div className="flex w-48 md:w-56 flex-col gap-3">
           <Link to={`/products/${product.id}`}>
-            <h1 className="text-3xl hover:underline">{product.name}</h1>
+            <h1 className="text-xl hover:underline uppercase">{product.name}</h1>
           </Link>
           <p className="text-xs italic text-gray-600">
             {product?.tags.map(({ tagName }) => tagName).join(', ')}
           </p>
           <p>${product.price}</p>
-          <div className="flex gap-2">
+          <div className="flex gap-2 w-fit border border-green-gray rounded-full px-2">
             <button onClick={() => decrementCart(product.id)}>
-              <img src={minus} alt="minus qty icon" className="w-6" />
+              <img src={minus} alt="minus qty icon" className="w-5" />
             </button>
             <p>{item.qty}</p>
             <button onClick={() => incrementCart(product.id)}>
-              <img src={plus} alt="plus qty icon" className="w-6" />
+              <img src={plus} alt="plus qty icon" className="w-5" />
             </button>
           </div>
         </div>
@@ -61,7 +61,7 @@ const CartCard = (props) => {
             onClick={() => {
               removeFromCart(product.id);
             }}
-            className="block  py-2 hover:bg-gray-200 sm:rounded sm:border-2 sm:px-4"
+            className="block  py-1 hover:bg-gray-200 sm:rounded border border-green-gray/30 px-2"
           >
             remove
           </button>
