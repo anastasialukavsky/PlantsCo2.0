@@ -77,12 +77,24 @@ const singleProduct = () => {
                   <LikedProduct />
                 </div>
                 <picture className="h-96 md:h-full ">
-                  <source type="image/webp" srcSet={imageBaseURL + '.webp'} />
-                  <source type="image/png" srcSet={singleProduct?.imageURL} />
+                  <source
+                    type="image/webp"
+                    srcSet={imageBaseURL + '.webp'}
+                    width={1070}
+                    height={1400}
+                  />
+                  <source
+                    type="image/png"
+                    srcSet={singleProduct?.imageURL}
+                    width={1070}
+                    height={1400}
+                  />
                   <img
                     className="h-96 w-80 md:h-full 4xl:w-[460px]"
                     src={`${singleProduct.imageURL}`}
                     alt="error showing photo"
+                    width={1070}
+                    height={1400}
                   />
                 </picture>
               </div>
