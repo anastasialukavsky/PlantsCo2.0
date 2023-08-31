@@ -25,10 +25,10 @@ export default function Signup() {
   });
 
   const validClass =
-    'appearance-none border rounded w-96 py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline';
+    'appearance-none border portrait:w-72 w-96 3xl:py-2 py-3 px-4 text-gray-700 text-[3vw] md:text-[1.3vw] 5xl:text-[1vw] 6xl:text-[.8vw] leading-tight focus:outline-none focus:bg-white focus:shadow-outline';
 
   const invalidClass =
-    'appearance-none border border-red-500 rounded w-96 py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline';
+    'appearance-none border portrait:w-72 border-red-700 text-[3vw] md:text-[1.3vw] 5xl:text-[1vw] 6xl:text-[.8vw] w-96 py-3 3xl:py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline';
 
   const token = window.localStorage.getItem('token');
   useEffect(() => {
@@ -76,16 +76,15 @@ export default function Signup() {
   };
 
   return (
-    <div className="h-[calc(100vh_-_5rem)] bg-[url('/assets/bg_img/login_signin_page.jpg')] bg-cover bg-center">
-      <div className="m-auto w-full max-w-sm pt-16">
-        <h2 className="font-bold text-center text-4xl">Sign Up</h2>
-        <section className="mt-16 flex flex-col justify-center gap-10 ">
-          <form onSubmit={handleSubmit}>
-            <div className="mb-3">
-              <label
-                className="font-bold mb-2 block text-sm text-primary-deep-green"
-                htmlFor="firstName"
-              >
+    <div className="right-0 bg-[url('/assets/misc_bg/login4.jpg')] bg-cover bg-center bg-no-repeat font-outfit text-white  md:h-[calc(100vh_-_10vh)] md:bg-[url('/assets/bg_img/login.jpg')] portrait:absolute portrait:top-0 portrait:mt-20 portrait:h-screen portrait:w-full portrait:lg:mt-20 ">
+      <div className="m-auto w-full max-w-sm pt-14 flex flex-col h-[80%] bg-pink-300">
+        <h2 className="text-center font-marcellus text-[7vw] md:text-[4vw] 3xl:text-[3vw] 5xl:text-[2vw]">
+          SIGN UP
+        </h2>
+        <section className="mt-2 flex flex-col items-center justify-center  gap-1">
+          <form onSubmit={handleSubmit} className="max-h-[70%]">
+            <div className="mb-2">
+              <label className="mb-1 block text-sm " htmlFor="firstName">
                 First Name
               </label>
               <input
@@ -104,19 +103,16 @@ export default function Signup() {
               <p
                 className={
                   isInvalidFirstName
-                    ? 'mt-2 text-xs text-red-500'
-                    : 'collapse -mt-2'
+                    ? 'mt-2 text-xs text-red-700'
+                    : 'collapse -mt-1'
                 }
               >
                 Please enter your first name!
               </p>
             </div>
 
-            <div className="mb-3">
-              <label
-                className="font-bold mb-2 block text-sm text-primary-deep-green"
-                htmlFor="lastName"
-              >
+            <div className="mb-2">
+              <label className="mb-1 block text-sm " htmlFor="lastName">
                 Last Name
               </label>
               <input
@@ -135,19 +131,16 @@ export default function Signup() {
               <p
                 className={
                   isInvalidLastName
-                    ? 'mt-2 text-xs text-red-500'
-                    : 'collapse -mt-2'
+                    ? 'mt-2 text-xs text-red-700'
+                    : 'collapse -mt-1'
                 }
               >
                 Please enter your last name!
               </p>
             </div>
 
-            <div className="mb-3">
-              <label
-                className="font-bold mb-2 block text-sm text-primary-deep-green"
-                htmlFor="email"
-              >
+            <div className="mb-2">
+              <label className="mb-1 block text-sm " htmlFor="email">
                 Email
               </label>
               <input
@@ -165,26 +158,23 @@ export default function Signup() {
               <p
                 className={
                   isInvalidEmail
-                    ? 'mt-2 text-xs text-red-500'
-                    : 'collapse -mt-2'
+                    ? 'mt-2 text-xs text-red-700'
+                    : 'collapse -mt-1'
                 }
               >
                 Please enter a valid email!
               </p>
             </div>
 
-            <div className="mb-3">
-              <label
-                className="font-bold mb-2 block text-sm text-primary-deep-green"
-                htmlFor="password"
-              >
+            <div className="mb-2">
+              <label className="mb-1 block text-sm " htmlFor="password">
                 Password
               </label>
               <input
                 className={isInvalidPassword ? invalidClass : validClass}
                 id="password"
                 type="password"
-                placeholder="************"
+                placeholder="password"
                 value={formData.password}
                 name="password"
                 onChange={(e) => {
@@ -196,8 +186,8 @@ export default function Signup() {
               <p
                 className={
                   isInvalidPassword
-                    ? 'mt-2 text-xs text-red-500'
-                    : 'collapse -mt-2'
+                    ? 'mt-2 text-xs text-red-700'
+                    : 'collapse -mt-1'
                 }
               >
                 Please enter a valid password (at least 8 chars)!
@@ -206,16 +196,19 @@ export default function Signup() {
 
             <div>
               <button
-                className="mx-auto mt-10  block w-full rounded-xl bg-primary-deep-green py-2 text-xl text-white duration-500 ease-in hover:bg-primary-button-hover hover:transition-all"
+                className="mx-auto block w-full bg-primary-deep-green py-2 text-[4vw] text-white hover:bg-primary-button-hover hover:transition-all md:text-[2.6vw] lg:py-1 lg:text-[2.1vw]  3xl:py-1 3xl:text-[2.2vw] 4xl:text-[1.6vw] 5xl:text-[1.2vw] 6xl:text-[1vw]"
                 type="submit"
               >
-                Submit
+                sign up
               </button>
             </div>
           </form>
           <div className="flex justify-center">
-            <button className="font-bold inline-block align-baseline text-sm hover:text-primary-promo-banner">
-              <Link to={'/login'}>Already have an account? Log in!</Link>
+            <button className="inline-block align-baseline text-[3vw] md:text-[1.6vw] xl:text-[1.2vw] 3xl:text-[1vw] 5xl:text-[.8vw] 6xl:text-[.6vw] ">
+              already have an account? log in{' '}
+              <Link to={'/login'} className="underline">
+                here
+              </Link>
             </button>
           </div>
         </section>
