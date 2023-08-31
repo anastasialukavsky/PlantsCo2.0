@@ -41,7 +41,7 @@ const NavBar = (props) => {
 
   return (
     <header>
-      <nav className="flex h-20  w-screen md:flex-col md:pt-2 items-center md:justify-around justify-between px-5 tracking-tighter relative text-green-gray  z-50 ">
+      <nav className="flex h-20 md:h-16 lg:h-[82px] xl:h-[100px] 2xl:h-[105px] 5xl:h-[159px] 6xl:h-[200px] w-screen md:flex-col  items-center md:justify-around justify-between px-5 tracking-tighter relative text-green-gray  z-50 ">
 
             <Toaster
         position="top-right"
@@ -56,7 +56,7 @@ const NavBar = (props) => {
       
         <div>
           <Link to={'/'}>
-            <h1 className="font-tabac text-[8vw] mt-2 5xl:mt-16 6xl:mt-24 md:text-[3vw] 3xl:text-[2.4vw]">plants&co</h1>
+            <h1 className="font-tabac text-[8vw] mt-2 md:mt-3 lg:mt-4 xl:mt-5 2xl:mt-6 4xl:mt-5 5xl:mt-10  md:text-[1.6rem] xl:text-[2.2rem] 5xl:text-[2.5rem] 6xl:text-[3.1rem] leading-none">plants&co</h1>
           </Link>
         </div>
 
@@ -79,7 +79,7 @@ const NavBar = (props) => {
     */}
 
 
-          <ul className="flex gap-16 2xl:gap-28 6xl:gap-32 font-outfit md:text-[1.5vw] lg:text-[1.2vw] 4xl:text-[1vw]">
+          <ul className="flex gap-16 xl:gap-20 2xl:gap-28 6xl:gap-40 font-outfit md:text-[.7rem] lg:text-[1.2vw] 4xl:text-[1.3rem] 5xl:text-[1.6rem] ">
             <Link to={`/products`}>
               <li onClick={() => dispatch(adjustFilter(''))}>SHOP</li>
             </Link>
