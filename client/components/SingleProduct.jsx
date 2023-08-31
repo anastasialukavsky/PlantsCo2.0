@@ -45,17 +45,15 @@ const singleProduct = () => {
   );
 
   const handleFullDescription = () => {
-    if(fullDescription === singleProduct.shortDescription) {
+    if (fullDescription === singleProduct.shortDescription) {
       setFullDescription(singleProduct.description);
-
     } else {
-      setFullDescription(singleProduct.shortDescription)
+      setFullDescription(singleProduct.shortDescription);
     }
   };
 
-  
   useEffect(() => {
-    setFullDescription(singleProduct.shortDescription)
+    setFullDescription(singleProduct.shortDescription);
   }, [singleProduct.shortDescription]);
 
   const notify = () => toast.success('Product added to cart!');
@@ -66,37 +64,43 @@ const singleProduct = () => {
       <PromoBanner />
     */}
       {!productLoading ? (
-        <main className="flex font-raleway text-[#212922] md:h-[470px]">
+        <main className="flex justify-center font-raleway text-[#212922] md:h-[470px] 3xl:mt-[4%] 4xl:mx-auto 4xl:min-h-[690px] 4xl:w-[1700px] 6xl:w-[2200px]">
           <section className="mt-8 flex flex-col justify-center md:flex-row md:gap-20">
-            <div className="mx-auto md:mx-0">
+            {/**mobile header only */}
+            <div className="mx-auto md:mx-0 ">
+            <header className=" font-meduim-light flex justify-center pb-4  text-center font-outfit text-[4.9vw] uppercase text-green-gray md:hidden ">
+            {singleProduct.name}
+            </header>
+
               <img
                 className="h-96 md:h-full"
                 src={`${singleProduct.imageURL}`}
                 alt="error showing photo"
               />
             </div>
+            {/**desktop header */}
             <div className="mx-8 md:mx-0 md:w-1/3">
-              <div className="mb-[5%] flex  flex-col items-end justify-center">
-                <header className=" font-meduim-light self-center pr-6 font-outfit text-[2.3vw] uppercase text-green-gray">
+              <div className="mb-[5%] hidden flex-col  items-end justify-center md:flex">
+                <header className=" font-meduim-light self-center pr-6 font-outfit text-[2.3vw] uppercase text-green-gray 3xl:text-[2vw] 4xl:text-[1.5vw]">
                   {singleProduct.name}
                 </header>
                 <LikedProduct />
               </div>
 
-              <div className="mb-4 flex justify-between border-b-4 pb-2 text-[1vw]">
+              <div className="md:mb-4 mb-0 flex justify-between md:border-b-4 p-2 md:p-0 text-[2.5vw] md:text-[1vw] 3xl:text-[.7vw]">
                 <p>
                   {singleProduct?.tags
                     ?.map(({ tagName }) => tagName)
                     .join(', ')}
                 </p>
               </div>
-              <p className="mb-4 text-[2vw] font-bold text-[#212922]">
+              <p className="md:mb-4 mb-2 md:text-[2vw] text-[3.7vw] font-bold text-[#212922] xl:text-[1.6vw] 4xl:text-[1.3vw]">
                 ${singleProduct.price}
               </p>
 
               {fullDescription && (
                 <p
-                  className="mb-8 cursor-pointer text-[1vw] leading-tight"
+                  className="mb-8 min-w-full cursor-pointer text-justify text-[2.8vw] md:text-[1vw] leading-tight 4xl:text-[.7vw]"
                   onClick={handleFullDescription}
                 >
                   {fullDescription}
@@ -109,21 +113,26 @@ const singleProduct = () => {
                 </p>
               )}
 
-              <div className="mb-3 border-b-4 pb-4">
+              <div className="mb-3 md:border-b-4 md:pb-4">
                 <button
                   onClick={() => {
                     notify();
                     addToCart();
                   }}
-                  className="mx-auto block w-full  bg-green-gray py-2 font-marcellus text-[2vw] text-white hover:bg-primary-button-green hover:transition-all"
+                  className="mx-auto block w-full  bg-green-gray py-2 font-marcellus text-[3.8vw] md:text-[2vw] text-white hover:bg-primary-button-green hover:transition-all 4xl:text-[1.5vw] 5xl:text-[1.2vw]"
                 >
                   ADD TO CART
                 </button>
-
               </div>
               <div className="flex items-center gap-2">
-                <img src={box} alt="shipping box icon" className="w-4" />
-                <p className="text-[1vw]">Free shipping in the USA</p>
+                <img
+                  src={box}
+                  alt="shipping box icon"
+                  className="w-4 4xl:w-[6]"
+                />
+                <p className="md:text-[1vw] text-[2.5vw] 4xl:text-[.8vw] 5xl:text-[.7vw]">
+                  Free shipping in the USA
+                </p>
               </div>
             </div>
           </section>
