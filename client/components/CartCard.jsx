@@ -30,40 +30,52 @@ const CartCard = (props) => {
 
   return (
     <>
-      <div className="mx-3 flex h-52 items-center justify-around gap-2 text-green-gray sm:mx-8 sm:gap-6">
-        <div className="h-36">
+      <div className="flex h-52 items-center justify-around gap-6 md:mx-4 portrait:xs:gap-3 portrait:xs:px-1">
+        <div className="h-36 2xl:w-40">
           <img
             src={`${product.imageURL}`}
             alt={`product photo of ${product.name}`}
-            className="h-36"
+            className="h-36 2xl:h-40"
           />
         </div>
-        <div className="flex w-48 flex-col gap-3 md:w-56">
+        <div className="min-w-48 flex flex-col gap-2 ">
           <Link to={`/products/${product.id}`}>
-            <h1 className="text-xl uppercase hover:underline">
+            <h1 className="cursor-pointer text-[1.5vw] uppercase hover:underline xl:text-[1.4vw] 2xl:text-[1.2vw] 4xl:text-[1vw] 5xl:text-[.8vw] 6xl:text-[.6vw] portrait:text-center  portrait:xs:text-[3.8vw] portrait:md:text-[2.5vw]">
               {product.name}
             </h1>
           </Link>
-          <p className="text-xs italic text-gray-600">
+          <p className="text-center text-[1.2vw] italic text-gray-600 xl:text-[1vw] 4xl:text-[.8vw] 5xl:text-[.6vw] 6xl:text-[.5vw] portrait:text-center portrait:text-[1.8vw] portrait:xs:text-[2.7vw] portrait:md:text-[2vw]">
             {product?.tags.map(({ tagName }) => tagName).join(', ')}
           </p>
-          <p>${product.price}</p>
-          <div className="flex w-fit gap-2 rounded-full border border-green-gray px-2">
+          <p className="text-[1.5vw] xl:text-[1.3vw] 2xl:text-[1.1vw] 4xl:text-[1vw] 5xl:text-[.8vw] 6xl:text-[.6vw] portrait:text-center portrait:text-[2.3vw] portrait:xs:text-[3.2vw] portrait:md:text-[2.5vw] ">
+            ${product.price}
+          </p>
+          <div className="flex w-fit  gap-2 rounded-full border border-green-gray px-2 py-1 2xl:py-[3px] 4xl:py-[2px] portrait:self-center">
             <button onClick={() => decrementCart(product.id)}>
-              <img src={minus} alt="minus qty icon" className="w-5" />
+              <img
+                src={minus}
+                alt="minus qty icon"
+                className="w-2 xl:w-3 4xl:w-4 portrait:xs:w-5"
+              />
             </button>
-            <p>{item.qty}</p>
+            <p className="text-[1vw] 4xl:text-[.8vw] 5xl:text-[.6vw] 6xl:text-[.4vw] portrait:xs:text-[3vw] portrait:xs:py-[1px] portrait:md:text-[2vw] portrait:md:px-2">
+              {item.qty}
+            </p>
             <button onClick={() => incrementCart(product.id)}>
-              <img src={plus} alt="plus qty icon" className="w-5" />
+              <img
+                src={plus}
+                alt="plus qty icon"
+                className="w-2 xl:w-3 4xl:w-4 portrait:xs:w-5"
+              />
             </button>
           </div>
         </div>
-        <div className="">
+        <div className="ml-8">
           <button
             onClick={() => {
               removeFromCart(product.id);
             }}
-            className="block  border border-green-gray/30 py-1 px-2   hover:bg-gray-200"
+            className="block   border border-green-gray/30 py-1 px-2 text-[1.2vw] transition-all duration-300 hover:bg-gray-100 3xl:text-[1vw] 4xl:text-[.8vw] 5xl:text-[.6vw] 6xl:text-[.5vw] portrait:text-[2vw] portrait:xs:text-[3.1vw] portrait:md:text-[2.2vw]"
           >
             remove
           </button>
