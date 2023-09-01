@@ -8,7 +8,7 @@ const CartSubtotal = () => {
 
   return (
     <div className="">
-      <h2 className="ml-8 text-xl pt-2 text-center">SUBTOTAL: {subtotal.toFixed(2)}</h2>
+      <h2 className="ml-8 text-[1.6vw] 6xl:text-[.9vw] 3xl:text-[1.4vw] 5xl:text-[1.2vw] pt-2 text-center portrait:xs:text-[4vw]">SUBTOTAL: {subtotal.toFixed(2)}</h2>
     </div>
   );
 };
