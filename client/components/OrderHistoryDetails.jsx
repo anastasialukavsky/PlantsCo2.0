@@ -46,25 +46,25 @@ const OrderHistoryDetails = () => {
     addressArr = details[0].address.split('  ');
     date = details[0].createdAt.slice(0, 10);
   }
-
+console.log(details)
   if (details.length < 1) return <h2>Loading...</h2>;
 
   return (
-    <div className="absolute top-0 left-0 min-h-screen w-screen bg-[url('/assets/bg_img/cart.webp')] bg-cover bg-center pt-36">
-      <div className="top-30 absolute left-10 flex w-full max-w-xl flex-col gap-10 pt-16">
-        <p className="font-extrabold text-center text-4xl text-primary-deep-green">
-          Order Detail
+    <div className="absolute top-16 left-0 min-h-screen w-screen bg-[url('/assets/bg_img/cart.webp')] bg-cover bg-center p-2 font-outfit text-green-gray md:top-0 md:p-0 portrait:md:p-2">
+      <div className="flex w-full flex-col items-center  justify-center gap-5  md:pt-[11%] 2xl:pt-[9%] 4xl:pt-[8%] 6xl:pt-[7%]">
+        <p className="pt-4 text-center text-[5.5vw] portrait:md:text-[5vw] md:text-[2vw] 5xl:text-[1.6vw] font-bold md:pt-0">
+          ORDER DETAIL
         </p>
 
-        <div className="relative flex flex-col gap-5 overflow-x-auto text-primary-deep-green">
-          <div>
+        <div className="relative flex flex-col gap-5 overflow-x-auto">
+          <div className="text-[3vw] md:text-[1vw]   3xl:text-[.9vw] 4xl:text-[.7vw] 5xl:text-[.6vw] portrait:md:text-[2vw]">
             <p>DATE: {date}</p>
             <p>ORDER ID: {orderId}</p>
             <p>ITEMS: {userOrder.totalQty}</p>
           </div>
-          <div className="table-wrapper rounded-xl border border-primary-deep-green bg-primary-deep-green">
-            <table className="w-full overflow-clip rounded-xl bg-white text-left text-sm text-gray-500 dark:text-gray-400">
-              <thead className="rounded-xl bg-primary-deep-green text-xs uppercase text-white">
+          <div className="table-wrapper  border border-green-gray ">
+            <table className="w-full overflow-clip  bg-white/90 text-left portrait:md:text-[2.7vw]  text-[3.5vw] md:text-[1vw] text-gray-500 dark:text-gray-400 5xl:text-[.6vw]">
+              <thead className=" bg-green-gray text-[3vw] md:text-[1vw] uppercase text-white 5xl:text-[.8vw] 6xl:text-[.6vw] portrait:md:text-[2.8vw]">
                 <tr>
                   <th scope="col" className="px-6 py-3">
                     Product Name
@@ -120,8 +120,8 @@ const OrderHistoryDetails = () => {
               </tfoot>
             </table>
           </div>
-          <div className="flex flex-row text-primary-deep-green">
-            <div className="w-1/2">
+          <div className="5xl:text-[.7vw] portrait:md:text-[3vw] flex flex-row border border-green-gray bg-white/90  p-2 text-[3.8vw] md:text-[1vw] text-green-gray">
+            <div className=" w-1/2">
               <p>PAYMENT METHOD</p>
               <p>
                 {details[0].paymentMethod === 'cc'
@@ -129,7 +129,7 @@ const OrderHistoryDetails = () => {
                   : details[0].paymentMethod}
               </p>
             </div>
-            <div className="w-1/2">
+            <div className="5xl:text[.6vw] w-1/2">
               <p>SHIPPING TO</p>
               <p>{details[0].userName}</p>
               <p>{addressArr[0]}</p>
@@ -139,9 +139,9 @@ const OrderHistoryDetails = () => {
             </div>
           </div>
         </div>
-        <div className="pt-50 m-auto">
-          <button className="align-text-left font-bold py-1 align-baseline text-sm hover:text-primary-promo-banner">
-            <Link to="/account/orderhistory">Back</Link>
+        <div className=" m-auto flex items-center justify-center pb-5 ">
+          <button className="align-text-left transition-all border border-green-gray bg-white/80 px-10  align-baseline portrait:md:text-[3.7vw] text-[5.4vw] md:text-[1vw] duration-500 5xl:text-[.8vw] ">
+            <Link to="/account/orderhistory">back</Link>
           </button>
         </div>
       </div>
