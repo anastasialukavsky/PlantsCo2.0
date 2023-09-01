@@ -48,7 +48,7 @@ const OrderHistory = () => {
   // </div>
 
   return (
-    <div className="portrait:h-[calc(100dvh_-_4rem)]portrait:lg:h-[calc(100dvh_-_5.9rem)] h-[calc(100vh_-_5rem)] w-screen  bg-[url('/assets/misc_bg/acc5.webp')] bg-cover bg-center pt-36 font-outfit md:h-[calc(100dvh_-_4rem)] lg:h-[calc(100dvh_-_82px)] xl:h-[calc(100dvh_-_100px)] 2xl:h-[calc(100dvh_-_105px)] 5xl:h-[calc(100dvh_-_159px)] 6xl:h-[calc(100dvh_-_200px)]">
+    <div className="portrait:h-[calc(100dvh_-_4rem)] portrait:lg:h-[calc(100dvh_-_5.9rem)] h-[calc(100vh_-_5rem)] w-screen  bg-[url('/assets/misc_bg/acc5.webp')] bg-cover bg-center pt-36 font-outfit md:h-[calc(100dvh_-_4rem)] lg:h-[calc(100dvh_-_82px)] xl:h-[calc(100dvh_-_100px)] 2xl:h-[calc(100dvh_-_105px)] 5xl:h-[calc(100dvh_-_159px)] 6xl:h-[calc(100dvh_-_200px)]">
       <div className="min-w-xxs w-sm 5xl:min-w-xl  absolute  top-16 mx-auto  w-full pt-16 2xl:top-28 5xl:top-44 6xl:top-64  ">
         <p className="font-extrabold pb-3 text-center text-xl font-bold text-white md:text-4xl">
           PREVIOUS ORDERS
