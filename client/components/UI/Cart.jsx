@@ -3,15 +3,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchCart, selectCart } from '../../slices/users/cartSlice';
 import { selectAuth } from '../../slices/users/authSlice';
 
-export default function Cart(props) {
+export default function Cart() {
   const dispatch = useDispatch();
 
   const cart = useSelector(selectCart);
   const { auth } = useSelector(selectAuth);
 
   useEffect(() => {
-    dispatch(fetchCart());
-  }, [dispatch, auth]);
+    const timer = setTimeout(() => dispatch(fetchCart()), 100);
+
+    return () => clearTimeout(timer);
+  }, [auth]);
 
   return;
 }
