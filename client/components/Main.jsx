@@ -67,7 +67,7 @@ export default function Main() {
 
   return (
     <React.Fragment>
-      <div className="font-fraunces text-primary-deep-green">
+      <div className="font-outfit text-green-gray">
         <NavBar auth={auth} />
         <Cart />
         <Routes>
