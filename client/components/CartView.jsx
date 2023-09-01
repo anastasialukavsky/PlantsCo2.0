@@ -71,54 +71,59 @@ export default function CartView() {
   // );
 
   return (
-    <main className="cart-page-wrapper font-green-gray absolute top-0 left-0 h-screen w-screen overflow-hidden bg-opacity-90 bg-[url('/assets/bg_img/cart.webp')] bg-cover bg-fixed bg-bottom bg-no-repeat pt-20 font-outfit xl:pt-28 5xl:pt-44 6xl:pt-56">
-      <h1 className="mb-4 text-center  text-[3.6vw] font-bold lg:text-[2.8vw] 3xl:text-[3vw] 4xl:text-[2.5vw] 5xl:text-[2vw] 6xl:text-[1.8vw] portrait:text-center portrait:xs:text-[5vw] portrait:md:text-[4vw]">
-        CART
-      </h1>
-      <div className="mx-auto max-h-[70vh] w-fit max-w-[1200px] overflow-y-auto border border-white bg-white/80 p-4 md:min-w-[700px] 4xl:min-w-[1000px] 5xl:max-h-[65vh] 5xl:min-w-[900px] portrait:w-[90vw]    portrait:border-green-gray portrait:xs:min-h-[80vh] portrait:xs:max-w-[90vw] portrait:xs:p-2 portrait:md:min-h-[80vh] portrait:lg:max-h-[70vh]">
-        {cart?.expandedCart.length > 0 ? (
-          <>
-            <div className="h-full overflow-y-auto">
-              {cart.expandedCart &&
-                cart.expandedCart.map((item) => {
-                  return (
-                    <div key={item.product.id}>
-                      <CartCard product={item.product} item={item} />
-                    </div>
-                  );
-                })}
-            </div>
-            <CartSubtotal />
-            <div className="mx-auto my-3 mb-6 flex w-full  flex-col items-center md:w-2/5 lg:w-3/5 2xl:w-full portrait:md:w-4/5 portrait:lg:w-3/4">
+    <div className="relative xl:pt-28 5xl:pt-44 6xl:pt-56">
+      <main className="cart-page-wrapper font-green-gray absolute top-0 left-0 h-screen w-screen overflow-hidden bg-opacity-90 bg-[url('/assets/bg_img/cart.webp')] bg-cover bg-fixed bg-bottom bg-no-repeat  font-outfit md:pt-3 ">
+        <h1 className="mb-4 text-center text-[2.7vw] font-bold text-green-gray mix-blend-multiply lg:text-[2.6vw] xl:text-[2.3vw] 3xl:text-[2.3vw] 4xl:text-[2.1vw] 5xl:text-[1.8vw] 6xl:text-[1.5vw] portrait:text-center portrait:xs:text-[5vw] portrait:md:text-[4vw]">
+          CART
+        </h1>
+        <div className="mx-auto max-h-[70vh] w-fit max-w-[1200px] overflow-y-auto border border-white bg-white/80 p-4 md:min-w-[700px] 4xl:min-w-[1000px] 5xl:max-h-[65vh] 5xl:min-w-[900px] portrait:w-[90vw] portrait:border-green-gray portrait:xs:min-h-[80vh] portrait:xs:max-w-[90vw] portrait:xs:p-2 portrait:md:min-h-[80vh] portrait:lg:max-h-[70vh]">
+          {cart?.expandedCart.length > 0 ? (
+            <>
+              <div className="h-full overflow-y-auto">
+                {cart.expandedCart &&
+                  cart.expandedCart.map((item) => {
+                    return (
+                      <div key={item.product.id}>
+                        <CartCard product={item.product} item={item} />
+                      </div>
+                    );
+                  })}
+              </div>
+              <CartSubtotal />
+              <div className="mx-auto my-3 mb-6 flex w-full  flex-col items-center md:w-2/5 lg:w-3/5 2xl:w-full portrait:md:w-4/5 portrait:lg:w-3/4">
+                <Link
+                  className="mx-auto block w-full bg-green-gray py-2 text-center text-[1.4vw] text-white duration-500 ease-in hover:bg-primary-button-hover hover:transition-all md:w-3/4 2xl:w-2/4 5xl:w-2/4 5xl:text-[.8vw] 6xl:text-[.7vw] portrait:xs:text-[4vw] portrait:md:text-[3vw]"
+                  to="/shipping"
+                >
+                  PROCEED TO PAYMENT
+                </Link>
+                <button
+                  onClick={emptyCart}
+                  className="text-[1.3vw] 5xl:text-[.8vw] 6xl:text-[.7vw] portrait:xs:text-[4vw] portrait:md:text-[2.7vw]"
+                >
+                  empty cart
+                </button>
+              </div>
+            </>
+          ) : (
+            <div className="mx-auto flex h-full w-fit flex-col items-center justify-center pt-10 text-center text-green-gray">
+              <h2 className="text-[2.2vw]  xl:text-[2vw] 2xl:text-[1.6vw] 4xl:text-[1.3vw] 5xl:text-[1.1vw] portrait:xs:text-[5vw] portrait:md:text-[3vw]">
+                Your cart is empty...
+              </h2>
+              <p className="text-[1.7vw] xl:text-[1.5vw] 2xl:text-[1.2vw] 4xl:text-[1vw] 5xl:text-[.9vw] portrait:xs:text-[3.7vw] portrait:md:text-[2.5vw]">
+                Can we recommend something from our shop?
+              </p>
               <Link
-                className="mx-auto block w-full bg-green-gray py-2 text-center text-[1.4vw] text-white duration-500 ease-in hover:bg-primary-button-hover hover:transition-all md:w-3/4 2xl:w-2/4 5xl:w-2/4 5xl:text-[.8vw] 6xl:text-[.7vw] portrait:xs:text-[4vw] portrait:md:text-[3vw]"
-                to="/shipping"
+                className="mt-8 self-center bg-green-gray py-1 px-4 text-[1.3vw] text-white hover:bg-primary-button-hover 2xl:text-[1vw] 4xl:text-[.8vw] portrait:px-6 portrait:xs:text-[4vw] portrait:md:text-[2.8vw] "
+                to={'/products'}
               >
-                PROCEED TO PAYMENT
+                shop now
               </Link>
-              <button
-                onClick={emptyCart}
-                className="text-[1.3vw] 5xl:text-[.8vw] 6xl:text-[.7vw] portrait:xs:text-[4vw] portrait:md:text-[2.7vw]"
-              >
-                empty cart
-              </button>
             </div>
-          </>
-        ) : (
-          <div className="empty-cart-wrapper mx-auto flex w-fit flex-col  items-center">
-            <h2 className="text-xl md:text-2xl">Your cart is empty...</h2>
-            <p className="md:text-md text-center text-sm">
-              Can we recommend something from our shop?
-            </p>
-            <Link
-              className="mt-8 self-center  bg-green-gray py-2 px-4 text-white "
-              to={'/products'}
-            >
-              shop now
-            </Link>
-          </div>
-        )}
-      </div>
-    </main>
+          )}
+        </div>
+      </main>
+    </div>
   );
-}
+                }
+                
