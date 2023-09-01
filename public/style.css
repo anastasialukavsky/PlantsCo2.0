@@ -18,3 +18,19 @@
   border: 1px solid rgb(20 83 45);
 }
 
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.loading-spinner {
+  width: 30px;
+  height: 30px;
+  border: 5px solid #6b9fa542;
+  border-top: 5px solid #354f52; 
+  border-radius: 50%;
+  animation: spinner 1.5s linear infinite;
+}
