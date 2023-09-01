@@ -17,11 +17,11 @@ export default function Wishlist() {
 
   return (
     <div className="relative  xl:pt-28 5xl:pt-44 6xl:pt-56">
-      <div className="absolute top-0 left-0 h-screen w-screen overflow-hidden bg-[url('/assets/bg_img/admin.webp')] bg-cover bg-fixed bg-bottom bg-no-repeat pt-3  font-outfit  portrait:px-2">
-        <h1 className="mb-4 text-center text-[2.7vw] font-bold  text-green-gray  3xl:text-white mix-blend-luminosity lg:text-[2.6vw] xl:text-[2.3vw] 3xl:text-[2.3vw] 4xl:text-[2.1vw] 5xl:text-[1.8vw] 6xl:text-[1.5vw] portrait:text-green-gray portrait:xs:text-[5vw] portrait:md:text-[4vw]">
+      <div className="absolute top-0 left-0 h-screen w-screen overflow-hidden bg-[url('/assets/bg_img/admin.webp')] bg-cover bg-fixed bg-bottom bg-no-repeat pt-3  font-outfit  md:h-[calc(100vh_-_4rem)] lg:h-[calc(100dvh_-_82px)] xl:h-[calc(100dvh_-_100px)] 2xl:h-[calc(100dvh_-_105px)] 5xl:h-[calc(100dvh_-_159px)]  6xl:h-[calc(100dvh_-_200px)] portrait:absolute portrait:top-0 portrait:mt-20 portrait:h-[calc(100dvh_-_5rem)] portrait:w-full portrait:px-2 portrait:lg:mt-20">
+        <h1 className="mb-4 text-center text-[2.7vw] font-bold  text-green-gray  mix-blend-luminosity lg:text-[2.6vw] xl:text-[2.3vw] 3xl:text-[2.3vw] 3xl:text-white 4xl:text-[2.1vw] 5xl:text-[1.8vw] 6xl:text-[1.5vw] portrait:text-green-gray portrait:xs:text-[5vw] portrait:md:text-[4vw]">
           WISHLIST
         </h1>
-        <div className="mx-auto max-h-[70vh] w-fit max-w-[1200px] overflow-y-auto border border-white bg-white/80 p-4 md:min-w-[700px] lg:text-[2.8vw] 4xl:min-w-[1000px] 5xl:max-h-[65vh] 5xl:min-w-[900px]  portrait:w-[90vw] portrait:border-green-gray portrait:xs:min-h-[80vh] portrait:xs:max-w-[90vw] portrait:xs:p-2 portrait:md:min-h-[80vh] portrait:lg:h-[90vh]">
+        <div className="mx-auto max-h-[70vh] w-fit max-w-[1200px] overflow-y-auto border border-green-gray bg-white/80 p-4 md:min-w-[700px] lg:text-[2.8vw] 4xl:min-w-[1000px] 5xl:max-h-[65vh] 5xl:min-w-[900px]  portrait:w-[90vw] portrait:border-green-gray portrait:xs:min-h-[80vh] portrait:xs:max-w-[90vw] portrait:xs:p-2 portrait:md:min-h-[80vh] portrait:lg:h-[90vh]">
           {wishlist[0]?.products.length > 0 ? (
             wishlist[0]?.products.map((product) => {
               return <WishlistCard key={product.id} product={product} />;
