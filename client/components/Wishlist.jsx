@@ -20,7 +20,7 @@ export default function Wishlist() {
       <h1 className="mb-4 text-center text-[3.8vw] font-bold text-white 3xl:text-[3vw] 4xl:text-[2.5vw] 5xl:text-[2vw] 6xl:text-[1.8vw] portrait:text-green-gray portrait:xs:text-[5vw] portrait:md:text-[4vw]">
         WISHLIST
       </h1>
-      <div className="mx-auto max-h-[70vh] w-fit max-w-[1200px] overflow-y-auto border border-green-gray bg-white/80 p-4 md:min-w-[700px] 4xl:min-w-[1000px] 5xl:max-h-[65vh] 5xl:min-w-[900px]  portrait:md:min-h-[80vh] portrait:xs:min-h-[80vh] portrait:w-[90vw] portrait:xs:max-w-[90vw] portrait:xs:p-2 portrait:lg:h-[90vh] lg:text-[2.8vw]">
+      <div className="mx-auto max-h-[70vh] w-fit max-w-[1200px] overflow-y-auto border portrait:border-green-gray border-white bg-white/80 p-4 md:min-w-[700px] 4xl:min-w-[1000px] 5xl:max-h-[65vh] 5xl:min-w-[900px]  portrait:md:min-h-[80vh] portrait:xs:min-h-[80vh] portrait:w-[90vw] portrait:xs:max-w-[90vw] portrait:xs:p-2 portrait:lg:h-[90vh] lg:text-[2.8vw]">
         {wishlist[0]?.products.length > 0 ? (
           wishlist[0]?.products.map((product) => {
             return <WishlistCard key={product.id} product={product} />;
