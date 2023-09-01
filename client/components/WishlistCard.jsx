@@ -21,11 +21,11 @@ const WishlistCard = ({ product }) => {
   return (
     <>
       <div className="flex h-52 items-center justify-around gap-6 md:mx-4 portrait:xs:gap-3 portrait:xs:px-1">
-        <div className="h-36 2xl:w-40">
+        <div className="h-36 2xl:h-40">
           <img
             src={`${product.imageURL}`}
             alt={`product photo of ${product.name}`}
-            className="h-36 2xl:w-40"
+            className="h-36 2xl:h-40"
           />
         </div>
         <div className=" min-w-48 flex flex-col  gap-2 align-top">
