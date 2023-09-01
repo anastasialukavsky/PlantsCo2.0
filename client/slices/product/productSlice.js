@@ -14,6 +14,9 @@ const initialState = {
   useSearch: false,
 };
 
+// Set pagination increment
+const PRODUCTS_PER_PAGE = 12;
+
 export const fetchAllProducts = createAsyncThunk(
   'products/fetchAll',
   async (_, { rejectWithValue }) => {
@@ -107,9 +110,12 @@ const productSlice = createSlice({
     },
     productPageChange(state, { payload }) {
       if (payload[0] === 'next')
-        state.productPage = Math.min(payload[1] - 8, state.productPage + 8);
+        state.productPage = Math.min(
+          payload[1] - PRODUCTS_PER_PAGE,
+          state.productPage + PRODUCTS_PER_PAGE
+        );
       if (payload === 'previous')
-        state.productPage = Math.max(0, state.productPage - 8);
+        state.productPage = Math.max(0, state.productPage - PRODUCTS_PER_PAGE);
     },
     adjustFilter(state, { payload }) {
       state.productPage = 0;
