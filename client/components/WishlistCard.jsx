@@ -20,27 +20,31 @@ const WishlistCard = ({ product }) => {
 
   return (
     <>
-      <div className="mx-8 flex h-52 items-center gap-6 rounded-xl">
-        <div className="h-48">
+      <div className="md:mx-4 flex h-52 items-center justify-around gap-6 portrait:xs:gap-3">
+        <div className="h-36">
           <img
             src={`${product.imageURL}`}
             alt={`product photo of ${product.name}`}
-            className="h-48"
+            className="h-36"
           />
         </div>
-        <div className=" flex w-48 flex-col gap-3">
+        <div className=" min-w-48 flex flex-col items-center gap-2 align-top">
           <Link to={`/products/${product.id}`}>
-            <h1 className="text-3xl hover:underline">{product.name}</h1>
+            <h1 className="cursor-pointer text-[1.5vw] uppercase hover:underline xl:text-[1.4vw] 2xl:text-[1.2vw] 4xl:text-[1vw] 5xl:text-[.8vw] 6xl:text-[.6vw] portrait:md:text-[2.5vw] text-center portrait:xs:text-[3.8vw]">
+              {product.name}
+            </h1>
           </Link>
-          <p className="text-xs italic text-gray-600">
+          <p className="text-[1.2vw] italic text-gray-600 xl:text-[1vw] 4xl:text-[.8vw] 5xl:text-[.6vw] 6xl:text-[.5vw] portrait:text-[1.8vw] portrait:md:text-[2vw] text-center portrait:xs:text-[2.7vw]">
             {product?.tags?.map(({ tagName }) => tagName).join(', ')}
           </p>
-          <p>${product.price}</p>
+          <p className="text-[1.5vw] xl:text-[1.3vw] 2xl:text-[1.1vw] 4xl:text-[1vw] 5xl:text-[.8vw] 6xl:text-[.6vw] portrait:text-[2.3vw] portrait:md:text-[2.5vw] portrait:xs:text-[3.2vw]">
+            ${product.price}
+          </p>
         </div>
         <div className="ml-8">
           <button
             onClick={() => handleRemove(product.id)}
-            className="block  rounded border-2 px-4 py-2 hover:bg-gray-200"
+            className="block   border border-green-gray/30 portrait:xs:text-[3.1vw] py-1 px-2 text-[1.2vw] portrait:md:text-[2.2vw] portrait:text-[2vw] hover:bg-gray-100 3xl:text-[1vw] 4xl:text-[.8vw] 5xl:text-[.6vw] 6xl:text-[.5vw]"
           >
             remove
           </button>
