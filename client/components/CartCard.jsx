@@ -31,7 +31,7 @@ const CartCard = (props) => {
   return (
     <>
       <div className="flex h-52 items-center justify-around gap-6 md:mx-4 portrait:xs:gap-3 portrait:xs:px-1">
-        <div className="h-36 2xl:w-40">
+        <div className="h-36 2xl:h-40">
           <img
             src={`${product.imageURL}`}
             alt={`product photo of ${product.name}`}
