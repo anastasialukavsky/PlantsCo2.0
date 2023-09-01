@@ -49,6 +49,14 @@ const NavBar = (props) => {
               primary: '#365314',
               secondary: '#a7bfb4',
             },
+            style: {
+              border: '1px solid #121212',
+              'border-radius': '1px',
+              padding: '16px',
+              color: '#121212',
+              'font-size': '1rem',
+              'text-transform': 'uppercase',
+            },
           }}
         />
         <div>
