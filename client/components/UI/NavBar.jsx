@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import searchIcon from '../../../public/assets/search-icon.svg';
 import { useDispatch, useSelector } from 'react-redux';
-import decoratedLine from '../../../public/assets/line.svg'
+import decoratedLine from '../../../public/assets/line.svg';
 import { Toaster } from 'react-hot-toast';
 import {
   selectSearchedItems,
@@ -26,13 +26,13 @@ const NavBar = (props) => {
   const searchTerm = useSelector(selectSearchBy);
   const cart = useSelector(selectCart);
 
-  useEffect(() => {
-    dispatch(fetchCart());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(fetchCart());
+  // }, []);
 
   const handleSearch = (e) => {
-    if(expand) {
-      setExpand(false)
+    if (expand) {
+      setExpand(false);
     }
     e.preventDefault();
     dispatch(adjustSearchBy(searchTerm));
@@ -41,22 +41,22 @@ const NavBar = (props) => {
 
   return (
     <header>
-      <nav className="flex h-20  w-screen md:flex-col md:pt-2 items-center md:justify-around justify-between px-5 tracking-tighter relative text-green-gray  z-50">
+      <nav className="relative z-50  flex h-20 w-screen items-center justify-between px-5 tracking-tighter text-green-gray md:flex-col md:justify-around  md:pt-2">
+        <Toaster
+          position="top-right"
+          toastOptions={{
+            iconTheme: {
+              primary: '#365314',
+              secondary: '#a7bfb4',
+            },
+          }}
+        />
 
-            <Toaster
-        position="top-right"
-        toastOptions={{
-          iconTheme: {
-            primary: '#365314',
-            secondary: '#a7bfb4',
-          },
-        }}
-      />
-
-      
         <div>
           <Link to={'/'}>
-            <h1 className="font-tabac text-[8vw] mt-2 5xl:mt-16 6xl:mt-24 md:text-[3vw] 3xl:text-[2.4vw]">plants&co</h1>
+            <h1 className="mt-2 font-tabac text-[8vw] md:text-[3vw] 3xl:text-[2.4vw] 5xl:mt-16 6xl:mt-24">
+              plants&co
+            </h1>
           </Link>
         </div>
 
@@ -78,13 +78,12 @@ const NavBar = (props) => {
       </div>
     */}
 
-
-          <ul className="flex gap-16 2xl:gap-28 6xl:gap-32 font-outfit md:text-[1.5vw] lg:text-[1.2vw] 4xl:text-[1vw]">
+          <ul className="flex gap-16 font-outfit md:text-[1.5vw] lg:text-[1.2vw] 2xl:gap-28 4xl:text-[1vw] 6xl:gap-32">
             <Link to={`/products`}>
               <li onClick={() => dispatch(adjustFilter(''))}>SHOP</li>
             </Link>
             {auth.firstName ? (
-              <Link to={'/account'} className='uppercase'>
+              <Link to={'/account'} className="uppercase">
                 <li>Hi, {auth.firstName} </li>
               </Link>
             ) : (
@@ -100,25 +99,22 @@ const NavBar = (props) => {
         </div>
 
         {/**decorated navbar border */}
-        <div className="relative md:flex w-[90vw] hidden">
+        <div className="relative hidden w-[90vw] md:flex">
           <img src={decoratedLine} alt="" className="absolute w-full " />
         </div>
 
         {/**hamburger menu */}
-        
+
         <button
-        className="z-30  md:hidden"
-        onClick={() => {
-          setExpand((prev) => !prev)}
-        }
+          className="z-30  md:hidden"
+          onClick={() => {
+            setExpand((prev) => !prev);
+          }}
         >
-        <img src={menu} alt="dropdown menu icon" className=" w-12" />
+          <img src={menu} alt="dropdown menu icon" className=" w-12" />
         </button>
-        
-        {expand &&
-          <MobileNav expand={expand} setExpand={setExpand} />
-        }
-     
+
+        {expand && <MobileNav expand={expand} setExpand={setExpand} />}
       </nav>
     </header>
   );
