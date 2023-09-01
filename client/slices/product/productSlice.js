@@ -14,6 +14,9 @@ const initialState = {
   useSearch: false,
 };
 
+// Set pagination increment
+const PRODUCTS_PER_PAGE = 12;
+
 export const fetchAllProducts = createAsyncThunk(
   'products/fetchAll',
   async (_, { rejectWithValue }) => {
@@ -107,9 +110,12 @@ const productSlice = createSlice({
     },
     productPageChange(state, { payload }) {
       if (payload[0] === 'next')
-        state.productPage = Math.min(payload[1] - 8, state.productPage + 8);
+        state.productPage = Math.min(
+          payload[1] - PRODUCTS_PER_PAGE,
+          state.productPage + PRODUCTS_PER_PAGE
+        );
       if (payload === 'previous')
-        state.productPage = Math.max(0, state.productPage - 8);
+        state.productPage = Math.max(0, state.productPage - PRODUCTS_PER_PAGE);
     },
     adjustFilter(state, { payload }) {
       state.productPage = 0;
@@ -121,16 +127,24 @@ const productSlice = createSlice({
       state.searchBy = '';
     },
     adjustSort(state, { payload }) {
-      state.products.sort((a, b) => {
-        if (payload === 'price') {
-          return +a[payload] > +b[payload]
-            ? 1
-            : +a[payload] < +b[payload]
-            ? -1
-            : 0;
-        }
-        return a[payload] > b[payload] ? 1 : a[payload] < b[payload] ? -1 : 0;
-      });
+      const sortKey = payload;
+
+      switch (sortKey) {
+        case 'name-asc':
+          state.products.sort((a, b) => (a.name >= b.name ? 1 : -1));
+          break;
+        case 'name-desc':
+          state.products.sort((a, b) => (a.name < b.name ? 1 : -1));
+          break;
+        case 'price-asc':
+          state.products.sort((a, b) => a.price - b.price);
+          break;
+        case 'price-desc':
+          state.products.sort((a, b) => b.price - a.price);
+          break;
+        default:
+          return;
+      }
     },
     adjustSearchBy(state, { payload }) {
       state.searchBy = payload || '';

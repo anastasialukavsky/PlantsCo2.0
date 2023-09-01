@@ -18,7 +18,7 @@ const UserAccount = () => {
     if (!localStorage.getItem('token')) {
       navigate('/');
     }
-  }, []);
+  }, [auth]);
 
   useEffect(() => {
     dispatch(attemptTokenLogin());
@@ -27,11 +27,6 @@ const UserAccount = () => {
       dispatch(resetStatus());
     };
   }, []);
-
-  const attemptLogOut = async () => {
-    await dispatch(logOut());
-    navigate('/');
-  };
 
   if (!auth) return <h1>Page Loading...</h1>;
 
@@ -73,7 +68,7 @@ const UserAccount = () => {
           )}
 
           <button
-            onClick={attemptLogOut}
+            onClick={() => dispatch(logOut())}
             className=" w-full border py-3 px-5 text-sm text-white transition-all duration-500 hover:bg-primary-bright-white/20 "
           >
             log out

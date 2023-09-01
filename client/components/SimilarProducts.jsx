@@ -29,7 +29,7 @@ const SimilarProducts = () => {
           className=" flex h-full min-w-[52px] max-w-sm items-center justify-center 4xl:mr-10"
           onClick={() => handlePageChange('previous')}
         >
-          <img src={leftArrow} alt="left arrow icon" className="md:w-8 w-0" />
+          <img src={leftArrow} alt="left arrow icon" className="w-0 md:w-8" />
         </button>
 
         <div className=" mx-auto grid grid-cols-1 justify-items-center gap-x-8 gap-y-8 md:grid-cols-2 lg:grid-cols-4 ">
@@ -50,7 +50,6 @@ const SimilarProducts = () => {
             similarProducts
               .slice(similarPage, similarPage + 4)
               .map((product) => {
-                console.log(window.innerWidth);
                 return <ProductCard key={product.id} product={product} />;
               })}
         </div>
@@ -58,7 +57,7 @@ const SimilarProducts = () => {
           className=" flex h-full min-w-[52px] max-w-sm items-center justify-center 4xl:ml-10"
           onClick={() => handlePageChange(['next', similarProducts.length])}
         >
-          <img src={rightArrow} alt="right arrow icon" className="md:w-8 w-0" />
+          <img src={rightArrow} alt="right arrow icon" className="w-0 md:w-8" />
         </button>
       </div>
     </section>
