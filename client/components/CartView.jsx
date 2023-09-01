@@ -71,11 +71,11 @@ export default function CartView() {
   // );
 
   return (
-    <main className="cart-page-wrapper font-green-gray absolute top-0 left-0 h-screen w-screen overflow-hidden bg-[url('/assets/bg_img/cart.webp')] bg-cover bg-fixed bg-bottom bg-no-repeat pt-20 font-outfit xl:pt-28 5xl:pt-44 6xl:pt-56">
-      <h1 className="portrait:xs:text-[5vw] mb-4  text-center text-[3.8vw] lg:text-[2.8vw] font-bold 3xl:text-[3vw] 4xl:text-[2.5vw] 5xl:text-[2vw] 6xl:text-[1.8vw] portrait:md:text-[4vw] portrait:text-center">
+    <main className="cart-page-wrapper font-green-gray absolute top-0 left-0 h-screen w-screen overflow-hidden bg-opacity-90 bg-[url('/assets/bg_img/cart.webp')] bg-cover bg-fixed bg-bottom bg-no-repeat pt-20 font-outfit xl:pt-28 5xl:pt-44 6xl:pt-56">
+      <h1 className="mb-4 text-center  text-[3.6vw] font-bold lg:text-[2.8vw] 3xl:text-[3vw] 4xl:text-[2.5vw] 5xl:text-[2vw] 6xl:text-[1.8vw] portrait:text-center portrait:xs:text-[5vw] portrait:md:text-[4vw]">
         CART
       </h1>
-      <div className="mx-auto max-h-[70vh] w-fit max-w-[1200px] overflow-y-auto border border-green-gray bg-white/80 p-4 md:min-w-[700px] 4xl:min-w-[1000px] 5xl:max-h-[65vh] 5xl:min-w-[900px]  portrait:w-[90vw] portrait:xs:min-h-[80vh] portrait:xs:max-w-[90vw] portrait:xs:p-2 portrait:md:min-h-[80vh] portrait:lg:h-[90vh]">
+      <div className="mx-auto max-h-[70vh] w-fit max-w-[1200px] overflow-y-auto border border-white bg-white/80 p-4 md:min-w-[700px] 4xl:min-w-[1000px] 5xl:max-h-[65vh] 5xl:min-w-[900px] portrait:w-[90vw]    portrait:border-green-gray portrait:xs:min-h-[80vh] portrait:xs:max-w-[90vw] portrait:xs:p-2 portrait:md:min-h-[80vh] portrait:lg:max-h-[70vh]">
         {cart?.expandedCart.length > 0 ? (
           <>
             <div className="h-full overflow-y-auto">
@@ -89,14 +89,17 @@ export default function CartView() {
                 })}
             </div>
             <CartSubtotal />
-            <div className="mx-auto my-3 mb-6 flex w-full flex-col items-center md:w-1/2">
+            <div className="mx-auto my-3 mb-6 flex w-full  flex-col items-center md:w-2/5 lg:w-3/5 2xl:w-full portrait:md:w-4/5 portrait:lg:w-3/4">
               <Link
-                className="mx-auto block w-full bg-green-gray py-2 text-center text-[1.4vw] text-white duration-500 ease-in hover:bg-primary-button-hover hover:transition-all md:w-3/4 2xl:w-2/4 5xl:w-2/4 portrait:text-[4vw]"
+                className="mx-auto block w-full bg-green-gray py-2 text-center text-[1.4vw] text-white duration-500 ease-in hover:bg-primary-button-hover hover:transition-all md:w-3/4 2xl:w-2/4 5xl:w-2/4 5xl:text-[.8vw] 6xl:text-[.7vw] portrait:xs:text-[4vw] portrait:md:text-[3vw]"
                 to="/shipping"
               >
                 PROCEED TO PAYMENT
               </Link>
-              <button onClick={emptyCart} className="text-[1.3vw] portrait:xs:text-[4vw]">
+              <button
+                onClick={emptyCart}
+                className="text-[1.3vw] 5xl:text-[.8vw] 6xl:text-[.7vw] portrait:xs:text-[4vw] portrait:md:text-[2.7vw]"
+              >
                 empty cart
               </button>
             </div>
@@ -111,7 +114,7 @@ export default function CartView() {
               className="mt-8 self-center  bg-green-gray py-2 px-4 text-white "
               to={'/products'}
             >
-              SHOP NOW
+              shop now
             </Link>
           </div>
         )}
