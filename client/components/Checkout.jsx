@@ -216,23 +216,23 @@ export default function Checkout() {
   }, [checkoutState]);
 
   return (
-    <div className="relative h-[calc(100vh_-_5rem)] bg-[url('/assets/misc_bg/shipping.webp')] bg-cover bg-center bg-no-repeat">
-      <h2 className="font-bold py-6 text-center text-4xl">
-        Shipping Information
+    <div className="relative bg-[url('/assets/misc_bg/ship1.webp')] bg-cover bg-center bg-no-repeat font-outfit md:h-[calc(100vh_-_4rem)] lg:h-[calc(100dvh_-_82px)] xl:h-[calc(100dvh_-_100px)] 2xl:h-[calc(100dvh_-_105px)] 5xl:h-[calc(100dvh_-_159px)]  6xl:h-[calc(100dvh_-_200px)] portrait:absolute portrait:top-0 portrait:mt-20 portrait:h-[calc(100dvh_-_5rem)]">
+      <h2 className="pt-5 pb-1 text-center text-[2.3vw] font-bold text-white lg:pb-5 xl:pt-9 5xl:text-[2vw]">
+        SHIPPING INFORMATION
       </h2>
-      <div className="flex justify-center ">
-        <div className="max-w-lg rounded-md  bg-lime-900 bg-opacity-50 p-6">
-          <section className="mt-3 flex flex-col">
+      <div className="flex w-full justify-center">
+        <div className="max-h-[72vh] border border-white/80 bg-white bg-opacity-50  md:py-3 lg:py-5 px-10 6xl:py-8 5xl:py-5 md:w-2/5 3xl:w-3/12 5xl:w-5/6 5xl:max-w-2xl">
+          <section className=" flex flex-col">
             <form onSubmit={handleSubmit}>
-              <div className="mb-3">
+              <div className="mb-2 text-[1vw] 5xl:text-[.8vw]">
                 <label
-                  className="font-bold mb-1 block text-sm text-slate-50"
+                  className="mb-[1px] block text-green-gray"
                   htmlFor="firstName"
                 >
                   First Name
                 </label>
                 <input
-                  className="focus:shadow-outline text-md w-96 appearance-none rounded border py-1 px-4 leading-tight text-gray-700 shadow focus:bg-white focus:outline-none"
+                  className=" w-full appearance-none   py-1 px-2 leading-tight text-gray-700  shadow focus:outline-none"
                   id="firstName"
                   type="text"
                   name="firstName"
@@ -242,15 +242,15 @@ export default function Checkout() {
                 />
               </div>
 
-              <div className="mb-3">
+              <div className="mb-2 text-[1vw]  5xl:text-[.8vw]">
                 <label
-                  className="font-bold  mb-1 block text-sm text-slate-50"
+                  className="mb-[1px]  block  text-green-gray"
                   htmlFor="lastName"
                 >
                   Last Name
                 </label>
                 <input
-                  className="focus:shadow-outline text-md w-96 appearance-none rounded border py-1 px-4 leading-tight text-gray-700 shadow focus:bg-white focus:outline-none"
+                  className="  w-full appearance-none  py-1 px-2 leading-tight text-gray-700 shadow  focus:outline-none"
                   type="text"
                   name="lastName"
                   placeholder={isInvalid ? 'Enter your last name' : null}
@@ -260,15 +260,15 @@ export default function Checkout() {
                 />
               </div>
 
-              <div className="mb-3">
+              <div className="mb-2 text-[1vw]  5xl:text-[.8vw]">
                 <label
-                  className="font-bold  mb-1 block text-sm text-slate-50"
+                  className="mb-[1px]  block  text-green-gray"
                   htmlFor="email"
                 >
                   Email
                 </label>
                 <input
-                  className="focus:shadow-outline text-md w-96 appearance-none rounded border py-1 px-4 leading-tight text-gray-700 shadow focus:bg-white focus:outline-none"
+                  className=" w-full appearance-none   py-1 px-2 leading-tight text-gray-700 shadow  focus:outline-none"
                   type="email"
                   name="email"
                   placeholder={isInvalid ? invalidEmailMessage : null}
@@ -278,15 +278,15 @@ export default function Checkout() {
                 />
               </div>
 
-              <div className="mb-3">
+              <div className="mb-2 text-[1vw]  5xl:text-[.8vw]">
                 <label
-                  className="font-bold  mb-1 block text-sm text-slate-50"
+                  className="mb-[1px]  block  text-green-gray"
                   htmlFor="street1"
                 >
                   Street1
                 </label>
                 <input
-                  className="focus:shadow-outline text-md w-96 appearance-none rounded border py-1 px-4 leading-tight text-gray-700 shadow focus:bg-white focus:outline-none"
+                  className=" w-full appearance-none   py-1 px-2 leading-tight text-gray-700 shadow focus:outline-none"
                   type="text"
                   name="street1"
                   placeholder={isInvalid ? 'Enter your address' : null}
@@ -296,15 +296,15 @@ export default function Checkout() {
                 />
               </div>
 
-              <div className="mb-3">
+              <div className="mb-2 text-[1vw]  5xl:text-[.8vw]">
                 <label
-                  className="font-bold  mb-1 block text-sm text-slate-50"
+                  className="mb-[1px]  block  text-green-gray"
                   htmlFor="street1"
                 >
                   Street2
                 </label>
                 <input
-                  className="focus:shadow-outline text-md w-96 appearance-none rounded border py-1 px-4 leading-tight text-gray-700 shadow focus:bg-white focus:outline-none"
+                  className=" w-full appearance-none  py-1 px-2 leading-tight text-gray-700 shadow  focus:outline-none"
                   type="text"
                   name="street2"
                   id="street2"
@@ -313,15 +313,15 @@ export default function Checkout() {
                 />
               </div>
 
-              <div className="mb-3">
+              <div className="mb-2 text-[1vw]  5xl:text-[.8vw]">
                 <label
-                  className="font-bold  mb-1 block text-sm text-slate-50"
+                  className="mb-[1px]  block  text-green-gray"
                   htmlFor="city"
                 >
                   City
                 </label>
                 <input
-                  className="focus:shadow-outline text-md w-96 appearance-none rounded border py-1 px-4 leading-tight text-gray-700 shadow focus:bg-white focus:outline-none"
+                  className=" w-full appearance-none  py-1 px-2 leading-tight text-gray-700 shadow focus:outline-none"
                   type="text"
                   name="city"
                   placeholder={isInvalid ? 'Enter your city' : null}
@@ -331,15 +331,15 @@ export default function Checkout() {
                 />
               </div>
 
-              <div className="mb-3">
+              <div className="mb-2 text-[1vw]  5xl:text-[.8vw]">
                 <label
-                  className="font-bold  mb-1 block text-sm text-slate-50"
+                  className="mb-[1px]  block text-green-gray"
                   htmlFor="state"
                 >
                   State
                 </label>
                 <select
-                  className="focus:shadow-outline text-md w-96 appearance-none rounded border py-1 px-4 leading-tight text-gray-700 shadow focus:bg-white focus:outline-none"
+                  className=" w-full appearance-none  py-1 px-2 leading-tight text-gray-700 shadow focus:outline-none"
                   name="state"
                   id="state"
                   value={formData.state}
@@ -354,15 +354,15 @@ export default function Checkout() {
                 </select>
               </div>
 
-              <div className="mb-3">
+              <div className="mb-2 text-[1vw]  5xl:text-[.8vw]">
                 <label
-                  className="font-bold mb-1 block text-sm text-slate-50"
+                  className="mb-[1px] block  text-green-gray"
                   htmlFor="state"
                 >
                   Zip
                 </label>
                 <input
-                  className="focus:shadow-outline text-md w-96 appearance-none rounded border py-1 px-4 leading-tight text-gray-700 shadow focus:bg-white focus:outline-none"
+                  className=" w-full appearance-none  py-1 px-2 leading-tight text-gray-700 shadow  focus:outline-none"
                   type="text"
                   name="zip"
                   minLength="5"
@@ -374,15 +374,15 @@ export default function Checkout() {
                 />
               </div>
 
-              <div className="mb-3">
+              <div className="mb-2 text-[1vw]  5xl:text-[.8vw]">
                 <label
-                  className="font-bold mb-1 block text-sm text-slate-50"
+                  className="mb-[1px] block  text-green-gray"
                   htmlFor="state"
                 >
                   Promo Code
                 </label>
                 <input
-                  className="focus:shadow-outline text-md w-96 appearance-none rounded border py-1 px-4 leading-tight text-gray-700 shadow focus:bg-white focus:outline-none"
+                  className=" w-full appearance-none  py-1 px-2 leading-tight text-gray-700 shadow  focus:outline-none"
                   type="text"
                   name="promoCode"
                   id="promoCode"
@@ -397,13 +397,13 @@ export default function Checkout() {
               </div>
             </form>
 
-            <div>
+            <div className="lg:pt-4">
               <button
-                className="mx-auto mt-5  block w-full rounded-2xl bg-primary-deep-green py-2 text-xl text-white duration-500 ease-in hover:bg-primary-button-hover hover:transition-all"
+                className="5xl:text-[.9vw] text-[1.2vw]  mx-auto block  w-full bg-green-gray  py-1 text-white duration-500 ease-out hover:bg-primary-button-hover hover:transition-all"
                 type="submit"
                 onClick={handleSubmit}
               >
-                Proceed To Payment
+                proceed to payment
               </button>
             </div>
           </section>
