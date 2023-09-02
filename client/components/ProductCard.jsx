@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addOneToCart } from '../slices/users/cartSlice';
 import toast from 'react-hot-toast';
 import { selectProductLoading } from '../slices/product/productSlice';
+import Spinner from './UI/Spinner.jsx';
 
 const ProductCard = (props) => {
   const { product } = props;
@@ -17,8 +18,41 @@ const ProductCard = (props) => {
   }
 
   const imageBaseURL = product?.imageURL.split('.').at(0);
+  const [loading, setLoading] = useState(false);
+  const images = document.querySelectorAll('img');
+  let imagesLoaded = 0;
 
-  return productsLoading !== 'loading' ? (
+  // function imageLoaded() {
+  //   setLoading(true)
+  //   imagesLoaded++;
+  //   if (imagesLoaded === images.length) {
+  //     console.log(imagesLoaded)
+  //     // All images have loaded, reveal the content
+  //     setLoading(false)
+  //   }
+  // }
+
+  // console.log(window.onloadedmetadata);
+
+  // useEffect(() => {
+  //   console.log('start');
+  //   setLoading(true);
+  //   window.onloadedmetadata = function () {
+  //     console.log('meta loaded');
+  //     setLoading(false);
+  //     console.log('finsih');
+  //   };
+  // }, []);
+
+  //  images.forEach((image) => {
+  //       image.addEventListener('load', imageLoaded);
+  //       return () => {
+  //         image.removeEventListener('load', imageLoaded)
+  //       }
+  //     });
+
+  // imageLoaded()
+  return !loading ? (
     <div key={product.id} className="group font-raleway">
       <div className="relative">
         <Link
@@ -67,27 +101,7 @@ const ProductCard = (props) => {
       </Link>
     </div>
   ) : (
-    <div className="font-raleway">
-      <div
-        key={product.id}
-        style={{
-          background: '#ccc',
-          animation: 'fade 2s ease-in-out infinite alternate',
-          backgroundSize: '200% 100%',
-          animation: 'pulse 2s left infinite',
-        }}
-        className="mb-2 block h-48 w-36 animate-pulse rounded-md bg-gray-300"
-      ></div>
-      <div
-        className="rounded- h-6 w-full"
-        style={{
-          background: '#ccc',
-          animation: 'fade 2s ease-in-out infinite alternate',
-          backgroundSize: '200% 100%',
-          animation: 'pulse 2s ease-in-out infinite',
-        }}
-      ></div>
-    </div>
+    <Spinner />
   );
 };
 
