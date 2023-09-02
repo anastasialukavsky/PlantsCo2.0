@@ -216,7 +216,7 @@ export default function Checkout() {
   }, [checkoutState]);
 
   return (
-    <div className="relative bg-[url('/assets/misc_bg/ship1.webp')] bg-cover bg-center bg-no-repeat font-outfit md:h-[calc(100vh_-_4rem)] lg:h-[calc(100dvh_-_82px)] xl:h-[calc(100dvh_-_100px)] 2xl:h-[calc(100dvh_-_105px)] 5xl:h-[calc(100dvh_-_159px)]  6xl:h-[calc(100dvh_-_200px)] portrait:absolute portrait:top-0 portrait:mt-20 portrait:h-[calc(100dvh_-_5rem)]">
+    <div className="relative bg-[url('/assets/misc_bg/ship1.webp')] bg-cover bg-center bg-no-repeat font-outfit md:h-[calc(100vh_-_4rem)] lg:h-[calc(100dvh_-_82px)] xl:h-[calc(100dvh_-_100px)] 2xl:h-[calc(100dvh_-_105px)] 5xl:h-[calc(100dvh_-_159px)]  6xl:h-[calc(100dvh_-_200px)]  portrait:h-[calc(100dvh_-_5rem)] portrait:w-full portrait:md:h-[calc(100dvh_-_90px)]">
       <h2 className="pt-5 pb-1 text-center text-[2.3vw] font-bold text-white lg:pb-5 xl:pt-9 5xl:text-[2vw]">
         SHIPPING INFORMATION
       </h2>
