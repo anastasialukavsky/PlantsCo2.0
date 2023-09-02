@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
+// const AllProds = lazy(() => import('./AllProductsSection.jsx'));
 import {
   adjustFilter,
   fetchAllProducts,
@@ -11,6 +11,7 @@ import AllProductsSection from './AllProductsSection.jsx';
 import ProductPagination from './ProductPagination.jsx';
 import Sort from './Sort.jsx';
 import { selectProductLoading } from '../slices/product/productSlice';
+import Spinner from './UI/Spinner.jsx';
 
 const AllProducts = () => {
   const dispatch = useDispatch();
@@ -27,17 +28,31 @@ const AllProducts = () => {
     };
   }, [dispatch]);
 
+const [loading, setLoading] = useState(false);
+
+  // useEffect(() => {
+  //   setLoading(true)
+  //   console.log(true)
+  //   window.onload = function () {
+  //     // Your code to manipulate the DOM or perform actions
+  //     console.log('Page is fully loaded');
+  //     setLoading(false)
+  //     console.log(false)
+  //   };
+  // }, [])
   return !productsLoading ? (
     // return !true ? (
     <>
-    {/**
+      {/**
     <PromoBanner />
   */}
       <div className="flex justify-center">
         <section>
           <FilterSection />
           <Sort />
+          
           <AllProductsSection />
+        
           <ProductPagination />
         </section>
       </div>
@@ -59,16 +74,16 @@ const AllProducts = () => {
       {/* <div className="flex flex-wrap justify-center gap-12 ">
         {[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1].map((e, idx) => (
           <div className="block w-64" key={idx}>
-            <div
-              style={{
-                background: '#ccc',
-                animation: 'fade 2s ease-in-out infinite alternate',
+          <div
+          style={{
+            background: '#ccc',
+            animation: 'fade 2s ease-in-out infinite alternate',
                 backgroundSize: '200% 100%',
                 animation: 'pulse 2s ease-in-out infinite',
               }}
               className="mx-auto mb-2 block h-80 w-full animate-pulse rounded-md bg-gray-300"
-            ></div>
-            <div
+              ></div>
+              <div
               className="mx-auto h-6 w-full pr-12"
               style={{
                 background: '#ccc',
@@ -76,12 +91,13 @@ const AllProducts = () => {
                 backgroundSize: '200% 100%',
                 animation: 'pulse 2s ease-in-out infinite',
               }}
-            ></div>
-          </div>
-        ))}
-      </div> */}
+              ></div>
+              </div>
+              ))}
+            </div> */}
     </div>
   );
-};
-
-export default AllProducts;
+          };
+          
+          export default AllProducts;
+          
